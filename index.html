@@ -187,11 +187,12 @@
 <body>
 <nav>
   <div class="logo">Site<span>Up</span></div>
-  <div>
+  <div style="display:flex;align-items:center;gap:6px;">
     <a href="#how">How It Works</a>
     <a href="#packages">Pricing</a>
     <a href="#contact">Contact</a>
-    <a class="nav-cta" href="#contact">Get Started</a>
+    <button onclick="openCart()" id="cart-nav-btn" style="background:none;border:1px solid #333;color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px;margin-left:10px;">🛒 Cart <span id="cart-count" style="display:none;background:#a3ff00;color:#0a0a0a;border-radius:50%;width:20px;height:20px;font-size:11px;font-weight:900;align-items:center;justify-content:center;">0</span></button>
+    <a class="nav-cta" href="#packages" style="margin-left:6px;">Get Started</a>
   </div>
 </nav>
 
@@ -260,240 +261,279 @@
 <section id="packages">
   <div class="section-tag">Pricing</div>
   <div class="section-title">Simple, Transparent Pricing</div>
-  <div class="section-sub">No hidden fees. No surprises. Only <strong style="color:#a3ff00;">$100 deposit</strong> to get started — pay the rest on delivery.</div>
+  <div class="section-sub">No hidden fees. Only <strong style="color:#a3ff00;">$100 deposit</strong> to start — pay the rest on delivery.</div>
 
-  <!-- STEP 1: Package Cards -->
-  <div id="pkg-grid" class="packages" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 48px;">
+  <div class="packages" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:48px;">
 
-    <div class="package" onclick="selectPackage('Basic','$500','2–3 Day Turnaround','Just getting started? Get a clean 1-page site up fast so customers can find you online.',['1-Page Custom Website','Mobile Responsive Design','Your Services Listed','Contact Form','SSL &amp; HTTPS Security','2–3 Day Turnaround'])">
+    <div class="package" style="cursor:pointer;transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='#a3ff00'" onmouseout="this.style.transform='';this.style.borderColor='#1e1e1e'">
       <div class="pkg-name">Basic</div>
       <div class="pkg-price">$500 <span>one-time</span></div>
       <div class="pkg-desc">A clean 1-page site to get you found online fast.</div>
       <ul class="pkg-features">
-        <li>✅ 1-Page Custom Website</li>
-        <li>✅ Mobile Responsive Design</li>
-        <li>✅ Contact Form</li>
-        <li>✅ SSL &amp; HTTPS Security</li>
-        <li>✅ 2–3 Day Turnaround</li>
+        <li>1-Page Custom Website</li><li>Mobile Responsive Design</li><li>Contact Form</li><li>SSL &amp; HTTPS Security</li><li>2–3 Day Turnaround</li>
       </ul>
-      <button class="pkg-btn outline select-btn">Select Package →</button>
+      <button class="pkg-btn outline" style="width:100%;cursor:pointer;border:none;font-family:inherit;margin-top:8px;" onclick="openDetail('Basic',500,'2–3 Day Turnaround','Just getting started? Get a clean 1-page site up fast so customers can find you online.',['1-Page Custom Website','Mobile Responsive Design','Contact Form','SSL &amp; HTTPS Security','2–3 Day Turnaround'])">View Details →</button>
     </div>
 
-    <div class="package" onclick="selectPackage('Starter','$1,000','3–5 Day Turnaround','Perfect for contractors who need a clean, professional online presence fast.',['5-Page Custom Website','Mobile Responsive Design','Contact Form','Google Maps Integration','SSL &amp; HTTPS Security','Basic SEO Setup','3–5 Day Turnaround'])">
+    <div class="package" style="cursor:pointer;transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='#a3ff00'" onmouseout="this.style.transform='';this.style.borderColor='#1e1e1e'">
       <div class="pkg-name">Starter</div>
       <div class="pkg-price">$1,000 <span>one-time</span></div>
-      <div class="pkg-desc">Professional multi-page site that builds trust instantly.</div>
+      <div class="pkg-desc">Perfect for contractors who need a clean professional presence fast.</div>
       <ul class="pkg-features">
-        <li>✅ 5-Page Custom Website</li>
-        <li>✅ Mobile Responsive Design</li>
-        <li>✅ Contact Form</li>
-        <li>✅ Google Maps Integration</li>
-        <li>✅ Basic SEO Setup</li>
-        <li>✅ 3–5 Day Turnaround</li>
+        <li>5-Page Custom Website</li><li>Mobile Responsive Design</li><li>Contact Form</li><li>Google Maps Integration</li><li>Basic SEO Setup</li><li>3–5 Day Turnaround</li>
       </ul>
-      <button class="pkg-btn outline select-btn">Select Package →</button>
+      <button class="pkg-btn outline" style="width:100%;cursor:pointer;border:none;font-family:inherit;margin-top:8px;" onclick="openDetail('Starter',1000,'3–5 Day Turnaround','Perfect for contractors who need a clean, professional online presence fast.',['5-Page Custom Website','Mobile Responsive Design','Contact Form','Google Maps Integration','Basic SEO Setup','3–5 Day Turnaround'])">View Details →</button>
     </div>
 
-    <div class="package pkg-featured" onclick="selectPackage('Pro','$1,500','4–5 Day Turnaround','Our most popular package. Full SEO, your domain included, and everything a contractor needs to dominate locally.',['Everything in Starter','SEO Optimization','Free Custom Domain (1 year)','Google Business Setup','Gallery / Portfolio Page','Blog Ready','Priority Support','4–5 Day Turnaround'])">
-      <div class="pkg-badge">⭐ Most Popular</div>
+    <div class="package featured" style="cursor:pointer;border-color:#a3ff00;background:#111d00;position:relative;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
+      <div class="popular-badge">⭐ Most Popular</div>
       <div class="pkg-name">Pro</div>
       <div class="pkg-price">$1,500 <span>one-time</span></div>
-      <div class="pkg-desc">Full SEO, domain included — our most popular pick.</div>
+      <div class="pkg-desc">Full SEO + free domain. Our most popular package.</div>
       <ul class="pkg-features">
-        <li>✅ Everything in Starter</li>
-        <li>✅ SEO Optimization</li>
-        <li>✅ Free Custom Domain (1 yr)</li>
-        <li>✅ Google Business Setup</li>
-        <li>✅ Gallery / Portfolio Page</li>
-        <li>✅ Priority Support</li>
-        <li>✅ 4–5 Day Turnaround</li>
+        <li>Everything in Starter</li><li>SEO Optimization</li><li>Free Custom Domain (1 yr)</li><li>Google Business Setup</li><li>Gallery / Portfolio Page</li><li>Priority Support</li><li>4–5 Day Turnaround</li>
       </ul>
-      <button class="pkg-btn filled select-btn">Select Package →</button>
+      <button class="pkg-btn filled" style="width:100%;cursor:pointer;border:none;font-family:inherit;margin-top:8px;" onclick="openDetail('Pro',1500,'4–5 Day Turnaround','Our most popular package. Full SEO, your domain included, and everything a contractor needs to dominate locally.',['Everything in Starter','SEO Optimization','Free Custom Domain (1 yr)','Google Business Setup','Gallery / Portfolio Page','Priority Support','4–5 Day Turnaround'])">View Details →</button>
     </div>
 
-    <div class="package" onclick="selectPackage('Elite','$2,500','5–7 Day Turnaround','The full package. Everything we offer, done to perfection. For businesses ready to dominate their market.',['Everything in Pro','E-Commerce / Booking System','Custom Animations &amp; Branding','Monthly Maintenance (30 days)','Dedicated Account Manager','Social Media Integration','Analytics Dashboard','5–7 Day Turnaround'])">
+    <div class="package" style="cursor:pointer;transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='#a3ff00'" onmouseout="this.style.transform='';this.style.borderColor='#1e1e1e'">
       <div class="pkg-name">Elite</div>
       <div class="pkg-price">$2,500 <span>one-time</span></div>
-      <div class="pkg-desc">Full-service build with e-commerce, booking & branding.</div>
+      <div class="pkg-desc">Full-service build — e-commerce, booking &amp; custom branding.</div>
       <ul class="pkg-features">
-        <li>✅ Everything in Pro</li>
-        <li>✅ E-Commerce / Booking System</li>
-        <li>✅ Custom Animations</li>
-        <li>✅ Monthly Maintenance (30 days)</li>
-        <li>✅ Analytics Dashboard</li>
-        <li>✅ 5–7 Day Turnaround</li>
+        <li>Everything in Pro</li><li>E-Commerce / Booking System</li><li>Custom Animations &amp; Branding</li><li>Monthly Maintenance (30 days)</li><li>Analytics Dashboard</li><li>5–7 Day Turnaround</li>
       </ul>
-      <button class="pkg-btn outline select-btn">Select Package →</button>
+      <button class="pkg-btn outline" style="width:100%;cursor:pointer;border:none;font-family:inherit;margin-top:8px;" onclick="openDetail('Elite',2500,'5–7 Day Turnaround','The full package. Everything we offer, done to perfection. For businesses ready to dominate their market.',['Everything in Pro','E-Commerce / Booking System','Custom Animations &amp; Branding','Monthly Maintenance (30 days)','Analytics Dashboard','5–7 Day Turnaround'])">View Details →</button>
     </div>
 
   </div>
-
-  <!-- STEP 2: Package Detail Slide -->
-  <div id="pkg-detail" style="display:none; max-width:700px; margin:40px auto 0; background:#111; border:1px solid #a3ff00; border-radius:24px; padding:48px 40px; animation: fadeIn 0.3s ease;">
-    <button onclick="goBack('pkg-grid','pkg-detail')" style="background:none;border:none;color:#a3ff00;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:24px;padding:0;">← Back to Packages</button>
-    <div id="detail-tag" style="color:#a3ff00;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;"></div>
-    <h2 id="detail-name" style="font-size:36px;font-weight:900;margin-bottom:4px;"></h2>
-    <div id="detail-price" style="font-size:48px;font-weight:900;color:#a3ff00;margin-bottom:4px;"></div>
-    <div id="detail-turnaround" style="color:#888;font-size:14px;margin-bottom:24px;"></div>
-    <p id="detail-desc" style="color:#aaa;font-size:16px;line-height:1.7;margin-bottom:28px;"></p>
-    <div style="background:#0d0d0d;border-radius:16px;padding:24px 28px;margin-bottom:32px;">
-      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#666;margin-bottom:16px;">What's Included</div>
-      <ul id="detail-features" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;"></ul>
-    </div>
-    <div style="background:#111d00;border:1px solid #a3ff00;border-radius:14px;padding:18px 22px;margin-bottom:28px;">
-      <div style="font-size:13px;color:#a3ff00;font-weight:700;margin-bottom:4px;">💰 Payment Structure</div>
-      <div style="color:#ccc;font-size:14px;">$100 deposit now to lock in your spot → remaining balance paid on delivery</div>
-    </div>
-    <button id="detail-cta" onclick="goToCart()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:18px;border-radius:14px;font-size:18px;font-weight:900;cursor:pointer;transition:opacity 0.2s;">Add to Cart →</button>
-  </div>
-
-  <!-- STEP 3: Cart -->
-  <div id="pkg-cart" style="display:none; max-width:700px; margin:40px auto 0; animation: fadeIn 0.3s ease;">
-    <button onclick="goBack('pkg-detail','pkg-cart')" style="background:none;border:none;color:#a3ff00;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:24px;padding:0;">← Back to Details</button>
-    <div style="background:#111;border:1px solid #1e1e1e;border-radius:24px;padding:40px;margin-bottom:20px;">
-      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#666;margin-bottom:20px;">🛒 Your Cart</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #1e1e1e;">
-        <div>
-          <div id="cart-name" style="font-size:20px;font-weight:900;"></div>
-          <div style="color:#888;font-size:14px;margin-top:4px;">Web Design Package — SiteUp Agency</div>
-        </div>
-        <div id="cart-price" style="font-size:24px;font-weight:900;color:#a3ff00;"></div>
-      </div>
-      <div style="padding:20px 0;border-bottom:1px solid #1e1e1e;">
-        <div style="display:flex;justify-content:space-between;color:#aaa;font-size:15px;margin-bottom:10px;">
-          <span>Due Today (Deposit)</span><span style="color:#a3ff00;font-weight:700;">$100</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;color:#aaa;font-size:15px;">
-          <span>Due on Delivery</span><span id="cart-remaining" style="font-weight:700;color:#fff;"></span>
-        </div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:20px;">
-        <span style="font-size:16px;font-weight:700;">Total</span>
-        <span id="cart-total" style="font-size:28px;font-weight:900;"></span>
-      </div>
-    </div>
-    <button onclick="goToCheckout()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:18px;border-radius:14px;font-size:18px;font-weight:900;cursor:pointer;margin-bottom:12px;">Proceed to Checkout →</button>
-    <button onclick="goBack('pkg-grid','pkg-cart'); document.getElementById('pkg-grid').style.display='grid'; document.getElementById('pkg-cart').style.display='none';" style="width:100%;background:transparent;color:#aaa;border:1px solid #333;padding:14px;border-radius:14px;font-size:15px;cursor:pointer;">← Continue Browsing</button>
-  </div>
-
-  <!-- STEP 4: Checkout -->
-  <div id="pkg-checkout" style="display:none; max-width:700px; margin:40px auto 0; animation: fadeIn 0.3s ease;">
-    <button onclick="goBack('pkg-cart','pkg-checkout')" style="background:none;border:none;color:#a3ff00;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:24px;padding:0;">← Back to Cart</button>
-    <div style="background:#111;border:1px solid #1e1e1e;border-radius:24px;padding:40px;">
-      <h2 style="font-size:28px;font-weight:900;margin-bottom:6px;">Complete Your Order</h2>
-      <p style="color:#888;font-size:15px;margin-bottom:32px;">Fill in your details, then pay the $100 deposit to lock in your spot.</p>
-
-      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px;">
-        <input id="co-name" type="text" placeholder="Your Full Name" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
-        <input id="co-biz" type="text" placeholder="Business Name" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
-        <input id="co-email" type="email" placeholder="Email Address" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
-        <input id="co-phone" type="tel" placeholder="Phone Number" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
-      </div>
-
-      <div style="margin-bottom:28px;">
-        <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#666;margin-bottom:16px;">Pay $100 Deposit</div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <a id="cashapp-link" href="https://cash.app/$kinsleybazemore8" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:12px;background:#00d632;color:#fff;border-radius:14px;padding:18px;font-size:16px;font-weight:900;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
-            💚 Pay with CashApp — $kinsleybazemore8
-          </a>
-          <a href="https://venmo.com/Mrbazemore" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:12px;background:#008CFF;color:#fff;border-radius:14px;padding:18px;font-size:16px;font-weight:900;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
-            💜 Pay with Venmo — @Mrbazemore
-          </a>
-        </div>
-      </div>
-
-      <div style="background:#0d0d0d;border-radius:14px;padding:18px 22px;margin-bottom:24px;">
-        <div style="font-size:13px;color:#666;line-height:1.6;">After paying, click the button below to confirm your order. We'll reach out within 24 hours to kick off your build! 🚀</div>
-      </div>
-
-      <button onclick="submitOrder()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:18px;border-radius:14px;font-size:18px;font-weight:900;cursor:pointer;">✅ I've Paid — Confirm My Order</button>
-    </div>
-  </div>
-
-  <!-- STEP 5: Success -->
-  <div id="pkg-success" style="display:none; max-width:700px; margin:40px auto 0; text-align:center; animation: fadeIn 0.3s ease;">
-    <div style="background:#111d00;border:2px solid #a3ff00;border-radius:24px;padding:60px 40px;">
-      <div style="font-size:64px;margin-bottom:20px;">🎉</div>
-      <h2 style="font-size:32px;font-weight:900;margin-bottom:12px;">Order Confirmed!</h2>
-      <p style="color:#aaa;font-size:16px;line-height:1.7;margin-bottom:28px;">We got your order and will reach out within <strong style="color:#fff;">24 hours</strong> to start building. Keep an eye on your email!</p>
-      <div id="success-summary" style="background:#0d0d0d;border-radius:14px;padding:20px 24px;margin-bottom:28px;text-align:left;"></div>
-      <a href="mailto:kinsleybazemore@gmail.com" style="display:inline-block;background:#a3ff00;color:#0a0a0a;border-radius:12px;padding:14px 32px;font-size:16px;font-weight:900;text-decoration:none;">📩 Email Us Directly</a>
-    </div>
-  </div>
-
 </section>
 
+<!-- ═══════════════════════ PACKAGE DETAIL MODAL ═══════════════════════ -->
+<div id="detail-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;backdrop-filter:blur(4px);" onclick="if(event.target===this)closeDetail()">
+  <div id="detail-modal" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#111;border:1px solid #a3ff00;border-radius:24px;padding:44px 40px;max-width:600px;width:90%;max-height:85vh;overflow-y:auto;animation:popIn .25s ease;">
+    <button onclick="closeDetail()" style="position:absolute;top:18px;right:20px;background:none;border:none;color:#666;font-size:22px;cursor:pointer;line-height:1;">✕</button>
+    <div id="dm-tag" style="color:#a3ff00;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;"></div>
+    <h2 id="dm-name" style="font-size:32px;font-weight:900;margin-bottom:4px;"></h2>
+    <div id="dm-price" style="font-size:44px;font-weight:900;color:#a3ff00;margin-bottom:4px;"></div>
+    <div id="dm-time" style="color:#888;font-size:14px;margin-bottom:20px;"></div>
+    <p id="dm-desc" style="color:#aaa;font-size:15px;line-height:1.7;margin-bottom:24px;"></p>
+    <div style="background:#0d0d0d;border-radius:14px;padding:20px 24px;margin-bottom:24px;">
+      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#555;margin-bottom:14px;">What's Included</div>
+      <ul id="dm-features" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;"></ul>
+    </div>
+    <div style="background:#111d00;border:1px solid #a3ff00;border-radius:12px;padding:16px 20px;margin-bottom:24px;font-size:14px;color:#ccc;">
+      💰 <strong style="color:#a3ff00;">$100 deposit now</strong> → remaining balance paid on delivery
+    </div>
+    <button id="dm-add-btn" onclick="addToCart()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:16px;border-radius:12px;font-size:17px;font-weight:900;cursor:pointer;">🛒 Add to Cart</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CART DRAWER ═══════════════════════ -->
+<div id="cart-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;backdrop-filter:blur(4px);" onclick="if(event.target===this)closeCart()"></div>
+<div id="cart-drawer" style="position:fixed;top:0;right:-480px;width:100%;max-width:460px;height:100%;background:#111;border-left:1px solid #1e1e1e;z-index:2001;display:flex;flex-direction:column;transition:right .3s ease;box-shadow:-8px 0 40px rgba(0,0,0,0.6);">
+  <!-- Cart Header -->
+  <div style="padding:24px 28px;border-bottom:1px solid #1e1e1e;display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:20px;font-weight:900;">🛒 Your Cart</div>
+    <button onclick="closeCart()" style="background:none;border:none;color:#888;font-size:22px;cursor:pointer;">✕</button>
+  </div>
+  <!-- Cart Items -->
+  <div id="cart-items-container" style="flex:1;overflow-y:auto;padding:20px 28px;">
+    <div id="cart-empty" style="text-align:center;padding:60px 20px;color:#555;">
+      <div style="font-size:48px;margin-bottom:16px;">🛒</div>
+      <div style="font-size:16px;font-weight:700;color:#777;">Your cart is empty</div>
+      <div style="font-size:14px;color:#555;margin-top:8px;">Pick a package above to get started</div>
+      <button onclick="closeCart();document.getElementById('packages').scrollIntoView({behavior:'smooth'})" style="margin-top:20px;background:#a3ff00;color:#0a0a0a;border:none;padding:12px 28px;border-radius:10px;font-weight:800;font-size:14px;cursor:pointer;">Browse Packages →</button>
+    </div>
+    <div id="cart-items-list" style="display:none;"></div>
+  </div>
+  <!-- Cart Footer -->
+  <div id="cart-footer" style="display:none;padding:24px 28px;border-top:1px solid #1e1e1e;background:#0d0d0d;">
+    <div style="display:flex;justify-content:space-between;color:#aaa;font-size:14px;margin-bottom:8px;">
+      <span>Due Today (Deposit)</span><span style="color:#a3ff00;font-weight:700;">$100</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;color:#aaa;font-size:14px;margin-bottom:16px;">
+      <span>Due on Delivery</span><span id="drawer-remaining" style="font-weight:700;color:#fff;"></span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:900;margin-bottom:20px;">
+      <span>Total</span><span id="drawer-total" style="color:#a3ff00;"></span>
+    </div>
+    <button onclick="goToCheckoutDrawer()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:900;cursor:pointer;margin-bottom:10px;">Checkout →</button>
+    <button onclick="closeCart()" style="width:100%;background:transparent;color:#888;border:1px solid #333;padding:12px;border-radius:12px;font-size:14px;cursor:pointer;">Continue Browsing</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CHECKOUT DRAWER PAGE ═══════════════════════ -->
+<div id="checkout-drawer" style="position:fixed;top:0;right:-480px;width:100%;max-width:460px;height:100%;background:#111;border-left:1px solid #1e1e1e;z-index:2002;display:flex;flex-direction:column;transition:right .3s ease;box-shadow:-8px 0 40px rgba(0,0,0,0.6);overflow-y:auto;">
+  <div style="padding:24px 28px;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;gap:14px;position:sticky;top:0;background:#111;z-index:1;">
+    <button onclick="closeCheckoutDrawer()" style="background:none;border:none;color:#a3ff00;font-size:14px;font-weight:700;cursor:pointer;">← Back</button>
+    <div style="font-size:18px;font-weight:900;">Complete Order</div>
+  </div>
+  <div style="padding:28px;">
+    <!-- Order Summary -->
+    <div style="background:#0d0d0d;border-radius:14px;padding:18px 20px;margin-bottom:24px;">
+      <div style="font-size:12px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Order Summary</div>
+      <div id="co-summary" style="display:flex;justify-content:space-between;font-weight:700;font-size:15px;"></div>
+      <div style="display:flex;justify-content:space-between;color:#a3ff00;font-size:13px;margin-top:8px;">Due Now: $100 deposit</div>
+    </div>
+    <!-- Form -->
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+      <input id="co-name" type="text" placeholder="Full Name *" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 16px;color:#fff;font-size:15px;font-family:inherit;outline:none;width:100%;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
+      <input id="co-biz" type="text" placeholder="Business Name" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 16px;color:#fff;font-size:15px;font-family:inherit;outline:none;width:100%;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
+      <input id="co-email" type="email" placeholder="Email Address *" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 16px;color:#fff;font-size:15px;font-family:inherit;outline:none;width:100%;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
+      <input id="co-phone" type="tel" placeholder="Phone Number" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 16px;color:#fff;font-size:15px;font-family:inherit;outline:none;width:100%;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
+    </div>
+    <!-- Pay Buttons -->
+    <div style="margin-bottom:20px;">
+      <div style="font-size:12px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Pay $100 Deposit</div>
+      <a href="https://cash.app/$kinsleybazemore8" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#00d632;color:#fff;border-radius:12px;padding:16px;font-size:15px;font-weight:900;text-decoration:none;margin-bottom:10px;">💚 CashApp — $kinsleybazemore8</a>
+      <a href="https://venmo.com/Mrbazemore" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#008CFF;color:#fff;border-radius:12px;padding:16px;font-size:15px;font-weight:900;text-decoration:none;">💜 Venmo — @Mrbazemore</a>
+    </div>
+    <div style="background:#0d0d0d;border-radius:12px;padding:14px 18px;margin-bottom:20px;color:#888;font-size:13px;line-height:1.6;">After sending the deposit, tap the button below to confirm your order. We'll reach out within 24 hours. 🚀</div>
+    <button onclick="submitOrderDrawer()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:900;cursor:pointer;">✅ I've Paid — Confirm Order</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SUCCESS OVERLAY ═══════════════════════ -->
+<div id="success-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:3000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);">
+  <div style="background:#111;border:2px solid #a3ff00;border-radius:24px;padding:56px 44px;max-width:500px;width:90%;text-align:center;animation:popIn .3s ease;">
+    <div style="font-size:64px;margin-bottom:16px;">🎉</div>
+    <h2 style="font-size:30px;font-weight:900;margin-bottom:10px;">Order Confirmed!</h2>
+    <p style="color:#aaa;font-size:15px;line-height:1.7;margin-bottom:24px;">We got your order and will reach out within <strong style="color:#fff;">24 hours</strong> to kick off your build.</p>
+    <div id="success-details" style="background:#0d0d0d;border-radius:12px;padding:18px 22px;margin-bottom:24px;text-align:left;font-size:14px;color:#aaa;line-height:1.8;"></div>
+    <button onclick="document.getElementById('success-overlay').style.display='none'" style="background:#a3ff00;color:#0a0a0a;border:none;padding:14px 36px;border-radius:12px;font-size:15px;font-weight:900;cursor:pointer;">Done ✓</button>
+  </div>
+</div>
+
 <style>
-@keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-.select-btn { width:100%; margin-top:20px; cursor:pointer; border:none; font-family:inherit; }
-.package { cursor:pointer; transition: transform 0.2s, border-color 0.2s; }
-.package:hover { transform: translateY(-4px); border-color: #a3ff00 !important; }
+@keyframes popIn { from { opacity:0;transform:translate(-50%,-50%) scale(0.92); } to { opacity:1;transform:translate(-50%,-50%) scale(1); } }
 </style>
 
 <script>
-var selectedPkg = {};
+var cart = [];
+var currentPkg = null;
 
-function selectPackage(name, price, turnaround, desc, features) {
-  selectedPkg = { name, price, turnaround, desc, features };
-  document.getElementById('detail-tag').textContent = 'Package Details';
-  document.getElementById('detail-name').textContent = name + ' Package';
-  document.getElementById('detail-price').textContent = price;
-  document.getElementById('detail-turnaround').textContent = '⏱ ' + turnaround;
-  document.getElementById('detail-desc').textContent = desc;
-  var ul = document.getElementById('detail-features');
+// ── Detail Modal ──────────────────────────────────────────
+function openDetail(name, price, turnaround, desc, features) {
+  currentPkg = { name, price, turnaround, desc, features };
+  document.getElementById('dm-tag').textContent = 'Package Details';
+  document.getElementById('dm-name').textContent = name + ' Package';
+  document.getElementById('dm-price').textContent = '$' + price.toLocaleString();
+  document.getElementById('dm-time').textContent = '⏱ ' + turnaround;
+  document.getElementById('dm-desc').textContent = desc;
+  var ul = document.getElementById('dm-features');
   ul.innerHTML = '';
   features.forEach(function(f) {
     var li = document.createElement('li');
-    li.style.cssText = 'display:flex;align-items:center;gap:10px;color:#ccc;font-size:15px;';
-    li.innerHTML = '<span style="color:#a3ff00;font-size:18px;">✓</span> ' + f;
+    li.style.cssText = 'display:flex;align-items:center;gap:10px;color:#ccc;font-size:14px;';
+    li.innerHTML = '<span style="color:#a3ff00;font-weight:900;font-size:16px;">✓</span> ' + f;
     ul.appendChild(li);
   });
-  document.getElementById('pkg-grid').style.display = 'none';
-  document.getElementById('pkg-detail').style.display = 'block';
-  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+  document.getElementById('detail-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail() {
+  document.getElementById('detail-overlay').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
-function goToCart() {
-  var priceNum = parseInt(selectedPkg.price.replace(/[^0-9]/g,''));
-  document.getElementById('cart-name').textContent = selectedPkg.name + ' Package';
-  document.getElementById('cart-price').textContent = selectedPkg.price;
-  document.getElementById('cart-remaining').textContent = '$' + (priceNum - 100).toLocaleString();
-  document.getElementById('cart-total').textContent = selectedPkg.price;
-  document.getElementById('pkg-detail').style.display = 'none';
-  document.getElementById('pkg-cart').style.display = 'block';
-  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+// ── Cart ──────────────────────────────────────────────────
+function addToCart() {
+  if (!currentPkg) return;
+  // Only 1 package at a time — replace if exists
+  cart = [{ ...currentPkg, qty: 1 }];
+  closeDetail();
+  renderCart();
+  openCart();
 }
 
-function goToCheckout() {
-  document.getElementById('pkg-cart').style.display = 'none';
-  document.getElementById('pkg-checkout').style.display = 'block';
-  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+function renderCart() {
+  var list = document.getElementById('cart-items-list');
+  var empty = document.getElementById('cart-empty');
+  var footer = document.getElementById('cart-footer');
+  var countEl = document.getElementById('cart-count');
+
+  if (cart.length === 0) {
+    list.style.display = 'none';
+    empty.style.display = 'block';
+    footer.style.display = 'none';
+    countEl.style.display = 'none';
+    return;
+  }
+
+  var total = cart.reduce(function(s, i) { return s + i.price; }, 0);
+  list.innerHTML = '';
+  cart.forEach(function(item, idx) {
+    var div = document.createElement('div');
+    div.style.cssText = 'background:#0d0d0d;border:1px solid #1e1e1e;border-radius:16px;padding:20px;margin-bottom:14px;';
+    div.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">' +
+      '<div><div style="font-size:17px;font-weight:900;">' + item.name + ' Package</div>' +
+      '<div style="color:#888;font-size:13px;margin-top:3px;">⏱ ' + item.turnaround + '</div></div>' +
+      '<div style="font-size:20px;font-weight:900;color:#a3ff00;">$' + item.price.toLocaleString() + '</div></div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+      '<div style="background:#111d00;border:1px solid #a3ff00;border-radius:8px;padding:6px 12px;font-size:12px;color:#a3ff00;font-weight:700;">$100 deposit now</div>' +
+      '<button onclick="removeFromCart(' + idx + ')" style="background:none;border:none;color:#555;font-size:13px;cursor:pointer;font-weight:600;">✕ Remove</button></div>';
+    list.appendChild(div);
+  });
+
+  list.style.display = 'block';
+  empty.style.display = 'none';
+  footer.style.display = 'block';
+  document.getElementById('drawer-total').textContent = '$' + total.toLocaleString();
+  document.getElementById('drawer-remaining').textContent = '$' + (total - 100).toLocaleString();
+  countEl.textContent = cart.length;
+  countEl.style.display = 'inline-flex';
 }
 
-function goBack(showId, hideId) {
-  document.getElementById(hideId).style.display = 'none';
-  var showEl = document.getElementById(showId);
-  showEl.style.display = (showId === 'pkg-grid') ? 'grid' : 'block';
-  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+function removeFromCart(idx) {
+  cart.splice(idx, 1);
+  renderCart();
 }
 
-function submitOrder() {
-  var name = document.getElementById('co-name').value;
-  var biz = document.getElementById('co-biz').value;
-  var email = document.getElementById('co-email').value;
-  if (!name || !email) { alert('Please fill in your name and email before confirming.'); return; }
-  document.getElementById('pkg-checkout').style.display = 'none';
-  document.getElementById('success-summary').innerHTML =
-    '<div style="color:#a3ff00;font-weight:700;margin-bottom:10px;">' + selectedPkg.name + ' Package — ' + selectedPkg.price + '</div>' +
-    '<div style="color:#aaa;font-size:14px;">Name: ' + name + (biz ? ' | Business: ' + biz : '') + '</div>' +
-    '<div style="color:#aaa;font-size:14px;margin-top:4px;">Email: ' + email + '</div>';
-  document.getElementById('pkg-success').style.display = 'block';
-  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+function openCart() {
+  document.getElementById('cart-overlay').style.display = 'block';
+  document.getElementById('cart-drawer').style.right = '0';
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('cart-overlay').style.display = 'none';
+  document.getElementById('cart-drawer').style.right = '-480px';
+  document.body.style.overflow = '';
+}
+
+// ── Checkout Drawer ───────────────────────────────────────
+function goToCheckoutDrawer() {
+  if (cart.length === 0) return;
+  var item = cart[0];
+  document.getElementById('co-summary').innerHTML =
+    '<span>' + item.name + ' Package</span><span style="color:#a3ff00;">$' + item.price.toLocaleString() + '</span>';
+  document.getElementById('cart-drawer').style.right = '-480px';
+  document.getElementById('checkout-drawer').style.right = '0';
+}
+function closeCheckoutDrawer() {
+  document.getElementById('checkout-drawer').style.right = '-480px';
+  document.getElementById('cart-drawer').style.right = '0';
+}
+
+function submitOrderDrawer() {
+  var name = document.getElementById('co-name').value.trim();
+  var email = document.getElementById('co-email').value.trim();
+  if (!name || !email) { alert('Please enter your name and email to confirm.'); return; }
+  var biz = document.getElementById('co-biz').value.trim();
+  var item = cart[0] || {};
+  document.getElementById('success-details').innerHTML =
+    '<div><strong style="color:#fff;">Package:</strong> ' + (item.name||'') + ' — $' + (item.price||0).toLocaleString() + '</div>' +
+    '<div><strong style="color:#fff;">Name:</strong> ' + name + (biz ? ' | ' + biz : '') + '</div>' +
+    '<div><strong style="color:#fff;">Email:</strong> ' + email + '</div>' +
+    '<div style="margin-top:8px;color:#a3ff00;font-weight:700;">✅ Deposit: $100 paid</div>';
+  document.getElementById('checkout-drawer').style.right = '-480px';
+  document.getElementById('cart-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+  document.getElementById('success-overlay').style.display = 'flex';
+  cart = [];
+  renderCart();
 }
 </script>
-
-
-
 
 <section id="consultation" style="padding: 0 60px 80px; max-width: 1100px; margin: 0 auto;">
   <div class="consult-section">
