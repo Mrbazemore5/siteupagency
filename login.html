@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Login — SiteUp Agency</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{--g:#a3ff00;--bg:#060606;--sub:#666;}
+    body{background:var(--bg);color:#fff;font-family:'Inter',-apple-system,sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+    a{text-decoration:none;}
+
+    /* NAV */
+    nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid #111;}
+    .logo{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px;}
+    .logo span{color:var(--g);}
+    .nav-back{font-size:13px;color:#555;display:flex;align-items:center;gap:6px;}
+    .nav-back:hover{color:#ccc;}
+
+    /* PAGE */
+    .page{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;}
+    .card{background:#111;border:1px solid #1e1e1e;border-radius:24px;width:100%;max-width:440px;padding:44px 40px;}
+    .card-icon{font-size:36px;margin-bottom:16px;}
+    .card-title{font-size:26px;font-weight:900;color:#fff;margin-bottom:6px;}
+    .card-sub{font-size:14px;color:var(--sub);margin-bottom:32px;line-height:1.6;}
+
+    /* TABS */
+    .tabs{display:flex;background:#0a0a0a;border:1px solid #1e1e1e;border-radius:12px;padding:4px;gap:4px;margin-bottom:28px;}
+    .tab{flex:1;padding:11px;border:none;background:transparent;color:#555;font-size:14px;font-weight:700;cursor:pointer;border-radius:9px;transition:.2s;}
+    .tab.active{background:var(--g);color:#060606;}
+
+    /* FORMS */
+    .form{display:none;}
+    .form.active{display:block;}
+    label{display:block;font-size:12px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+    input{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;border-radius:10px;padding:14px 16px;color:#fff;font-size:14px;margin-bottom:16px;outline:none;transition:.2s;}
+    input:focus{border-color:var(--g);}
+    input::placeholder{color:#333;}
+    .btn{width:100%;background:var(--g);color:#060606;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:900;cursor:pointer;transition:.2s;margin-top:4px;}
+    .btn:hover{background:#b8ff1a;transform:translateY(-1px);}
+    .err{color:#ff5555;font-size:13px;margin-top:10px;min-height:20px;text-align:center;}
+    .success-msg{display:none;background:#0a1a00;border:1px solid var(--g);border-radius:12px;padding:20px;text-align:center;margin-top:16px;}
+    .success-msg .big{font-size:32px;margin-bottom:8px;}
+    .success-msg p{font-size:14px;color:#ccc;line-height:1.6;}
+
+    /* DASHBOARD */
+    .dash{display:none;}
+    .dash-header{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+    .dash-avatar{width:52px;height:52px;background:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#060606;font-weight:900;flex-shrink:0;}
+    .dash-name{font-size:18px;font-weight:900;}
+    .dash-role{font-size:12px;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+    .section-label{font-size:11px;font-weight:800;color:var(--g);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
+    .quick-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+    .ql{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:12px;padding:14px;text-align:center;color:#ccc;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;display:block;}
+    .ql:hover{border-color:var(--g);color:var(--g);}
+    .order-card{background:#0a0a0a;border:1px solid #1e1e1e;border-radius:12px;padding:16px 20px;margin-bottom:10px;}
+    .order-pkg{font-size:15px;font-weight:800;}
+    .order-status{font-size:12px;color:var(--g);font-weight:700;margin-top:3px;}
+    .order-detail{font-size:13px;color:#555;margin-top:6px;line-height:1.6;}
+    .no-orders{text-align:center;padding:24px;color:#333;font-size:14px;}
+    .signout-btn{width:100%;background:transparent;border:1px solid #1e1e1e;color:#444;border-radius:10px;padding:12px;font-size:13px;cursor:pointer;margin-top:8px;transition:.2s;}
+    .signout-btn:hover{border-color:#ff4444;color:#ff4444;}
+
+    /* DEV PANEL */
+    .dev-panel{background:#0a0a0a;border:1px solid #7c3aed44;border-radius:12px;padding:20px;margin-bottom:20px;}
+    .dev-badge{display:inline-block;background:#7c3aed;color:#fff;font-size:10px;font-weight:900;padding:3px 8px;border-radius:100px;margin-left:8px;vertical-align:middle;}
+    .dev-stat{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #111;font-size:14px;}
+    .dev-stat:last-child{border-bottom:none;}
+    .dev-stat-val{color:var(--g);font-weight:700;}
+
+    /* FOOTER */
+    footer{text-align:center;padding:24px;color:#222;font-size:12px;border-top:1px solid #111;}
+    footer a{color:#333;}footer a:hover{color:var(--g);}
+
+    @media(max-width:520px){
+      nav{padding:16px 20px;}
+      .card{padding:32px 24px;}
+      .quick-links{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Site<span>Up</span></a>
+  <a href="/" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="page">
+  <div class="card" id="auth-card">
+    <div class="card-icon">🔐</div>
+    <div class="card-title">Welcome back.</div>
+    <div class="card-sub">Sign in to your SiteUp account to track your orders and manage your project.</div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('signin')">Sign In</button>
+      <button class="tab" onclick="switchTab('signup')">Create Account</button>
+    </div>
+
+    <!-- SIGN IN -->
+    <div class="form active" id="form-signin">
+      <label>Email Address</label>
+      <input type="email" id="si-email" placeholder="you@example.com" autocomplete="email"/>
+      <label>Password</label>
+      <input type="password" id="si-pass" placeholder="Your password" autocomplete="current-password"/>
+      <button class="btn" onclick="doSignIn()">Sign In →</button>
+      <div class="err" id="si-err"></div>
+    </div>
+
+    <!-- SIGN UP -->
+    <div class="form" id="form-signup">
+      <label>Full Name</label>
+      <input type="text" id="su-name" placeholder="John Smith" autocomplete="name"/>
+      <label>Business Name <span style="color:#333;font-weight:400;">(optional)</span></label>
+      <input type="text" id="su-biz" placeholder="Smith Plumbing LLC"/>
+      <label>Email Address</label>
+      <input type="email" id="su-email" placeholder="you@example.com" autocomplete="email"/>
+      <label>Password</label>
+      <input type="password" id="su-pass" placeholder="At least 6 characters" autocomplete="new-password"/>
+      <button class="btn" onclick="doSignUp()">Create Account →</button>
+      <div class="err" id="su-err"></div>
+      <div class="success-msg" id="su-success">
+        <div class="big">🎉</div>
+        <p>Account created! Welcome to SiteUp Agency. Loading your dashboard...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="card dash" id="dash-card">
+    <div class="dash-header">
+      <div class="dash-avatar" id="dash-avatar">K</div>
+      <div>
+        <div class="dash-name" id="dash-name">Loading...</div>
+        <div class="dash-role" id="dash-role">Customer</div>
+      </div>
+    </div>
+
+    <!-- DEV PANEL -->
+    <div class="dev-panel" id="dev-panel" style="display:none;">
+      <div class="section-label">Developer Panel <span class="dev-badge">DEV</span></div>
+      <div class="dev-stat"><span>Total Accounts</span><span class="dev-stat-val" id="dev-users">—</span></div>
+      <div class="dev-stat"><span>Total Orders</span><span class="dev-stat-val" id="dev-orders">—</span></div>
+      <div class="dev-stat"><span>Site</span><span class="dev-stat-val"><a href="https://siteupagency.com" target="_blank" style="color:var(--g);">siteupagency.com ↗</a></span></div>
+      <div class="dev-stat"><span>GitHub Repo</span><span class="dev-stat-val"><a href="https://github.com/Mrbazemore5/siteupagency" target="_blank" style="color:var(--g);">Mrbazemore5/siteupagency ↗</a></span></div>
+    </div>
+
+    <div class="section-label">Quick Links</div>
+    <div class="quick-links">
+      <a class="ql" href="/#packages">🛒 Order a Site</a>
+      <a class="ql" href="/#contact">💬 Contact Us</a>
+      <a class="ql" href="mailto:kinsleybazemore@gmail.com">📧 Email Support</a>
+      <a class="ql" href="/#process">⚡ How It Works</a>
+    </div>
+
+    <div class="section-label">My Orders</div>
+    <div id="dash-orders">
+      <div class="no-orders">No orders yet. <a href="/#packages" style="color:var(--g);">Browse packages →</a></div>
+    </div>
+
+    <button class="signout-btn" onclick="doSignOut()">Sign Out</button>
+  </div>
+</div>
+
+<footer>
+  <a href="/">siteupagency.com</a> · kinsleybazemore@gmail.com · CashApp: $kinsleybazemore8 · Venmo: @Mrbazemore
+</footer>
+
+<script>
+var DEV_EMAIL = 'kinsley@siteupagency.dev';
+var DEV_PASS  = 'SiteUp2026!';
+
+function switchTab(t){
+  document.getElementById('form-signin').className = 'form'+(t==='signin'?' active':'');
+  document.getElementById('form-signup').className = 'form'+(t==='signup'?' active':'');
+  document.querySelectorAll('.tab').forEach(function(el,i){
+    el.className = 'tab'+(( i===0&&t==='signin')||(i===1&&t==='signup')?' active':'');
+  });
+}
+
+function doSignIn(){
+  var email = document.getElementById('si-email').value.trim();
+  var pass  = document.getElementById('si-pass').value;
+  var err   = document.getElementById('si-err');
+  err.textContent = '';
+  if(!email||!pass){ err.textContent='Please fill in all fields.'; return; }
+  // Dev account
+  if(email===DEV_EMAIL && pass===DEV_PASS){
+    var u = {name:'Kinsley',email:email,role:'developer',joined:new Date().toISOString()};
+    localStorage.setItem('su_user', JSON.stringify(u));
+    showDash(u); return;
+  }
+  var users = JSON.parse(localStorage.getItem('su_users')||'[]');
+  var u = users.find(function(x){ return x.email===email && x.pass===pass; });
+  if(!u){ err.textContent='Email or password is incorrect.'; return; }
+  localStorage.setItem('su_user', JSON.stringify(u));
+  showDash(u);
+}
+
+function doSignUp(){
+  var name  = document.getElementById('su-name').value.trim();
+  var biz   = document.getElementById('su-biz').value.trim();
+  var email = document.getElementById('su-email').value.trim();
+  var pass  = document.getElementById('su-pass').value;
+  var err   = document.getElementById('su-err');
+  err.textContent = '';
+  if(!name||!email||!pass){ err.textContent='Please fill in all required fields.'; return; }
+  if(pass.length<6){ err.textContent='Password must be at least 6 characters.'; return; }
+  var users = JSON.parse(localStorage.getItem('su_users')||'[]');
+  if(users.find(function(x){ return x.email===email; })){ err.textContent='An account with this email already exists.'; return; }
+  var newUser = {name:name,biz:biz,email:email,pass:pass,role:'customer',joined:new Date().toISOString()};
+  users.push(newUser);
+  localStorage.setItem('su_users', JSON.stringify(users));
+  localStorage.setItem('su_user', JSON.stringify(newUser));
+  document.getElementById('su-success').style.display='block';
+  setTimeout(function(){ showDash(newUser); }, 1800);
+}
+
+function showDash(u){
+  document.getElementById('auth-card').style.display='none';
+  document.getElementById('dash-card').style.display='block';
+  document.getElementById('dash-name').textContent = u.name;
+  document.getElementById('dash-role').textContent = u.role==='developer' ? '⚡ Developer' : 'Customer';
+  document.getElementById('dash-avatar').textContent = u.name.charAt(0).toUpperCase();
+  if(u.role==='developer'){
+    document.getElementById('dev-panel').style.display='block';
+    var users = JSON.parse(localStorage.getItem('su_users')||'[]');
+    document.getElementById('dev-users').textContent = users.length;
+    // Count all orders
+    var totalOrders = 0;
+    users.forEach(function(usr){
+      var ords = JSON.parse(localStorage.getItem('su_orders_'+usr.email)||'[]');
+      totalOrders += ords.length;
+    });
+    document.getElementById('dev-orders').textContent = totalOrders;
+  }
+  var orders = JSON.parse(localStorage.getItem('su_orders_'+u.email)||'[]');
+  var el = document.getElementById('dash-orders');
+  if(orders.length===0){
+    el.innerHTML='<div class="no-orders">No orders yet. <a href="/#packages" style="color:var(--g);">Browse packages →</a></div>';
+  } else {
+    el.innerHTML = orders.map(function(o){
+      return '<div class="order-card"><div class="order-pkg">'+o.pkg+' Package</div><div class="order-status">'+o.status+'</div><div class="order-detail">Total: $'+o.total+' · $100 deposit paid · Balance: $'+(o.total-100)+' due on delivery</div></div>';
+    }).join('');
+  }
+}
+
+function doSignOut(){
+  localStorage.removeItem('su_user');
+  document.getElementById('dash-card').style.display='none';
+  document.getElementById('auth-card').style.display='block';
+  switchTab('signin');
+}
+
+// Auto-login if session exists
+window.addEventListener('DOMContentLoaded', function(){
+  var u = JSON.parse(localStorage.getItem('su_user')||'null');
+  if(u) showDash(u);
+});
+</script>
+</body>
+</html>
