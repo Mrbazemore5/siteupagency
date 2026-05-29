@@ -649,10 +649,10 @@
     .dash-badge.dev{background:#7c3aed;color:#fff;}
 
     /* ── LIVE CHAT WIDGET ── */
-    .chat-btn{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:#a3ff00;border-radius:50%;border:none;cursor:pointer;box-shadow:0 4px 24px rgba(163,255,0,0.35);z-index:8000;font-size:24px;display:flex;align-items:center;justify-content:center;transition:.2s;}
+    .chat-btn{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:#a3ff00;border-radius:50%;border:none;cursor:pointer;box-shadow:0 4px 24px rgba(163,255,0,0.35);z-index:8500;font-size:24px;display:flex;align-items:center;justify-content:center;transition:.2s;}
     .chat-btn:hover{transform:scale(1.1);}
     .chat-notif{position:absolute;top:-2px;right:-2px;width:14px;height:14px;background:#ff4444;border-radius:50%;border:2px solid #060606;}
-    .chat-win{position:fixed;bottom:98px;right:28px;width:340px;height:480px;background:#111;border:1px solid #222;border-radius:20px;z-index:8000;display:none;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,0.6);overflow:hidden;}
+    .chat-win{position:fixed;bottom:98px;right:28px;width:340px;height:480px;background:#111;border:1px solid #222;border-radius:20px;z-index:8500;display:none;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,0.6);overflow:hidden;}
     .chat-win.on{display:flex;}
     .chat-head{background:#0a0a0a;padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #1e1e1e;}
     .chat-avatar{width:38px;height:38px;background:#a3ff00;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
@@ -696,7 +696,7 @@
     <button class="nav-cart-btn" onclick="openCart()">
       🛒&nbsp;Cart&nbsp;<span class="cart-badge" id="cart-badge">0</span>
     </button>
-    <button class="nav-account-btn" id="nav-account-btn" onclick="openAuthModal()">👤 Sign In</button>
+    <a href="/login" class="nav-account-btn" id="nav-account-btn">👤 Sign In</a>
     <a class="nav-cta" href="#packages">Get Started</a>
   </div>
 </nav>
@@ -714,6 +714,7 @@
     <div class="hero-btns">
       <a class="btn-hero-primary" href="#packages">Browse Packages →</a>
       <a class="btn-hero-ghost" href="#process">See How It Works</a>
+      <a class="btn-hero-ghost" href="/login" style="border-color:#333;color:#888;">🔐 My Account</a>
     </div>
     <div class="hero-trust">
       <div class="hero-trust-label">Trusted by contractors worldwide</div>
