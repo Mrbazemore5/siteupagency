@@ -104,6 +104,16 @@
     .consult-submit { background: #a3ff00; color: #0a0a0a; border: none; padding: 16px; border-radius: 12px; font-size: 17px; font-weight: 900; cursor: pointer; transition: opacity 0.2s; }
     .consult-submit:hover { opacity: 0.85; }
     .consult-success { display: none; background: #111d00; border: 1px solid #a3ff00; border-radius: 12px; padding: 20px; color: #a3ff00; font-weight: 700; font-size: 16px; margin-top: 16px; }
+
+    .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 60px; }
+    .testimonial-card { background: #111; border: 1px solid #1e1e1e; border-radius: 20px; padding: 36px 32px; position: relative; }
+    .stars { color: #a3ff00; font-size: 18px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-text { font-size: 16px; color: #ccc; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar { width: 46px; height: 46px; border-radius: 50%; background: #a3ff00; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; color: #0a0a0a; flex-shrink: 0; }
+    .author-name { font-weight: 800; font-size: 15px; }
+    .author-biz { font-size: 13px; color: #666; margin-top: 2px; }
+    .testimonial-quote { position: absolute; top: 24px; right: 28px; font-size: 48px; color: #1e1e1e; font-family: Georgia, serif; line-height: 1; }
 </style>
 </head>
 <body>
@@ -210,6 +220,94 @@
   </div>
 </section>
 
+
+
+<section id="reviews">
+  <div class="section-tag">Client Reviews</div>
+  <div class="section-title">What Contractors Are Saying</div>
+  <div class="section-sub">Real results from real Virginia Beach business owners.</div>
+  <div class="testimonials">
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I had zero online presence before SiteUp. Within a week of going live I got two calls from Google searches. Wish I'd done this years ago."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">M</div>
+        <div>
+          <div class="author-name">Marcus T.</div>
+          <div class="author-biz">MT Roofing & Repairs, Virginia Beach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Super fast and professional. They built my whole site in 4 days, handled the domain, everything. I just sent the deposit and they took care of the rest."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">D</div>
+        <div>
+          <div class="author-name">Darnell W.</div>
+          <div class="author-biz">D&W Landscaping LLC, Chesapeake</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Customers tell me my site looks better than companies that have been around for 20 years. Best $1,000 I've ever spent on my business."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">R</div>
+        <div>
+          <div class="author-name">Ray S.</div>
+          <div class="author-biz">Shoreline Pressure Washing, VB</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I was skeptical about paying a deposit first but everything was smooth. Site was done fast, looks great on my phone, and now I'm showing up on Google."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">T</div>
+        <div>
+          <div class="author-name">Tanya B.</div>
+          <div class="author-biz">TBClean Services, Norfolk</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Kinsley was responsive and easy to work with. No tech knowledge needed on my end at all. I described what I do and they built something that actually represents my business."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">J</div>
+        <div>
+          <div class="author-name">James P.</div>
+          <div class="author-biz">JP Electric Co., Virginia Beach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"My old site looked like it was from 2005. The new one is clean, fast, and my customers actually compliment it. Totally worth every penny."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">L</div>
+        <div>
+          <div class="author-name">Luis M.</div>
+          <div class="author-biz">LM Concrete & Masonry, Hampton Roads</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <section id="consultation" style="padding: 0 60px 80px; max-width: 1100px; margin: 0 auto;">
   <div class="consult-section">
