@@ -276,49 +276,6 @@
       padding:4px 12px;border-radius:100px;
     }
 
-    /* ══════════════ TESTIMONIALS ══════════════ */
-    .testi-grid{
-      display:grid;grid-template-columns:repeat(3,1fr);
-      gap:20px;margin-top:60px;
-    }
-    .testi-card{
-      background:var(--card);border:1px solid var(--border);
-      border-radius:20px;padding:32px 28px;
-      transition:border-color .2s;
-    }
-    .testi-card:hover{border-color:var(--border2);}
-    .testi-stars{color:var(--g);font-size:13px;letter-spacing:3px;margin-bottom:18px;}
-    .testi-quote{font-size:15px;color:#bbb;line-height:1.75;font-style:italic;margin-bottom:24px;}
-    .testi-author{display:flex;align-items:center;gap:12px;}
-    .testi-avatar{
-      width:40px;height:40px;border-radius:50%;
-      background:linear-gradient(135deg,var(--g),#60cc00);
-      color:#060606;font-weight:900;font-size:15px;
-      display:flex;align-items:center;justify-content:center;flex-shrink:0;
-    }
-    .testi-name{font-size:14px;font-weight:700;color:#fff;}
-    .testi-biz{font-size:12px;color:var(--sub);margin-top:2px;}
-    .verified{
-      display:inline-flex;align-items:center;gap:4px;
-      background:rgba(163,255,0,.08);border:1px solid rgba(163,255,0,.15);
-      color:var(--g);font-size:10px;font-weight:700;
-      padding:3px 8px;border-radius:100px;margin-bottom:16px;
-    }
-
-    /* ══════════════ FAQ ══════════════ */
-    .faq-wrap{max-width:720px;margin:56px auto 0;}
-    .faq-item{border-bottom:1px solid var(--border);padding:22px 0;cursor:pointer;}
-    .faq-q{font-size:16px;font-weight:700;display:flex;justify-content:space-between;align-items:center;color:#fff;}
-    .faq-chevron{
-      width:28px;height:28px;border-radius:50%;
-      background:var(--card);border:1px solid var(--border);
-      display:flex;align-items:center;justify-content:center;
-      color:var(--g);font-size:16px;font-weight:300;
-      flex-shrink:0;transition:background .15s,transform .25s;
-    }
-    .faq-item.open .faq-chevron{background:var(--g);color:#060606;transform:rotate(45deg);}
-    .faq-a{display:none;color:var(--sub);font-size:14px;line-height:1.75;margin-top:14px;padding-right:40px;}
-
     /* ══════════════ CONTACT ══════════════ */
     .contact-outer{
       max-width:1100px;margin:0 auto;padding:0 24px 120px;
@@ -627,7 +584,7 @@
       .pkg-grid{grid-template-columns:1fr 1fr;}
       .feat-grid{grid-template-columns:1fr;}
       .feat-card.wide{grid-column:span 1;}
-      .testi-grid{grid-template-columns:1fr;}
+      
       .contact-outer{grid-template-columns:1fr;gap:40px;}
       .cta-banner{margin:0 16px 80px;padding:52px 24px;}
       .cta-banner h2{font-size:32px;}
@@ -656,7 +613,6 @@
   <div class="nav-links">
     <a href="#process">How It Works</a>
     <a href="#packages">Pricing</a>
-    <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
   </div>
   <div class="nav-right">
@@ -845,46 +801,6 @@
   </div>
 </div>
 
-<!-- TESTIMONIALS -->
-<div class="section" id="reviews">
-  <div class="sec-eyebrow">Reviews</div>
-  <div class="sec-title">What clients say.</div>
-  <div class="testi-grid">
-    <div class="testi-card">
-      <div class="verified">✓ Verified Client</div>
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-quote">"Had my site up in 4 days. Customers actually find me on Google now — my phone has been ringing way more than before."</div>
-      <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Mike R.</div><div class="testi-biz">MR Plumbing Co.</div></div></div>
-    </div>
-    <div class="testi-card">
-      <div class="verified">✓ Verified Client</div>
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-quote">"Super professional, communicated the whole time, and delivered exactly what I asked for. Best $1,000 I've spent on my business."</div>
-      <div class="testi-author"><div class="testi-avatar">D</div><div><div class="testi-name">Dana W.</div><div class="testi-biz">Woodworking by Dana</div></div></div>
-    </div>
-    <div class="testi-card">
-      <div class="verified">✓ Verified Client</div>
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-quote">"I was skeptical since they're new, but wow — the site looks like a $5k build. Highly recommend if you need something fast and professional."</div>
-      <div class="testi-author"><div class="testi-avatar">J</div><div><div class="testi-name">James T.</div><div class="testi-biz">T&T Electric LLC</div></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- FAQ -->
-<div class="section" id="faq">
-  <div class="sec-eyebrow">FAQ</div>
-  <div class="sec-title" style="text-align:center;">Common questions.</div>
-  <div class="faq-wrap">
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How does the $100 deposit work? <span class="faq-chevron">+</span></div><div class="faq-a">The $100 deposit reserves your spot in our build queue. It's applied toward your total — you pay the remaining balance only after you see the finished site and love it.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How long does it take to build? <span class="faq-chevron">+</span></div><div class="faq-a">Basic sites take 2–3 business days, Starter and Pro take 3–5 days, and Elite packages up to 7 days. We move fast.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What if I don't like it? <span class="faq-chevron">+</span></div><div class="faq-a">We offer unlimited revisions until you're happy. If you're still not satisfied after revisions, we'll work with you on a fair resolution. You don't pay the balance until you approve.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do I need to provide content or images? <span class="faq-chevron">+</span></div><div class="faq-a">Nope. Just your business name, what you do, and your service area. We handle everything else — writing, images, layout, and setup.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How do I pay the remaining balance? <span class="faq-chevron">+</span></div><div class="faq-a">Same as the deposit — CashApp ($kinsleybazemore8) or Venmo (@Mrbazemore). Simple, fast, no hidden fees.</div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Do I get to keep the site after? <span class="faq-chevron">+</span></div><div class="faq-a">Yes — 100%. The site is yours. We hand over everything including the code, domain access, and hosting setup.</div></div>
-  </div>
-</div>
-
 <!-- CONTACT -->
 <div class="contact-outer" id="contact">
   <div class="contact-left">
@@ -936,7 +852,6 @@
   <div class="footer-links">
     <a href="#process">How It Works</a>
     <a href="#packages">Pricing</a>
-    <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
     <a href="mailto:kinsleybazemore@gmail.com">Email Us</a>
   </div>
