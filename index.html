@@ -91,7 +91,20 @@
       .stats { gap: 30px; padding: 40px 24px; }
       .contact-section { padding: 36px 24px; margin: 40px 16px 0; }
     }
-  </style>
+  
+    .consult-section { background: #111; border: 1px solid #1e1e1e; border-radius: 24px; padding: 60px 40px; max-width: 700px; margin: 60px auto 0; text-align: center; }
+    .consult-section h2 { font-size: 36px; font-weight: 900; margin-bottom: 12px; }
+    .consult-section h2 span { color: #a3ff00; }
+    .consult-section p { color: #aaa; font-size: 16px; margin-bottom: 32px; }
+    .consult-form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+    .consult-form input, .consult-form select, .consult-form textarea { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 14px 18px; color: #fff; font-size: 15px; font-family: inherit; outline: none; transition: border 0.2s; }
+    .consult-form input:focus, .consult-form select:focus, .consult-form textarea:focus { border-color: #a3ff00; }
+    .consult-form select option { background: #1a1a1a; }
+    .consult-form textarea { resize: vertical; min-height: 100px; }
+    .consult-submit { background: #a3ff00; color: #0a0a0a; border: none; padding: 16px; border-radius: 12px; font-size: 17px; font-weight: 900; cursor: pointer; transition: opacity 0.2s; }
+    .consult-submit:hover { opacity: 0.85; }
+    .consult-success { display: none; background: #111d00; border: 1px solid #a3ff00; border-radius: 12px; padding: 20px; color: #a3ff00; font-weight: 700; font-size: 16px; margin-top: 16px; }
+</style>
 </head>
 <body>
 <nav>
@@ -197,6 +210,30 @@
   </div>
 </section>
 
+
+<section id="consultation" style="padding: 0 60px 80px; max-width: 1100px; margin: 0 auto;">
+  <div class="consult-section">
+    <h2>Book a <span>Free Consultation</span></h2>
+    <p>Not ready to pay yet? No problem. Tell us about your business and we'll reach out within 24 hours to chat — zero pressure.</p>
+    <form class="consult-form" onsubmit="submitConsult(event)">
+      <input type="text" id="c-name" placeholder="Your Full Name" required />
+      <input type="text" id="c-business" placeholder="Business Name" required />
+      <input type="tel" id="c-phone" placeholder="Phone Number" required />
+      <input type="email" id="c-email" placeholder="Email Address" required />
+      <select id="c-package">
+        <option value="" disabled selected>Which package interests you?</option>
+        <option value="Starter - $1,000">Starter — $1,000</option>
+        <option value="Pro - $1,500">Pro — $1,500 ⭐ Most Popular</option>
+        <option value="Elite - $2,500">Elite — $2,500</option>
+        <option value="Not sure yet">Not sure yet</option>
+      </select>
+      <textarea id="c-message" placeholder="Tell us a little about your business (optional)"></textarea>
+      <button type="submit" class="consult-submit">📅 Book My Free Consultation →</button>
+    </form>
+    <div class="consult-success" id="consult-success">✅ We got your info! Expect a message from us within 24 hours.</div>
+  </div>
+</section>
+
 <section>
   <div class="section-tag">FAQ</div>
   <div class="section-title">Common Questions</div>
@@ -251,5 +288,26 @@
     this.reset();
   });
 </script>
+
+  <script>
+    function submitConsult(e) {
+      e.preventDefault();
+      const name = document.getElementById('c-name').value;
+      const business = document.getElementById('c-business').value;
+      const phone = document.getElementById('c-phone').value;
+      const email = document.getElementById('c-email').value;
+      const pkg = document.getElementById('c-package').value;
+      const message = document.getElementById('c-message').value;
+
+      fetch('https://superagent-d29c9b67.base44.app/functions/siteup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'consultation', name, business, phone, email, package: pkg, message })
+      }).catch(() => {});
+
+      document.querySelector('.consult-form').style.display = 'none';
+      document.getElementById('consult-success').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
