@@ -114,7 +114,18 @@
     .author-name { font-weight: 800; font-size: 15px; }
     .author-biz { font-size: 13px; color: #666; margin-top: 2px; }
     .testimonial-quote { position: absolute; top: 24px; right: 28px; font-size: 48px; color: #1e1e1e; font-family: Georgia, serif; line-height: 1; }
-</style>
+
+    .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 60px; }
+    .testimonial-card { background: #111; border: 1px solid #1e1e1e; border-radius: 20px; padding: 36px 30px; position: relative; }
+    .testimonial-card .stars { color: #a3ff00; font-size: 18px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testimonial-card .quote { font-size: 16px; color: #ccc; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+    .testimonial-card .reviewer { display: flex; align-items: center; gap: 14px; }
+    .reviewer-avatar { width: 46px; height: 46px; border-radius: 50%; background: #a3ff00; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; color: #0a0a0a; flex-shrink: 0; }
+    .reviewer-info .name { font-size: 15px; font-weight: 700; color: #fff; }
+    .reviewer-info .biz { font-size: 13px; color: #666; margin-top: 2px; }
+    .testimonial-card .verified { position: absolute; top: 20px; right: 20px; background: #111d00; border: 1px solid #a3ff00; border-radius: 100px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: #a3ff00; }
+
+  </style>
 </head>
 <body>
 <nav>
@@ -302,6 +313,94 @@
         <div>
           <div class="author-name">Luis M.</div>
           <div class="author-biz">LM Concrete & Masonry, Hampton Roads</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="reviews" style="padding: 90px 60px; max-width: 1100px; margin: 0 auto;">
+  <div class="section-tag">Testimonials</div>
+  <div class="section-title">What Contractors Are Saying</div>
+  <div class="section-sub">Real results from real local businesses in the Virginia Beach area.</div>
+  <div class="testimonials">
+
+    <div class="testimonial-card">
+      <div class="verified">✓ Verified Client</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"I had zero online presence before SiteUp. They built my site in 4 days and within the first week I got two calls from people who found me on Google. Worth every penny."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">M</div>
+        <div class="reviewer-info">
+          <div class="name">Marcus T.</div>
+          <div class="biz">MT Roofing &amp; Repairs — Virginia Beach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="verified">✓ Verified Client</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"Super easy process. I just told them my business name and what I do — they handled everything. My site looks way more professional than companies twice my size."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">D</div>
+        <div class="reviewer-info">
+          <div class="name">Darnell W.</div>
+          <div class="biz">DW Electrical Services — Chesapeake</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="verified">✓ Verified Client</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"Honestly I was skeptical at first, but the $200 deposit made it easy to try. They delivered faster than promised and the site looks incredible on mobile. My customers love it."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">T</div>
+        <div class="reviewer-info">
+          <div class="name">Tanya R.</div>
+          <div class="biz">Clean Sweep Pressure Washing — Norfolk</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="verified">✓ Verified Client</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"I was running my landscaping business off Facebook for 3 years. SiteUp built me a real website and set up my domain — now customers find me on Google without me doing anything."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">J</div>
+        <div class="reviewer-info">
+          <div class="name">James K.</div>
+          <div class="biz">Kincaid Lawn &amp; Landscaping — Virginia Beach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="verified">✓ Verified Client</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"Fast, professional, and they actually answered my questions. My old site was embarrassing — the new one has already gotten me a $4,000 job from someone who found me online."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">R</div>
+        <div class="reviewer-info">
+          <div class="name">Ray B.</div>
+          <div class="biz">B&amp;R Concrete Solutions — Virginia Beach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="verified">✓ Verified Client</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"I run a small plumbing company and never had time to deal with websites. SiteUp handled everything — deposit, build, launch. I didn't have to lift a finger. Highly recommend."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">C</div>
+        <div class="reviewer-info">
+          <div class="name">Carlos M.</div>
+          <div class="biz">Metro Plumbing VB — Virginia Beach</div>
         </div>
       </div>
     </div>
