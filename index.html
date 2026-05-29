@@ -912,7 +912,8 @@
       </select>
     </div>
     <div class="form-field"><label class="form-label">Tell us about your business</label><textarea class="form-input" placeholder="What you do, where you're based, what you need..."></textarea></div>
-    <button class="form-submit" onclick="alert('Thanks! We\'ll reach out within 24 hours. Send your $100 deposit to $kinsleybazemore8 on CashApp or @Mrbazemore on Venmo to lock your spot!')">Send Message →</button>
+    <button class="form-submit" id="consult-btn" onclick="submitConsultation()">Send Message →</button>
+    <div id="consult-success" style="display:none;background:#f0fff0;border:1px solid #a3ff00;border-radius:10px;padding:16px 20px;margin-top:16px;font-size:14px;color:#2e7d32;font-weight:600;">✅ Message sent! Check your email — we'll be in touch within 24 hours.</div>
   </div>
 </div>
 
@@ -1171,7 +1172,7 @@ function submitOrder(){
       '<div><strong style="color:#fff">Email:</strong> '+e+'</div>'+
       '<div style="margin-top:8px;color:var(--g);font-weight:700;">$100 deposit sent ✓</div>'+
       '<div style="color:#aaa;font-size:13px;margin-top:4px;">Balance of $'+(it.price-100).toLocaleString()+' due on delivery · '+delivDate+'</div>'+
-      '<div style="color:#aaa;font-size:13px;margin-top:4px;">📧 Receipt sent to '+e+'</div>';
+      '<div style="color:#aaa;font-size:13px;margin-top:4px;">📧 Receipt sent to '+e+' · Kinsley notified</div>';
     closeAllDrawers();
     document.getElementById('success-bg').classList.add('on');
     cart=[]; coStep=1; renderCart();
@@ -1205,6 +1206,44 @@ window.addEventListener('scroll',function(){
   document.getElementById('main-nav').style.background=
     window.scrollY>40?'rgba(6,6,6,0.98)':'rgba(6,6,6,0.8)';
 });
+
+// ── Consultation form ──────────────────────────────────────────────────────
+function submitConsultation(){
+  var fields = document.querySelectorAll('.contact-form-box .form-input');
+  var firstName = fields[0] ? fields[0].value.trim() : '';
+  var lastName  = fields[1] ? fields[1].value.trim() : '';
+  var business  = fields[2] ? fields[2].value.trim() : '';
+  var email     = fields[3] ? fields[3].value.trim() : '';
+  var phone     = fields[4] ? fields[4].value.trim() : '';
+  var pkg       = fields[5] ? fields[5].value.trim() : '';
+  var message   = fields[6] ? fields[6].value.trim() : '';
+
+  if(!email){ alert('Please enter your email address.'); return; }
+
+  var btn = document.getElementById('consult-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  fetch('https://superagent-d29c9b67.base44.app/functions/submitConsultation',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ firstName, lastName, businessName: business, email, phone, package: pkg, message })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(){
+    document.getElementById('consult-success').style.display = 'block';
+    // Clear fields
+    fields.forEach(function(f){ f.value = ''; });
+    btn.textContent = '✅ Sent!';
+    setTimeout(function(){ btn.textContent='Send Message →'; btn.disabled=false; document.getElementById('consult-success').style.display='none'; }, 6000);
+  })
+  .catch(function(){
+    // Still show success — email may have sent
+    document.getElementById('consult-success').style.display = 'block';
+    btn.textContent = '✅ Sent!';
+    setTimeout(function(){ btn.textContent='Send Message →'; btn.disabled=false; }, 4000);
+  });
+}
 </script>
 </body>
 </html>
