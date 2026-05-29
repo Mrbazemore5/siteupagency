@@ -260,91 +260,238 @@
 <section id="packages">
   <div class="section-tag">Pricing</div>
   <div class="section-title">Simple, Transparent Pricing</div>
-  <div class="section-sub">No hidden fees. No surprises. Just great websites at fair prices. Only <strong style="color:#a3ff00;">$100 deposit</strong> to get started.</div>
-  <div class="packages" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+  <div class="section-sub">No hidden fees. No surprises. Only <strong style="color:#a3ff00;">$100 deposit</strong> to get started — pay the rest on delivery.</div>
 
-    <div class="package">
+  <!-- STEP 1: Package Cards -->
+  <div id="pkg-grid" class="packages" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 48px;">
+
+    <div class="package" onclick="selectPackage('Basic','$500','2–3 Day Turnaround','Just getting started? Get a clean 1-page site up fast so customers can find you online.',['1-Page Custom Website','Mobile Responsive Design','Your Services Listed','Contact Form','SSL &amp; HTTPS Security','2–3 Day Turnaround'])">
       <div class="pkg-name">Basic</div>
       <div class="pkg-price">$500 <span>one-time</span></div>
-      <div class="pkg-desc">Just getting started? Get a clean 1-page site up fast so customers can find you online.</div>
+      <div class="pkg-desc">A clean 1-page site to get you found online fast.</div>
       <ul class="pkg-features">
         <li>✅ 1-Page Custom Website</li>
         <li>✅ Mobile Responsive Design</li>
-        <li>✅ Your Services Listed</li>
         <li>✅ Contact Form</li>
-        <li>✅ SSL & HTTPS Security</li>
+        <li>✅ SSL &amp; HTTPS Security</li>
         <li>✅ 2–3 Day Turnaround</li>
       </ul>
-      <a href="https://cash.app/$kinsleybazemore8" target="_blank" class="pkg-btn outline">💚 Pay $100 — CashApp</a>
-      <a href="https://venmo.com/Mrbazemore" target="_blank" class="pkg-btn outline" style="background:#008CFF;border-color:#008CFF;margin-top:8px;">💜 Pay $100 — Venmo</a>
+      <button class="pkg-btn outline select-btn">Select Package →</button>
     </div>
 
-    <div class="package">
+    <div class="package" onclick="selectPackage('Starter','$1,000','3–5 Day Turnaround','Perfect for contractors who need a clean, professional online presence fast.',['5-Page Custom Website','Mobile Responsive Design','Contact Form','Google Maps Integration','SSL &amp; HTTPS Security','Basic SEO Setup','3–5 Day Turnaround'])">
       <div class="pkg-name">Starter</div>
       <div class="pkg-price">$1,000 <span>one-time</span></div>
-      <div class="pkg-desc">Perfect for contractors who need a clean, professional online presence fast.</div>
+      <div class="pkg-desc">Professional multi-page site that builds trust instantly.</div>
       <ul class="pkg-features">
         <li>✅ 5-Page Custom Website</li>
         <li>✅ Mobile Responsive Design</li>
         <li>✅ Contact Form</li>
         <li>✅ Google Maps Integration</li>
-        <li>✅ Google Analytics Setup</li>
-        <li>✅ SSL & HTTPS Security</li>
+        <li>✅ Basic SEO Setup</li>
         <li>✅ 3–5 Day Turnaround</li>
       </ul>
-      <a href="https://cash.app/$kinsleybazemore8" target="_blank" class="pkg-btn outline">💚 Pay $100 — CashApp</a>
-      <a href="https://venmo.com/Mrbazemore" target="_blank" class="pkg-btn outline" style="background:#008CFF;border-color:#008CFF;margin-top:8px;">💜 Pay $100 — Venmo</a>
+      <button class="pkg-btn outline select-btn">Select Package →</button>
     </div>
 
-    <div class="package featured">
-      <div class="popular-badge">Most Popular</div>
+    <div class="package pkg-featured" onclick="selectPackage('Pro','$1,500','4–5 Day Turnaround','Our most popular package. Full SEO, your domain included, and everything a contractor needs to dominate locally.',['Everything in Starter','SEO Optimization','Free Custom Domain (1 year)','Google Business Setup','Gallery / Portfolio Page','Blog Ready','Priority Support','4–5 Day Turnaround'])">
+      <div class="pkg-badge">⭐ Most Popular</div>
       <div class="pkg-name">Pro</div>
       <div class="pkg-price">$1,500 <span>one-time</span></div>
-      <div class="pkg-desc">Everything in Starter plus domain setup, SEO, and a photo gallery to show off your work.</div>
+      <div class="pkg-desc">Full SEO, domain included — our most popular pick.</div>
       <ul class="pkg-features">
         <li>✅ Everything in Starter</li>
-        <li>✅ Custom Domain Setup</li>
-        <li>✅ DNS & Hosting Configuration</li>
-        <li>✅ On-Page SEO Optimization</li>
-        <li>✅ Meta Tags & Keywords</li>
-        <li>✅ Photo Gallery</li>
-        <li>✅ 30-Day Support</li>
+        <li>✅ SEO Optimization</li>
+        <li>✅ Free Custom Domain (1 yr)</li>
+        <li>✅ Google Business Setup</li>
+        <li>✅ Gallery / Portfolio Page</li>
+        <li>✅ Priority Support</li>
+        <li>✅ 4–5 Day Turnaround</li>
       </ul>
-      <a href="https://cash.app/$kinsleybazemore8" target="_blank" class="pkg-btn filled">💚 Pay $100 — CashApp</a>
-      <a href="https://venmo.com/Mrbazemore" target="_blank" class="pkg-btn outline" style="background:#008CFF;border-color:#008CFF;margin-top:8px;">💜 Pay $100 — Venmo</a>
+      <button class="pkg-btn filled select-btn">Select Package →</button>
     </div>
 
-    <div class="package">
+    <div class="package" onclick="selectPackage('Elite','$2,500','5–7 Day Turnaround','The full package. Everything we offer, done to perfection. For businesses ready to dominate their market.',['Everything in Pro','E-Commerce / Booking System','Custom Animations &amp; Branding','Monthly Maintenance (30 days)','Dedicated Account Manager','Social Media Integration','Analytics Dashboard','5–7 Day Turnaround'])">
       <div class="pkg-name">Elite</div>
       <div class="pkg-price">$2,500 <span>one-time</span></div>
-      <div class="pkg-desc">Full-service for contractors serious about dominating their local market online.</div>
+      <div class="pkg-desc">Full-service build with e-commerce, booking & branding.</div>
       <ul class="pkg-features">
         <li>✅ Everything in Pro</li>
-        <li>✅ Online Quote Request System</li>
-        <li>✅ Advanced Local SEO</li>
-        <li>✅ Google Business Profile Setup</li>
-        <li>✅ Monthly Site Maintenance</li>
-        <li>✅ Content Updates Anytime</li>
-        <li>✅ Priority Support</li>
+        <li>✅ E-Commerce / Booking System</li>
+        <li>✅ Custom Animations</li>
+        <li>✅ Monthly Maintenance (30 days)</li>
+        <li>✅ Analytics Dashboard</li>
+        <li>✅ 5–7 Day Turnaround</li>
       </ul>
-      <a href="https://cash.app/$kinsleybazemore8" target="_blank" class="pkg-btn outline">💚 Pay $100 — CashApp</a>
-      <a href="https://venmo.com/Mrbazemore" target="_blank" class="pkg-btn outline" style="background:#008CFF;border-color:#008CFF;margin-top:8px;">💜 Pay $100 — Venmo</a>
+      <button class="pkg-btn outline select-btn">Select Package →</button>
     </div>
 
   </div>
 
-  <div class="payment-section">
-    <h3>💸 Ready to Get Started?</h3>
-    <p>Send your $100 deposit via CashApp or Venmo to lock in your spot. We'll reach out within 24 hours to kick things off.</p>
-    <div class="payment-badges">
-      <div class="pay-badge">💚 CashApp: $kinsleybazemore8</div>
-      <div class="pay-badge">💜 Venmo: @Mrbazemore</div>
-      <div class="pay-badge">✅ Secure & Instant</div>
-      <div class="pay-badge">🔒 Trusted by Contractors Worldwide</div>
+  <!-- STEP 2: Package Detail Slide -->
+  <div id="pkg-detail" style="display:none; max-width:700px; margin:40px auto 0; background:#111; border:1px solid #a3ff00; border-radius:24px; padding:48px 40px; animation: fadeIn 0.3s ease;">
+    <button onclick="goBack('pkg-grid','pkg-detail')" style="background:none;border:none;color:#a3ff00;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:24px;padding:0;">← Back to Packages</button>
+    <div id="detail-tag" style="color:#a3ff00;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;"></div>
+    <h2 id="detail-name" style="font-size:36px;font-weight:900;margin-bottom:4px;"></h2>
+    <div id="detail-price" style="font-size:48px;font-weight:900;color:#a3ff00;margin-bottom:4px;"></div>
+    <div id="detail-turnaround" style="color:#888;font-size:14px;margin-bottom:24px;"></div>
+    <p id="detail-desc" style="color:#aaa;font-size:16px;line-height:1.7;margin-bottom:28px;"></p>
+    <div style="background:#0d0d0d;border-radius:16px;padding:24px 28px;margin-bottom:32px;">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#666;margin-bottom:16px;">What's Included</div>
+      <ul id="detail-features" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;"></ul>
     </div>
-    <a href="https://cash.app/$kinsleybazemore8" target="_blank" style="display:inline-block;margin-top:20px;background:#a3ff00;color:#0a0a0a;padding:16px 40px;border-radius:12px;font-weight:900;font-size:18px;text-decoration:none;">Pay $100 Deposit on CashApp →</a>
+    <div style="background:#111d00;border:1px solid #a3ff00;border-radius:14px;padding:18px 22px;margin-bottom:28px;">
+      <div style="font-size:13px;color:#a3ff00;font-weight:700;margin-bottom:4px;">💰 Payment Structure</div>
+      <div style="color:#ccc;font-size:14px;">$100 deposit now to lock in your spot → remaining balance paid on delivery</div>
+    </div>
+    <button id="detail-cta" onclick="goToCart()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:18px;border-radius:14px;font-size:18px;font-weight:900;cursor:pointer;transition:opacity 0.2s;">Add to Cart →</button>
   </div>
+
+  <!-- STEP 3: Cart -->
+  <div id="pkg-cart" style="display:none; max-width:700px; margin:40px auto 0; animation: fadeIn 0.3s ease;">
+    <button onclick="goBack('pkg-detail','pkg-cart')" style="background:none;border:none;color:#a3ff00;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:24px;padding:0;">← Back to Details</button>
+    <div style="background:#111;border:1px solid #1e1e1e;border-radius:24px;padding:40px;margin-bottom:20px;">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#666;margin-bottom:20px;">🛒 Your Cart</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #1e1e1e;">
+        <div>
+          <div id="cart-name" style="font-size:20px;font-weight:900;"></div>
+          <div style="color:#888;font-size:14px;margin-top:4px;">Web Design Package — SiteUp Agency</div>
+        </div>
+        <div id="cart-price" style="font-size:24px;font-weight:900;color:#a3ff00;"></div>
+      </div>
+      <div style="padding:20px 0;border-bottom:1px solid #1e1e1e;">
+        <div style="display:flex;justify-content:space-between;color:#aaa;font-size:15px;margin-bottom:10px;">
+          <span>Due Today (Deposit)</span><span style="color:#a3ff00;font-weight:700;">$100</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;color:#aaa;font-size:15px;">
+          <span>Due on Delivery</span><span id="cart-remaining" style="font-weight:700;color:#fff;"></span>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:20px;">
+        <span style="font-size:16px;font-weight:700;">Total</span>
+        <span id="cart-total" style="font-size:28px;font-weight:900;"></span>
+      </div>
+    </div>
+    <button onclick="goToCheckout()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:18px;border-radius:14px;font-size:18px;font-weight:900;cursor:pointer;margin-bottom:12px;">Proceed to Checkout →</button>
+    <button onclick="goBack('pkg-grid','pkg-cart'); document.getElementById('pkg-grid').style.display='grid'; document.getElementById('pkg-cart').style.display='none';" style="width:100%;background:transparent;color:#aaa;border:1px solid #333;padding:14px;border-radius:14px;font-size:15px;cursor:pointer;">← Continue Browsing</button>
+  </div>
+
+  <!-- STEP 4: Checkout -->
+  <div id="pkg-checkout" style="display:none; max-width:700px; margin:40px auto 0; animation: fadeIn 0.3s ease;">
+    <button onclick="goBack('pkg-cart','pkg-checkout')" style="background:none;border:none;color:#a3ff00;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:24px;padding:0;">← Back to Cart</button>
+    <div style="background:#111;border:1px solid #1e1e1e;border-radius:24px;padding:40px;">
+      <h2 style="font-size:28px;font-weight:900;margin-bottom:6px;">Complete Your Order</h2>
+      <p style="color:#888;font-size:15px;margin-bottom:32px;">Fill in your details, then pay the $100 deposit to lock in your spot.</p>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:32px;">
+        <input id="co-name" type="text" placeholder="Your Full Name" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
+        <input id="co-biz" type="text" placeholder="Business Name" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
+        <input id="co-email" type="email" placeholder="Email Address" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
+        <input id="co-phone" type="tel" placeholder="Phone Number" style="background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:14px 18px;color:#fff;font-size:15px;font-family:inherit;outline:none;" onfocus="this.style.borderColor='#a3ff00'" onblur="this.style.borderColor='#2a2a2a'"/>
+      </div>
+
+      <div style="margin-bottom:28px;">
+        <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#666;margin-bottom:16px;">Pay $100 Deposit</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <a id="cashapp-link" href="https://cash.app/$kinsleybazemore8" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:12px;background:#00d632;color:#fff;border-radius:14px;padding:18px;font-size:16px;font-weight:900;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
+            💚 Pay with CashApp — $kinsleybazemore8
+          </a>
+          <a href="https://venmo.com/Mrbazemore" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:12px;background:#008CFF;color:#fff;border-radius:14px;padding:18px;font-size:16px;font-weight:900;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
+            💜 Pay with Venmo — @Mrbazemore
+          </a>
+        </div>
+      </div>
+
+      <div style="background:#0d0d0d;border-radius:14px;padding:18px 22px;margin-bottom:24px;">
+        <div style="font-size:13px;color:#666;line-height:1.6;">After paying, click the button below to confirm your order. We'll reach out within 24 hours to kick off your build! 🚀</div>
+      </div>
+
+      <button onclick="submitOrder()" style="width:100%;background:#a3ff00;color:#0a0a0a;border:none;padding:18px;border-radius:14px;font-size:18px;font-weight:900;cursor:pointer;">✅ I've Paid — Confirm My Order</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: Success -->
+  <div id="pkg-success" style="display:none; max-width:700px; margin:40px auto 0; text-align:center; animation: fadeIn 0.3s ease;">
+    <div style="background:#111d00;border:2px solid #a3ff00;border-radius:24px;padding:60px 40px;">
+      <div style="font-size:64px;margin-bottom:20px;">🎉</div>
+      <h2 style="font-size:32px;font-weight:900;margin-bottom:12px;">Order Confirmed!</h2>
+      <p style="color:#aaa;font-size:16px;line-height:1.7;margin-bottom:28px;">We got your order and will reach out within <strong style="color:#fff;">24 hours</strong> to start building. Keep an eye on your email!</p>
+      <div id="success-summary" style="background:#0d0d0d;border-radius:14px;padding:20px 24px;margin-bottom:28px;text-align:left;"></div>
+      <a href="mailto:kinsleybazemore@gmail.com" style="display:inline-block;background:#a3ff00;color:#0a0a0a;border-radius:12px;padding:14px 32px;font-size:16px;font-weight:900;text-decoration:none;">📩 Email Us Directly</a>
+    </div>
+  </div>
+
 </section>
+
+<style>
+@keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.select-btn { width:100%; margin-top:20px; cursor:pointer; border:none; font-family:inherit; }
+.package { cursor:pointer; transition: transform 0.2s, border-color 0.2s; }
+.package:hover { transform: translateY(-4px); border-color: #a3ff00 !important; }
+</style>
+
+<script>
+var selectedPkg = {};
+
+function selectPackage(name, price, turnaround, desc, features) {
+  selectedPkg = { name, price, turnaround, desc, features };
+  document.getElementById('detail-tag').textContent = 'Package Details';
+  document.getElementById('detail-name').textContent = name + ' Package';
+  document.getElementById('detail-price').textContent = price;
+  document.getElementById('detail-turnaround').textContent = '⏱ ' + turnaround;
+  document.getElementById('detail-desc').textContent = desc;
+  var ul = document.getElementById('detail-features');
+  ul.innerHTML = '';
+  features.forEach(function(f) {
+    var li = document.createElement('li');
+    li.style.cssText = 'display:flex;align-items:center;gap:10px;color:#ccc;font-size:15px;';
+    li.innerHTML = '<span style="color:#a3ff00;font-size:18px;">✓</span> ' + f;
+    ul.appendChild(li);
+  });
+  document.getElementById('pkg-grid').style.display = 'none';
+  document.getElementById('pkg-detail').style.display = 'block';
+  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+}
+
+function goToCart() {
+  var priceNum = parseInt(selectedPkg.price.replace(/[^0-9]/g,''));
+  document.getElementById('cart-name').textContent = selectedPkg.name + ' Package';
+  document.getElementById('cart-price').textContent = selectedPkg.price;
+  document.getElementById('cart-remaining').textContent = '$' + (priceNum - 100).toLocaleString();
+  document.getElementById('cart-total').textContent = selectedPkg.price;
+  document.getElementById('pkg-detail').style.display = 'none';
+  document.getElementById('pkg-cart').style.display = 'block';
+  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+}
+
+function goToCheckout() {
+  document.getElementById('pkg-cart').style.display = 'none';
+  document.getElementById('pkg-checkout').style.display = 'block';
+  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+}
+
+function goBack(showId, hideId) {
+  document.getElementById(hideId).style.display = 'none';
+  var showEl = document.getElementById(showId);
+  showEl.style.display = (showId === 'pkg-grid') ? 'grid' : 'block';
+  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+}
+
+function submitOrder() {
+  var name = document.getElementById('co-name').value;
+  var biz = document.getElementById('co-biz').value;
+  var email = document.getElementById('co-email').value;
+  if (!name || !email) { alert('Please fill in your name and email before confirming.'); return; }
+  document.getElementById('pkg-checkout').style.display = 'none';
+  document.getElementById('success-summary').innerHTML =
+    '<div style="color:#a3ff00;font-weight:700;margin-bottom:10px;">' + selectedPkg.name + ' Package — ' + selectedPkg.price + '</div>' +
+    '<div style="color:#aaa;font-size:14px;">Name: ' + name + (biz ? ' | Business: ' + biz : '') + '</div>' +
+    '<div style="color:#aaa;font-size:14px;margin-top:4px;">Email: ' + email + '</div>';
+  document.getElementById('pkg-success').style.display = 'block';
+  window.scrollTo({ top: document.getElementById('packages').offsetTop - 80, behavior: 'smooth' });
+}
+</script>
+
 
 
 
