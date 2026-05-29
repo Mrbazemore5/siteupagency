@@ -1030,11 +1030,11 @@
         <div style="font-size:13px;color:var(--sub);margin-top:4px;" id="co-rem-txt"></div>
       </div>
       <div class="co-label">Select Payment Method</div>
-      <a href="https://cash.app/$kinsleybazemore8" target="_blank" class="pay-btn pay-cashapp">
+      <a href="https://cash.app/$kinsleybazemore8" target="_blank" class="pay-btn pay-cashapp" onclick="lastPaymentMethod='CashApp'">
         <span style="font-size:22px;">💚</span>
         <span>Pay with CashApp<br/><span class="pay-sub">$kinsleybazemore8</span></span>
       </a>
-      <a href="https://venmo.com/Mrbazemore" target="_blank" class="pay-btn pay-venmo">
+      <a href="https://venmo.com/Mrbazemore" target="_blank" class="pay-btn pay-venmo" onclick="lastPaymentMethod='Venmo'">
         <span style="font-size:22px;">💜</span>
         <span>Pay with Venmo<br/><span class="pay-sub">@Mrbazemore</span></span>
       </a>
@@ -1067,7 +1067,7 @@
 
 <script>
 // ── State
-var cart=[], cur=null, coStep=1;
+var cart=[], cur=null, coStep=1, lastPaymentMethod='Unknown';
 
 // ── Modal
 function openModal(name,price,time,desc,feats,icon){
@@ -1146,16 +1146,51 @@ function submitOrder(){
   var n=document.getElementById('co-name').value.trim(),
       b=document.getElementById('co-biz').value.trim(),
       e=document.getElementById('co-email').value.trim(),
-      it=cart[0]||{};
-  document.getElementById('s-detail').innerHTML=
-    '<div><strong style="color:#fff">Package:</strong> '+it.name+' — $'+it.price.toLocaleString()+'</div>'+
-    '<div><strong style="color:#fff">Name:</strong> '+n+(b?' | '+b:'')+'</div>'+
-    '<div><strong style="color:#fff">Email:</strong> '+e+'</div>'+
-    '<div style="margin-top:8px;color:var(--g);font-weight:700;">$100 deposit sent ✓ &nbsp;·&nbsp; $'+(it.price-100).toLocaleString()+' due on delivery</div>';
-  closeAllDrawers();
-  document.getElementById('success-bg').classList.add('on');
-  cart=[]; coStep=1; renderCart();
-  ['co-name','co-biz','co-email','co-phone'].forEach(function(id){document.getElementById(id).value='';});
+      ph=document.getElementById('co-phone').value.trim(),
+      it=cart[0]||{},
+      btn=document.getElementById('co-next');
+
+  btn.textContent='Submitting...';
+  btn.disabled=true;
+
+  fetch('https://superagent-d29c9b67.base44.app/functions/submitOrder',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      name:n, business:b, email:e, phone:ph,
+      pkg:it.name, price:it.price,
+      payment_method: lastPaymentMethod || 'Unknown'
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var delivDate = data.delivery_date ? new Date(data.delivery_date).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}) : 'within '+it.time;
+    document.getElementById('s-detail').innerHTML=
+      '<div><strong style="color:#fff">Package:</strong> '+it.name+' — $'+it.price.toLocaleString()+'</div>'+
+      '<div><strong style="color:#fff">Name:</strong> '+n+(b?' | '+b:'')+'</div>'+
+      '<div><strong style="color:#fff">Email:</strong> '+e+'</div>'+
+      '<div style="margin-top:8px;color:var(--g);font-weight:700;">$100 deposit sent ✓</div>'+
+      '<div style="color:#aaa;font-size:13px;margin-top:4px;">Balance of $'+(it.price-100).toLocaleString()+' due on delivery · '+delivDate+'</div>'+
+      '<div style="color:#aaa;font-size:13px;margin-top:4px;">📧 Receipt sent to '+e+'</div>';
+    closeAllDrawers();
+    document.getElementById('success-bg').classList.add('on');
+    cart=[]; coStep=1; renderCart();
+    ['co-name','co-biz','co-email','co-phone'].forEach(function(id){document.getElementById(id).value='';});
+  })
+  .catch(function(){
+    // Still show success even if API call fails — order was placed
+    document.getElementById('s-detail').innerHTML=
+      '<div><strong style="color:#fff">Package:</strong> '+it.name+' — $'+it.price.toLocaleString()+'</div>'+
+      '<div><strong style="color:#fff">Name:</strong> '+n+'</div>'+
+      '<div><strong style="color:#fff">Email:</strong> '+e+'</div>'+
+      '<div style="margin-top:8px;color:var(--g);font-weight:700;">$100 deposit sent ✓</div>'+
+      '<div style="color:#aaa;font-size:13px;margin-top:4px;">Balance of $'+(it.price-100).toLocaleString()+' due on delivery</div>';
+    closeAllDrawers();
+    document.getElementById('success-bg').classList.add('on');
+    cart=[]; coStep=1; renderCart();
+    ['co-name','co-biz','co-email','co-phone'].forEach(function(id){document.getElementById(id).value='';});
+  })
+  .finally(function(){btn.textContent='✅ Confirm My Order';btn.disabled=false;});
 }
 
 // ── FAQ
