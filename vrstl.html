@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VRSTL — Official Store</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #111111;
+    --mid: #222222;
+    --accent: #ff2d2d;
+    --text-muted: #666666;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--accent); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav ul a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--white); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .cart-icon {
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: -6px; right: -8px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.6rem;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, #1a0000 0%, #000 60%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(255,45,45,0.15) 0%, transparent 70%);
+    filter: blur(40px);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255,45,45,0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+  }
+
+  .hero h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(5rem, 15vw, 12rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .accent { color: var(--accent); }
+
+  .hero p {
+    font-size: 1rem;
+    color: #777;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--black);
+    padding: 1rem 2.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid #333;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--white);
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--accent);
+    padding: 0.75rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 20s linear infinite;
+    gap: 0;
+  }
+
+  .ticker span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0 3rem;
+    color: var(--white);
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION */
+  section {
+    padding: 6rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 3rem;
+  }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: #111;
+  }
+
+  .product-card {
+    background: var(--black);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card:hover { background: #0a0a0a; }
+
+  .product-img {
+    aspect-ratio: 3/4;
+    background: var(--gray);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-img-placeholder {
+    font-family: 'Space Mono', monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #222;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: var(--accent);
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.7rem;
+    text-transform: uppercase;
+  }
+
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .product-card:hover .product-overlay { opacity: 1; }
+
+  .product-info {
+    padding: 1.25rem;
+    border-top: 1px solid #111;
+  }
+
+  .product-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .product-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+
+  /* BRAND STATEMENT */
+  .brand-statement {
+    padding: 8rem 3rem;
+    text-align: center;
+    background: linear-gradient(180deg, #000 0%, #0d0000 50%, #000 100%);
+  }
+
+  .brand-statement h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+  }
+
+  .brand-statement h2 em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .brand-statement p {
+    color: #666;
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid #111;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  footer p {
+    color: #444;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-links a {
+    color: #444;
+    font-size: 0.75rem;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  /* BUILT BY */
+  .built-by {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid #0a0a0a;
+    font-size: 0.7rem;
+    color: #333;
+    letter-spacing: 0.1em;
+  }
+
+  .built-by a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav ul { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">VR<span>S</span>TL</a>
+  <ul>
+    <li><a href="#">Shop</a></li>
+    <li><a href="#">Collections</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="cart-icon">🛒<span class="cart-badge">0</span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">New Drop — SS26 Collection</div>
+    <h1>VR<span class="accent">S</span>TL</h1>
+    <p>Wear the version of yourself that doesn't exist yet.</p>
+    <div class="hero-btns">
+      <a href="#shop" class="btn-primary">Shop Now</a>
+      <a href="#" class="btn-outline">Our Story</a>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>New Drop Available</span><span>★</span>
+    <span>Free Shipping Over $100</span><span>★</span>
+    <span>VRSTL SS26 Collection</span><span>★</span>
+    <span>Limited Quantities</span><span>★</span>
+    <span>New Drop Available</span><span>★</span>
+    <span>Free Shipping Over $100</span><span>★</span>
+    <span>VRSTL SS26 Collection</span><span>★</span>
+    <span>Limited Quantities</span><span>★</span>
+  </div>
+</div>
+
+<!-- SHOP -->
+<section id="shop">
+  <div class="section-label">The Collection</div>
+  <div class="section-title">Latest Drops</div>
+
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);">
+        <div class="product-img-placeholder">VR</div>
+        <div class="product-badge">New</div>
+        <div class="product-overlay"><button class="btn-primary">Add to Cart</button></div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">VRSTL Core Tee — Black</div>
+        <div class="product-price">$45.00</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #0d0d0d 0%, #1a0000 100%);">
+        <div class="product-img-placeholder">ST</div>
+        <div class="product-badge">Limited</div>
+        <div class="product-overlay"><button class="btn-primary">Add to Cart</button></div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">VRSTL Cargo Pants — Washed</div>
+        <div class="product-price">$95.00</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);">
+        <div class="product-img-placeholder">VL</div>
+        <div class="product-overlay"><button class="btn-primary">Add to Cart</button></div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">VRSTL Hoodie — Oversized</div>
+        <div class="product-price">$110.00</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img" style="background: linear-gradient(135deg, #100000 0%, #1a1a1a 100%);">
+        <div class="product-img-placeholder">SS</div>
+        <div class="product-badge">Hot</div>
+        <div class="product-overlay"><button class="btn-primary">Add to Cart</button></div>
+      </div>
+      <div class="product-info">
+        <div class="product-name">VRSTL Shorts — SS26</div>
+        <div class="product-price">$65.00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STATEMENT -->
+<div class="brand-statement">
+  <h2>Not a brand.<br><em>A movement.</em></h2>
+  <p>VRSTL was built for those who exist in the space between who they are and who they're becoming. Every piece is a statement.</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VR<span>S</span>TL</div>
+  <div class="footer-links">
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+    <a href="#">Sizing</a>
+    <a href="#">Returns</a>
+    <a href="#">Contact</a>
+  </div>
+  <p>© 2026 VRSTL. All rights reserved.</p>
+</footer>
+
+<div class="built-by">
+  Website by <a href="https://siteupagency.com">SiteUp Agency</a>
+</div>
+
+</body>
+</html>
