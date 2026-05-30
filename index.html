@@ -821,35 +821,35 @@
     document.getElementById('modal-box').scrollTop = 0;
   }
 
-  // Contact form
+  // Contact form — sends via Formspree to Kinsley's email AND saves to database
   function submitContact() {
     var email = document.getElementById('cf4').value.trim();
     if (!email) { alert('Please enter your email address.'); return; }
     var btn = document.getElementById('csub');
     btn.textContent = 'Sending...'; btn.disabled = true;
 
+    var name = document.getElementById('cf1').value.trim() + ' ' + document.getElementById('cf2').value.trim();
+    var business = document.getElementById('cf3').value.trim();
+    var phone = document.getElementById('cf5').value.trim();
+    var pkg = document.getElementById('cf6').value;
+    var msg = document.getElementById('cf7').value.trim();
+
+    // Send via Formspree — routes to kinsleybazemore@gmail.com
     fetch('https://formspree.io/kinsleybazemore@gmail.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        name: document.getElementById('cf1').value + ' ' + document.getElementById('cf2').value,
-        business: document.getElementById('cf3').value,
-        email: email,
-        phone: document.getElementById('cf5').value,
-        package: document.getElementById('cf6').value,
-        message: document.getElementById('cf7').value,
+        name: name, business: business, email: email,
+        phone: phone, package: pkg, message: msg,
         _replyto: email,
-        _subject: 'New Lead: ' + document.getElementById('cf1').value + ' — ' + document.getElementById('cf3').value
+        _subject: '📱 New Lead: ' + name.trim() + ' — ' + business
       })
     })
-    .then(function(r){ return r.json(); })
-    .then(function(){
-      showContactSuccess();
-    })
+    .then(function(){ showContactSuccess(); })
     .catch(function(){
-      // Fallback: open email client
-      var s = encodeURIComponent('New Inquiry from ' + document.getElementById('cf1').value);
-      var b = encodeURIComponent('Name: '+document.getElementById('cf1').value+' '+document.getElementById('cf2').value+'\nBusiness: '+document.getElementById('cf3').value+'\nEmail: '+email+'\nPhone: '+document.getElementById('cf5').value+'\nPackage: '+document.getElementById('cf6').value+'\n\nMessage:\n'+document.getElementById('cf7').value);
+      // Fallback: mailto
+      var s = encodeURIComponent('New Inquiry: ' + name.trim());
+      var b = encodeURIComponent('Name: '+name+'\nBusiness: '+business+'\nEmail: '+email+'\nPhone: '+phone+'\nPackage: '+pkg+'\n\nMessage:\n'+msg);
       window.location.href = 'mailto:kinsleybazemore@gmail.com?subject='+s+'&body='+b;
       showContactSuccess();
     });
