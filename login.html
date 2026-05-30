@@ -1,438 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>My Account — SiteUp Agency</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
-    :root{--g:#a3ff00;--bg:#060606;--card:#0f0f0f;--border:#1e1e1e;--sub:#555;}
-    body{background:var(--bg);color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;min-height:100vh;}
-    a{text-decoration:none;color:inherit;}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>My Account — SiteUp Agency</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--g:#a3ff00;--bg:#060606;--card:#0f0f0f;--border:#1e1e1e;--sub:#555;}
+body{background:var(--bg);color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;min-height:100vh;}
+a{text-decoration:none;color:inherit;}
 
-    /* ── NAV ── */
-    nav{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:1px solid #111;position:sticky;top:0;background:rgba(6,6,6,0.96);backdrop-filter:blur(12px);z-index:100;}
-    .logo{font-size:20px;font-weight:900;letter-spacing:-0.5px;}
-    .logo span{color:var(--g);}
-    .nav-right{display:flex;align-items:center;gap:12px;}
-    .nav-link{font-size:13px;color:#555;transition:.2s;}
-    .nav-link:hover{color:#ccc;}
-    .nav-signout{font-size:13px;color:#333;border:1px solid #1e1e1e;border-radius:8px;padding:7px 14px;cursor:pointer;background:none;transition:.2s;}
-    .nav-signout:hover{border-color:#ff4444;color:#ff4444;}
+/* NAV */
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:1px solid #111;background:rgba(6,6,6,0.97);position:sticky;top:0;z-index:50;}
+.logo{font-size:20px;font-weight:900;}.logo span{color:var(--g);}
+.nav-r{display:flex;align-items:center;gap:12px;}
+.back-link{font-size:13px;color:#444;transition:.2s;}.back-link:hover{color:#ccc;}
+.signout-btn{font-size:13px;color:#333;border:1px solid #1e1e1e;border-radius:8px;padding:7px 14px;cursor:pointer;background:none;transition:.2s;}
+.signout-btn:hover{border-color:#ff4444;color:#ff4444;}
 
-    /* ── AUTH SCREEN ── */
-    #auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;}
-    .auth-wrap{width:100%;max-width:420px;}
-    .auth-brand{text-align:center;margin-bottom:32px;}
-    .auth-brand .logo{font-size:28px;}
-    .auth-brand p{font-size:14px;color:var(--sub);margin-top:6px;}
-    .auth-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;}
-    .auth-tabs{display:flex;background:#080808;border:1px solid #1a1a1a;border-radius:10px;padding:3px;gap:3px;margin-bottom:24px;}
-    .auth-tab{flex:1;padding:10px;border:none;background:transparent;color:#444;font-size:13px;font-weight:700;cursor:pointer;border-radius:8px;transition:.2s;}
-    .auth-tab.active{background:var(--g);color:#060606;}
-    label{display:block;font-size:11px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;}
-    .inp{width:100%;background:#080808;border:1px solid #1a1a1a;border-radius:10px;padding:13px 15px;color:#fff;font-size:14px;margin-bottom:14px;outline:none;transition:.2s;}
-    .inp:focus{border-color:var(--g);}
-    .inp::placeholder{color:#2a2a2a;}
-    .auth-btn{width:100%;background:var(--g);color:#060606;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:900;cursor:pointer;transition:.2s;margin-top:4px;}
-    .auth-btn:hover{background:#b5ff1a;transform:translateY(-1px);}
-    .auth-err{color:#ff5050;font-size:13px;margin-top:10px;text-align:center;min-height:18px;}
-    .auth-form{display:none;}
-    .auth-form.show{display:block;}
+/* AUTH SCREEN */
+.auth-screen{min-height:calc(100vh - 57px);display:flex;align-items:center;justify-content:center;padding:40px 20px;}
+.auth-box{width:100%;max-width:400px;}
+.auth-brand{text-align:center;margin-bottom:28px;}
+.auth-brand .logo{font-size:26px;}
+.auth-brand p{font-size:14px;color:var(--sub);margin-top:6px;}
+.auth-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;}
+.tabs{display:flex;background:#080808;border:1px solid #1a1a1a;border-radius:10px;padding:3px;gap:3px;margin-bottom:22px;}
+.tab{flex:1;padding:10px;border:none;background:transparent;color:#444;font-size:13px;font-weight:700;cursor:pointer;border-radius:8px;transition:.2s;}
+.tab.on{background:var(--g);color:#060606;}
+lbl{display:block;font-size:11px;font-weight:700;color:#444;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:5px;}
+.inp{width:100%;background:#080808;border:1px solid #1a1a1a;border-radius:10px;padding:13px 15px;color:#fff;font-size:14px;margin-bottom:14px;outline:none;transition:.2s;display:block;}
+.inp:focus{border-color:var(--g);}
+.inp::placeholder{color:#2a2a2a;}
+.auth-btn{width:100%;background:var(--g);color:#060606;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:900;cursor:pointer;transition:.2s;margin-top:2px;}
+.auth-btn:hover{background:#b5ff1a;}
+.errmsg{color:#ff5050;font-size:13px;margin-top:10px;text-align:center;min-height:18px;}
+.form-panel{display:none;}.form-panel.on{display:block;}
 
-    /* ── DASHBOARD ── */
-    #dash-screen{display:none;}
-    .dash-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 57px);}
+/* DASHBOARD */
+.dash-wrap{display:none;}
+.dash-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 57px);}
+.sidebar{background:#0a0a0a;border-right:1px solid #111;padding:24px 0;}
+.sb-profile{padding:0 18px 22px;border-bottom:1px solid #111;margin-bottom:16px;}
+.sb-av{width:48px;height:48px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#060606;margin-bottom:10px;}
+.sb-name{font-size:14px;font-weight:800;}
+.sb-email{font-size:11px;color:#333;margin-top:2px;word-break:break-all;}
+.sb-role{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-top:6px;background:#1a1a1a;color:#555;}
+.sb-role.dev{background:#7c3aed22;color:#a78bfa;border:1px solid #7c3aed44;}
+.sb-nav{padding:0 10px;}
+.sbn{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:9px;font-size:13px;font-weight:600;color:#444;cursor:pointer;transition:.2s;margin-bottom:2px;}
+.sbn:hover{background:#141414;color:#bbb;}
+.sbn.on{background:#141414;color:#fff;}
+.sbn .ic{font-size:15px;width:18px;text-align:center;}
 
-    /* Sidebar */
-    .sidebar{background:#0a0a0a;border-right:1px solid #111;padding:28px 0;}
-    .sidebar-profile{padding:0 20px 24px;border-bottom:1px solid #111;margin-bottom:20px;}
-    .sb-avatar{width:52px;height:52px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#060606;margin-bottom:12px;}
-    .sb-name{font-size:15px;font-weight:800;color:#fff;}
-    .sb-email{font-size:12px;color:#444;margin-top:2px;word-break:break-all;}
-    .sb-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-top:6px;}
-    .sb-badge.customer{background:#1a1a1a;color:#666;}
-    .sb-badge.developer{background:#7c3aed22;color:#a78bfa;border:1px solid #7c3aed44;}
-    .sb-nav{padding:0 12px;}
-    .sb-nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;font-size:13px;font-weight:600;color:#444;cursor:pointer;transition:.2s;margin-bottom:2px;}
-    .sb-nav-item:hover{background:#141414;color:#ccc;}
-    .sb-nav-item.active{background:#141414;color:#fff;}
-    .sb-nav-item .icon{font-size:16px;width:20px;text-align:center;}
+/* MAIN */
+.dash-main{padding:36px 40px;overflow-y:auto;}
+.sec{display:none;}.sec.on{display:block;}
+.pg-title{font-size:22px;font-weight:900;margin-bottom:4px;}
+.pg-sub{font-size:13px;color:var(--sub);margin-bottom:26px;}
 
-    /* Main content */
-    .dash-main{padding:36px 40px;overflow-y:auto;}
-    .dash-section{display:none;}
-    .dash-section.show{display:block;}
-    .page-title{font-size:24px;font-weight:900;margin-bottom:4px;}
-    .page-sub{font-size:14px;color:var(--sub);margin-bottom:28px;}
+/* Overview cards */
+.ov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+.ov-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;}
+.ov-card.hi{border-color:#a3ff0030;background:#a3ff0008;}
+.ov-icon{font-size:22px;margin-bottom:8px;}
+.ov-val{font-size:26px;font-weight:900;}
+.ov-card.hi .ov-val{color:var(--g);}
+.ov-lbl{font-size:11px;color:var(--sub);margin-top:3px;font-weight:600;}
 
-    /* Overview cards */
-    .overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;}
-    .ov-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;}
-    .ov-card .ov-icon{font-size:24px;margin-bottom:10px;}
-    .ov-card .ov-val{font-size:28px;font-weight:900;color:#fff;}
-    .ov-card .ov-lbl{font-size:12px;color:var(--sub);margin-top:4px;font-weight:600;}
-    .ov-card.highlight{border-color:#a3ff0033;background:#a3ff0008;}
-    .ov-card.highlight .ov-val{color:var(--g);}
+/* Orders */
+.order-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:18px 22px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.o-pkg{font-size:15px;font-weight:800;}
+.o-biz{font-size:12px;color:var(--sub);margin-top:2px;}
+.o-price{font-size:17px;font-weight:900;color:var(--g);text-align:right;}
+.pill{display:inline-block;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:700;margin-top:5px;}
+.pill.paid{background:#a3ff0018;color:var(--g);border:1px solid #a3ff0030;}
+.pill.prog{background:#facc1518;color:#facc15;border:1px solid #facc1530;}
+.pill.done{background:#22c55e18;color:#22c55e;border:1px solid #22c55e30;}
+.empty{text-align:center;padding:50px 20px;color:#222;}
+.empty .ei{font-size:44px;margin-bottom:14px;}
+.empty p{font-size:13px;color:#333;margin-bottom:18px;}
+.cta{display:inline-block;background:var(--g);color:#060606;border-radius:9px;padding:11px 22px;font-size:13px;font-weight:800;}
 
-    /* Orders */
-    .order-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-    .order-card-left .order-pkg{font-size:16px;font-weight:800;}
-    .order-card-left .order-biz{font-size:13px;color:var(--sub);margin-top:3px;}
-    .order-card-right{text-align:right;flex-shrink:0;}
-    .order-price{font-size:18px;font-weight:900;color:var(--g);}
-    .status-pill{display:inline-block;padding:4px 12px;border-radius:100px;font-size:11px;font-weight:700;margin-top:6px;}
-    .status-pill.paid{background:#a3ff0022;color:var(--g);border:1px solid #a3ff0033;}
-    .status-pill.progress{background:#facc1522;color:#facc15;border:1px solid #facc1533;}
-    .status-pill.done{background:#22c55e22;color:#22c55e;border:1px solid #22c55e33;}
-    .empty-state{text-align:center;padding:60px 20px;color:#222;}
-    .empty-state .empty-icon{font-size:48px;margin-bottom:16px;}
-    .empty-state p{font-size:14px;color:#333;margin-bottom:20px;}
-    .cta-btn{display:inline-block;background:var(--g);color:#060606;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:800;}
+/* Quick actions */
+.qa{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;}
+.qa a{display:inline-block;border:1px solid #1e1e1e;color:#aaa;border-radius:9px;padding:10px 18px;font-size:13px;font-weight:600;transition:.2s;}
+.qa a:hover{border-color:var(--g);color:var(--g);}
+.qa .primary{background:var(--g);color:#060606;border-color:var(--g);}
+.qa .primary:hover{background:#b5ff1a;}
 
-    /* Section title */
-    .sec-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
-    .sec-badge{background:#1a1a1a;color:#555;font-size:11px;padding:3px 8px;border-radius:100px;}
+/* Settings */
+.set-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:20px;margin-bottom:14px;}
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid #0d0d0d;font-size:14px;}
+.set-row:last-child{border-bottom:none;}
+.set-lbl{color:#888;font-size:13px;}
+.set-val{color:#444;font-size:13px;}
 
-    /* Settings */
-    .settings-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:16px;}
-    .settings-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #111;}
-    .settings-row:last-child{border-bottom:none;}
-    .settings-label{font-size:14px;color:#ccc;}
-    .settings-value{font-size:13px;color:#444;}
+/* Dev */
+.dev-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;}
+.dev-card{background:var(--card);border:1px solid #7c3aed22;border-radius:13px;padding:18px;}
+.dev-val{font-size:24px;font-weight:900;color:#a78bfa;}
+.dev-lbl{font-size:11px;color:#444;margin-top:3px;}
+.dev-link{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:13px 16px;margin-bottom:8px;color:#888;font-size:13px;transition:.2s;}
+.dev-link:hover{border-color:#7c3aed55;color:#a78bfa;}
 
-    /* Dev panel */
-    .dev-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
-    .dev-card{background:var(--card);border:1px solid #7c3aed22;border-radius:14px;padding:20px;}
-    .dev-card .dev-val{font-size:26px;font-weight:900;color:#a78bfa;}
-    .dev-card .dev-lbl{font-size:12px;color:#444;margin-top:4px;}
-    .dev-link{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px;color:#ccc;font-size:14px;}
-    .dev-link:hover{border-color:#7c3aed;color:#a78bfa;}
-    .dev-link .arrow{color:#333;}
+.sec-lbl{font-size:11px;font-weight:800;color:var(--g);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;}
 
-    @media(max-width:768px){
-      nav{padding:14px 20px;}
-      .dash-layout{grid-template-columns:1fr;}
-      .sidebar{border-right:none;border-bottom:1px solid #111;padding:16px 0;}
-      .sidebar-profile{display:none;}
-      .sb-nav{display:flex;overflow-x:auto;padding:0 16px;gap:4px;}
-      .sb-nav-item{white-space:nowrap;flex-shrink:0;margin-bottom:0;}
-      .dash-main{padding:24px 20px;}
-      .overview-grid{grid-template-columns:1fr 1fr;}
-      .dev-grid{grid-template-columns:1fr;}
-      #auth-screen{padding:24px 16px;}
-    }
-  </style>
+@media(max-width:760px){
+  .topnav{padding:14px 18px;}
+  .dash-layout{grid-template-columns:1fr;}
+  .sidebar{border-right:none;border-bottom:1px solid #111;padding:12px 0;}
+  .sb-profile{display:none;}
+  .sb-nav{display:flex;gap:4px;overflow-x:auto;padding:0 14px;}
+  .sbn{flex-shrink:0;margin-bottom:0;}
+  .dash-main{padding:22px 18px;}
+  .ov-grid{grid-template-columns:1fr 1fr;}
+  .auth-screen{padding:24px 16px;}
+  .auth-card{padding:24px 20px;}
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="main-nav" style="display:none;">
+<!-- TOP NAV -->
+<div class="topnav">
   <a href="/" class="logo">Site<span>Up</span></a>
-  <div class="nav-right">
-    <a href="/" class="nav-link">← Back to site</a>
-    <button class="nav-signout" onclick="doSignOut()">Sign Out</button>
+  <div class="nav-r">
+    <a href="/" class="back-link">← Back to site</a>
+    <button class="signout-btn" id="signout-btn" style="display:none;" onclick="doSignOut()">Sign Out</button>
   </div>
-</nav>
+</div>
 
-<!-- AUTH SCREEN -->
-<div id="auth-screen">
-  <div class="auth-wrap">
+<!-- ══ AUTH SCREEN ══ -->
+<div class="auth-screen" id="auth-screen">
+  <div class="auth-box">
     <div class="auth-brand">
       <div class="logo">Site<span>Up</span> Agency</div>
       <p>Sign in to track your project and manage your account.</p>
     </div>
     <div class="auth-card">
-      <div class="auth-tabs">
-        <button class="auth-tab active" onclick="switchTab('signin')">Sign In</button>
-        <button class="auth-tab" onclick="switchTab('signup')">Create Account</button>
+      <div class="tabs">
+        <button class="tab on" id="tab-si" onclick="switchTab('si')">Sign In</button>
+        <button class="tab" id="tab-su" onclick="switchTab('su')">Create Account</button>
       </div>
 
       <!-- SIGN IN -->
-      <div class="auth-form show" id="form-signin">
-        <label>Email</label>
+      <div class="form-panel on" id="panel-si">
+        <lbl>Email</lbl>
         <input class="inp" type="email" id="si-email" placeholder="you@example.com" autocomplete="email"/>
-        <label>Password</label>
+        <lbl>Password</lbl>
         <input class="inp" type="password" id="si-pass" placeholder="Your password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doSignIn()"/>
         <button class="auth-btn" onclick="doSignIn()">Sign In →</button>
-        <div class="auth-err" id="si-err"></div>
+        <div class="errmsg" id="si-err"></div>
       </div>
 
       <!-- SIGN UP -->
-      <div class="auth-form" id="form-signup">
-        <label>Full Name</label>
+      <div class="form-panel" id="panel-su">
+        <lbl>Full Name</lbl>
         <input class="inp" type="text" id="su-name" placeholder="John Smith"/>
-        <label>Business Name <span style="color:#333;font-weight:400;text-transform:none;">(optional)</span></label>
+        <lbl>Business Name <span style="color:#333;font-weight:400;text-transform:none;font-size:11px;">(optional)</span></lbl>
         <input class="inp" type="text" id="su-biz" placeholder="Smith Plumbing LLC"/>
-        <label>Email</label>
+        <lbl>Email</lbl>
         <input class="inp" type="email" id="su-email" placeholder="you@example.com" autocomplete="email"/>
-        <label>Password</label>
+        <lbl>Password</lbl>
         <input class="inp" type="password" id="su-pass" placeholder="At least 6 characters" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSignUp()"/>
         <button class="auth-btn" onclick="doSignUp()">Create Account →</button>
-        <div class="auth-err" id="su-err"></div>
+        <div class="errmsg" id="su-err"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- DASHBOARD -->
-<div id="dash-screen">
-  <nav id="main-nav-dash" style="display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:1px solid #111;background:rgba(6,6,6,0.96);">
-    <a href="/" class="logo">Site<span>Up</span></a>
-    <div class="nav-right">
-      <a href="/" class="nav-link">← Back to site</a>
-      <button class="nav-signout" onclick="doSignOut()">Sign Out</button>
-    </div>
-  </nav>
-
+<!-- ══ DASHBOARD ══ -->
+<div class="dash-wrap" id="dash-wrap">
   <div class="dash-layout">
+
     <!-- SIDEBAR -->
     <div class="sidebar">
-      <div class="sidebar-profile">
-        <div class="sb-avatar" id="sb-avatar">K</div>
-        <div class="sb-name" id="sb-name">Loading...</div>
-        <div class="sb-email" id="sb-email">...</div>
-        <div class="sb-badge customer" id="sb-badge">Customer</div>
+      <div class="sb-profile">
+        <div class="sb-av" id="sb-av">K</div>
+        <div class="sb-name" id="sb-name">—</div>
+        <div class="sb-email" id="sb-email">—</div>
+        <div class="sb-role" id="sb-role">Customer</div>
       </div>
       <div class="sb-nav">
-        <div class="sb-nav-item active" onclick="showSection('overview',this)"><span class="icon">🏠</span> Overview</div>
-        <div class="sb-nav-item" onclick="showSection('orders',this)"><span class="icon">📦</span> My Orders</div>
-        <div class="sb-nav-item" onclick="showSection('settings',this)"><span class="icon">⚙️</span> Settings</div>
-        <div class="sb-nav-item" id="dev-nav-item" style="display:none;" onclick="showSection('developer',this)"><span class="icon">🛠️</span> Developer</div>
+        <div class="sbn on" id="nav-overview" onclick="showSec('overview')"><span class="ic">🏠</span> Overview</div>
+        <div class="sbn" id="nav-orders" onclick="showSec('orders')"><span class="ic">📦</span> My Orders</div>
+        <div class="sbn" id="nav-settings" onclick="showSec('settings')"><span class="ic">⚙️</span> Settings</div>
+        <div class="sbn" id="nav-dev" style="display:none;" onclick="showSec('dev')"><span class="ic">🛠️</span> Developer</div>
       </div>
     </div>
 
-    <!-- MAIN -->
+    <!-- MAIN CONTENT -->
     <div class="dash-main">
 
       <!-- OVERVIEW -->
-      <div class="dash-section show" id="sec-overview">
-        <div class="page-title" id="ov-greeting">Good evening 👋</div>
-        <div class="page-sub">Here's a summary of your SiteUp account.</div>
-        <div class="overview-grid">
-          <div class="ov-card highlight">
-            <div class="ov-icon">📦</div>
-            <div class="ov-val" id="ov-orders">0</div>
-            <div class="ov-lbl">Total Orders</div>
-          </div>
-          <div class="ov-card">
-            <div class="ov-icon">💰</div>
-            <div class="ov-val" id="ov-paid">$0</div>
-            <div class="ov-lbl">Deposit Paid</div>
-          </div>
-          <div class="ov-card">
-            <div class="ov-icon">🚀</div>
-            <div class="ov-val" id="ov-balance">$0</div>
-            <div class="ov-lbl">Balance Due</div>
-          </div>
+      <div class="sec on" id="sec-overview">
+        <div class="pg-title" id="greeting">Welcome back 👋</div>
+        <div class="pg-sub">Here's a summary of your SiteUp account.</div>
+        <div class="ov-grid">
+          <div class="ov-card hi"><div class="ov-icon">📦</div><div class="ov-val" id="ov-orders">0</div><div class="ov-lbl">Total Orders</div></div>
+          <div class="ov-card"><div class="ov-icon">💰</div><div class="ov-val" id="ov-paid">$0</div><div class="ov-lbl">Deposit Paid</div></div>
+          <div class="ov-card"><div class="ov-icon">🚀</div><div class="ov-val" id="ov-bal">$0</div><div class="ov-lbl">Balance Due</div></div>
         </div>
-        <div class="sec-title">Recent Orders <span class="sec-badge" id="ov-order-count">0</span></div>
+        <div class="sec-lbl">Recent Orders</div>
         <div id="ov-order-list"></div>
-        <div style="margin-top:28px;">
-          <div class="sec-title">Quick Actions</div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <a href="/#packages" class="cta-btn">🛒 Order a Website</a>
-            <a href="/#contact" style="display:inline-block;border:1px solid #222;color:#ccc;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;">💬 Contact Support</a>
-            <a href="mailto:kinsleybazemore@gmail.com" style="display:inline-block;border:1px solid #222;color:#ccc;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;">📧 Email Us</a>
-          </div>
+        <div class="qa">
+          <a class="primary" href="/#packages">🛒 Order a Website</a>
+          <a href="/#contact">💬 Contact Us</a>
+          <a href="mailto:kinsleybazemore@gmail.com">📧 Email Support</a>
         </div>
       </div>
 
       <!-- ORDERS -->
-      <div class="dash-section" id="sec-orders">
-        <div class="page-title">My Orders</div>
-        <div class="page-sub">Track the status of your website projects.</div>
-        <div id="orders-list"></div>
+      <div class="sec" id="sec-orders">
+        <div class="pg-title">My Orders</div>
+        <div class="pg-sub">Track the status of your website projects.</div>
+        <div id="all-orders-list"></div>
       </div>
 
       <!-- SETTINGS -->
-      <div class="dash-section" id="sec-settings">
-        <div class="page-title">Account Settings</div>
-        <div class="page-sub">Your account details and preferences.</div>
-        <div class="settings-card">
-          <div class="settings-row">
-            <div class="settings-label">Full Name</div>
-            <div class="settings-value" id="set-name">—</div>
-          </div>
-          <div class="settings-row">
-            <div class="settings-label">Email</div>
-            <div class="settings-value" id="set-email">—</div>
-          </div>
-          <div class="settings-row">
-            <div class="settings-label">Business</div>
-            <div class="settings-value" id="set-biz">—</div>
-          </div>
-          <div class="settings-row">
-            <div class="settings-label">Account Type</div>
-            <div class="settings-value" id="set-role">—</div>
-          </div>
-          <div class="settings-row">
-            <div class="settings-label">Member Since</div>
-            <div class="settings-value" id="set-joined">—</div>
-          </div>
+      <div class="sec" id="sec-settings">
+        <div class="pg-title">Account Settings</div>
+        <div class="pg-sub">Your account details and preferences.</div>
+        <div class="set-card">
+          <div class="set-row"><span class="set-lbl">Full Name</span><span class="set-val" id="set-name">—</span></div>
+          <div class="set-row"><span class="set-lbl">Email</span><span class="set-val" id="set-email">—</span></div>
+          <div class="set-row"><span class="set-lbl">Business</span><span class="set-val" id="set-biz">—</span></div>
+          <div class="set-row"><span class="set-lbl">Account Type</span><span class="set-val" id="set-role">—</span></div>
+          <div class="set-row"><span class="set-lbl">Member Since</span><span class="set-val" id="set-joined">—</span></div>
         </div>
-        <div class="settings-card" style="margin-top:12px;">
-          <div class="settings-row">
-            <div class="settings-label">Payment (Deposit)</div>
-            <div class="settings-value">CashApp: $kinsleybazemore8 · Venmo: @Mrbazemore</div>
-          </div>
-          <div class="settings-row">
-            <div class="settings-label">Support Email</div>
-            <div class="settings-value"><a href="mailto:kinsleybazemore@gmail.com" style="color:var(--g);">kinsleybazemore@gmail.com</a></div>
-          </div>
+        <div class="set-card">
+          <div class="set-row"><span class="set-lbl">Deposit Payment</span><span class="set-val">CashApp: $kinsleybazemore8 · Venmo: @Mrbazemore</span></div>
+          <div class="set-row"><span class="set-lbl">Support</span><span class="set-val"><a href="mailto:kinsleybazemore@gmail.com" style="color:var(--g);">kinsleybazemore@gmail.com</a></span></div>
         </div>
-        <button class="nav-signout" style="margin-top:20px;padding:12px 24px;font-size:14px;" onclick="doSignOut()">Sign Out of Account</button>
+        <button class="signout-btn" style="margin-top:18px;padding:12px 22px;font-size:13px;" onclick="doSignOut()">Sign Out</button>
       </div>
 
       <!-- DEVELOPER -->
-      <div class="dash-section" id="sec-developer">
-        <div class="page-title">Developer Panel 🛠️</div>
-        <div class="page-sub">Internal dashboard for SiteUp Agency management.</div>
+      <div class="sec" id="sec-dev">
+        <div class="pg-title">Developer Panel 🛠️</div>
+        <div class="pg-sub">Internal dashboard for SiteUp Agency.</div>
         <div class="dev-grid">
-          <div class="dev-card">
-            <div class="dev-val" id="dev-users">—</div>
-            <div class="dev-lbl">Registered Accounts</div>
-          </div>
-          <div class="dev-card">
-            <div class="dev-val" id="dev-orders">—</div>
-            <div class="dev-lbl">Total Orders</div>
-          </div>
+          <div class="dev-card"><div class="dev-val" id="dv-users">—</div><div class="dev-lbl">Registered Accounts</div></div>
+          <div class="dev-card"><div class="dev-val" id="dv-orders">—</div><div class="dev-lbl">Total Orders</div></div>
         </div>
-        <div class="sec-title" style="margin-bottom:12px;">Dev Links</div>
-        <a class="dev-link" href="https://siteupagency.com" target="_blank">🌍 siteupagency.com <span class="arrow">↗</span></a>
-        <a class="dev-link" href="https://github.com/Mrbazemore5/siteupagency" target="_blank">🐙 GitHub Repo <span class="arrow">↗</span></a>
-        <a class="dev-link" href="https://analytics.google.com" target="_blank">📊 Google Analytics <span class="arrow">↗</span></a>
-        <a class="dev-link" href="https://search.google.com/search-console" target="_blank">🔍 Search Console <span class="arrow">↗</span></a>
-        <a class="dev-link" href="https://app.base44.com" target="_blank">⚡ Base44 Dashboard <span class="arrow">↗</span></a>
+        <div class="sec-lbl">Quick Links</div>
+        <a class="dev-link" href="https://siteupagency.com" target="_blank">🌍 siteupagency.com <span>↗</span></a>
+        <a class="dev-link" href="https://github.com/Mrbazemore5/siteupagency" target="_blank">🐙 GitHub Repo <span>↗</span></a>
+        <a class="dev-link" href="https://analytics.google.com" target="_blank">📊 Google Analytics <span>↗</span></a>
+        <a class="dev-link" href="https://search.google.com/search-console" target="_blank">🔍 Search Console <span>↗</span></a>
+        <a class="dev-link" href="https://app.base44.com" target="_blank">⚡ Base44 Dashboard <span>↗</span></a>
       </div>
 
     </div><!-- /dash-main -->
   </div><!-- /dash-layout -->
-</div><!-- /dash-screen -->
+</div><!-- /dash-wrap -->
 
 <script>
+// ── STATE ──
 var DEV_EMAIL = 'kinsley@siteupagency.dev';
-var DEV_PASS_HASH = '9f2e4a8b1c6d3f7e'; /* rotated - do not store plaintext */
-var currentUser = null;
 
-function switchTab(t){
-  document.getElementById('form-signin').className = 'auth-form'+(t==='signin'?' show':'');
-  document.getElementById('form-signup').className = 'auth-form'+(t==='signup'?' show':'');
-  document.querySelectorAll('.auth-tab').forEach(function(el,i){
-    el.className = 'auth-tab'+((i===0&&t==='signin')||(i===1&&t==='signup')?' active':'');
-  });
+function switchTab(t) {
+  document.getElementById('panel-si').className = 'form-panel' + (t === 'si' ? ' on' : '');
+  document.getElementById('panel-su').className = 'form-panel' + (t === 'su' ? ' on' : '');
+  document.getElementById('tab-si').className = 'tab' + (t === 'si' ? ' on' : '');
+  document.getElementById('tab-su').className = 'tab' + (t === 'su' ? ' on' : '');
+  document.getElementById('si-err').textContent = '';
+  document.getElementById('su-err').textContent = '';
 }
 
-function doSignIn(){
+function doSignIn() {
   var email = document.getElementById('si-email').value.trim();
   var pass  = document.getElementById('si-pass').value;
   var err   = document.getElementById('si-err');
   err.textContent = '';
-  if(!email||!pass){ err.textContent='Please fill in all fields.'; return; }
-  if(email===DEV_EMAIL && btoa(pass)==='S2luc2xleUBTaXRlVXAjMjAyNg=='){
-    login({name:'Kinsley',email:email,role:'developer',biz:'SiteUp Agency',joined:new Date().toISOString()});
+  if (!email || !pass) { err.textContent = 'Please fill in all fields.'; return; }
+  // Dev account check
+  if (email === DEV_EMAIL && btoa(pass) === 'S2luc2xleUBTaXRlVXAjMjAyNg==') {
+    loadDash({ name: 'Kinsley', email: email, role: 'developer', biz: 'SiteUp Agency', joined: new Date().toISOString() });
     return;
   }
-  var users = JSON.parse(localStorage.getItem('su_users')||'[]');
-  var u = users.find(function(x){ return x.email===email && x.pass===pass; });
-  if(!u){ err.textContent='Email or password is incorrect.'; return; }
-  login(u);
+  var users = JSON.parse(localStorage.getItem('su_users') || '[]');
+  var u = users.find(function(x) { return x.email === email && x.pass === pass; });
+  if (!u) { err.textContent = 'Incorrect email or password.'; return; }
+  loadDash(u);
 }
 
-function doSignUp(){
+function doSignUp() {
   var name  = document.getElementById('su-name').value.trim();
   var biz   = document.getElementById('su-biz').value.trim();
   var email = document.getElementById('su-email').value.trim();
   var pass  = document.getElementById('su-pass').value;
   var err   = document.getElementById('su-err');
-  err.textContent='';
-  if(!name||!email||!pass){ err.textContent='Please fill in all required fields.'; return; }
-  if(pass.length<6){ err.textContent='Password must be at least 6 characters.'; return; }
-  var users = JSON.parse(localStorage.getItem('su_users')||'[]');
-  if(users.find(function(x){ return x.email===email; })){ err.textContent='An account already exists with this email.'; return; }
-  var newUser = {name:name,biz:biz||'Not specified',email:email,pass:pass,role:'customer',joined:new Date().toISOString()};
-  users.push(newUser);
+  err.textContent = '';
+  if (!name || !email || !pass) { err.textContent = 'Please fill in all required fields.'; return; }
+  if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; return; }
+  var users = JSON.parse(localStorage.getItem('su_users') || '[]');
+  if (users.find(function(x) { return x.email === email; })) { err.textContent = 'An account with this email already exists.'; return; }
+  var u = { name: name, biz: biz || 'Not specified', email: email, pass: pass, role: 'customer', joined: new Date().toISOString() };
+  users.push(u);
   localStorage.setItem('su_users', JSON.stringify(users));
-  login(newUser);
+  loadDash(u);
 }
 
-function login(u){
-  currentUser = u;
+function loadDash(u) {
+  // Persist session
   localStorage.setItem('su_user', JSON.stringify(u));
-  showDash(u);
-}
 
-function showDash(u){
-  document.getElementById('auth-screen').style.display='none';
-  document.getElementById('dash-screen').style.display='block';
+  // Hide auth, show dash
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('dash-wrap').style.display = 'block';
+  document.getElementById('signout-btn').style.display = 'block';
 
   // Sidebar
-  document.getElementById('sb-avatar').textContent = u.name.charAt(0).toUpperCase();
-  document.getElementById('sb-name').textContent = u.name;
+  document.getElementById('sb-av').textContent    = u.name.charAt(0).toUpperCase();
+  document.getElementById('sb-name').textContent  = u.name;
   document.getElementById('sb-email').textContent = u.email;
-  var badge = document.getElementById('sb-badge');
-  if(u.role==='developer'){ badge.textContent='⚡ Developer'; badge.className='sb-badge developer'; document.getElementById('dev-nav-item').style.display='flex'; }
-  else { badge.textContent='Customer'; badge.className='sb-badge customer'; }
+  var roleEl = document.getElementById('sb-role');
+  if (u.role === 'developer') {
+    roleEl.textContent = '⚡ Developer';
+    roleEl.className = 'sb-role dev';
+    document.getElementById('nav-dev').style.display = 'flex';
+    // Load dev stats
+    var allUsers = JSON.parse(localStorage.getItem('su_users') || '[]');
+    var totalOrds = 0;
+    allUsers.forEach(function(usr) {
+      totalOrds += JSON.parse(localStorage.getItem('su_orders_' + usr.email) || '[]').length;
+    });
+    document.getElementById('dv-users').textContent  = allUsers.length;
+    document.getElementById('dv-orders').textContent = totalOrds;
+  } else {
+    roleEl.textContent = 'Customer';
+    roleEl.className = 'sb-role';
+  }
 
   // Greeting
   var hr = new Date().getHours();
-  var greet = hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';
-  document.getElementById('ov-greeting').textContent = greet+', '+u.name.split(' ')[0]+' 👋';
+  var greet = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
+  document.getElementById('greeting').textContent = greet + ', ' + u.name.split(' ')[0] + ' 👋';
 
   // Settings
-  document.getElementById('set-name').textContent = u.name;
-  document.getElementById('set-email').textContent = u.email;
-  document.getElementById('set-biz').textContent = u.biz||'Not specified';
-  document.getElementById('set-role').textContent = u.role==='developer'?'Developer (Admin)':'Customer';
-  document.getElementById('set-joined').textContent = new Date(u.joined).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  document.getElementById('set-name').textContent   = u.name;
+  document.getElementById('set-email').textContent  = u.email;
+  document.getElementById('set-biz').textContent    = u.biz || 'Not specified';
+  document.getElementById('set-role').textContent   = u.role === 'developer' ? 'Developer (Admin)' : 'Customer';
+  document.getElementById('set-joined').textContent = new Date(u.joined).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
   // Orders
-  var orders = JSON.parse(localStorage.getItem('su_orders_'+u.email)||'[]');
+  var orders = JSON.parse(localStorage.getItem('su_orders_' + u.email) || '[]');
   document.getElementById('ov-orders').textContent = orders.length;
-  var totalPaid = orders.length * 100;
-  var totalBalance = orders.reduce(function(a,o){ return a+(o.total-100); },0);
-  document.getElementById('ov-paid').textContent = '$'+totalPaid;
-  document.getElementById('ov-balance').textContent = '$'+totalBalance;
-  document.getElementById('ov-order-count').textContent = orders.length;
+  document.getElementById('ov-paid').textContent   = '$' + (orders.length * 100);
+  document.getElementById('ov-bal').textContent    = '$' + orders.reduce(function(a, o) { return a + (o.total - 100); }, 0);
 
-  var orderHTML = orders.length===0
-    ? '<div class="empty-state"><div class="empty-icon">📭</div><p>No orders yet. Ready to get your website built?</p><a href="/#packages" class="cta-btn">Browse Packages →</a></div>'
-    : orders.map(function(o){ return renderOrder(o); }).join('');
-  document.getElementById('ov-order-list').innerHTML = orderHTML;
-  document.getElementById('orders-list').innerHTML = orderHTML || '<div class="empty-state"><div class="empty-icon">📭</div><p>No orders yet.</p><a href="/#packages" class="cta-btn">Browse Packages →</a></div>';
+  var ordersHTML = buildOrdersHTML(orders);
+  document.getElementById('ov-order-list').innerHTML    = ordersHTML;
+  document.getElementById('all-orders-list').innerHTML  = ordersHTML;
+}
 
-  // Dev panel
-  if(u.role==='developer'){
-    var users = JSON.parse(localStorage.getItem('su_users')||'[]');
-    document.getElementById('dev-users').textContent = users.length;
-    var totalOrders = 0;
-    users.forEach(function(usr){ totalOrders += (JSON.parse(localStorage.getItem('su_orders_'+usr.email)||'[]')).length; });
-    document.getElementById('dev-orders').textContent = totalOrders;
+function buildOrdersHTML(orders) {
+  if (!orders.length) {
+    return '<div class="empty"><div class="ei">📭</div><p>No orders yet — ready to get your site built?</p><a class="cta" href="/#packages">Browse Packages →</a></div>';
   }
+  return orders.map(function(o) {
+    var sc = o.status && o.status.toLowerCase().indexOf('progress') > -1 ? 'prog' : o.status && (o.status.toLowerCase().indexOf('done') > -1 || o.status.toLowerCase().indexOf('live') > -1) ? 'done' : 'paid';
+    return '<div class="order-card"><div><div class="o-pkg">' + o.pkg + ' Package</div><div class="o-biz">' + (o.biz || 'Your Business') + '</div></div><div style="text-align:right;"><div class="o-price">$' + o.total + '</div><div class="pill ' + sc + '">' + (o.status || 'Deposit Paid') + '</div></div></div>';
+  }).join('');
 }
 
-function renderOrder(o){
-  var statusClass = o.status.indexOf('Progress')!==-1?'progress':o.status.indexOf('Done')!==-1||o.status.indexOf('Live')!==-1?'done':'paid';
-  return '<div class="order-card"><div class="order-card-left"><div class="order-pkg">'+o.pkg+' Package</div><div class="order-biz">'+(o.biz||'Your Business')+'</div></div><div class="order-card-right"><div class="order-price">$'+o.total+'</div><div class="status-pill '+statusClass+'">'+o.status+'</div></div></div>';
+function showSec(id) {
+  ['overview','orders','settings','dev'].forEach(function(s) {
+    document.getElementById('sec-' + s).className = 'sec';
+    var n = document.getElementById('nav-' + s);
+    if (n) n.className = 'sbn' + (s === 'dev' ? '' : '');
+  });
+  document.getElementById('sec-' + id).className = 'sec on';
+  // Reset all nav items
+  document.querySelectorAll('.sbn').forEach(function(el) { el.classList.remove('on'); });
+  var navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('on');
 }
 
-function showSection(id, el){
-  document.querySelectorAll('.dash-section').forEach(function(s){ s.className='dash-section'; });
-  document.getElementById('sec-'+id).className='dash-section show';
-  document.querySelectorAll('.sb-nav-item').forEach(function(n){ n.className='sb-nav-item'; });
-  if(el) el.className='sb-nav-item active';
-}
-
-function doSignOut(){
-  currentUser=null;
+function doSignOut() {
   localStorage.removeItem('su_user');
-  document.getElementById('dash-screen').style.display='none';
-  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('dash-wrap').style.display  = 'none';
+  document.getElementById('auth-screen').style.display = 'flex';
+  document.getElementById('signout-btn').style.display = 'none';
+  // Reset form
+  document.getElementById('si-email').value = '';
+  document.getElementById('si-pass').value  = '';
+  document.getElementById('si-err').textContent = '';
+  switchTab('si');
+  // Reset nav
+  showSec('overview');
 }
 
-window.addEventListener('DOMContentLoaded',function(){
-  var u = JSON.parse(localStorage.getItem('su_user')||'null');
-  if(u){ currentUser=u; showDash(u); }
+// ── AUTO LOGIN ON LOAD ──
+window.addEventListener('DOMContentLoaded', function() {
+  try {
+    var u = JSON.parse(localStorage.getItem('su_user') || 'null');
+    if (u && u.name && u.email) {
+      loadDash(u);
+    }
+  } catch(e) {
+    localStorage.removeItem('su_user');
+  }
 });
 </script>
 </body>
