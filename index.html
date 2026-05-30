@@ -644,6 +644,21 @@
     #su-send-btn{background:#a3ff00;border:none;border-radius:10px;width:38px;cursor:pointer;font-size:18px;color:#060606;font-weight:900;flex-shrink:0;}
     @media(max-width:480px){#su-chat-box{width:calc(100vw - 32px);right:16px;bottom:86px;}#su-chat-btn{bottom:18px;right:18px;}}
 
+  
+    /* ══ PORTFOLIO ══ */
+    .port-section{padding:100px 24px;}
+    .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto;}
+    .port-card{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:16px;overflow:hidden;transition:.25s;cursor:pointer;}
+    .port-card:hover{border-color:#a3ff00;transform:translateY(-4px);box-shadow:0 12px 40px rgba(163,255,0,0.12);}
+    .port-img{width:100%;height:200px;object-fit:cover;object-position:top;display:block;}
+    .port-info{padding:16px 20px;}
+    .port-niche{font-size:11px;font-weight:700;color:#a3ff00;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:5px;}
+    .port-name{font-size:16px;font-weight:800;color:#fff;}
+    .port-pkg{font-size:12px;color:#444;margin-top:4px;}
+    .port-badge{display:inline-block;background:#a3ff0015;border:1px solid #a3ff0030;color:#a3ff00;font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px;margin-top:8px;}
+    @media(max-width:900px){.port-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:560px){.port-grid{grid-template-columns:1fr;}.port-img{height:180px;}}
+
   </style>
 </head>
 <body>
@@ -653,6 +668,7 @@
   <div class="logo">Site<span>Up</span></div>
   <div class="nav-links">
     <a href="#process">How It Works</a>
+    <a href="#portfolio">Our Work</a>
     <a href="#packages">Pricing</a>
     <a href="#contact">Contact</a>
   </div>
@@ -732,6 +748,67 @@
     <div class="step-card"><div class="step-num-big">02</div><div class="step-icon">💳</div><div class="step-title">$100 Deposit</div><div class="step-desc">Pay a small $100 deposit via CashApp or Venmo to lock in your spot and kick off the build.</div></div>
     <div class="step-card"><div class="step-num-big">03</div><div class="step-icon">🛠️</div><div class="step-title">We Build It</div><div class="step-desc">We design your custom site in 3–5 days. No input required from you — we handle everything.</div></div>
     <div class="step-card"><div class="step-num-big">04</div><div class="step-icon">🚀</div><div class="step-title">You Go Live</div><div class="step-desc">Review, approve, pay the balance, and we launch. Your site is live and bringing in leads.</div></div>
+  </div>
+</div>
+
+
+<!-- PORTFOLIO -->
+<div class="port-section" id="portfolio">
+  <div style="text-align:center;margin-bottom:48px;">
+    <div class="sec-eyebrow">Our Work</div>
+    <h2 style="font-size:clamp(28px,4vw,44px);font-weight:900;margin-bottom:12px;">Sites We've Built</h2>
+    <p style="color:#555;font-size:16px;max-width:520px;margin:0 auto;">Real websites for real contractors. Professional, fast, and built to get you hired.</p>
+  </div>
+  <div class="port-grid">
+    
+    <div class="port-card">
+      <img class="port-img" src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/ae0d9aede_generated_image.png" alt="Smith Plumbing & Heating website" loading="lazy"/>
+      <div class="port-info">
+        <div class="port-niche">Plumbing Contractor</div>
+        <div class="port-name">Smith Plumbing & Heating</div>
+        <div class="port-pkg">Pro Package</div>
+        <div class="port-badge">✓ Built by SiteUp</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img class="port-img" src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/98fa59315_generated_image.png" alt="Peak Roofing Co. website" loading="lazy"/>
+      <div class="port-info">
+        <div class="port-niche">Roofing Contractor</div>
+        <div class="port-name">Peak Roofing Co.</div>
+        <div class="port-pkg">Starter Package</div>
+        <div class="port-badge">✓ Built by SiteUp</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img class="port-img" src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/66fcea97b_generated_image.png" alt="Green Edge Landscaping website" loading="lazy"/>
+      <div class="port-info">
+        <div class="port-niche">Landscaping Business</div>
+        <div class="port-name">Green Edge Landscaping</div>
+        <div class="port-pkg">Elite Package</div>
+        <div class="port-badge">✓ Built by SiteUp</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img class="port-img" src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/968b22110_generated_image.png" alt="CoolAir HVAC Services website" loading="lazy"/>
+      <div class="port-info">
+        <div class="port-niche">HVAC Contractor</div>
+        <div class="port-name">CoolAir HVAC Services</div>
+        <div class="port-pkg">Pro Package</div>
+        <div class="port-badge">✓ Built by SiteUp</div>
+      </div>
+    </div>
+    <div class="port-card">
+      <img class="port-img" src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/2b0a2a838_generated_image.png" alt="Elite Coat Painters website" loading="lazy"/>
+      <div class="port-info">
+        <div class="port-niche">Painting Contractor</div>
+        <div class="port-name">Elite Coat Painters</div>
+        <div class="port-pkg">Starter Package</div>
+        <div class="port-badge">✓ Built by SiteUp</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;">
+    <a class="nav-cta" href="#packages" style="display:inline-block;padding:14px 32px;font-size:15px;">Get Your Site Built →</a>
   </div>
 </div>
 
@@ -894,6 +971,7 @@
   </div>
   <div class="footer-links">
     <a href="#process">How It Works</a>
+    <a href="#portfolio">Our Work</a>
     <a href="#packages">Pricing</a>
     <a href="#contact">Contact</a>
     <a href="mailto:kinsleybazemore@gmail.com">Email Us</a>
@@ -1351,6 +1429,23 @@ function submitConsultation(){
 
   // Hide dot after 5s
   setTimeout(function(){ var d=document.getElementById('su-chat-dot'); if(d) d.style.display='none'; }, 5000);
+})();
+</script>
+
+
+<script>
+(function(){
+  try {
+    var u = JSON.parse(localStorage.getItem('su_user') || 'null');
+    if(u && u.name){
+      var btn = document.getElementById('nav-account-btn');
+      if(btn){
+        btn.textContent = '👤 ' + u.name.split(' ')[0];
+        btn.style.borderColor = '#a3ff00';
+        btn.style.color = '#a3ff00';
+      }
+    }
+  } catch(e){}
 })();
 </script>
 
