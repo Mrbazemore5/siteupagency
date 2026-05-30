@@ -83,52 +83,14 @@ a{text-decoration:none;color:inherit;}
 .ov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
 .ov-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;}
 .ov-card.hi{border-color:#a3ff0030;background:#a3ff0008;}
-.ov-card.cr{border-color:#7c3aed44;background:#7c3aed08;}
+
 .ov-icon{font-size:22px;margin-bottom:8px;}
 .ov-val{font-size:26px;font-weight:900;}
 .ov-card.hi .ov-val{color:var(--g);}
 .ov-card.cr .ov-val{color:#a78bfa;}
 .ov-lbl{font-size:11px;color:var(--sub);margin-top:3px;font-weight:600;}
 
-/* Credits store */
-.credits-bar{background:var(--card);border:1px solid #7c3aed44;border-radius:14px;padding:18px 22px;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.credits-bar .bal{font-size:22px;font-weight:900;color:#a78bfa;}
-.credits-bar .bal-lbl{font-size:12px;color:#555;margin-top:2px;}
-.credits-bar .add-btn{background:#7c3aed;color:#fff;border:none;border-radius:9px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;white-space:nowrap;}
-.credits-bar .add-btn:hover{background:#6d28d9;}
 
-.store-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:24px;}
-.store-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:.2s;}
-.store-card:hover{border-color:#a3ff0040;}
-.store-card.featured{border-color:#a3ff0050;background:#a3ff0008;}
-.store-badge{font-size:10px;font-weight:800;background:var(--g);color:#060606;border-radius:100px;padding:2px 8px;display:inline-block;margin-bottom:10px;}
-.store-name{font-size:15px;font-weight:800;margin-bottom:4px;}
-.store-desc{font-size:12px;color:#444;margin-bottom:14px;line-height:1.5;}
-.store-price{font-size:20px;font-weight:900;color:var(--g);margin-bottom:12px;}
-.store-price span{font-size:12px;color:#444;font-weight:400;}
-.store-btn{width:100%;background:var(--g);color:#060606;border:none;border-radius:9px;padding:10px;font-size:13px;font-weight:800;cursor:pointer;transition:.2s;}
-.store-btn:hover{background:#b5ff1a;}
-.store-btn:disabled{background:#1a1a1a;color:#333;cursor:not-allowed;}
-.store-btn.outline{background:transparent;border:1px solid #2a2a2a;color:#666;}
-.store-btn.outline:hover{border-color:var(--g);color:var(--g);background:transparent;}
-
-/* Add credits modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;}
-.modal-bg.open{display:flex;}
-.modal{background:#0f0f0f;border:1px solid #222;border-radius:18px;padding:28px;width:100%;max-width:380px;}
-.modal-title{font-size:18px;font-weight:900;margin-bottom:4px;}
-.modal-sub{font-size:13px;color:#444;margin-bottom:20px;}
-.credit-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
-.credit-opt{background:#141414;border:2px solid #1e1e1e;border-radius:11px;padding:14px;text-align:center;cursor:pointer;transition:.2s;}
-.credit-opt:hover{border-color:var(--g);}
-.credit-opt.sel{border-color:var(--g);background:#a3ff0010;}
-.credit-opt .ca{font-size:18px;font-weight:900;color:var(--g);}
-.credit-opt .cb{font-size:12px;color:#444;margin-top:2px;}
-.modal-note{font-size:12px;color:#333;margin-bottom:18px;text-align:center;}
-.modal-btns{display:flex;gap:10px;}
-.modal-cancel{flex:1;background:none;border:1px solid #222;color:#444;border-radius:9px;padding:12px;font-size:13px;cursor:pointer;}
-.modal-confirm{flex:2;background:var(--g);color:#060606;border:none;border-radius:9px;padding:12px;font-size:13px;font-weight:800;cursor:pointer;}
-.modal-confirm:hover{background:#b5ff1a;}
 
 /* Orders */
 .order-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:18px 22px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
@@ -297,14 +259,12 @@ a{text-decoration:none;color:inherit;}
         <div class="pg-sub">Here's a summary of your SiteUp account.</div>
         <div class="ov-grid">
           <div class="ov-card hi"><div class="ov-icon">📦</div><div class="ov-val" id="ov-orders">0</div><div class="ov-lbl">Total Orders</div></div>
-          <div class="ov-card"><div class="ov-icon">💰</div><div class="ov-val" id="ov-paid">$0</div><div class="ov-lbl">Deposit Paid</div></div>
-          <div class="ov-card cr"><div class="ov-icon">💜</div><div class="ov-val" id="ov-credits">$0.00</div><div class="ov-lbl">Account Credits</div></div>
+          <div class="ov-card"><div class="ov-icon">💰</div><div class="ov-val" id="ov-paid">$0</div><div class="ov-lbl">Deposit Paid</div></div></div>
         </div>
         <div class="sec-lbl">Recent Orders</div>
         <div id="ov-order-list"></div>
         <div class="qa">
           <a class="primary" href="/#packages">🛒 Order a Website</a>
-          <a onclick="showSec('store')">💜 Buy Credits</a>
           <a href="mailto:kinsleybazemore@gmail.com">📧 Email Support</a>
         </div>
       </div>
@@ -313,9 +273,7 @@ a{text-decoration:none;color:inherit;}
       <div class="sec" id="sec-store">
         <div class="pg-title">Store</div>
         <div class="pg-sub">Purchase website packages or add credits to your account.</div>
-        <div class="credits-bar">
-          <div><div class="bal" id="store-credits-bal">$0.00</div><div class="bal-lbl">Available Credits</div></div>
-          <button class="add-btn" onclick="openCreditsModal()">+ Add Credits</button>
+          
         </div>
         <div class="sec-lbl" style="margin-bottom:16px;">Website Packages</div>
         <div class="store-grid">
@@ -323,7 +281,7 @@ a{text-decoration:none;color:inherit;}
             <div class="store-name">Basic</div>
             <div class="store-desc">1-page professional site. Fast, clean, gets you online.</div>
             <div class="store-price">$500 <span>· $100 deposit</span></div>
-            <button class="store-btn" onclick="buyPackage('Basic',500)">Buy with Credits</button>
+            
             <div style="margin-top:8px;"><a href="https://cash.app/$kinsleybazemore8" target="_blank" class="store-btn outline" style="display:block;text-align:center;padding:9px;font-size:12px;font-weight:700;border-radius:9px;border:1px solid #2a2a2a;color:#666;">Pay Deposit via CashApp →</a></div>
           </div>
           <div class="store-card featured">
@@ -331,21 +289,21 @@ a{text-decoration:none;color:inherit;}
             <div class="store-name">Starter</div>
             <div class="store-desc">5-page site to showcase your services and get leads.</div>
             <div class="store-price">$1,000 <span>· $100 deposit</span></div>
-            <button class="store-btn" onclick="buyPackage('Starter',1000)">Buy with Credits</button>
+            
             <div style="margin-top:8px;"><a href="https://cash.app/$kinsleybazemore8" target="_blank" class="store-btn outline" style="display:block;text-align:center;padding:9px;font-size:12px;font-weight:700;border-radius:9px;border:1px solid #2a2a2a;color:#666;">Pay Deposit via CashApp →</a></div>
           </div>
           <div class="store-card">
             <div class="store-name">Pro</div>
             <div class="store-desc">Full SEO, custom domain, Google Business setup included.</div>
             <div class="store-price">$1,500 <span>· $100 deposit</span></div>
-            <button class="store-btn" onclick="buyPackage('Pro',1500)">Buy with Credits</button>
+            
             <div style="margin-top:8px;"><a href="https://cash.app/$kinsleybazemore8" target="_blank" class="store-btn outline" style="display:block;text-align:center;padding:9px;font-size:12px;font-weight:700;border-radius:9px;border:1px solid #2a2a2a;color:#666;">Pay Deposit via CashApp →</a></div>
           </div>
           <div class="store-card">
             <div class="store-name">Elite</div>
             <div class="store-desc">Full-service, priority build, premium design. All-in.</div>
             <div class="store-price">$2,500 <span>· $100 deposit</span></div>
-            <button class="store-btn" onclick="buyPackage('Elite',2500)">Buy with Credits</button>
+            
             <div style="margin-top:8px;"><a href="https://cash.app/$kinsleybazemore8" target="_blank" class="store-btn outline" style="display:block;text-align:center;padding:9px;font-size:12px;font-weight:700;border-radius:9px;border:1px solid #2a2a2a;color:#666;">Pay Deposit via CashApp →</a></div>
           </div>
         </div>
@@ -355,13 +313,13 @@ a{text-decoration:none;color:inherit;}
             <div class="store-name">Extra Revision Round</div>
             <div class="store-desc">One additional round of revisions after project delivery.</div>
             <div class="store-price">$50</div>
-            <button class="store-btn" onclick="buyPackage('Extra Revision',50)">Buy with Credits</button>
+            
           </div>
           <div class="store-card">
             <div class="store-name">Priority Build</div>
             <div class="store-desc">Move to the front of the queue — delivered in 24–48 hrs.</div>
             <div class="store-price">$150</div>
-            <button class="store-btn" onclick="buyPackage('Priority Build',150)">Buy with Credits</button>
+            
           </div>
         </div>
       </div>
@@ -398,7 +356,6 @@ a{text-decoration:none;color:inherit;}
         <div class="dev-grid">
           <div class="dev-card"><div class="dev-val" id="dv-users">—</div><div class="dev-lbl">Registered Accounts</div></div>
           <div class="dev-card"><div class="dev-val" id="dv-orders">—</div><div class="dev-lbl">Total Orders</div></div>
-          <div class="dev-card"><div class="dev-val" id="dv-credits">—</div><div class="dev-lbl">Credits Issued (USD)</div></div>
           <div class="dev-card"><div class="dev-val" id="dv-revenue">—</div><div class="dev-lbl">Est. Revenue</div></div>
         </div>
         <div class="sec-lbl">Quick Links</div>
@@ -413,10 +370,6 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<!-- ADD CREDITS MODAL -->
-<div class="modal-bg" id="credits-modal">
-  <div class="modal">
-    <div class="modal-title">Add Credits 💜</div>
     <div class="modal-sub">Credits are applied to your account instantly and can be used to purchase any package or add-on.</div>
     <div class="credit-opts">
       <div class="credit-opt sel" id="opt-25" onclick="selectCredit(25)"><div class="ca">$25</div><div class="cb">25 credits</div></div>
@@ -468,7 +421,7 @@ function doSignIn() {
   err.textContent = '';
   if (!email || !pass) { err.textContent = 'Please fill in all fields.'; return; }
   if (email === DEV_EMAIL && btoa(pass) === 'S2luc2xleUBTaXRlVXAjMjAyNg==') {
-    loadDash({ name: 'Kinsley', email: email, role: 'developer', biz: 'SiteUp Agency', joined: new Date().toISOString(), credits: 500 });
+    loadDash({ name: 'Kinsley', email: email, role: 'developer', biz: 'SiteUp Agency', joined: new Date().toISOString() });
     return;
   }
   var users = JSON.parse(localStorage.getItem('su_users') || '[]');
@@ -488,7 +441,7 @@ function doSignUp() {
   if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; return; }
   var users = JSON.parse(localStorage.getItem('su_users') || '[]');
   if (users.find(function(x) { return x.email === email; })) { err.textContent = 'An account with this email already exists.'; return; }
-  var u = { name: name, biz: biz || 'Not specified', email: email, pass: pass, role: 'customer', joined: new Date().toISOString(), credits: 0 };
+  var u = { name: name, biz: biz || 'Not specified', email: email, pass: pass, role: 'customer', joined: new Date().toISOString() };
   users.push(u);
   localStorage.setItem('su_users', JSON.stringify(users));
   loadDash(u);
@@ -521,7 +474,6 @@ function loadDash(u) {
   document.getElementById('sb-name').textContent  = u.name;
   document.getElementById('sb-email').textContent = u.email;
   var roleEl = document.getElementById('sb-role');
-  var credits = u.credits || 0;
 
   if (u.role === 'developer') {
     roleEl.textContent = '⚡ Developer';
@@ -532,12 +484,10 @@ function loadDash(u) {
     allUsers.forEach(function(usr) {
       var ords = JSON.parse(localStorage.getItem('su_orders_' + usr.email) || '[]');
       totalOrds += ords.length;
-      totalCredits += (usr.credits || 0);
       ords.forEach(function(o) { totalRevenue += (o.total || 0); });
     });
     document.getElementById('dv-users').textContent   = allUsers.length;
     document.getElementById('dv-orders').textContent  = totalOrds;
-    document.getElementById('dv-credits').textContent = '$' + totalCredits.toFixed(2);
     document.getElementById('dv-revenue').textContent = '$' + totalRevenue.toLocaleString();
   } else {
     roleEl.textContent = 'Customer';
@@ -550,8 +500,6 @@ function loadDash(u) {
   document.getElementById('greeting').textContent = greet + ', ' + u.name.split(' ')[0] + ' 👋';
 
   // Credits
-  document.getElementById('ov-credits').textContent      = '$' + credits.toFixed(2);
-  document.getElementById('store-credits-bal').textContent = '$' + credits.toFixed(2);
 
   // Settings
   document.getElementById('set-name').textContent   = u.name;
@@ -561,31 +509,14 @@ function loadDash(u) {
   document.getElementById('set-joined').textContent = new Date(u.joined).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
   // Orders
-  var orders = JSON.parse(localStorage.getItem('su_orders_' + u.email) || '[]');
+  var orders = [];
   document.getElementById('ov-orders').textContent = orders.length;
   document.getElementById('ov-paid').textContent   = '$' + (orders.length * 100);
   var html = buildOrdersHTML(orders);
   document.getElementById('ov-order-list').innerHTML   = html;
   document.getElementById('all-orders-list').innerHTML = html;
-
-  // Update buy buttons based on credits
-  updateBuyBtns(credits);
 }
 
-function updateBuyBtns(credits) {
-  var prices = { Basic: 500, Starter: 1000, Pro: 1500, Elite: 2500, 'Extra Revision': 50, 'Priority Build': 150 };
-  document.querySelectorAll('.store-btn:not(.outline)').forEach(function(btn) {
-    if (!btn.getAttribute('onclick')) return;
-    var match = btn.getAttribute('onclick').match(/buyPackage\('([^']+)',(\d+)\)/);
-    if (!match) return;
-    var price = parseInt(match[2]);
-    if (credits >= price) {
-      btn.disabled = false;
-      btn.textContent = 'Buy with Credits (' + '$' + price + ')';
-    } else {
-      btn.disabled = true;
-      btn.textContent = 'Need $' + (price - credits).toFixed(0) + ' more credits';
-    }
   });
 }
 
@@ -612,45 +543,6 @@ function showSec(id) {
   var navTarget = document.getElementById('nav-' + id);
   if (target) target.className = 'sec on';
   if (navTarget) navTarget.className = 'sbn on';
-}
-
-// ── CREDITS ──
-function openCreditsModal() { document.getElementById('credits-modal').classList.add('open'); }
-function closeCreditsModal() { document.getElementById('credits-modal').classList.remove('open'); }
-function selectCredit(amt) {
-  selectedCredit = amt;
-  [25,50,100,250].forEach(function(a) {
-    document.getElementById('opt-' + a).className = 'credit-opt' + (a === amt ? ' sel' : '');
-  });
-}
-function confirmCredits() {
-  closeCreditsModal();
-  var cashUrl = 'https://cash.app/$kinsleybazemore8/' + selectedCredit;
-  window.open(cashUrl, '_blank');
-  showToast('Opening CashApp — credits added within 1 hour after payment ✅', true);
-}
-
-function buyPackage(name, price) {
-  if (!currentUser) return;
-  var credits = currentUser.credits || 0;
-  if (credits < price) { showToast('Not enough credits. Add more to continue.'); return; }
-  // Deduct credits
-  currentUser.credits = credits - price;
-  // Save updated user
-  if (currentUser.role !== 'developer') {
-    var users = JSON.parse(localStorage.getItem('su_users') || '[]');
-    var idx = users.findIndex(function(x) { return x.email === currentUser.email; });
-    if (idx > -1) { users[idx].credits = currentUser.credits; localStorage.setItem('su_users', JSON.stringify(users)); }
-  }
-  localStorage.setItem('su_user', JSON.stringify(currentUser));
-  // Add order
-  var orders = JSON.parse(localStorage.getItem('su_orders_' + currentUser.email) || '[]');
-  orders.push({ pkg: name, biz: currentUser.biz, total: price, status: 'Deposit Paid', date: new Date().toISOString() });
-  localStorage.setItem('su_orders_' + currentUser.email, JSON.stringify(orders));
-  // Refresh UI
-  loadDash(currentUser);
-  showSec('orders');
-  showToast('🎉 ' + name + ' package ordered! We\'ll be in touch within 24 hours.', true);
 }
 
 // ── TOAST ──
