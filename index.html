@@ -125,6 +125,34 @@
     .cbtn-sms:hover { border-color: var(--green); }
     .contact-note { margin-top: 1.25rem; font-size: 0.78rem; color: var(--muted); }
 
+
+    /* PACKAGES */
+    .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+    .pkg-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.75rem; display: flex; flex-direction: column; gap: 0.6rem;
+      transition: border-color 0.2s, transform 0.2s; position: relative;
+    }
+    .pkg-card:hover { border-color: var(--green); transform: translateY(-2px); }
+    .pkg-popular { border-color: var(--green); }
+    .pkg-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: #000; font-size: 0.72rem; font-weight: 800;
+      padding: 0.2rem 0.85rem; border-radius: 100px; white-space: nowrap;
+    }
+    .pkg-name { font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .pkg-price { font-size: 2.2rem; font-weight: 900; color: #fff; letter-spacing: -1px; }
+    .pkg-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+    .pkg-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
+    .pkg-list li { font-size: 0.85rem; color: #ccc; }
+    .pkg-btn {
+      display: block; text-align: center; margin-top: 1.25rem;
+      background: var(--green); color: #000; padding: 0.75rem 1rem;
+      border-radius: 10px; font-weight: 800; font-size: 0.9rem; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .pkg-btn:hover { opacity: 0.85; }
+
     /* FOOTER */
     footer { border-top: 1px solid var(--border); padding: 1.75rem 1.5rem; text-align: center; color: var(--muted); font-size: 0.82rem; }
     footer a { color: var(--muted); text-decoration: none; }
@@ -142,6 +170,7 @@
   <div class="logo">Site<span>Up</span></div>
   <div class="nav-right">
     <a href="#work">Our Work</a>
+    <a href="#services">Pricing</a>
     <a href="#contact" class="nav-cta" onclick="trackContact('email')">Contact Us</a>
   </div>
 </nav>
@@ -221,6 +250,83 @@
         <div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🧱
       </div>
       <div class="pcard-body"><h3>Cornerstone Masonry</h3><p>Project showcase with free estimate form</p></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SERVICES / PACKAGES -->
+<div class="sec" id="services">
+  <div class="sec-tag">What We Do</div>
+  <div class="sec-title">Services &amp; Pricing</div>
+  <p class="sec-sub">Everything you need to get online and start winning more jobs.</p>
+
+  <!-- WHAT WE DO -->
+  <div class="grid-3" style="margin-bottom:3rem;">
+    <div class="card"><div class="card-icon">🎨</div><h3>Custom Web Design</h3><p>We design your site from scratch — no templates. Clean, professional, and built around your business.</p></div>
+    <div class="card"><div class="card-icon">📝</div><h3>Copywriting</h3><p>We write all the content for you. No blank pages — we tell your story in a way that gets customers calling.</p></div>
+    <div class="card"><div class="card-icon">🌐</div><h3>Domain &amp; Hosting Setup</h3><p>We handle your domain registration and hosting setup so you don't have to figure any of it out.</p></div>
+    <div class="card"><div class="card-icon">🔍</div><h3>SEO Optimization</h3><p>We set up your site so Google can find it — keywords, page titles, descriptions, and local SEO basics.</p></div>
+    <div class="card"><div class="card-icon">📱</div><h3>Mobile Optimization</h3><p>Every site we build looks and works perfectly on phones — where most of your customers are searching.</p></div>
+    <div class="card"><div class="card-icon">🛠️</div><h3>Edits &amp; Updates</h3><p>Need to change something after launch? We've got you. Pro &amp; Elite clients get 30 days of free updates.</p></div>
+  </div>
+
+  <!-- PACKAGES -->
+  <div class="sec-tag">Packages</div>
+  <div class="sec-title" style="margin-bottom:0.5rem;">Pick your plan</div>
+  <p class="sec-sub">$100 deposit to get started. Balance due when your site goes live.</p>
+  <div class="pkg-grid">
+    <div class="pkg-card">
+      <div class="pkg-name">Basic</div>
+      <div class="pkg-price">$500</div>
+      <div class="pkg-desc">Perfect if you just need something live fast.</div>
+      <ul class="pkg-list">
+        <li>✅ 1-page website</li>
+        <li>✅ Mobile-friendly design</li>
+        <li>✅ Contact button</li>
+        <li>✅ Live in 3–5 days</li>
+      </ul>
+      <a href="sms:7573345771" class="pkg-btn" onclick="trackContact('sms')">Get Started →</a>
+    </div>
+    <div class="pkg-card pkg-popular">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-name">Starter</div>
+      <div class="pkg-price">$1,000</div>
+      <div class="pkg-desc">A full site that covers everything.</div>
+      <ul class="pkg-list">
+        <li>✅ 5-page website</li>
+        <li>✅ Services, About, Contact pages</li>
+        <li>✅ Quote request form</li>
+        <li>✅ Google Maps embed</li>
+        <li>✅ Mobile-friendly design</li>
+      </ul>
+      <a href="sms:7573345771" class="pkg-btn" onclick="trackContact('sms')">Get Started →</a>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-name">Pro</div>
+      <div class="pkg-price">$1,500</div>
+      <div class="pkg-desc">Built to rank and convert.</div>
+      <ul class="pkg-list">
+        <li>✅ Everything in Starter</li>
+        <li>✅ Full SEO setup</li>
+        <li>✅ Free domain (1 year)</li>
+        <li>✅ Google Business setup</li>
+        <li>✅ 30 days free updates</li>
+      </ul>
+      <a href="sms:7573345771" class="pkg-btn" onclick="trackContact('sms')">Get Started →</a>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-name">Elite</div>
+      <div class="pkg-price">$2,500</div>
+      <div class="pkg-desc">Full-service, done for you completely.</div>
+      <ul class="pkg-list">
+        <li>✅ Everything in Pro</li>
+        <li>✅ Custom branding &amp; logo</li>
+        <li>✅ Photo/video sourcing</li>
+        <li>✅ Social media setup</li>
+        <li>✅ Priority support</li>
+      </ul>
+      <a href="sms:7573345771" class="pkg-btn" onclick="trackContact('sms')">Get Started →</a>
     </div>
   </div>
 </div>
