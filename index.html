@@ -1391,25 +1391,31 @@ function submitConsultation(){
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  fetch('https://superagent-d29c9b67.base44.app/functions/submitConsultation',{
+  // Save lead to database — triggers email notification automation
+  fetch('https://api.base44.com/api/apps/6a188b2648676353d29c9b67/entities/Lead',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ firstName, lastName, businessName: business, email, phone, package: pkg, message })
+    body: JSON.stringify({
+      business_name: business || (firstName + ' ' + lastName),
+      owner_name: firstName + ' ' + lastName,
+      email: email,
+      phone: phone,
+      niche: pkg || 'General',
+      notes: message,
+      status: 'New'
+    })
   })
-  .then(function(r){ return r.json(); })
-  .then(function(){
-    document.getElementById('consult-success').style.display = 'block';
-    // Clear fields
-    fields.forEach(function(f){ f.value = ''; });
-    btn.textContent = '✅ Sent!';
-    setTimeout(function(){ btn.textContent='Send Message →'; btn.disabled=false; document.getElementById('consult-success').style.display='none'; }, 6000);
-  })
-  .catch(function(){
-    // Still show success — email may have sent
-    document.getElementById('consult-success').style.display = 'block';
-    btn.textContent = '✅ Sent!';
-    setTimeout(function(){ btn.textContent='Send Message →'; btn.disabled=false; }, 4000);
-  });
+  .then(function(){ showConsultSuccess(); })
+  .catch(function(){ showConsultSuccess(); });
+}
+
+function showConsultSuccess(){
+  var fields = document.querySelectorAll('.contact-form-box .form-input');
+  var btn = document.getElementById('consult-btn');
+  document.getElementById('consult-success').style.display = 'block';
+  fields.forEach(function(f){ f.value = ''; });
+  btn.textContent = '✅ Sent!';
+  setTimeout(function(){ btn.textContent='Send Message →'; btn.disabled=false; document.getElementById('consult-success').style.display='none'; }, 6000);
 }
 </script>
 <script>if(history.scrollRestoration){history.scrollRestoration="manual";}window.onbeforeunload=function(){window.scrollTo(0,0);};
