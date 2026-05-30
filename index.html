@@ -646,14 +646,26 @@
 
   
     /* ══ DEV DASHBOARD ══ */
-    #dev-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;}
+    #dev-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;}
     #dev-modal-bg.on{display:flex;}
-    .dev-modal{background:#0d0d0d;border:1px solid #1e1e1e;border-radius:16px;width:100%;max-width:420px;overflow:hidden;}
+    .dev-modal{background:#0d0d0d;border:1px solid #1e1e1e;border-radius:18px;width:100%;max-width:420px;overflow:hidden;max-height:90vh;overflow-y:auto;}
     .dev-modal-head{background:#060606;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #111;}
     .dev-modal-title{font-size:15px;font-weight:900;color:#fff;}
-    .dev-modal-sub{font-size:11px;color:#333;margin-top:2px;}
+    .dev-modal-sub{font-size:11px;color:#444;margin-top:2px;}
     .dev-close{background:none;border:none;color:#444;font-size:18px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:.2s;}
     .dev-close:hover{color:#fff;background:#141414;}
+    /* Login screen */
+    .dev-login{padding:32px 24px;}
+    .dev-login-title{font-size:18px;font-weight:900;color:#fff;margin-bottom:4px;}
+    .dev-login-sub{font-size:13px;color:#444;margin-bottom:24px;}
+    .dev-field{margin-bottom:14px;}
+    .dev-field label{display:block;font-size:11px;font-weight:700;color:#555;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;}
+    .dev-field input{width:100%;background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:11px 14px;color:#fff;font-size:14px;outline:none;transition:.2s;box-sizing:border-box;}
+    .dev-field input:focus{border-color:#a3ff00;}
+    .dev-login-btn{width:100%;background:#a3ff00;color:#060606;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:900;cursor:pointer;margin-top:6px;transition:.2s;}
+    .dev-login-btn:hover{background:#8fe000;}
+    .dev-login-err{color:#ff4d4d;font-size:12px;margin-top:10px;text-align:center;display:none;}
+    /* Dashboard screen */
     .dev-body{padding:20px 24px;}
     .dev-stat{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #111;font-size:13px;}
     .dev-stat:last-child{border-bottom:none;}
@@ -662,11 +674,13 @@
     .dev-stat-val.green{color:#a3ff00;}
     .dev-stat-val.yellow{color:#ffc300;}
     .dev-section-title{font-size:10px;font-weight:800;color:#222;text-transform:uppercase;letter-spacing:2px;margin:16px 0 8px;}
-    .dev-action{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#111;border-radius:10px;margin-bottom:8px;cursor:pointer;border:1px solid #1a1a1a;transition:.2s;}
+    .dev-action{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#111;border-radius:10px;margin-bottom:8px;cursor:pointer;border:1px solid #1a1a1a;transition:.2s;text-decoration:none;}
     .dev-action:hover{background:#161616;border-color:#2a2a2a;}
     .dev-action-ic{font-size:16px;}
     .dev-action-label{font-size:13px;font-weight:700;color:#ccc;}
     .dev-action-sub{font-size:11px;color:#444;}
+    .dev-logout{width:100%;background:transparent;border:1px solid #1e1e1e;color:#444;border-radius:8px;padding:10px;font-size:12px;cursor:pointer;margin-top:16px;transition:.2s;}
+    .dev-logout:hover{border-color:#333;color:#888;}
 
   </style>
 </head>
@@ -1401,8 +1415,49 @@ function closeSideDrawer(){
 
 
 // ── DEV DASHBOARD ──
-function openDevDash(){ document.getElementById('dev-modal-bg').classList.add('on'); document.body.style.overflow='hidden'; }
-function closeDevDash(){ document.getElementById('dev-modal-bg').classList.remove('on'); document.body.style.overflow=''; }
+const DEV_USER = 'admin';
+const DEV_PASS = 'siteup2026';
+let devAuthed = false;
+
+function openDevDash(){
+  const bg = document.getElementById('dev-modal-bg');
+  bg.classList.add('on');
+  document.body.style.overflow='hidden';
+  if(devAuthed){
+    document.getElementById('dev-login-screen').style.display='none';
+    document.getElementById('dev-dash-screen').style.display='block';
+  } else {
+    document.getElementById('dev-login-screen').style.display='block';
+    document.getElementById('dev-dash-screen').style.display='none';
+    setTimeout(()=>{ const u=document.getElementById('dev-user-input'); if(u) u.focus(); },100);
+  }
+}
+function closeDevDash(){
+  document.getElementById('dev-modal-bg').classList.remove('on');
+  document.body.style.overflow='';
+}
+function devLogin(){
+  const u = document.getElementById('dev-user-input').value.trim();
+  const p = document.getElementById('dev-pass-input').value;
+  const err = document.getElementById('dev-login-err');
+  if(u===DEV_USER && p===DEV_PASS){
+    devAuthed=true;
+    err.style.display='none';
+    document.getElementById('dev-login-screen').style.display='none';
+    document.getElementById('dev-dash-screen').style.display='block';
+  } else {
+    err.style.display='block';
+    document.getElementById('dev-pass-input').value='';
+    document.getElementById('dev-pass-input').focus();
+  }
+}
+function devLogout(){
+  devAuthed=false;
+  document.getElementById('dev-dash-screen').style.display='none';
+  document.getElementById('dev-login-screen').style.display='block';
+  document.getElementById('dev-user-input').value='';
+  document.getElementById('dev-pass-input').value='';
+}
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeDevDash(); });
 
 </script>
@@ -1439,42 +1494,78 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeDevDa
 <!-- DEV DASHBOARD MODAL -->
 <div id="dev-modal-bg">
   <div class="dev-modal">
-    <div class="dev-modal-head">
-      <div>
-        <div class="dev-modal-title">🔐 Dev Dashboard</div>
-        <div class="dev-modal-sub">SiteUp Agency · kinsley@siteupagency.dev</div>
-      </div>
-      <button class="dev-close" onclick="closeDevDash()">✕</button>
-    </div>
-    <div class="dev-body">
-      <div class="dev-section-title">Site Status</div>
-      <div class="dev-stat"><span class="dev-stat-label">Domain</span><span class="dev-stat-val green">siteupagency.com ✓</span></div>
-      <div class="dev-stat"><span class="dev-stat-label">SSL</span><span class="dev-stat-val green">Active ✓</span></div>
-      <div class="dev-stat"><span class="dev-stat-label">Google Search Console</span><span class="dev-stat-val green">Verified ✓</span></div>
-      <div class="dev-stat"><span class="dev-stat-label">Email Notifications</span><span class="dev-stat-val green">Live ✓</span></div>
 
-      <div class="dev-section-title">Quick Actions</div>
-      <div class="dev-action" onclick="window.open('https://github.com/Mrbazemore5/siteupagency','_blank')">
-        <span class="dev-action-ic">🐙</span>
-        <div><div class="dev-action-label">GitHub Repo</div><div class="dev-action-sub">Mrbazemore5/siteupagency</div></div>
+    <!-- ── LOGIN SCREEN ── -->
+    <div id="dev-login-screen">
+      <div class="dev-modal-head">
+        <div>
+          <div class="dev-modal-title">🔐 Dev Access</div>
+          <div class="dev-modal-sub">SiteUp Agency — Restricted</div>
+        </div>
+        <button class="dev-close" onclick="closeDevDash()">✕</button>
       </div>
-      <div class="dev-action" onclick="window.open('https://search.google.com/search-console','_blank')">
-        <span class="dev-action-ic">📊</span>
-        <div><div class="dev-action-label">Search Console</div><div class="dev-action-sub">Check traffic & indexing</div></div>
+      <div class="dev-login">
+        <div class="dev-login-title">Welcome back, Kinsley</div>
+        <div class="dev-login-sub">Enter your credentials to access the dashboard.</div>
+        <div class="dev-field">
+          <label>Username</label>
+          <input type="text" id="dev-user-input" placeholder="admin" autocomplete="off"/>
+        </div>
+        <div class="dev-field">
+          <label>Password</label>
+          <input type="password" id="dev-pass-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')devLogin()"/>
+        </div>
+        <button class="dev-login-btn" onclick="devLogin()">Access Dashboard →</button>
+        <div class="dev-login-err" id="dev-login-err">❌ Incorrect credentials. Try again.</div>
       </div>
-      <div class="dev-action" onclick="window.open('https://namecheap.com','_blank')">
-        <span class="dev-action-ic">🌐</span>
-        <div><div class="dev-action-label">Namecheap DNS</div><div class="dev-action-sub">Manage domain settings</div></div>
-      </div>
-      <div class="dev-action" onclick="window.open('mailto:kinsleybazemore@gmail.com','_blank')">
-        <span class="dev-action-ic">📧</span>
-        <div><div class="dev-action-label">Gmail Inbox</div><div class="dev-action-sub">kinsleybazemore@gmail.com</div></div>
-      </div>
-
-      <div class="dev-section-title">Payment Info</div>
-      <div class="dev-stat"><span class="dev-stat-label">CashApp</span><span class="dev-stat-val yellow">$kinsleybazemore8</span></div>
-      <div class="dev-stat"><span class="dev-stat-label">Venmo</span><span class="dev-stat-val yellow">@Mrbazemore</span></div>
     </div>
+
+    <!-- ── DASHBOARD SCREEN ── -->
+    <div id="dev-dash-screen" style="display:none;">
+      <div class="dev-modal-head">
+        <div>
+          <div class="dev-modal-title">⚡ Dev Dashboard</div>
+          <div class="dev-modal-sub">SiteUp Agency · Kinsley Bazemore</div>
+        </div>
+        <button class="dev-close" onclick="closeDevDash()">✕</button>
+      </div>
+      <div class="dev-body">
+        <div class="dev-section-title">Site Status</div>
+        <div class="dev-stat"><span class="dev-stat-label">Domain</span><span class="dev-stat-val green">siteupagency.com ✓</span></div>
+        <div class="dev-stat"><span class="dev-stat-label">SSL</span><span class="dev-stat-val green">Active ✓</span></div>
+        <div class="dev-stat"><span class="dev-stat-label">Search Console</span><span class="dev-stat-val green">Verified ✓</span></div>
+        <div class="dev-stat"><span class="dev-stat-label">Email Notifications</span><span class="dev-stat-val green">Live ✓</span></div>
+        <div class="dev-stat"><span class="dev-stat-label">Order System</span><span class="dev-stat-val green">Active ✓</span></div>
+
+        <div class="dev-section-title">Quick Links</div>
+        <a class="dev-action" href="https://github.com/Mrbazemore5/siteupagency" target="_blank">
+          <span class="dev-action-ic">🐙</span>
+          <div><div class="dev-action-label">GitHub Repo</div><div class="dev-action-sub">Mrbazemore5/siteupagency</div></div>
+        </a>
+        <a class="dev-action" href="https://search.google.com/search-console" target="_blank">
+          <span class="dev-action-ic">📊</span>
+          <div><div class="dev-action-label">Search Console</div><div class="dev-action-sub">Traffic & indexing stats</div></div>
+        </a>
+        <a class="dev-action" href="https://namecheap.com" target="_blank">
+          <span class="dev-action-ic">🌐</span>
+          <div><div class="dev-action-label">Namecheap DNS</div><div class="dev-action-sub">Manage domain settings</div></div>
+        </a>
+        <a class="dev-action" href="https://mail.google.com" target="_blank">
+          <span class="dev-action-ic">📧</span>
+          <div><div class="dev-action-label">Gmail</div><div class="dev-action-sub">kinsleybazemore@gmail.com</div></div>
+        </a>
+
+        <div class="dev-section-title">Payment Info</div>
+        <div class="dev-stat"><span class="dev-stat-label">CashApp</span><span class="dev-stat-val yellow">$kinsleybazemore8</span></div>
+        <div class="dev-stat"><span class="dev-stat-label">Venmo</span><span class="dev-stat-val yellow">@Mrbazemore</span></div>
+
+        <div class="dev-section-title">Account</div>
+        <div class="dev-stat"><span class="dev-stat-label">Username</span><span class="dev-stat-val">admin</span></div>
+        <div class="dev-stat"><span class="dev-stat-label">Password</span><span class="dev-stat-val">siteup2026</span></div>
+        <button class="dev-logout" onclick="devLogout()">Sign Out</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
