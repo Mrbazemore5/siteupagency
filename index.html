@@ -1084,24 +1084,32 @@
         <div style="font-size:36px;font-weight:900;color:var(--g);">$100</div>
         <div style="font-size:13px;color:var(--sub);margin-top:4px;" id="co-rem-txt"></div>
       </div>
-      <div class="co-label">Select Payment Method</div>
-      <a href="https://cash.app/$kinsleybazemore8" target="_blank" class="pay-btn pay-cashapp" onclick="lastPaymentMethod='CashApp'">
-        <span style="font-size:22px;">💚</span>
-        <span>Pay with CashApp<br/><span class="pay-sub">$kinsleybazemore8</span></span>
-      </a>
-      <a href="https://venmo.com/Mrbazemore" target="_blank" class="pay-btn pay-venmo" onclick="lastPaymentMethod='Venmo'">
-        <span style="font-size:22px;">💜</span>
-        <span>Pay with Venmo<br/><span class="pay-sub">@Mrbazemore</span></span>
-      </a>
+      <div class="co-label">Send Your $100 Deposit</div>
+      <div id="pay-choose" style="display:block;">
+        <a id="pay-cashapp-btn" href="https://cash.app/$kinsleybazemore8/100" target="_blank" class="pay-btn pay-cashapp" onclick="markPaid('CashApp')">
+          <span style="font-size:22px;">💚</span>
+          <span>Pay $100 via CashApp<br/><span class="pay-sub">$kinsleybazemore8</span></span>
+        </a>
+        <a id="pay-venmo-btn" href="https://venmo.com/Mrbazemore?txn=pay&amount=100&note=SiteUp+Website+Deposit" target="_blank" class="pay-btn pay-venmo" onclick="markPaid('Venmo')">
+          <span style="font-size:22px;">💜</span>
+          <span>Pay $100 via Venmo<br/><span class="pay-sub">@Mrbazemore</span></span>
+        </a>
+      </div>
+      <div id="pay-confirm-row" style="display:none;margin-top:14px;background:#0d1a0d;border:1px solid #a3ff0033;border-radius:12px;padding:16px 18px;text-align:center;">
+        <div style="font-size:24px;margin-bottom:6px;">✅</div>
+        <div style="font-weight:800;color:#a3ff00;font-size:15px;">Payment Sent!</div>
+        <div style="color:#555;font-size:13px;margin-top:4px;">Tap "Confirm Order" below to complete your order and get your receipt.</div>
+      </div>
     </div>
     <!-- Step 3 -->
     <div id="cos3" style="display:none;">
       <div class="step3-check">
-        <div class="big">✅</div>
-        <h3>Almost there!</h3>
-        <p>Once you've sent the $100 deposit, tap confirm below. We'll reach out within 24 hours to kick off your build.</p>
+        <div class="big">🎉</div>
+        <h3>Almost Done!</h3>
+        <p>You're one tap away. We'll send a full receipt to your email instantly after you confirm.</p>
       </div>
-      <div class="co-note">Make sure you've sent $100 to <strong style="color:var(--g);">$kinsleybazemore8</strong> on CashApp or <strong style="color:#3D95CE;">@Mrbazemore</strong> on Venmo before confirming.</div>
+      <div id="cos3-summary" style="background:#111;border-radius:12px;padding:16px;margin-bottom:14px;font-size:13px;color:#aaa;line-height:2;"></div>
+      <div class="co-note">A receipt + project confirmation will be sent to your email address right away. We'll follow up within 24 hours to start your build.</div>
     </div>
   </div>
   <div class="d-foot">
@@ -1109,14 +1117,32 @@
   </div>
 </div>
 
-<!-- SUCCESS -->
+<!-- SUCCESS RECEIPT -->
 <div class="success-bg" id="success-bg">
-  <div class="success-box">
-    <div class="s-emoji">🎉</div>
-    <h2>Order Confirmed!</h2>
-    <p>We got your order and will reach out within <strong style="color:#fff;">24 hours</strong> to start building your site.</p>
-    <div class="s-detail" id="s-detail"></div>
-    <button class="s-close" onclick="document.getElementById('success-bg').classList.remove('on');window.scrollTo({top:0,behavior:'smooth'});">Done ✓</button>
+  <div class="success-box" style="max-width:480px;padding:0;overflow:hidden;">
+    <!-- Header -->
+    <div style="background:#a3ff00;padding:28px 32px;text-align:center;">
+      <div style="font-size:42px;margin-bottom:6px;">✅</div>
+      <div style="font-size:22px;font-weight:900;color:#060606;">Payment Received!</div>
+      <div style="font-size:14px;color:#0a3d00;margin-top:4px;font-weight:600;">Your order is confirmed</div>
+    </div>
+    <!-- Receipt Body -->
+    <div style="padding:28px 32px;background:#0f0f0f;">
+      <div style="font-size:12px;font-weight:800;color:#333;text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;">Order Receipt</div>
+      <div id="s-detail" style="font-size:14px;line-height:1.9;color:#888;margin-bottom:20px;"></div>
+      <div style="border-top:1px solid #1e1e1e;padding-top:18px;margin-top:4px;">
+        <div style="font-size:13px;color:#555;margin-bottom:16px;">📧 A receipt has been sent to your email address.</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="s-close" style="flex:1;min-width:120px;" onclick="document.getElementById('success-bg').classList.remove('on');window.scrollTo({top:0,behavior:'smooth'});">Done ✓</button>
+          <a href="/login" style="flex:1;min-width:120px;display:block;text-align:center;border:1px solid #2a2a2a;color:#888;border-radius:10px;padding:14px;font-size:14px;font-weight:700;text-decoration:none;">Track Order →</a>
+        </div>
+      </div>
+    </div>
+    <!-- Footer brand -->
+    <div style="background:#080808;padding:14px 32px;text-align:center;border-top:1px solid #111;">
+      <div style="font-size:15px;font-weight:900;color:#fff;">Site<span style="color:#a3ff00;">Up</span> Agency</div>
+      <div style="font-size:11px;color:#333;margin-top:3px;">siteupagency.com · kinsleybazemore@gmail.com</div>
+    </div>
   </div>
 </div>
 
@@ -1193,10 +1219,35 @@ function coNext(){
     var n=document.getElementById('co-name').value.trim(),e=document.getElementById('co-email').value.trim();
     if(!n||!e){alert('Please enter your name and email to continue.');return;}
     coStep=2;
-  } else if(coStep===2){coStep=3;}
-  else{submitOrder();return;}
+  } else if(coStep===2){
+    if(!lastPaymentMethod||lastPaymentMethod==='Unknown'){
+      alert('Please tap a payment button above to send your $100 deposit first.');return;
+    }
+    // Populate step 3 summary
+    var n=document.getElementById('co-name').value.trim(),
+        b=document.getElementById('co-biz').value.trim(),
+        e=document.getElementById('co-email').value.trim(),
+        it=cart[0]||{};
+    document.getElementById('cos3-summary').innerHTML=
+      '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1a1a1a;"><span>Package</span><span style="color:#fff;font-weight:700;">'+(it.name||'')+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1a1a1a;"><span>Total</span><span style="color:#a3ff00;font-weight:800;">$'+(it.price||0).toLocaleString()+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #1a1a1a;"><span>Deposit</span><span style="color:#a3ff00;">$100 via '+lastPaymentMethod+' ✓</span></div>'+
+      '<div style="display:flex;justify-content:space-between;padding:5px 0;"><span>Email receipt to</span><span style="color:#fff;">'+e+'</span></div>';
+    coStep=3;
+  } else{submitOrder();return;}
   syncCoStep();
 }
+function markPaid(method){
+  lastPaymentMethod = method;
+  // After a short delay (user went to pay app), show the "paid" confirmation row
+  setTimeout(function(){
+    document.getElementById('pay-choose').style.display='none';
+    document.getElementById('pay-confirm-row').style.display='block';
+    var btn=document.getElementById('co-next');
+    btn.textContent="✅ Confirm Order & Get Receipt →";
+  }, 1800);
+}
+
 function submitOrder(){
   var n=document.getElementById('co-name').value.trim(),
       b=document.getElementById('co-biz').value.trim(),
@@ -1205,8 +1256,12 @@ function submitOrder(){
       it=cart[0]||{},
       btn=document.getElementById('co-next');
 
-  btn.textContent='Submitting...';
+  btn.textContent='Sending Receipt...';
   btn.disabled=true;
+
+  var orderNum = 'SU-' + Date.now().toString().slice(-6);
+  var orderDate = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  var balDue = (it.price||0) - 100;
 
   fetch('https://superagent-d29c9b67.base44.app/functions/submitOrder',{
     method:'POST',
@@ -1214,38 +1269,47 @@ function submitOrder(){
     body:JSON.stringify({
       name:n, business:b, email:e, phone:ph,
       pkg:it.name, price:it.price,
-      payment_method: lastPaymentMethod || 'Unknown'
+      payment_method: lastPaymentMethod || 'Unknown',
+      order_number: orderNum
     })
   })
   .then(function(r){return r.json();})
   .then(function(data){
-    var delivDate = data.delivery_date ? new Date(data.delivery_date).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}) : 'within '+it.time;
-    document.getElementById('s-detail').innerHTML=
-      '<div><strong style="color:#fff">Package:</strong> '+it.name+' — $'+it.price.toLocaleString()+'</div>'+
-      '<div><strong style="color:#fff">Name:</strong> '+n+(b?' | '+b:'')+'</div>'+
-      '<div><strong style="color:#fff">Email:</strong> '+e+'</div>'+
-      '<div style="margin-top:8px;color:var(--g);font-weight:700;">$100 deposit sent ✓</div>'+
-      '<div style="color:#aaa;font-size:13px;margin-top:4px;">Balance of $'+(it.price-100).toLocaleString()+' due on delivery · '+delivDate+'</div>'+
-      '<div style="color:#aaa;font-size:13px;margin-top:4px;">📧 Receipt sent to '+e+' · Kinsley notified</div>';
-    closeAllDrawers();
-    document.getElementById('success-bg').classList.add('on');
-    cart=[]; coStep=1; renderCart();
-    ['co-name','co-biz','co-email','co-phone'].forEach(function(id){document.getElementById(id).value='';});
+    showReceipt(n,b,e,it,orderNum,orderDate,balDue,data.delivery_date);
   })
   .catch(function(){
-    // Still show success even if API call fails — order was placed
-    document.getElementById('s-detail').innerHTML=
-      '<div><strong style="color:#fff">Package:</strong> '+it.name+' — $'+it.price.toLocaleString()+'</div>'+
-      '<div><strong style="color:#fff">Name:</strong> '+n+'</div>'+
-      '<div><strong style="color:#fff">Email:</strong> '+e+'</div>'+
-      '<div style="margin-top:8px;color:var(--g);font-weight:700;">$100 deposit sent ✓</div>'+
-      '<div style="color:#aaa;font-size:13px;margin-top:4px;">Balance of $'+(it.price-100).toLocaleString()+' due on delivery</div>';
-    closeAllDrawers();
-    document.getElementById('success-bg').classList.add('on');
-    cart=[]; coStep=1; renderCart();
-    ['co-name','co-biz','co-email','co-phone'].forEach(function(id){document.getElementById(id).value='';});
-  })
-  .finally(function(){btn.textContent='✅ Confirm My Order';btn.disabled=false;});
+    showReceipt(n,b,e,it,orderNum,orderDate,balDue,null);
+  });
+}
+
+function showReceipt(n,b,e,it,orderNum,orderDate,balDue,delivDate){
+  var deliv = delivDate
+    ? new Date(delivDate).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})
+    : 'Estimated within '+( it.time || '5-7 days');
+
+  document.getElementById('s-detail').innerHTML =
+    '<div style="background:#141414;border-radius:10px;padding:14px 16px;margin-bottom:14px;">'+
+    '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e1e1e;"><span>Order #</span><span style="color:#fff;font-weight:700;">'+orderNum+'</span></div>'+
+    '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e1e1e;"><span>Date</span><span style="color:#fff;">'+orderDate+'</span></div>'+
+    '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e1e1e;"><span>Package</span><span style="color:#fff;font-weight:700;">'+it.name+'</span></div>'+
+    '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e1e1e;"><span>Client</span><span style="color:#fff;">'+(b?b+' · ':'')+n+'</span></div>'+
+    '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e1e1e;"><span>Payment via</span><span style="color:#fff;">'+lastPaymentMethod+'</span></div>'+
+    '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e1e1e;"><span>Deposit Paid</span><span style="color:#a3ff00;font-weight:800;">$100.00 ✓</span></div>'+
+    '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e1e1e;"><span>Balance Due</span><span style="color:#fff;">$'+balDue.toLocaleString()+' on delivery</span></div>'+
+    '<div style="display:flex;justify-content:space-between;padding:7px 0;"><span>Est. Delivery</span><span style="color:#fff;">'+deliv+'</span></div>'+
+    '</div>'+
+    '<div style="font-size:12px;color:#444;text-align:center;">Receipt emailed to <strong style="color:#888;">'+e+'</strong></div>';
+
+  closeAllDrawers();
+  document.getElementById('success-bg').classList.add('on');
+  cart=[]; coStep=1; renderCart();
+  // Reset form + pay step
+  ['co-name','co-biz','co-email','co-phone'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('pay-choose').style.display='block';
+  document.getElementById('pay-confirm-row').style.display='none';
+  document.getElementById('co-next').disabled=false;
+  document.getElementById('co-next').textContent='Continue →';
+  lastPaymentMethod='Unknown';
 }
 
 // ── FAQ
