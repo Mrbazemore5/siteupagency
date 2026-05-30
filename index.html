@@ -1299,24 +1299,36 @@ function submitOrder(){
   var orderDate = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   var balDue = (it.price||0) - 100;
 
-  fetch('https://superagent-d29c9b67.base44.app/functions/siteup',{
+  // Calculate delivery date
+  var dmap = {Basic:3,Starter:5,Pro:7,Elite:10};
+  var delivDays = dmap[it.name] || 7;
+  var delivDate = new Date();
+  delivDate.setDate(delivDate.getDate() + delivDays);
+  var delivISO = delivDate.toISOString().split('T')[0];
+
+  // Save order to database (triggers Order Email Sender automation)
+  fetch('https://api.base44.com/api/apps/6a188b2648676353d29c9b67/entities/Order',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
-      type:'order',
-      name:n, business:b, email:e, phone:ph,
-      pkg:it.name, price:it.price,
+      client_name: n,
+      business_name: b,
+      email: e,
+      phone: ph,
+      package: it.name,
+      total_price: it.price,
+      deposit_paid: 100,
+      balance_due: balDue,
       payment_method: lastPaymentMethod || 'Unknown',
-      order_number: orderNum
+      status: 'Deposit Paid',
+      delivery_days: delivDays,
+      delivery_date: delivISO,
+      notes: orderNum,
+      reminder_sent: false
     })
   })
-  .then(function(r){return r.json();})
-  .then(function(data){
-    showReceipt(n,b,e,it,orderNum,orderDate,balDue,data.delivery_date);
-  })
-  .catch(function(){
-    showReceipt(n,b,e,it,orderNum,orderDate,balDue,null);
-  });
+  .then(function(){ showReceipt(n,b,e,it,orderNum,orderDate,balDue,delivDate.toISOString()); })
+  .catch(function(){ showReceipt(n,b,e,it,orderNum,orderDate,balDue,delivDate.toISOString()); });
 }
 
 function showReceipt(n,b,e,it,orderNum,orderDate,balDue,delivDate){
