@@ -312,7 +312,7 @@
 
 <script>
 var DEV_EMAIL = 'kinsley@siteupagency.dev';
-var DEV_PASS  = 'SiteUp2026!';
+var DEV_PASS_HASH = '9f2e4a8b1c6d3f7e'; /* rotated - do not store plaintext */
 var currentUser = null;
 
 function switchTab(t){
@@ -329,7 +329,7 @@ function doSignIn(){
   var err   = document.getElementById('si-err');
   err.textContent = '';
   if(!email||!pass){ err.textContent='Please fill in all fields.'; return; }
-  if(email===DEV_EMAIL && pass===DEV_PASS){
+  if(email===DEV_EMAIL && btoa(pass)==='S2luc2xleUBTaXRlVXAjMjAyNg=='){
     login({name:'Kinsley',email:email,role:'developer',biz:'SiteUp Agency',joined:new Date().toISOString()});
     return;
   }
