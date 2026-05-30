@@ -624,12 +624,33 @@
     @media(max-width:900px){.port-grid{grid-template-columns:1fr 1fr;}}
     @media(max-width:560px){.port-grid{grid-template-columns:1fr;}.port-img{height:180px;}}
 
+  
+    /* ══ SLIDE DRAWER ══ */
+    .side-drawer{position:fixed;left:0;top:0;bottom:0;width:275px;background:#0a0a0a;border-right:1px solid #1e1e1e;z-index:500;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+    .side-drawer.open{transform:translateX(0);}
+    .side-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:499;opacity:0;pointer-events:none;transition:opacity .3s;}
+    .side-drawer-overlay.open{opacity:1;pointer-events:all;}
+    .sd-head{display:flex;align-items:center;justify-content:space-between;padding:20px 18px;border-bottom:1px solid #111;}
+    .sd-logo{font-size:18px;font-weight:900;color:#fff;}.sd-logo span{color:#a3ff00;}
+    .sd-close{background:none;border:none;color:#444;font-size:20px;cursor:pointer;transition:.2s;padding:4px 8px;border-radius:6px;}.sd-close:hover{color:#fff;background:#141414;}
+    .sd-section{padding:14px 10px 6px;}
+    .sd-lbl{font-size:10px;font-weight:800;color:#2a2a2a;text-transform:uppercase;letter-spacing:2px;padding:0 10px;margin-bottom:8px;}
+    .sd-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;font-size:14px;font-weight:600;color:#555;cursor:pointer;transition:.2s;text-decoration:none;margin-bottom:2px;}
+    .sd-item:hover{background:#141414;color:#ccc;}
+    .sd-item .sd-ic{font-size:16px;width:20px;text-align:center;}
+    .sd-item.active{background:#141414;color:#fff;}
+    .sd-cta{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;font-size:14px;font-weight:800;color:#060606;background:#a3ff00;cursor:pointer;text-decoration:none;margin:6px 10px 0;transition:.2s;}
+    .sd-cta:hover{background:#b5ff1a;}
+    .ham-btn{background:none;border:none;color:#888;font-size:18px;cursor:pointer;padding:7px 8px;border-radius:8px;transition:.2s;line-height:1;display:flex;align-items:center;}
+    .ham-btn:hover{color:#fff;background:#141414;}
+
   </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav id="main-nav">
+  <button class="ham-btn" onclick="openSideDrawer()" aria-label="Menu">☰</button>
   <div class="logo">Site<span>Up</span></div>
   <div class="nav-links">
     <a href="#process">How It Works</a>
@@ -970,6 +991,38 @@
 </div>
 
 <!-- BACKDROP -->
+<!-- SIDE DRAWER OVERLAY -->
+<div class="side-drawer-overlay" id="sd-overlay" onclick="closeSideDrawer()"></div>
+
+<!-- SIDE DRAWER -->
+<div class="side-drawer" id="side-drawer">
+  <div class="sd-head">
+    <div class="sd-logo">Site<span>Up</span></div>
+    <button class="sd-close" onclick="closeSideDrawer()">✕</button>
+  </div>
+  <div class="sd-section">
+    <div class="sd-lbl">Navigate</div>
+    <a class="sd-item" href="#home" onclick="closeSideDrawer()"><span class="sd-ic">🏠</span> Home</a>
+    <a class="sd-item" href="#portfolio" onclick="closeSideDrawer()"><span class="sd-ic">🖼️</span> Our Work</a>
+    <a class="sd-item" href="#packages" onclick="closeSideDrawer()"><span class="sd-ic">💼</span> Pricing</a>
+    <a class="sd-item" href="#process" onclick="closeSideDrawer()"><span class="sd-ic">⚡</span> How It Works</a>
+    <a class="sd-item" href="#faq" onclick="closeSideDrawer()"><span class="sd-ic">❓</span> FAQ</a>
+    <a class="sd-item" href="#contact" onclick="closeSideDrawer()"><span class="sd-ic">📬</span> Contact</a>
+  </div>
+  <div class="sd-section">
+    <div class="sd-lbl">Account</div>
+    <a class="sd-item" href="/login" onclick="closeSideDrawer()"><span class="sd-ic">👤</span> My Dashboard</a>
+  </div>
+  <div class="sd-section">
+    <div class="sd-lbl">Pay Deposit</div>
+    <a class="sd-item" href="https://cash.app/$kinsleybazemore8" target="_blank" onclick="closeSideDrawer()"><span class="sd-ic">💚</span> CashApp: $kinsleybazemore8</a>
+    <a class="sd-item" href="https://venmo.com/Mrbazemore" target="_blank" onclick="closeSideDrawer()"><span class="sd-ic">💜</span> Venmo: @Mrbazemore</a>
+  </div>
+  <div class="sd-section">
+    <a class="sd-cta" href="#packages" onclick="closeSideDrawer()">🚀 Order a Website</a>
+  </div>
+</div>
+
 <div class="backdrop" id="backdrop" onclick="closeAllDrawers()"></div>
 
 <!-- CART DRAWER -->
@@ -1246,7 +1299,20 @@ function submitConsultation(){
   });
 }
 </script>
-<script>if(history.scrollRestoration){history.scrollRestoration="manual";}window.onbeforeunload=function(){window.scrollTo(0,0);};</script>
+<script>if(history.scrollRestoration){history.scrollRestoration="manual";}window.onbeforeunload=function(){window.scrollTo(0,0);};
+// ── SIDE DRAWER ──
+function openSideDrawer(){
+  document.getElementById('side-drawer').classList.add('open');
+  document.getElementById('sd-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSideDrawer(){
+  document.getElementById('side-drawer').classList.remove('open');
+  document.getElementById('sd-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+</script>
 
 
     <div class="chat-head-info">
