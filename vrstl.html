@@ -4,392 +4,159 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VRSTL — Official Store</title>
+<meta name="description" content="VRSTL — Premium streetwear. Shop hoodies, shorts, and limited drops." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --black: #000000;
-    --white: #ffffff;
-    --gray: #111111;
+    --black: #000;
+    --white: #f0f0f0;
+    --gray: #111;
+    --border: #1a1a1a;
     --accent: #ff2d2d;
-    --text-muted: #666666;
+    --muted: #555;
   }
-
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Space Grotesk', sans-serif;
-    overflow-x: hidden;
-  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-thumb { background: var(--accent); }
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(0,0,0,0.9);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #1a1a1a;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid #111;
   }
-
-  .logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    color: var(--white);
-    text-decoration: none;
-  }
-
+  .logo { font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.3em; color: var(--white); text-decoration: none; }
   .logo span { color: var(--accent); }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-  }
-
-  nav ul a {
-    color: #aaa;
-    text-decoration: none;
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  nav ul a:hover { color: var(--white); }
-
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: #666; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
   .nav-right { display: flex; align-items: center; gap: 1.5rem; }
-
-  .cart-icon { font-size: 1.4rem; cursor: pointer; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    padding: 0 2rem;
-    text-align: center;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 40%, #1a0000 0%, #000 60%);
-  }
-
-  .hero-glow {
-    position: absolute;
-    top: 20%; left: 50%;
-    transform: translateX(-50%);
-    width: 600px; height: 400px;
-    background: radial-gradient(ellipse, rgba(255,45,45,0.15) 0%, transparent 70%);
-    filter: blur(40px);
-  }
-
-  .hero-content { position: relative; z-index: 2; }
-
-  .hero-tag {
-    display: inline-block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    border: 1px solid rgba(255,45,45,0.3);
-    padding: 0.4rem 1rem;
-  }
-
-  .hero h1 {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(5rem, 15vw, 12rem);
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    line-height: 0.9;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero h1 .accent { color: var(--accent); }
-
-  .hero p {
-    font-size: 1rem;
-    color: #777;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 3rem;
-  }
-
-  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-  .btn-primary {
-    background: var(--white);
-    color: var(--black);
-    padding: 1rem 2.5rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-    display: inline-block;
-  }
-
-  .btn-primary:hover { background: var(--accent); color: var(--white); }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--white);
-    padding: 1rem 2.5rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 700;
-    border: 1px solid #333;
-    transition: all 0.2s;
-    cursor: pointer;
-    display: inline-block;
-  }
-
-  .btn-outline:hover { border-color: var(--white); }
+  .cart-btn { background: var(--accent); color: white; border: none; padding: 0.5rem 1.25rem; font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; cursor: pointer; font-weight: 700; transition: opacity 0.2s; }
+  .cart-btn:hover { opacity: 0.85; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 22px; height: 2px; background: var(--white); }
+  .mobile-nav { display: none; position: fixed; top: 65px; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.98); z-index: 199; flex-direction: column; align-items: center; justify-content: center; gap: 3rem; }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { color: var(--white); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 1.5rem; letter-spacing: 0.2em; text-transform: uppercase; }
 
   /* TICKER */
-  .ticker {
-    background: var(--accent);
-    padding: 0.75rem 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+  .ticker { background: var(--accent); padding: 0.6rem 0; overflow: hidden; white-space: nowrap; margin-top: 65px; }
+  .ticker-inner { display: inline-flex; animation: tick 22s linear infinite; }
+  .ticker span { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0 2.5rem; color: white; }
+  @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  .ticker-inner {
-    display: inline-flex;
-    animation: ticker 20s linear infinite;
-  }
+  /* HERO */
+  .hero { min-height: 95vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; text-align: center; padding: 2rem; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, #1a0000 0%, #000 65%); }
+  .hero-glow { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); width: 700px; height: 500px; background: radial-gradient(ellipse, rgba(255,45,45,0.12) 0%, transparent 70%); filter: blur(60px); pointer-events: none; }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.75rem; border: 1px solid rgba(255,45,45,0.3); padding: 0.4rem 1.1rem; }
+  .hero h1 { font-family: 'Space Mono', monospace; font-size: clamp(5rem, 18vw, 14rem); font-weight: 700; letter-spacing: 0.1em; line-height: 0.9; margin-bottom: 1.5rem; }
+  .hero h1 .a { color: var(--accent); }
+  .hero-sub { font-size: 0.95rem; color: #666; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 3rem; }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--white); color: var(--black); padding: 1rem 2.5rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; font-weight: 700; transition: all 0.2s; display: inline-block; border: none; cursor: pointer; }
+  .btn-primary:hover { background: var(--accent); color: white; }
+  .btn-outline { background: transparent; color: var(--white); padding: 1rem 2.5rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; font-weight: 700; border: 1px solid #2a2a2a; transition: all 0.2s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--white); }
 
-  .ticker span {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0 3rem;
-    color: var(--white);
-  }
+  /* SECTION HEADERS */
+  .sec { padding: 6rem 2rem; max-width: 1300px; margin: 0 auto; }
+  .sec-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.75rem; }
+  .sec-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.5px; margin-bottom: 2.5rem; }
+  .divider { border-top: 1px solid var(--border); }
 
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+  /* SHOP GRID */
+  .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; background: #0a0a0a; border: 1px solid #0a0a0a; }
+  .product-card { background: var(--black); cursor: pointer; transition: background 0.3s; }
+  .product-card:hover { background: #080808; }
+  .product-img { aspect-ratio: 3/4; position: relative; overflow: hidden; background: #0a0a0a; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block; }
+  .product-card:hover .product-img img { transform: scale(1.05); }
+  .p-badge { position: absolute; top: 1rem; left: 1rem; background: var(--accent); color: white; font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; padding: 0.3rem 0.75rem; text-transform: uppercase; z-index: 2; }
+  .p-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; z-index: 3; }
+  .product-card:hover .p-overlay { opacity: 1; }
+  .p-info { padding: 1.25rem 1rem; border-top: 1px solid #0f0f0f; }
+  .p-name { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .p-bottom { display: flex; justify-content: space-between; align-items: center; }
+  .p-price { font-family: 'Space Mono', monospace; font-size: 0.88rem; color: #aaa; }
+  .p-sizes { font-size: 0.68rem; color: #444; letter-spacing: 0.08em; }
 
-  /* SECTION */
-  .shop-section {
-    padding: 6rem 3rem;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text h2 { font-family: 'Space Mono', monospace; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.05; margin-bottom: 1.5rem; }
+  .about-text h2 em { color: var(--accent); font-style: normal; }
+  .about-text p { color: #666; font-size: 0.9rem; line-height: 1.85; margin-bottom: 1rem; }
+  .about-visual { aspect-ratio: 1; background: linear-gradient(135deg, #0d0000 0%, #1a1a1a 100%); display: flex; align-items: center; justify-content: center; }
+  .about-logo-big { font-family: 'Space Mono', monospace; font-size: 6rem; font-weight: 700; letter-spacing: 0.2em; color: #1a1a1a; }
+  .about-logo-big span { color: rgba(255,45,45,0.3); }
 
-  .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
+  /* GALLERY */
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: #0a0a0a; }
+  .gallery-item { aspect-ratio: 1; overflow: hidden; position: relative; background: #0a0a0a; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .gallery-item:hover img { transform: scale(1.08); }
+  .gallery-item.big { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
 
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 3rem;
-  }
-
-  /* PRODUCTS */
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2px;
-    background: #111;
-  }
-
-  .product-card {
-    background: var(--black);
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .product-card:hover { background: #0d0d0d; }
-
-  .product-img {
-    aspect-ratio: 3/4;
-    position: relative;
-    overflow: hidden;
-    background: #0a0a0a;
-  }
-
-  .product-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    display: block;
-  }
-
-  .product-card:hover .product-img img { transform: scale(1.04); }
-
-  .product-badge {
-    position: absolute;
-    top: 1rem; left: 1rem;
-    background: var(--accent);
-    color: white;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    padding: 0.3rem 0.7rem;
-    text-transform: uppercase;
-    z-index: 2;
-  }
-
-  .product-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 3;
-  }
-
-  .product-card:hover .product-overlay { opacity: 1; }
-
-  .product-info {
-    padding: 1.25rem;
-    border-top: 1px solid #111;
-  }
-
-  .product-name {
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .product-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .product-price {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.9rem;
-    color: #aaa;
-  }
-
-  .product-sizes {
-    font-size: 0.7rem;
-    color: #555;
-    letter-spacing: 0.1em;
-  }
+  /* CONTACT */
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-left h2 { font-family: 'Space Mono', monospace; font-size: 2.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+  .contact-left p { color: #666; font-size: 0.88rem; line-height: 1.8; margin-bottom: 2rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .c-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .c-icon { width: 36px; height: 36px; background: #111; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+  .c-text { font-size: 0.82rem; color: #888; line-height: 1.6; }
+  .c-text strong { color: var(--white); display: block; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .contact-form { background: #080808; border: 1px solid var(--border); padding: 2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #555; font-family: 'Space Mono', monospace; }
+  .form-group input, .form-group textarea, .form-group select { background: #000; border: 1px solid #1a1a1a; color: var(--white); padding: 0.85rem 1rem; font-family: 'Space Grotesk', sans-serif; font-size: 0.88rem; width: 100%; transition: border-color 0.2s; outline: none; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-group select option { background: #000; }
 
   /* BRAND STATEMENT */
-  .brand-statement {
-    padding: 8rem 3rem;
-    text-align: center;
-    background: linear-gradient(180deg, #000 0%, #0d0000 50%, #000 100%);
-  }
-
-  .brand-statement h2 {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(2rem, 6vw, 5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: 0.05em;
-    max-width: 900px;
-    margin: 0 auto 2rem;
-  }
-
-  .brand-statement h2 em { color: var(--accent); font-style: normal; }
-
-  .brand-statement p {
-    color: #666;
-    font-size: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.7;
-  }
+  .brand-stmt { padding: 9rem 2rem; text-align: center; background: linear-gradient(180deg, #000 0%, #0d0000 50%, #000 100%); }
+  .brand-stmt h2 { font-family: 'Space Mono', monospace; font-size: clamp(2.5rem, 7vw, 6rem); font-weight: 700; line-height: 1.05; letter-spacing: 0.02em; max-width: 1000px; margin: 0 auto 1.5rem; }
+  .brand-stmt h2 em { color: var(--accent); font-style: normal; }
+  .brand-stmt p { color: #555; font-size: 0.95rem; max-width: 480px; margin: 0 auto; line-height: 1.8; }
 
   /* FOOTER */
-  footer {
-    border-top: 1px solid #111;
-    padding: 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+  .footer-main { border-top: 1px solid var(--border); padding: 4rem 2.5rem 2rem; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+  .footer-brand p { color: #444; font-size: 0.82rem; line-height: 1.75; margin-top: 1rem; max-width: 260px; }
+  .footer-col h4 { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: #444; margin-bottom: 1.25rem; }
+  .footer-col a { display: block; color: #333; text-decoration: none; font-size: 0.82rem; margin-bottom: 0.6rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid #0a0a0a; padding: 1.5rem 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-bottom p { color: #2a2a2a; font-size: 0.72rem; }
+  .footer-bottom a { color: #2a2a2a; font-size: 0.72rem; text-decoration: none; }
+  .footer-bottom a:hover { color: var(--accent); }
+  .built-tag { color: var(--accent) !important; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-visual { display: none; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.big { grid-column: span 1; grid-row: span 1; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    .footer-main { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .sec { padding: 4rem 1.25rem; }
   }
 
-  .footer-logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-  }
-
-  .footer-logo span { color: var(--accent); }
-
-  footer p { color: #444; font-size: 0.75rem; letter-spacing: 0.1em; }
-
-  .footer-links { display: flex; gap: 2rem; }
-
-  .footer-links a {
-    color: #444;
-    font-size: 0.75rem;
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .footer-links a:hover { color: var(--white); }
-
-  .built-by {
-    text-align: center;
-    padding: 1.5rem;
-    border-top: 1px solid #0a0a0a;
-    font-size: 0.7rem;
-    color: #333;
-    letter-spacing: 0.1em;
-  }
-
-  .built-by a { color: var(--accent); text-decoration: none; }
-
-  @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    nav ul { display: none; }
-    .shop-section { padding: 4rem 1.5rem; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
-    footer { flex-direction: column; text-align: center; }
+  @media (max-width: 480px) {
+    .shop-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-main { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -398,113 +165,104 @@
 <!-- NAV -->
 <nav>
   <a class="logo" href="#">VR<span>S</span>TL</a>
-  <ul>
+  <ul class="nav-links">
     <li><a href="#shop">Shop</a></li>
-    <li><a href="#">Collections</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <div class="cart-icon">🛒</div>
+    <button class="cart-btn">Cart (0)</button>
+    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
   </div>
 </nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#shop" onclick="toggleNav()">Shop</a>
+  <a href="#about" onclick="toggleNav()">About</a>
+  <a href="#gallery" onclick="toggleNav()">Gallery</a>
+  <a href="#contact" onclick="toggleNav()">Contact</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>New Drop — SS26 Collection</span><span>★</span>
+    <span>Free Shipping Over $150</span><span>★</span>
+    <span>Limited Quantities</span><span>★</span>
+    <span>Wear the version of yourself that doesn't exist yet</span><span>★</span>
+    <span>New Drop — SS26 Collection</span><span>★</span>
+    <span>Free Shipping Over $150</span><span>★</span>
+    <span>Limited Quantities</span><span>★</span>
+    <span>Wear the version of yourself that doesn't exist yet</span><span>★</span>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-glow"></div>
   <div class="hero-content">
-    <div class="hero-tag">New Drop — SS26 Collection</div>
-    <h1>VR<span class="accent">S</span>TL</h1>
-    <p>Wear the version of yourself that doesn't exist yet.</p>
+    <div class="hero-tag">SS26 Collection — Now Live</div>
+    <h1>VR<span class="a">S</span>TL</h1>
+    <p class="hero-sub">Wear the version of yourself that doesn't exist yet.</p>
     <div class="hero-btns">
-      <a href="#shop" class="btn-primary">Shop Now</a>
-      <a href="#" class="btn-outline">Our Story</a>
+      <a href="#shop" class="btn-primary">Shop the Drop</a>
+      <a href="#about" class="btn-outline">Our Story</a>
     </div>
-  </div>
-</div>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span>New Drop Available</span><span>★</span>
-    <span>Free Shipping Over $100</span><span>★</span>
-    <span>VRSTL SS26 Collection</span><span>★</span>
-    <span>Limited Quantities</span><span>★</span>
-    <span>New Drop Available</span><span>★</span>
-    <span>Free Shipping Over $100</span><span>★</span>
-    <span>VRSTL SS26 Collection</span><span>★</span>
-    <span>Limited Quantities</span><span>★</span>
   </div>
 </div>
 
 <!-- SHOP -->
-<div class="shop-section" id="shop">
-  <div class="section-label">The Collection</div>
-  <div class="section-title">Latest Drops</div>
+<div class="divider"></div>
+<div class="sec" id="shop">
+  <div class="sec-label">The Collection</div>
+  <div class="sec-title">Latest Drops</div>
+  <div class="shop-grid">
 
-  <div class="products-grid">
-
-    <!-- Product 1: Blue Racing Hoodie -->
     <div class="product-card">
       <div class="product-img">
-        <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/3fa84a01d_IMG_9023.jpg" alt="VRSTL Racing Hoodie Blue">
-        <div class="product-badge">New</div>
-        <div class="product-overlay"><a href="#" class="btn-primary">Add to Cart</a></div>
+        <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/3fa84a01d_IMG_9023.jpg" alt="VRSTL Racing Hoodie Blue" loading="lazy">
+        <div class="p-badge">New</div>
+        <div class="p-overlay"><button class="btn-primary">Add to Cart</button></div>
       </div>
-      <div class="product-info">
-        <div class="product-name">Racing Zip Hoodie — Blue</div>
-        <div class="product-meta">
-          <div class="product-price">$180.00</div>
-          <div class="product-sizes">XS / S / M / L / XL</div>
-        </div>
+      <div class="p-info">
+        <div class="p-name">Racing Zip Hoodie — Blue</div>
+        <div class="p-bottom"><span class="p-price">$180</span><span class="p-sizes">XS–XL</span></div>
       </div>
     </div>
 
-    <!-- Product 2: Pink Gem Hoodie -->
     <div class="product-card">
       <div class="product-img">
-        <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/575aa9fa5_8BEF391A-30C5-4DD9-8B66-4B6685C31610.png" alt="VRSTL Gem Hoodie Pink">
-        <div class="product-badge">Limited</div>
-        <div class="product-overlay"><a href="#" class="btn-primary">Add to Cart</a></div>
+        <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/575aa9fa5_8BEF391A-30C5-4DD9-8B66-4B6685C31610.png" alt="VRSTL Gem Hoodie Pink" loading="lazy">
+        <div class="p-badge">Limited</div>
+        <div class="p-overlay"><button class="btn-primary">Add to Cart</button></div>
       </div>
-      <div class="product-info">
-        <div class="product-name">Gem Zip Hoodie — Pink</div>
-        <div class="product-meta">
-          <div class="product-price">$160.00</div>
-          <div class="product-sizes">XS / S / M / L / XL</div>
-        </div>
+      <div class="p-info">
+        <div class="p-name">Gem Zip Hoodie — Pink</div>
+        <div class="p-bottom"><span class="p-price">$160</span><span class="p-sizes">XS–XL</span></div>
       </div>
     </div>
 
-    <!-- Product 3: Grey Gem Hoodie -->
     <div class="product-card">
       <div class="product-img">
-        <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/68b769c5c_AB3F5B11-D33D-4BDC-A6D5-6861286518E9.png" alt="VRSTL Gem Hoodie Grey">
-        <div class="product-overlay"><a href="#" class="btn-primary">Add to Cart</a></div>
+        <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/68b769c5c_AB3F5B11-D33D-4BDC-A6D5-6861286518E9.png" alt="VRSTL Gem Hoodie Grey" loading="lazy">
+        <div class="p-overlay"><button class="btn-primary">Add to Cart</button></div>
       </div>
-      <div class="product-info">
-        <div class="product-name">Gem Zip Hoodie — Grey</div>
-        <div class="product-meta">
-          <div class="product-price">$160.00</div>
-          <div class="product-sizes">XS / S / M / L / XL</div>
-        </div>
+      <div class="p-info">
+        <div class="p-name">Gem Zip Hoodie — Grey</div>
+        <div class="p-bottom"><span class="p-price">$160</span><span class="p-sizes">XS–XL</span></div>
       </div>
     </div>
 
-    <!-- Product 4: Denim Shorts -->
     <div class="product-card">
       <div class="product-img">
-        <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/b025de848_608FA46A-3B41-4177-84A5-3626F07CCF69.png" alt="VRSTL Denim Shorts">
-        <div class="product-badge">Hot</div>
-        <div class="product-overlay"><a href="#" class="btn-primary">Add to Cart</a></div>
+        <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/b025de848_608FA46A-3B41-4177-84A5-3626F07CCF69.png" alt="VRSTL Denim Shorts" loading="lazy">
+        <div class="p-badge">Hot</div>
+        <div class="p-overlay"><button class="btn-primary">Add to Cart</button></div>
       </div>
-      <div class="product-info">
-        <div class="product-name">Logo Waist Denim Shorts</div>
-        <div class="product-meta">
-          <div class="product-price">$95.00</div>
-          <div class="product-sizes">28 / 30 / 32 / 34 / 36</div>
-        </div>
+      <div class="p-info">
+        <div class="p-name">Logo Waist Denim Shorts</div>
+        <div class="p-bottom"><span class="p-price">$95</span><span class="p-sizes">28–36</span></div>
       </div>
     </div>
 
@@ -512,27 +270,137 @@
 </div>
 
 <!-- BRAND STATEMENT -->
-<div class="brand-statement">
+<div class="brand-stmt">
   <h2>Not a brand.<br><em>A movement.</em></h2>
-  <p>VRSTL was built for those who exist in the space between who they are and who they're becoming. Every piece is a statement.</p>
+  <p>VRSTL exists for those living in the space between who they are and who they're becoming. Every piece is intentional. Every drop is limited.</p>
+</div>
+
+<!-- ABOUT -->
+<div class="divider"></div>
+<div class="sec" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="sec-label">About VRSTL</div>
+      <h2>Built different.<br>Worn by the <em>versatile.</em></h2>
+      <p>VRSTL (Versatile) is a streetwear brand built for people who don't fit one box. We design pieces that cross the line between luxury and raw — rhinestone-studded hoodies, racing patches, gem details on acid-wash cuts.</p>
+      <p>Every piece is made with intention. Every drop is limited. If you see it, get it — because it won't be here tomorrow.</p>
+      <p style="color:#444;font-size:0.82rem;margin-top:1.5rem;">Est. 2024 · Handcrafted · Limited Runs</p>
+      <br>
+      <a href="#shop" class="btn-primary" style="margin-top:0.5rem;">Shop Now</a>
+    </div>
+    <div class="about-visual">
+      <div class="about-logo-big">VR<span>S</span>TL</div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="divider"></div>
+<div class="sec" id="gallery">
+  <div class="sec-label">Gallery</div>
+  <div class="sec-title">The Pieces</div>
+  <div class="gallery-grid">
+    <div class="gallery-item big">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/3fa84a01d_IMG_9023.jpg" alt="VRSTL Racing Hoodie">
+    </div>
+    <div class="gallery-item">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/575aa9fa5_8BEF391A-30C5-4DD9-8B66-4B6685C31610.png" alt="VRSTL Pink Hoodie">
+    </div>
+    <div class="gallery-item">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/68b769c5c_AB3F5B11-D33D-4BDC-A6D5-6861286518E9.png" alt="VRSTL Grey Hoodie">
+    </div>
+    <div class="gallery-item">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/b025de848_608FA46A-3B41-4177-84A5-3626F07CCF69.png" alt="VRSTL Shorts">
+    </div>
+    <div class="gallery-item">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/3fa84a01d_IMG_9023.jpg" alt="VRSTL Detail">
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="divider"></div>
+<div class="sec" id="contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <div class="sec-label">Contact</div>
+      <h2>Get in<br>touch.</h2>
+      <p>Questions about sizing, shipping, or custom orders? We respond within 24 hours.</p>
+      <div class="contact-info">
+        <div class="c-item">
+          <div class="c-icon">📧</div>
+          <div class="c-text"><strong>Email</strong>vrstlofficial@gmail.com</div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📱</div>
+          <div class="c-text"><strong>Instagram</strong>@vrstl</div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📦</div>
+          <div class="c-text"><strong>Shipping</strong>Worldwide · 5–10 business days</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="John"></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe"></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select>
+          <option>Order inquiry</option>
+          <option>Sizing help</option>
+          <option>Custom order</option>
+          <option>Wholesale</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell us what you need..."></textarea></div>
+      <button class="btn-primary" style="width:100%;padding:1.1rem;">Send Message →</button>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-logo">VR<span>S</span>TL</div>
-  <div class="footer-links">
-    <a href="#">Shop</a>
-    <a href="#">About</a>
-    <a href="#">Sizing</a>
-    <a href="#">Returns</a>
-    <a href="#">Contact</a>
+<div style="border-top:1px solid var(--border);">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo" style="font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;letter-spacing:0.3em;">VR<span style="color:var(--accent)">S</span>TL</div>
+      <p>Streetwear for the versatile. Limited drops, intentional design, built different.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#shop">All Products</a>
+      <a href="#shop">Hoodies</a>
+      <a href="#shop">Bottoms</a>
+      <a href="#shop">New Arrivals</a>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#">Sizing Guide</a>
+      <a href="#">Returns</a>
+    </div>
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="#">Twitter/X</a>
+    </div>
   </div>
-  <p>© 2026 VRSTL. All rights reserved.</p>
-</footer>
-
-<div class="built-by">
-  Website by <a href="https://siteupagency.com">SiteUp Agency</a>
+  <div class="footer-bottom">
+    <p>© 2026 VRSTL. All rights reserved.</p>
+    <a href="https://siteupagency.com" class="built-tag">Built by SiteUp Agency</a>
+  </div>
 </div>
 
+<script>
+  function toggleNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+</script>
 </body>
 </html>
