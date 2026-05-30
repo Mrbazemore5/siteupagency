@@ -4,477 +4,674 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SiteUp Agency — Web Design for Contractors</title>
-  <meta name="description" content="Professional websites for contractors & small businesses. Starting at $500. $100 deposit to get started. 100% remote, worldwide."/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>"/>
+  <meta name="description" content="Professional websites for contractors & small businesses. Starting at $500. $100 deposit to get started."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #080808;
-      --card: #111111;
-      --border: #1e1e1e;
+      --bg: #060608;
+      --surface: #0e0e12;
+      --card: #13131a;
+      --border: #1e1e2a;
       --green: #a3ff00;
-      --green-dim: #7acc00;
+      --green2: #7acc00;
+      --blue: #4f8eff;
+      --purple: #a855f7;
       --text: #ffffff;
-      --sub: #888888;
-      --radius: 16px;
+      --sub: #7a7a8c;
+      --radius: 20px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; overflow-x: hidden; }
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
 
-    a { color: inherit; text-decoration: none; }
+    /* ── GRID BACKGROUND ── */
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0;
+      background-image: linear-gradient(rgba(163,255,0,.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(163,255,0,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    /* ── GLOW ORBS ── */
+    .orb {
+      position: fixed; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      filter: blur(80px);
+      animation: float 8s ease-in-out infinite;
+    }
+    .orb1 { width: 500px; height: 500px; top: -100px; left: -100px; background: rgba(163,255,0,.06); }
+    .orb2 { width: 400px; height: 400px; bottom: 10%; right: -80px; background: rgba(79,142,255,.05); animation-delay: -3s; }
+    .orb3 { width: 300px; height: 300px; top: 50%; left: 40%; background: rgba(168,85,247,.04); animation-delay: -5s; }
+    @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-20px);} }
+
+    * { position: relative; z-index: 1; }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 32px;
-      background: rgba(8,8,8,0.85);
-      backdrop-filter: blur(12px);
+      padding: 0 40px; height: 64px;
+      background: rgba(6,6,8,.8);
+      backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
     }
-    .logo { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
-    .logo span { color: var(--green); }
-    .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--sub); }
-    .nav-links a:hover { color: var(--text); }
+    .logo { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; cursor: pointer; }
+    .logo em { color: var(--green); font-style: normal; }
+    .nav-links { display: flex; gap: 32px; font-size: 13px; color: var(--sub); font-weight: 500; }
+    .nav-links a { transition: color .2s; } .nav-links a:hover { color: var(--text); }
     .nav-cta {
       background: var(--green); color: #000; font-weight: 700;
-      padding: 9px 20px; border-radius: 8px; font-size: 14px;
-      transition: opacity .2s;
+      padding: 8px 18px; border-radius: 8px; font-size: 13px;
+      transition: transform .15s, opacity .15s; cursor: pointer;
     }
-    .nav-cta:hover { opacity: .85; }
-
-    @media(max-width:640px){
-      .nav-links { display: none; }
-      nav { padding: 14px 20px; }
-    }
+    .nav-cta:hover { opacity: .88; transform: scale(1.02); }
+    @media(max-width:640px){ .nav-links{display:none;} nav{padding:0 20px;} }
 
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       text-align: center;
-      padding: 120px 24px 80px;
+      padding: 100px 24px 60px;
     }
-    .badge {
+    .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(163,255,0,.1); border: 1px solid rgba(163,255,0,.25);
-      color: var(--green); font-size: 12px; font-weight: 600;
-      padding: 6px 14px; border-radius: 999px; margin-bottom: 28px;
-      letter-spacing: .5px; text-transform: uppercase;
+      background: rgba(163,255,0,.08);
+      border: 1px solid rgba(163,255,0,.2);
+      color: var(--green); font-size: 11px; font-weight: 700;
+      padding: 6px 16px; border-radius: 999px;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 32px;
     }
-    .badge span { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+    .hero-badge .dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.3;transform:scale(.8);} }
 
-    h1 {
-      font-size: clamp(38px, 7vw, 76px);
-      font-weight: 900; letter-spacing: -2px; line-height: 1.05;
-      max-width: 800px; margin-bottom: 24px;
+    .hero h1 {
+      font-size: clamp(40px, 8vw, 88px);
+      font-weight: 900; letter-spacing: -3px; line-height: 1.0;
+      max-width: 900px; margin-bottom: 24px;
     }
-    h1 em { color: var(--green); font-style: normal; }
+    .hero h1 .accent { color: var(--green); position: relative; }
+    .hero h1 .accent::after {
+      content: ''; position: absolute; bottom: 4px; left: 0; right: 0;
+      height: 3px; background: var(--green); opacity: .4; border-radius: 2px;
+    }
     .hero-sub {
-      font-size: clamp(16px, 2.5vw, 20px);
-      color: var(--sub); max-width: 520px; margin: 0 auto 40px;
+      font-size: clamp(15px, 2vw, 19px); color: var(--sub);
+      max-width: 500px; margin: 0 auto 44px; line-height: 1.7; font-weight: 400;
     }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-    .btn-primary {
-      background: var(--green); color: #000; font-weight: 700;
-      padding: 14px 32px; border-radius: 10px; font-size: 16px;
-      transition: opacity .2s;
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn-green {
+      background: var(--green); color: #000; font-weight: 800;
+      padding: 15px 36px; border-radius: 12px; font-size: 15px;
+      transition: transform .15s, box-shadow .15s; cursor: pointer;
+      box-shadow: 0 0 30px rgba(163,255,0,.25);
     }
-    .btn-primary:hover { opacity: .85; }
-    .btn-secondary {
+    .btn-green:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(163,255,0,.4); }
+    .btn-ghost {
       border: 1px solid var(--border); color: var(--text);
-      padding: 14px 32px; border-radius: 10px; font-size: 16px;
-      transition: border-color .2s;
+      padding: 15px 36px; border-radius: 12px; font-size: 15px; font-weight: 600;
+      transition: border-color .2s, background .2s; cursor: pointer;
+      background: rgba(255,255,255,.02);
     }
-    .btn-secondary:hover { border-color: var(--sub); }
+    .btn-ghost:hover { border-color: var(--sub); background: rgba(255,255,255,.04); }
 
+    /* Hero stats ticker */
     .hero-stats {
-      display: flex; gap: 40px; margin-top: 64px;
-      flex-wrap: wrap; justify-content: center;
-    }
-    .stat { text-align: center; }
-    .stat-num { font-size: 32px; font-weight: 900; color: var(--green); }
-    .stat-label { font-size: 13px; color: var(--sub); margin-top: 2px; }
-
-    /* ── SECTIONS ── */
-    section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 12px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
-    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 900; letter-spacing: -1px; margin-bottom: 14px; }
-    .section-sub { font-size: 16px; color: var(--sub); max-width: 520px; margin-bottom: 48px; }
-
-    /* ── PACKAGES ── */
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .pkg-card {
+      display: flex; gap: 0; margin-top: 72px;
       background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 28px 24px;
-      transition: border-color .2s, transform .2s;
+      border-radius: 16px; overflow: hidden;
+      flex-wrap: wrap;
+    }
+    .stat {
+      padding: 20px 32px; text-align: center;
+      border-right: 1px solid var(--border); flex: 1; min-width: 120px;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-n { font-size: 28px; font-weight: 900; color: var(--green); letter-spacing: -1px; }
+    .stat-l { font-size: 12px; color: var(--sub); margin-top: 2px; font-weight: 500; }
+
+    /* ── SECTION BASE ── */
+    .section { padding: 100px 24px; max-width: 1140px; margin: 0 auto; }
+    .s-chip {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      color: var(--green); background: rgba(163,255,0,.08);
+      border: 1px solid rgba(163,255,0,.15);
+      padding: 4px 12px; border-radius: 999px;
+      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+    }
+    .s-title { font-size: clamp(28px, 4vw, 48px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; }
+    .s-sub { font-size: 16px; color: var(--sub); max-width: 480px; margin-bottom: 52px; line-height: 1.7; }
+
+    /* ── PACKAGES — ROBLOX STYLE ── */
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .pkg {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0;
+      cursor: pointer;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      overflow: hidden;
       position: relative;
     }
-    .pkg-card:hover { border-color: var(--green); transform: translateY(-4px); }
-    .pkg-card.featured { border-color: var(--green); }
-    .pkg-badge {
-      position: absolute; top: -12px; left: 24px;
-      background: var(--green); color: #000; font-size: 11px; font-weight: 700;
-      padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: .5px;
+    .pkg:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+    .pkg.popular { border-color: var(--green); box-shadow: 0 0 40px rgba(163,255,0,.1); }
+    .pkg.popular:hover { box-shadow: 0 20px 80px rgba(163,255,0,.2); }
+
+    /* Package top banner — like Roblox game card */
+    .pkg-banner {
+      height: 140px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px;
+      position: relative; overflow: hidden;
     }
-    .pkg-name { font-size: 13px; font-weight: 700; color: var(--sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-    .pkg-price { font-size: 40px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
-    .pkg-price span { font-size: 16px; font-weight: 400; color: var(--sub); }
-    .pkg-desc { font-size: 14px; color: var(--sub); margin-bottom: 20px; line-height: 1.5; }
-    .pkg-features { list-style: none; margin-bottom: 24px; }
-    .pkg-features li { font-size: 14px; color: #ccc; padding: 5px 0; display: flex; align-items: center; gap: 8px; }
-    .pkg-features li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; }
-    .pkg-btn {
-      display: block; text-align: center;
-      background: transparent; border: 1px solid var(--border);
-      color: var(--text); font-weight: 600; padding: 11px;
-      border-radius: 8px; font-size: 14px; cursor: pointer;
-      transition: background .2s, border-color .2s;
-      width: 100%;
+    .pkg-banner::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, var(--card));
     }
-    .pkg-card.featured .pkg-btn { background: var(--green); color: #000; border-color: var(--green); }
-    .pkg-btn:hover { background: var(--green); color: #000; border-color: var(--green); }
+    .pkg-b1 { background: linear-gradient(135deg, #0a1800, #1a3300, #0d2200); }
+    .pkg-b2 { background: linear-gradient(135deg, #001233, #0a1f4d, #001a40); }
+    .pkg-b3 { background: linear-gradient(135deg, #1a0038, #2d0060, #150030); }
+    .pkg-b4 { background: linear-gradient(135deg, #330a00, #5c1500, #290800); }
+
+    .pkg-hot {
+      position: absolute; top: 12px; right: 12px; z-index: 2;
+      background: var(--green); color: #000;
+      font-size: 10px; font-weight: 800; padding: 3px 10px;
+      border-radius: 999px; text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    .pkg-body { padding: 20px 22px 24px; }
+    .pkg-label { font-size: 11px; font-weight: 700; color: var(--sub); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+    .pkg-price-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+    .pkg-price { font-size: 36px; font-weight: 900; letter-spacing: -1px; }
+    .pkg-price-sub { font-size: 13px; color: var(--sub); }
+    .pkg-deposit { font-size: 12px; color: var(--green); font-weight: 600; margin-bottom: 16px; }
+    .pkg-features { list-style: none; margin-bottom: 22px; }
+    .pkg-features li { font-size: 13px; color: #bbb; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+    .pkg-features li::before { content: '✓'; color: var(--green); font-weight: 700; font-size: 12px; }
+
+    /* BUY button — Roblox style green */
+    .pkg-buy {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; background: var(--green); color: #000;
+      border: none; font-weight: 800; font-size: 15px;
+      padding: 13px; border-radius: 10px; cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 20px rgba(163,255,0,.2);
+    }
+    .pkg-buy:hover { transform: scale(1.02); box-shadow: 0 4px 30px rgba(163,255,0,.4); }
+    .pkg-buy .robux-icon { font-size: 18px; }
+
+    /* ── PAYMENT MODAL — ROBLOX STYLE ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(8px);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      width: 100%; max-width: 480px;
+      overflow: hidden;
+      animation: popIn .25s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn { from{transform:scale(.85);opacity:0;} to{transform:scale(1);opacity:1;} }
+
+    .modal-header {
+      background: linear-gradient(135deg, #0d1f00, #1a3800);
+      padding: 28px 28px 24px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 18px;
+      background: rgba(255,255,255,.08); border: none; color: var(--sub);
+      width: 32px; height: 32px; border-radius: 8px;
+      font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,.15); color: var(--text); }
+    .modal-pkg-name { font-size: 12px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+    .modal-title { font-size: 26px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
+    .modal-desc { font-size: 13px; color: var(--sub); }
+
+    .modal-body { padding: 24px 28px; }
+
+    /* Order summary box */
+    .order-summary {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 20px; margin-bottom: 20px;
+    }
+    .order-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 14px; }
+    .order-row .label { color: var(--sub); }
+    .order-row .value { font-weight: 700; }
+    .order-row.total { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 14px; }
+    .order-row.total .label { color: var(--text); font-weight: 600; }
+    .order-row.total .value { color: var(--green); font-size: 20px; }
+
+    /* Payment method tabs */
+    .pay-tabs { display: flex; gap: 10px; margin-bottom: 16px; }
+    .pay-tab {
+      flex: 1; padding: 10px; border-radius: 10px;
+      border: 2px solid var(--border); background: var(--surface);
+      cursor: pointer; text-align: center; font-size: 13px; font-weight: 700;
+      transition: border-color .2s, background .2s; color: var(--sub);
+    }
+    .pay-tab.active { border-color: var(--green); color: var(--text); background: rgba(163,255,0,.06); }
+    .pay-tab .tab-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+
+    .pay-instruction {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px; margin-bottom: 20px;
+    }
+    .pay-handle { font-size: 22px; font-weight: 900; color: var(--green); letter-spacing: -0.5px; margin-bottom: 6px; }
+    .pay-steps { font-size: 13px; color: var(--sub); line-height: 1.8; }
+    .pay-steps strong { color: var(--text); }
+
+    .modal-confirm {
+      width: 100%; background: var(--green); color: #000;
+      border: none; font-weight: 800; font-size: 16px;
+      padding: 16px; border-radius: 12px; cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 24px rgba(163,255,0,.3);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .modal-confirm:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(163,255,0,.5); }
+
+    /* ── CONFIRMED SCREEN ── */
+    .confirmed-screen {
+      display: none; padding: 40px 28px; text-align: center;
+    }
+    .confirmed-icon { font-size: 64px; margin-bottom: 16px; }
+    .confirmed-title { font-size: 24px; font-weight: 900; margin-bottom: 8px; color: var(--green); }
+    .confirmed-sub { font-size: 14px; color: var(--sub); line-height: 1.7; margin-bottom: 24px; }
+    .confirmed-detail {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px; font-size: 13px; color: var(--sub);
+      text-align: left; margin-bottom: 20px; line-height: 1.8;
+    }
+    .confirmed-detail strong { color: var(--text); }
+    .confirmed-close {
+      width: 100%; background: var(--green); color: #000;
+      border: none; font-weight: 800; font-size: 15px;
+      padding: 14px; border-radius: 10px; cursor: pointer;
+    }
 
     /* ── HOW IT WORKS ── */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
-    .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; }
-    .step-num { font-size: 36px; font-weight: 900; color: var(--green); margin-bottom: 12px; }
-    .step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-    .step-desc { font-size: 14px; color: var(--sub); line-height: 1.6; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .step-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 24px;
+      position: relative; overflow: hidden;
+    }
+    .step-card::before {
+      content: attr(data-n);
+      position: absolute; right: 16px; top: 12px;
+      font-size: 64px; font-weight: 900; color: rgba(163,255,0,.05);
+      line-height: 1; pointer-events: none;
+    }
+    .step-icon { font-size: 32px; margin-bottom: 14px; }
+    .step-title { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--sub); line-height: 1.7; }
 
     /* ── PORTFOLIO ── */
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-    .portfolio-card {
+    .port-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .port-card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: var(--radius); overflow: hidden;
-      transition: border-color .2s, transform .2s;
+      transition: transform .2s, border-color .2s;
+      cursor: pointer;
     }
-    .portfolio-card:hover { border-color: var(--green); transform: translateY(-4px); }
-    .portfolio-thumb {
-      height: 180px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 48px;
+    .port-card:hover { transform: translateY(-4px); border-color: rgba(163,255,0,.3); }
+    .port-thumb {
+      height: 170px; display: flex; align-items: center; justify-content: center; font-size: 52px;
+      position: relative;
     }
-    .portfolio-info { padding: 18px 20px; }
-    .portfolio-niche { font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-    .portfolio-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-    .portfolio-pkg { font-size: 13px; color: var(--sub); }
+    .port-thumb .port-overlay {
+      position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, var(--card));
+    }
+    .port-info { padding: 16px 20px 20px; }
+    .port-niche { font-size: 10px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
+    .port-name { font-size: 15px; font-weight: 800; margin-bottom: 2px; }
+    .port-pkg { font-size: 12px; color: var(--sub); }
 
     /* ── CONTACT ── */
-    .contact-wrap {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
-    }
-    @media(max-width:700px){ .contact-wrap { grid-template-columns: 1fr; } }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
+    @media(max-width:720px){ .contact-grid{grid-template-columns:1fr;} }
+    .contact-left h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; }
+    .contact-left p { color: var(--sub); font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
 
-    .contact-info h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; }
-    .contact-info p { color: var(--sub); font-size: 15px; line-height: 1.7; margin-bottom: 24px; }
-    .pay-box {
+    .info-card {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px;
+      border-radius: 14px; padding: 18px 20px; margin-bottom: 12px;
     }
-    .pay-box-label { font-size: 11px; font-weight: 700; color: var(--sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-    .pay-item { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; padding: 6px 0; }
-    .pay-item .icon { font-size: 20px; }
+    .info-card-label { font-size: 10px; font-weight: 700; color: var(--sub); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+    .info-row { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; padding: 5px 0; }
+    .info-row .ico { font-size: 18px; }
 
-    /* ── FORM ── */
-    .contact-form { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-    @media(max-width:480px){ .form-row { grid-template-columns: 1fr; } }
-    .form-group { margin-bottom: 14px; }
-    .form-label { display: block; font-size: 11px; font-weight: 700; color: var(--sub); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-    .form-input, .form-select, .form-textarea {
-      width: 100%; background: #0a0a0a; border: 1px solid var(--border);
-      color: var(--text); padding: 12px 14px; border-radius: 8px;
-      font-size: 14px; font-family: inherit;
+    .cform { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+    .cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    @media(max-width:480px){ .cform-row{grid-template-columns:1fr;} }
+    .cg { margin-bottom: 12px; }
+    .clabel { display: block; font-size: 10px; font-weight: 700; color: var(--sub); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+    .cinput, .cselect, .ctextarea {
+      width: 100%; background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); padding: 12px 14px; border-radius: 10px;
+      font-size: 14px; font-family: inherit; outline: none;
       transition: border-color .2s;
-      outline: none;
     }
-    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--green); }
-    .form-select { appearance: none; cursor: pointer; }
-    .form-textarea { resize: vertical; min-height: 100px; }
-    .form-submit {
+    .cinput:focus,.cselect:focus,.ctextarea:focus { border-color: var(--green); }
+    .ctextarea { resize: vertical; min-height: 96px; }
+    .csub {
       width: 100%; background: var(--green); color: #000;
-      border: none; font-weight: 700; font-size: 16px;
+      border: none; font-weight: 800; font-size: 15px;
       padding: 14px; border-radius: 10px; cursor: pointer;
-      transition: opacity .2s; margin-top: 6px;
+      transition: opacity .2s, transform .15s; margin-top: 4px;
     }
-    .form-submit:hover { opacity: .85; }
-    .form-submit:disabled { opacity: .5; cursor: not-allowed; }
-    .form-success {
-      display: none; background: rgba(163,255,0,.08);
-      border: 1px solid rgba(163,255,0,.3);
-      border-radius: 10px; padding: 16px 18px;
-      color: var(--green); font-size: 14px; font-weight: 600;
-      margin-top: 14px; text-align: center;
+    .csub:hover { opacity: .88; transform: translateY(-1px); }
+    .csub:disabled { opacity: .5; cursor: not-allowed; }
+    .c-success {
+      display: none; background: rgba(163,255,0,.07);
+      border: 1px solid rgba(163,255,0,.25);
+      border-radius: 10px; padding: 14px 16px;
+      color: var(--green); font-size: 13px; font-weight: 700;
+      text-align: center; margin-top: 12px;
     }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      text-align: center; padding: 40px 24px;
+      text-align: center; padding: 48px 24px;
       color: var(--sub); font-size: 13px;
     }
-    footer .logo { font-size: 20px; margin-bottom: 10px; }
-    footer p { margin-top: 6px; }
-    footer a { color: var(--sub); }
-    footer a:hover { color: var(--text); }
+    .foot-logo { font-size: 22px; font-weight: 900; margin-bottom: 12px; color: var(--text); }
+    .foot-logo em { color: var(--green); font-style: normal; }
+    .foot-links { display: flex; gap: 24px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+    .foot-links a { color: var(--sub); transition: color .2s; } .foot-links a:hover { color: var(--text); }
 
-    /* ── GRAND OPENING BANNER ── */
-    .banner {
+    /* ── BANNER ── */
+    .top-banner {
       background: var(--green); color: #000;
-      text-align: center; padding: 10px 20px;
-      font-size: 13px; font-weight: 700;
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      text-align: center; padding: 9px 20px;
+      font-size: 12px; font-weight: 700; letter-spacing: .3px;
     }
-    body { padding-top: 36px; }
-    nav { top: 36px; }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
   </style>
 </head>
 <body>
 
+<!-- BG -->
+<div class="grid-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
 <!-- BANNER -->
-<div class="banner">🎉 Grand Opening Special — First 5 clients get a FREE domain + 30 days of free updates!</div>
+<div class="top-banner">🎉 Grand Opening — First 5 clients get a FREE domain + 30 days of free updates!</div>
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Site<span>Up</span></div>
+  <div class="logo">Site<em>Up</em></div>
   <div class="nav-links">
     <a href="#packages">Packages</a>
-    <a href="#how-it-works">How It Works</a>
+    <a href="#how">How It Works</a>
     <a href="#portfolio">Our Work</a>
     <a href="#contact">Contact</a>
   </div>
-  <a href="#contact" class="nav-cta">Get Started</a>
+  <a href="#packages" class="nav-cta">Get Started</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="badge"><span></span> Now Accepting Clients Worldwide</div>
-  <h1>Your Business Deserves a <em>Real Website</em></h1>
-  <p class="hero-sub">We build fast, professional websites for contractors & small businesses — anywhere in the world. Starting at just $500.</p>
+  <div class="hero-badge"><span class="dot"></span> Now Accepting Clients Worldwide</div>
+  <h1>Get Your Business<br>a <span class="accent">Real Website</span></h1>
+  <p class="hero-sub">Fast, professional websites for contractors & small businesses — anywhere in the world. Starting at $500, just $100 to start.</p>
   <div class="hero-btns">
-    <a href="#packages" class="btn-primary">See Packages →</a>
-    <a href="#contact" class="btn-secondary">Book Free Consultation</a>
+    <a href="#packages" class="btn-green">Browse Packages →</a>
+    <a href="#contact" class="btn-ghost">Free Consultation</a>
   </div>
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num">$500</div><div class="stat-label">Starting Price</div></div>
-    <div class="stat"><div class="stat-num">3–5</div><div class="stat-label">Days to Launch</div></div>
-    <div class="stat"><div class="stat-num">$100</div><div class="stat-label">Deposit to Start</div></div>
-    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Remote & Worldwide</div></div>
+    <div class="stat"><div class="stat-n">$500</div><div class="stat-l">Starting Price</div></div>
+    <div class="stat"><div class="stat-n">3–5</div><div class="stat-l">Days to Launch</div></div>
+    <div class="stat"><div class="stat-n">$100</div><div class="stat-l">To Get Started</div></div>
+    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Remote</div></div>
   </div>
 </div>
 
 <!-- PACKAGES -->
-<section id="packages">
-  <div class="section-label">Pricing</div>
-  <div class="section-title">Simple, Honest Pricing</div>
-  <p class="section-sub">No hidden fees. No monthly charges. Just a professional site delivered fast — only $100 deposit to get started.</p>
-  <div class="packages-grid">
+<section id="packages" class="section">
+  <div class="s-chip">Packages</div>
+  <div class="s-title">Pick Your Package</div>
+  <p class="s-sub">Click any package to see exactly how to pay. Just $100 deposit to lock in your spot.</p>
+  <div class="pkg-grid">
 
-    <div class="pkg-card">
-      <div class="pkg-name">Basic</div>
-      <div class="pkg-price">$500 <span>one-time</span></div>
-      <div class="pkg-desc">Perfect for getting your business online fast.</div>
-      <ul class="pkg-features">
-        <li>1-Page Professional Website</li>
-        <li>Mobile Responsive</li>
-        <li>Contact Form Included</li>
-        <li>3–5 Day Delivery</li>
-        <li>$100 Deposit to Start</li>
-      </ul>
-      <a href="#contact" class="pkg-btn">Get Started</a>
+    <div class="pkg" onclick="openModal('basic')">
+      <div class="pkg-banner pkg-b1">🔧</div>
+      <div class="pkg-body">
+        <div class="pkg-label">Basic</div>
+        <div class="pkg-price-row">
+          <div class="pkg-price">$500</div>
+          <div class="pkg-price-sub">one-time</div>
+        </div>
+        <div class="pkg-deposit">$100 deposit to start</div>
+        <ul class="pkg-features">
+          <li>1-Page Professional Website</li>
+          <li>Mobile Responsive</li>
+          <li>Contact Form</li>
+          <li>3–5 Day Delivery</li>
+        </ul>
+        <button class="pkg-buy"><span class="robux-icon">💚</span> Get This Package</button>
+      </div>
     </div>
 
-    <div class="pkg-card featured">
-      <div class="pkg-badge">Most Popular</div>
-      <div class="pkg-name">Starter</div>
-      <div class="pkg-price">$1,000 <span>one-time</span></div>
-      <div class="pkg-desc">A full site that makes you look like the best in your area.</div>
-      <ul class="pkg-features">
-        <li>5-Page Professional Website</li>
-        <li>Mobile Responsive</li>
-        <li>Contact & Quote Forms</li>
-        <li>Photo Gallery</li>
-        <li>3–5 Day Delivery</li>
-        <li>$100 Deposit to Start</li>
-      </ul>
-      <a href="#contact" class="pkg-btn">Get Started</a>
+    <div class="pkg popular" onclick="openModal('starter')">
+      <div class="pkg-hot">🔥 Popular</div>
+      <div class="pkg-banner pkg-b2">🌐</div>
+      <div class="pkg-body">
+        <div class="pkg-label">Starter</div>
+        <div class="pkg-price-row">
+          <div class="pkg-price">$1,000</div>
+          <div class="pkg-price-sub">one-time</div>
+        </div>
+        <div class="pkg-deposit">$100 deposit to start</div>
+        <ul class="pkg-features">
+          <li>5-Page Professional Website</li>
+          <li>Mobile Responsive</li>
+          <li>Quote & Contact Forms</li>
+          <li>Photo Gallery</li>
+          <li>3–5 Day Delivery</li>
+        </ul>
+        <button class="pkg-buy"><span class="robux-icon">💚</span> Get This Package</button>
+      </div>
     </div>
 
-    <div class="pkg-card">
-      <div class="pkg-name">Pro</div>
-      <div class="pkg-price">$1,500 <span>one-time</span></div>
-      <div class="pkg-desc">Everything you need to dominate local search results.</div>
-      <ul class="pkg-features">
-        <li>5-Page Website + SEO Setup</li>
-        <li>Google Business Profile Help</li>
-        <li>Custom Domain Setup</li>
-        <li>Speed Optimized</li>
-        <li>3–5 Day Delivery</li>
-        <li>$100 Deposit to Start</li>
-      </ul>
-      <a href="#contact" class="pkg-btn">Get Started</a>
+    <div class="pkg" onclick="openModal('pro')">
+      <div class="pkg-banner pkg-b3">🚀</div>
+      <div class="pkg-body">
+        <div class="pkg-label">Pro</div>
+        <div class="pkg-price-row">
+          <div class="pkg-price">$1,500</div>
+          <div class="pkg-price-sub">one-time</div>
+        </div>
+        <div class="pkg-deposit">$100 deposit to start</div>
+        <ul class="pkg-features">
+          <li>5-Page Website + SEO</li>
+          <li>Google Business Setup</li>
+          <li>Custom Domain Included</li>
+          <li>Speed Optimized</li>
+          <li>3–5 Day Delivery</li>
+        </ul>
+        <button class="pkg-buy"><span class="robux-icon">💚</span> Get This Package</button>
+      </div>
     </div>
 
-    <div class="pkg-card">
-      <div class="pkg-name">Elite</div>
-      <div class="pkg-price">$2,500 <span>one-time</span></div>
-      <div class="pkg-desc">Full-service build for serious businesses ready to scale.</div>
-      <ul class="pkg-features">
-        <li>Custom Multi-Page Website</li>
-        <li>Full SEO + Content Writing</li>
-        <li>Google Ads Setup</li>
-        <li>Logo & Branding Included</li>
-        <li>30 Days Free Support</li>
-        <li>$100 Deposit to Start</li>
-      </ul>
-      <a href="#contact" class="pkg-btn">Get Started</a>
+    <div class="pkg" onclick="openModal('elite')">
+      <div class="pkg-banner pkg-b4">👑</div>
+      <div class="pkg-body">
+        <div class="pkg-label">Elite</div>
+        <div class="pkg-price-row">
+          <div class="pkg-price">$2,500</div>
+          <div class="pkg-price-sub">one-time</div>
+        </div>
+        <div class="pkg-deposit">$100 deposit to start</div>
+        <ul class="pkg-features">
+          <li>Custom Multi-Page Website</li>
+          <li>Full SEO + Content Writing</li>
+          <li>Google Ads Setup</li>
+          <li>Logo & Branding</li>
+          <li>30 Days Free Support</li>
+        </ul>
+        <button class="pkg-buy"><span class="robux-icon">💚</span> Get This Package</button>
+      </div>
     </div>
 
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="how-it-works">
-  <div class="section-label">Process</div>
-  <div class="section-title">How It Works</div>
-  <p class="section-sub">Simple, fast, and stress-free. We handle everything — you just show up at launch.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-title">Fill Out the Form</div>
-      <div class="step-desc">Tell us about your business and what package you're interested in. Takes 2 minutes.</div>
+<section id="how" class="section">
+  <div class="s-chip">Process</div>
+  <div class="s-title">How It Works</div>
+  <p class="s-sub">Simple, clear, and fast. We handle everything — you just show up at launch day.</p>
+  <div class="steps-grid">
+    <div class="step-card" data-n="1">
+      <div class="step-icon">📋</div>
+      <div class="step-title">Pick a Package</div>
+      <div class="step-desc">Browse our packages above and click to get started. No guessing — all pricing is upfront.</div>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
+    <div class="step-card" data-n="2">
+      <div class="step-icon">💸</div>
       <div class="step-title">Send $100 Deposit</div>
-      <div class="step-desc">Lock in your spot via CashApp or Venmo. We start building immediately.</div>
+      <div class="step-desc">Send via CashApp or Venmo to lock in your spot. We start building immediately.</div>
     </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-title">We Build Your Site</div>
-      <div class="step-desc">Your professional website is ready in 3–5 days. We handle design, copy, and launch.</div>
+    <div class="step-card" data-n="3">
+      <div class="step-icon">⚡</div>
+      <div class="step-title">We Build in 3–5 Days</div>
+      <div class="step-desc">We design, build, and set up everything. You review and request any tweaks.</div>
     </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <div class="step-title">Go Live & Get Paid</div>
-      <div class="step-desc">Review, approve, and your site goes live. Pay the balance on delivery — no surprises.</div>
+    <div class="step-card" data-n="4">
+      <div class="step-icon">🚀</div>
+      <div class="step-title">Go Live & Pay Balance</div>
+      <div class="step-desc">Approve your site, pay the remaining balance, and your site goes live. Done.</div>
     </div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
-<section id="portfolio">
-  <div class="section-label">Our Work</div>
-  <div class="section-title">Built for Contractors</div>
-  <p class="section-sub">We specialize in trades & home services — your industry is our specialty.</p>
-  <div class="portfolio-grid">
-    <div class="portfolio-card">
-      <div class="portfolio-thumb" style="background:linear-gradient(135deg,#0a1a0a,#1a2a0a);">🔧</div>
-      <div class="portfolio-info">
-        <div class="portfolio-niche">Plumbing</div>
-        <div class="portfolio-name">Smith Plumbing Co.</div>
-        <div class="portfolio-pkg">Starter Package — 5 Pages</div>
+<section id="portfolio" class="section">
+  <div class="s-chip">Our Work</div>
+  <div class="s-title">Built for the Trades</div>
+  <p class="s-sub">We specialize in contractors & home service businesses — your industry is our specialty.</p>
+  <div class="port-grid">
+    <div class="port-card">
+      <div class="port-thumb" style="background:linear-gradient(135deg,#001a33,#003366);">🔧<div class="port-overlay"></div></div>
+      <div class="port-info">
+        <div class="port-niche">Plumbing</div>
+        <div class="port-name">Smith Plumbing Co.</div>
+        <div class="port-pkg">Starter — 5 Pages</div>
       </div>
     </div>
-    <div class="portfolio-card">
-      <div class="portfolio-thumb" style="background:linear-gradient(135deg,#0a0a1a,#1a1a2a);">🏠</div>
-      <div class="portfolio-info">
-        <div class="portfolio-niche">Roofing</div>
-        <div class="portfolio-name">Peak Roofing Solutions</div>
-        <div class="portfolio-pkg">Pro Package — SEO + Domain</div>
+    <div class="port-card">
+      <div class="port-thumb" style="background:linear-gradient(135deg,#1a0a00,#3d1a00);">🏠<div class="port-overlay"></div></div>
+      <div class="port-info">
+        <div class="port-niche">Roofing</div>
+        <div class="port-name">Peak Roofing Solutions</div>
+        <div class="port-pkg">Pro — SEO + Domain</div>
       </div>
     </div>
-    <div class="portfolio-card">
-      <div class="portfolio-thumb" style="background:linear-gradient(135deg,#0a1a00,#1a3000);">🌿</div>
-      <div class="portfolio-info">
-        <div class="portfolio-niche">Landscaping</div>
-        <div class="portfolio-name">Green Edge Landscaping</div>
-        <div class="portfolio-pkg">Starter Package — 5 Pages</div>
+    <div class="port-card">
+      <div class="port-thumb" style="background:linear-gradient(135deg,#001a00,#003300);">🌿<div class="port-overlay"></div></div>
+      <div class="port-info">
+        <div class="port-niche">Landscaping</div>
+        <div class="port-name">Green Edge Landscaping</div>
+        <div class="port-pkg">Starter — 5 Pages</div>
       </div>
     </div>
-    <div class="portfolio-card">
-      <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1a0a0a,#2a1a0a);">❄️</div>
-      <div class="portfolio-info">
-        <div class="portfolio-niche">HVAC</div>
-        <div class="portfolio-name">CoolAir HVAC Services</div>
-        <div class="portfolio-pkg">Basic Package — 1 Page</div>
+    <div class="port-card">
+      <div class="port-thumb" style="background:linear-gradient(135deg,#00101a,#001f33);">❄️<div class="port-overlay"></div></div>
+      <div class="port-info">
+        <div class="port-niche">HVAC</div>
+        <div class="port-name">CoolAir HVAC Services</div>
+        <div class="port-pkg">Basic — 1 Page</div>
       </div>
     </div>
-    <div class="portfolio-card">
-      <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1a1a0a,#2a2a0a);">🎨</div>
-      <div class="portfolio-info">
-        <div class="portfolio-niche">Painting</div>
-        <div class="portfolio-name">Elite Coat Painters</div>
-        <div class="portfolio-pkg">Pro Package — SEO + Domain</div>
+    <div class="port-card">
+      <div class="port-thumb" style="background:linear-gradient(135deg,#1a1500,#332900);">🎨<div class="port-overlay"></div></div>
+      <div class="port-info">
+        <div class="port-niche">Painting</div>
+        <div class="port-name">Elite Coat Painters</div>
+        <div class="port-pkg">Pro — SEO + Domain</div>
       </div>
     </div>
-    <div class="portfolio-card">
-      <div class="portfolio-thumb" style="background:linear-gradient(135deg,#0a0a1a,#0a1a2a);">⚡</div>
-      <div class="portfolio-info">
-        <div class="portfolio-niche">Electrical</div>
-        <div class="portfolio-name">Bright Wire Electric</div>
-        <div class="portfolio-pkg">Starter Package — 5 Pages</div>
+    <div class="port-card">
+      <div class="port-thumb" style="background:linear-gradient(135deg,#10001a,#1f0033);">⚡<div class="port-overlay"></div></div>
+      <div class="port-info">
+        <div class="port-niche">Electrical</div>
+        <div class="port-name">Bright Wire Electric</div>
+        <div class="port-pkg">Starter — 5 Pages</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">Contact</div>
-  <div class="section-title">Let's Build Your Site</div>
-  <div class="contact-wrap">
-
-    <div class="contact-info">
+<section id="contact" class="section">
+  <div class="s-chip">Contact</div>
+  <div class="s-title">Let's Build Your Site</div>
+  <div class="contact-grid">
+    <div class="contact-left">
       <h3>Ready to get started?</h3>
-      <p>Fill out the form and Kinsley will personally reach out within 24 hours. We work with businesses everywhere — 100% remote.</p>
-
-      <div class="pay-box">
-        <div class="pay-box-label">Send Your $100 Deposit</div>
-        <div class="pay-item"><span class="icon">💚</span> CashApp: <strong>$kinsleybazemore8</strong></div>
-        <div class="pay-item"><span class="icon">💜</span> Venmo: <strong>@Mrbazemore</strong></div>
+      <p>Fill out the form and Kinsley will personally reach out within 24 hours. 100% remote — we work with businesses worldwide.</p>
+      <div class="info-card">
+        <div class="info-card-label">Send Your $100 Deposit</div>
+        <div class="info-row"><span class="ico">💚</span> CashApp: <strong>$kinsleybazemore8</strong></div>
+        <div class="info-row"><span class="ico">💜</span> Venmo: <strong>@Mrbazemore</strong></div>
       </div>
-
-      <div class="pay-box">
-        <div class="pay-box-label">Direct Email</div>
-        <div class="pay-item"><span class="icon">📧</span> <a href="mailto:kinsleybazemore@gmail.com" style="color:var(--green);">kinsleybazemore@gmail.com</a></div>
+      <div class="info-card">
+        <div class="info-card-label">Email Us Directly</div>
+        <div class="info-row"><span class="ico">📧</span> <a href="mailto:kinsleybazemore@gmail.com" style="color:var(--green);font-weight:700;">kinsleybazemore@gmail.com</a></div>
       </div>
     </div>
-
-    <div class="contact-form">
-      <div class="form-row">
-        <div>
-          <label class="form-label">First Name</label>
-          <input class="form-input" id="f-first" type="text" placeholder="John"/>
-        </div>
-        <div>
-          <label class="form-label">Last Name</label>
-          <input class="form-input" id="f-last" type="text" placeholder="Smith"/>
-        </div>
+    <div class="cform">
+      <div class="cform-row">
+        <div><label class="clabel">First Name</label><input class="cinput" id="cf1" type="text" placeholder="John"/></div>
+        <div><label class="clabel">Last Name</label><input class="cinput" id="cf2" type="text" placeholder="Smith"/></div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Business Name</label>
-        <input class="form-input" id="f-biz" type="text" placeholder="Smith Plumbing Co."/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email Address *</label>
-        <input class="form-input" id="f-email" type="email" placeholder="john@smithplumbing.com"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Phone Number</label>
-        <input class="form-input" id="f-phone" type="tel" placeholder="(555) 000-0000"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Package Interest</label>
-        <select class="form-select" id="f-pkg">
+      <div class="cg"><label class="clabel">Business Name</label><input class="cinput" id="cf3" type="text" placeholder="Smith Plumbing Co."/></div>
+      <div class="cg"><label class="clabel">Email Address *</label><input class="cinput" id="cf4" type="email" placeholder="john@smithplumbing.com"/></div>
+      <div class="cg"><label class="clabel">Phone Number</label><input class="cinput" id="cf5" type="tel" placeholder="(555) 000-0000"/></div>
+      <div class="cg">
+        <label class="clabel">Package Interest</label>
+        <select class="cselect" id="cf6">
           <option value="">Select a package...</option>
           <option>Basic — $500 (1-page site)</option>
           <option>Starter — $1,000 (5-page site)</option>
@@ -483,116 +680,200 @@
           <option>Not sure yet</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="form-label">Tell Us About Your Business</label>
-        <textarea class="form-textarea" id="f-msg" placeholder="What do you do, where are you located, and what are you looking for?"></textarea>
-      </div>
-      <button class="form-submit" id="submit-btn" onclick="submitForm()">Send Message →</button>
-      <div class="form-success" id="form-success">
-        ✅ Message sent! Kinsley will be in touch within 24 hours.
-      </div>
+      <div class="cg"><label class="clabel">Tell Us About Your Business</label><textarea class="ctextarea" id="cf7" placeholder="What do you do, where are you located, and what are you looking for?"></textarea></div>
+      <button class="csub" id="csub" onclick="submitContact()">Send Message →</button>
+      <div class="c-success" id="csuccess">✅ Message sent! Kinsley will be in touch within 24 hours.</div>
     </div>
-
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">Site<span style="color:var(--green);">Up</span></div>
-  <p>Websites built for contractors worldwide.</p>
-  <p style="margin-top:10px;">
-    <a href="mailto:kinsleybazemore@gmail.com">kinsleybazemore@gmail.com</a> &nbsp;·&nbsp;
-    CashApp: $kinsleybazemore8 &nbsp;·&nbsp;
-    Venmo: @Mrbazemore
-  </p>
-  <p style="margin-top:10px;font-size:12px;color:#444;">© 2026 SiteUp Agency · All rights reserved.</p>
+  <div class="foot-logo">Site<em>Up</em></div>
+  <div>Professional websites for contractors & small businesses worldwide.</div>
+  <div class="foot-links">
+    <a href="mailto:kinsleybazemore@gmail.com">kinsleybazemore@gmail.com</a>
+    <a href="#packages">Packages</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div style="margin-top:20px;color:#333;font-size:12px;">© 2026 SiteUp Agency · All rights reserved.</div>
 </footer>
 
+<!-- ── PAYMENT MODAL ── -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" id="modal-box">
+
+    <!-- Main purchase view -->
+    <div id="modal-main">
+      <div class="modal-header">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="modal-pkg-name" id="m-chip">Package</div>
+        <div class="modal-title" id="m-title">Package Name</div>
+        <div class="modal-desc" id="m-desc">Description</div>
+      </div>
+      <div class="modal-body">
+        <div class="order-summary">
+          <div class="order-row"><span class="label">Package</span><span class="value" id="m-pkg-label">—</span></div>
+          <div class="order-row"><span class="label">Total Price</span><span class="value" id="m-total">—</span></div>
+          <div class="order-row"><span class="label">Balance on Delivery</span><span class="value" id="m-balance">—</span></div>
+          <div class="order-row total"><span class="label">💰 Due Today (Deposit)</span><span class="value">$100</span></div>
+        </div>
+
+        <div class="pay-tabs">
+          <div class="pay-tab active" id="tab-cashapp" onclick="setTab('cashapp')">
+            <span class="tab-icon">💚</span>CashApp
+          </div>
+          <div class="pay-tab" id="tab-venmo" onclick="setTab('venmo')">
+            <span class="tab-icon">💜</span>Venmo
+          </div>
+        </div>
+
+        <div class="pay-instruction" id="pay-cashapp">
+          <div class="pay-handle">$kinsleybazemore8</div>
+          <div class="pay-steps">
+            1. Open <strong>CashApp</strong> on your phone<br>
+            2. Tap the <strong>$ Send</strong> button<br>
+            3. Search <strong>$kinsleybazemore8</strong><br>
+            4. Send <strong>$100</strong> with your business name in the note<br>
+            5. Hit <strong>"I've Paid"</strong> below ✅
+          </div>
+        </div>
+        <div class="pay-instruction" id="pay-venmo" style="display:none;">
+          <div class="pay-handle">@Mrbazemore</div>
+          <div class="pay-steps">
+            1. Open <strong>Venmo</strong> on your phone<br>
+            2. Tap the <strong>Pay/Request</strong> button<br>
+            3. Search <strong>@Mrbazemore</strong><br>
+            4. Send <strong>$100</strong> with your business name in the note<br>
+            5. Hit <strong>"I've Paid"</strong> below ✅
+          </div>
+        </div>
+
+        <button class="modal-confirm" onclick="showConfirmed()">✅ I've Paid — Confirm My Order</button>
+      </div>
+    </div>
+
+    <!-- Confirmation screen -->
+    <div class="confirmed-screen" id="modal-confirmed">
+      <div class="confirmed-icon">🎉</div>
+      <div class="confirmed-title">You're All Set!</div>
+      <div class="confirmed-sub">Your deposit is confirmed. Kinsley will reach out within <strong>24 hours</strong> to get started on your website.</div>
+      <div class="confirmed-detail">
+        <strong>What happens next:</strong><br>
+        📧 Check your email for a welcome message<br>
+        💬 Kinsley will contact you to collect details<br>
+        ⚡ Your site will be ready in <strong>3–5 days</strong><br>
+        💰 Pay the balance when you approve your site
+      </div>
+      <div class="confirmed-detail">
+        <strong>Questions?</strong><br>
+        Email: <span style="color:var(--green);">kinsleybazemore@gmail.com</span><br>
+        CashApp: $kinsleybazemore8 · Venmo: @Mrbazemore
+      </div>
+      <button class="confirmed-close" onclick="closeModal()">Close & Continue Browsing</button>
+    </div>
+
+  </div>
+</div>
+
 <script>
-  // Form submission via Formspree — emails Kinsley directly, no backend needed
-  function submitForm() {
-    var first = document.getElementById('f-first').value.trim();
-    var last  = document.getElementById('f-last').value.trim();
-    var biz   = document.getElementById('f-biz').value.trim();
-    var email = document.getElementById('f-email').value.trim();
-    var phone = document.getElementById('f-phone').value.trim();
-    var pkg   = document.getElementById('f-pkg').value;
-    var msg   = document.getElementById('f-msg').value.trim();
+  var packages = {
+    basic:   { name:'Basic Package',   chip:'Basic',   desc:'1-page professional website delivered in 3–5 days.',       total:'$500',  balance:'$400' },
+    starter: { name:'Starter Package', chip:'Starter', desc:'5-page website with gallery & quote forms.',               total:'$1,000',balance:'$900' },
+    pro:     { name:'Pro Package',     chip:'Pro',     desc:'5-page site with full SEO setup & custom domain.',         total:'$1,500',balance:'$1,400' },
+    elite:   { name:'Elite Package',   chip:'Elite',   desc:'Full custom site with branding, SEO & Google Ads setup.',  total:'$2,500',balance:'$2,400' }
+  };
 
+  function openModal(key) {
+    var p = packages[key];
+    document.getElementById('m-chip').textContent = p.chip;
+    document.getElementById('m-title').textContent = p.name;
+    document.getElementById('m-desc').textContent = p.desc;
+    document.getElementById('m-pkg-label').textContent = p.name;
+    document.getElementById('m-total').textContent = p.total;
+    document.getElementById('m-balance').textContent = p.balance;
+    document.getElementById('modal-main').style.display = '';
+    document.getElementById('modal-confirmed').style.display = 'none';
+    setTab('cashapp');
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  function setTab(tab) {
+    document.getElementById('tab-cashapp').classList.toggle('active', tab==='cashapp');
+    document.getElementById('tab-venmo').classList.toggle('active', tab==='venmo');
+    document.getElementById('pay-cashapp').style.display = tab==='cashapp' ? '' : 'none';
+    document.getElementById('pay-venmo').style.display   = tab==='venmo'   ? '' : 'none';
+  }
+
+  function showConfirmed() {
+    document.getElementById('modal-main').style.display = 'none';
+    document.getElementById('modal-confirmed').style.display = 'block';
+    document.getElementById('modal-box').scrollTop = 0;
+  }
+
+  // Contact form
+  function submitContact() {
+    var email = document.getElementById('cf4').value.trim();
     if (!email) { alert('Please enter your email address.'); return; }
+    var btn = document.getElementById('csub');
+    btn.textContent = 'Sending...'; btn.disabled = true;
 
-    var btn = document.getElementById('submit-btn');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    // Build mailto as fallback — always works
-    var subject = encodeURIComponent('New Inquiry from ' + (first || 'Visitor') + ' — ' + (biz || 'New Lead'));
-    var body = encodeURIComponent(
-      'Name: ' + first + ' ' + last + '\n' +
-      'Business: ' + biz + '\n' +
-      'Email: ' + email + '\n' +
-      'Phone: ' + phone + '\n' +
-      'Package: ' + pkg + '\n\n' +
-      'Message:\n' + msg
-    );
-
-    // Send via Formspree
     fetch('https://formspree.io/kinsleybazemore@gmail.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        name: first + ' ' + last,
-        business: biz,
+        name: document.getElementById('cf1').value + ' ' + document.getElementById('cf2').value,
+        business: document.getElementById('cf3').value,
         email: email,
-        phone: phone,
-        package: pkg,
-        message: msg,
+        phone: document.getElementById('cf5').value,
+        package: document.getElementById('cf6').value,
+        message: document.getElementById('cf7').value,
         _replyto: email,
-        _subject: 'New Lead: ' + (first || '') + ' ' + (last || '') + ' — ' + (biz || 'SiteUp Inquiry')
+        _subject: 'New Lead: ' + document.getElementById('cf1').value + ' — ' + document.getElementById('cf3').value
       })
     })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      if (data.ok || data.next) {
-        showSuccess();
-      } else {
-        // Fallback: open mailto
-        window.location.href = 'mailto:kinsleybazemore@gmail.com?subject=' + subject + '&body=' + body;
-        showSuccess();
-      }
+    .then(function(r){ return r.json(); })
+    .then(function(){
+      showContactSuccess();
     })
-    .catch(function() {
-      // Fallback: open mailto
-      window.location.href = 'mailto:kinsleybazemore@gmail.com?subject=' + subject + '&body=' + body;
-      showSuccess();
+    .catch(function(){
+      // Fallback: open email client
+      var s = encodeURIComponent('New Inquiry from ' + document.getElementById('cf1').value);
+      var b = encodeURIComponent('Name: '+document.getElementById('cf1').value+' '+document.getElementById('cf2').value+'\nBusiness: '+document.getElementById('cf3').value+'\nEmail: '+email+'\nPhone: '+document.getElementById('cf5').value+'\nPackage: '+document.getElementById('cf6').value+'\n\nMessage:\n'+document.getElementById('cf7').value);
+      window.location.href = 'mailto:kinsleybazemore@gmail.com?subject='+s+'&body='+b;
+      showContactSuccess();
     });
   }
 
-  function showSuccess() {
-    document.getElementById('form-success').style.display = 'block';
-    document.getElementById('submit-btn').textContent = '✅ Sent!';
-    setTimeout(function() {
-      document.getElementById('submit-btn').textContent = 'Send Message →';
-      document.getElementById('submit-btn').disabled = false;
-      document.getElementById('form-success').style.display = 'none';
-      ['f-first','f-last','f-biz','f-email','f-phone','f-msg'].forEach(function(id){
-        document.getElementById(id).value = '';
-      });
-      document.getElementById('f-pkg').selectedIndex = 0;
+  function showContactSuccess() {
+    document.getElementById('csuccess').style.display = 'block';
+    document.getElementById('csub').textContent = '✅ Sent!';
+    setTimeout(function(){
+      ['cf1','cf2','cf3','cf4','cf5','cf7'].forEach(function(id){ document.getElementById(id).value=''; });
+      document.getElementById('cf6').selectedIndex=0;
+      document.getElementById('csuccess').style.display='none';
+      document.getElementById('csub').textContent='Send Message →';
+      document.getElementById('csub').disabled=false;
     }, 5000);
   }
 
-  // Smooth scroll for nav links
-  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function(e) {
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+  // Smooth nav scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t = document.querySelector(this.getAttribute('href'));
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
     });
   });
 </script>
-
 </body>
 </html>
