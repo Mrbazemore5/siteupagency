@@ -3,257 +3,305 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SiteUp Agency — Websites for Contractors</title>
-  <meta name="description" content="We build fast, professional websites for contractors and small businesses. Starting at $500. Live in 3–5 days." />
-  <meta property="og:title" content="SiteUp Agency — Websites for Contractors" />
-  <meta property="og:description" content="Starting at $500. Live in 3–5 days. No monthly fees." />
+  <title>SiteUp Agency — Premium Web Design for Businesses</title>
+  <meta name="description" content="We build stunning, high-converting websites for businesses worldwide. Starting at $500. $100 deposit. Live in 3–5 days." />
+  <meta property="og:title" content="SiteUp Agency — Premium Web Design" />
+  <meta property="og:description" content="Starting at $500. $100 deposit. Live in 3–5 days. You own it forever." />
   <meta property="og:url" content="https://siteupagency.com" />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --green: #a3ff00;
-      --dark: #080808;
-      --card: #111113;
-      --card2: #0e0e10;
-      --border: #1f1f23;
-      --muted: #777;
-      --white: #f5f5f5;
+      --dark: #060608;
+      --card: #0e0e11;
+      --border: #1a1a1f;
+      --muted: #666;
+      --white: #f0f0f0;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
 
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 2rem;
-      background: rgba(8,8,8,0.92); backdrop-filter: blur(16px);
+      padding: 1.1rem 2.5rem;
+      background: rgba(6,6,8,0.95); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
-    .logo { font-size: 1.25rem; font-weight: 900; letter-spacing: -0.5px; }
+    .logo { font-size: 1.3rem; font-weight: 900; letter-spacing: -0.5px; text-decoration: none; color: var(--white); }
     .logo span { color: var(--green); }
     .nav-links { display: flex; gap: 2rem; align-items: center; }
-    .nav-links a { color: var(--muted); font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: #fff; }
+    .nav-links a { color: var(--muted); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
     .nav-cta {
       background: var(--green); color: #000 !important;
-      padding: 0.5rem 1.25rem; border-radius: 8px;
-      font-weight: 800 !important; font-size: 0.85rem !important;
+      padding: 0.55rem 1.4rem; border-radius: 8px;
+      font-weight: 800 !important; font-size: 0.83rem !important;
+      transition: transform 0.15s, opacity 0.15s !important;
     }
-    .nav-cta:hover { opacity: 0.9; }
+    .nav-cta:hover { transform: translateY(-1px); opacity: 0.9; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed; top: 61px; left: 0; right: 0; bottom: 0;
+      background: rgba(6,6,8,0.98); backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2.5rem; z-index: 199;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: var(--white); font-size: 1.4rem; font-weight: 700; text-decoration: none; }
+    .mobile-menu .m-cta { background: var(--green); color: #000; padding: 1rem 2.5rem; border-radius: 12px; }
 
-    /* BANNER */
-    .banner {
+    /* TICKER */
+    .ticker {
       background: var(--green); color: #000;
-      text-align: center; padding: 0.55rem 1rem;
-      font-size: 0.82rem; font-weight: 700;
+      padding: 0.6rem 0; overflow: hidden; white-space: nowrap;
       margin-top: 61px;
     }
-    .banner span { opacity: 0.7; margin: 0 0.5rem; }
+    .ticker-inner { display: inline-flex; animation: tick 25s linear infinite; }
+    .ticker span { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 2rem; }
+    @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* HERO */
     .hero {
-      min-height: 92vh;
+      min-height: 96vh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center; padding: 5rem 1.5rem 4rem;
       position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
-      width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(163,255,0,0.07) 0%, transparent 70%);
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(163,255,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(163,255,0,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .hero-glow {
+      position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(163,255,0,0.06) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: rgba(163,255,0,0.08); border: 1px solid rgba(163,255,0,0.2);
-      color: var(--green); padding: 0.4rem 1rem; border-radius: 100px;
-      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3px;
-      margin-bottom: 1.75rem;
+      color: var(--green); padding: 0.45rem 1.1rem; border-radius: 100px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px;
+      margin-bottom: 2rem; position: relative; z-index: 1;
     }
+    .badge-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
     .hero h1 {
-      font-size: clamp(3rem, 9vw, 6rem); font-weight: 900;
-      line-height: 1.0; letter-spacing: -3px;
-      max-width: 820px; margin-bottom: 1.5rem;
+      font-size: clamp(3rem, 9vw, 6.5rem); font-weight: 900;
+      line-height: 0.95; letter-spacing: -3px;
+      max-width: 900px; margin-bottom: 1.75rem;
+      position: relative; z-index: 1;
     }
     .hero h1 .accent { color: var(--green); }
-    .hero h1 .dim { color: #444; }
+    .hero h1 .dim { color: #2a2a2a; }
     .hero-sub {
-      font-size: 1.15rem; color: var(--muted);
-      max-width: 500px; margin-bottom: 0.75rem; line-height: 1.7;
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 520px; margin-bottom: 0.75rem; line-height: 1.75;
+      position: relative; z-index: 1;
     }
-    .hero-proof {
-      font-size: 0.82rem; color: #555;
-      margin-bottom: 2.5rem;
-    }
+    .hero-proof { font-size: 0.8rem; color: #444; margin-bottom: 2.75rem; position: relative; z-index: 1; }
     .hero-proof strong { color: var(--green); }
-
-    .cta-group { display: flex; gap: 0.85rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3.5rem; position: relative; z-index: 1; }
     .cta-primary {
       background: var(--green); color: #000;
-      padding: 1rem 2rem; border-radius: 12px;
-      font-weight: 900; font-size: 1rem; text-decoration: none;
-      transition: transform 0.15s, opacity 0.15s;
-      box-shadow: 0 0 32px rgba(163,255,0,0.25);
+      padding: 1.1rem 2.25rem; border-radius: 12px;
+      font-weight: 900; font-size: 0.95rem; text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 0 40px rgba(163,255,0,0.3);
     }
-    .cta-primary:hover { transform: translateY(-2px); opacity: 0.92; }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(163,255,0,0.4); }
     .cta-secondary {
-      background: transparent; border: 1px solid var(--border); color: #fff;
-      padding: 1rem 2rem; border-radius: 12px;
-      font-weight: 600; font-size: 1rem; text-decoration: none;
-      transition: border-color 0.2s;
+      background: transparent; border: 1px solid #2a2a2a; color: var(--white);
+      padding: 1.1rem 2.25rem; border-radius: 12px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .cta-secondary:hover { border-color: var(--green); }
-
+    .cta-secondary:hover { border-color: var(--green); background: rgba(163,255,0,0.04); }
     .trust-row {
       display: flex; gap: 2rem; flex-wrap: wrap;
       justify-content: center; align-items: center;
-      color: var(--muted); font-size: 0.82rem;
+      color: #444; font-size: 0.8rem; position: relative; z-index: 1;
     }
     .trust-row .t { display: flex; align-items: center; gap: 0.4rem; }
-    .trust-row .t::before { content: '✓'; color: var(--green); font-weight: 700; }
+    .trust-row .t::before { content: '✓'; color: var(--green); font-weight: 800; }
 
     /* STATS */
     .stats-bar {
-      display: flex; justify-content: center; gap: 0;
+      display: flex; justify-content: center;
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       flex-wrap: wrap;
     }
     .stat-item {
-      flex: 1; min-width: 140px;
-      padding: 2rem 1.5rem; text-align: center;
+      flex: 1; min-width: 160px;
+      padding: 2.25rem 1.5rem; text-align: center;
       border-right: 1px solid var(--border);
     }
     .stat-item:last-child { border-right: none; }
-    .stat-n { font-size: 2.4rem; font-weight: 900; color: var(--green); letter-spacing: -1px; }
-    .stat-l { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+    .stat-n { font-size: 2.6rem; font-weight: 900; color: var(--green); letter-spacing: -2px; line-height: 1; }
+    .stat-l { font-size: 0.75rem; color: var(--muted); margin-top: 0.35rem; letter-spacing: 0.5px; }
 
     /* SECTIONS */
-    .section { padding: 5.5rem 1.5rem; max-width: 1080px; margin: 0 auto; }
-    .section-label { color: var(--green); font-size: 0.72rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 0.6rem; }
-    .section-sub { color: var(--muted); font-size: 0.95rem; max-width: 480px; margin-bottom: 2.5rem; line-height: 1.7; }
+    .section { padding: 6rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { color: var(--green); font-size: 0.68rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 0.75rem; line-height: 1.1; }
+    .section-sub { color: var(--muted); font-size: 0.95rem; max-width: 480px; margin-bottom: 3rem; line-height: 1.75; }
 
-    /* PROBLEM SECTION */
-    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-    .prob-item { background: var(--card); padding: 2rem; }
-    .prob-item h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.4rem; }
-    .prob-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
-    .prob-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    /* SERVICES BENTO */
+    .bento { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .bento-card { background: var(--card); padding: 2.25rem; transition: background 0.2s; }
+    .bento-card:hover { background: #121215; }
+    .bento-card.wide { grid-column: span 2; }
+    .bento-card.tall { grid-row: span 2; }
+    .bento-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .bento-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .bento-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+    .bento-tag { display: inline-block; background: rgba(163,255,0,0.08); color: var(--green); font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 100px; margin-top: 0.75rem; }
 
-    /* HOW IT WORKS */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-    .step { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; }
-    .step-num { font-size: 3rem; font-weight: 900; color: rgba(163,255,0,0.12); line-height: 1; margin-bottom: 0.75rem; }
-    .step h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.4rem; }
-    .step p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+    /* PROCESS */
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 2rem; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--green), transparent); opacity: 0.3; }
+    .p-step { padding: 2rem 1.5rem; text-align: center; }
+    .p-num { width: 48px; height: 48px; background: rgba(163,255,0,0.1); border: 1px solid rgba(163,255,0,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 900; color: var(--green); margin: 0 auto 1.25rem; }
+    .p-step h3 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .p-step p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
 
     /* PORTFOLIO */
-    .port-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
-    .port-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 0.2s, border-color 0.2s; }
-    .port-card:hover { transform: translateY(-3px); border-color: rgba(163,255,0,0.3); }
-    .port-preview { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; }
-    .port-bar { position: absolute; top: 0; left: 0; right: 0; height: 32px; background: rgba(0,0,0,0.6); display: flex; align-items: center; padding: 0 0.85rem; gap: 6px; }
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .port-info { padding: 1.25rem; }
-    .port-info h3 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.25rem; }
-    .port-info p { font-size: 0.8rem; color: var(--muted); }
-    .port-tag { display: inline-block; background: rgba(163,255,0,0.1); color: var(--green); font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: 100px; margin-top: 0.5rem; }
+    .port-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; }
+    .port-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.25s, border-color 0.25s; cursor: pointer; }
+    .port-card:hover { transform: translateY(-4px); border-color: rgba(163,255,0,0.25); }
+    .port-preview { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
+    .port-preview-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .port-bar { position: absolute; top: 0; left: 0; right: 0; height: 30px; background: rgba(0,0,0,0.7); display: flex; align-items: center; padding: 0 0.85rem; gap: 6px; z-index: 2; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .port-info { padding: 1.5rem; }
+    .port-info h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .port-info p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .port-tag { display: inline-block; background: rgba(163,255,0,0.08); color: var(--green); font-size: 0.68rem; font-weight: 700; padding: 0.18rem 0.65rem; border-radius: 100px; margin-top: 0.6rem; letter-spacing: 0.3px; }
+
+    /* URGENCY BOX */
+    .urgency {
+      background: linear-gradient(135deg, rgba(163,255,0,0.06) 0%, rgba(163,255,0,0.02) 100%);
+      border: 1px solid rgba(163,255,0,0.2); border-radius: 20px;
+      padding: 2.5rem; text-align: center; margin-bottom: 3rem;
+    }
+    .urgency h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 0.75rem; }
+    .urgency p { color: var(--muted); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem; line-height: 1.7; }
+    .spots { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 0.5rem; }
+    .spot { width: 36px; height: 10px; background: rgba(163,255,0,0.15); border: 1px solid rgba(163,255,0,0.2); border-radius: 100px; }
+    .spot.taken { background: var(--green); border-color: var(--green); }
+    .spots-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.5rem; }
 
     /* PACKAGES */
-    .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
-    .pkg { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; position: relative; }
+    .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .pkg { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2.25rem; display: flex; flex-direction: column; transition: border-color 0.2s, transform 0.2s; position: relative; }
     .pkg:hover { transform: translateY(-3px); }
-    .pkg.hot { border-color: var(--green); }
-    .pkg-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--green); color: #000; font-size: 0.7rem; font-weight: 900; padding: 0.2rem 0.9rem; border-radius: 100px; white-space: nowrap; letter-spacing: 0.5px; }
-    .pkg-tier { font-size: 0.72rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
-    .pkg-price { font-size: 2.75rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 0.2rem; }
-    .pkg-deposit { font-size: 0.78rem; color: var(--green); font-weight: 700; margin-bottom: 0.75rem; }
-    .pkg-tagline { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.6; }
-    .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; margin-bottom: 1.5rem; }
-    .pkg-features li { font-size: 0.85rem; color: #ccc; display: flex; gap: 0.5rem; }
-    .pkg-features li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; }
-    .pkg-btns { display: flex; flex-direction: column; gap: 0.6rem; }
+    .pkg.hot { border-color: var(--green); box-shadow: 0 0 40px rgba(163,255,0,0.08); }
+    .pkg.elite { border-color: #a3ff00; background: linear-gradient(135deg, #0e0e11 0%, #0d1100 100%); box-shadow: 0 0 60px rgba(163,255,0,0.1); }
+    .pkg-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--green); color: #000; font-size: 0.68rem; font-weight: 900; padding: 0.22rem 1rem; border-radius: 100px; white-space: nowrap; letter-spacing: 0.5px; }
+    .pkg-tier { font-size: 0.68rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 0.6rem; }
+    .pkg-price { font-size: 3rem; font-weight: 900; letter-spacing: -2px; line-height: 1; margin-bottom: 0.25rem; }
+    .pkg-deposit { font-size: 0.78rem; color: var(--green); font-weight: 700; margin-bottom: 0.85rem; }
+    .pkg-tagline { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.65; }
+    .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; margin-bottom: 1.75rem; }
+    .pkg-features li { font-size: 0.83rem; color: #ccc; display: flex; gap: 0.5rem; line-height: 1.5; }
+    .pkg-features li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+    .pkg-btns { display: flex; flex-direction: column; gap: 0.65rem; }
     .btn-email {
       display: flex; align-items: center; justify-content: center; gap: 0.5rem;
       background: var(--green); color: #000;
-      padding: 0.8rem 1rem; border-radius: 10px;
+      padding: 0.85rem 1rem; border-radius: 10px;
       font-weight: 900; font-size: 0.88rem; text-decoration: none;
       transition: opacity 0.15s, transform 0.15s;
     }
-    .btn-email:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-email:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn-sms {
       display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      background: transparent; border: 1px solid var(--border); color: #fff;
-      padding: 0.8rem 1rem; border-radius: 10px;
-      font-weight: 600; font-size: 0.88rem; text-decoration: none;
+      background: transparent; border: 1px solid var(--border); color: var(--white);
+      padding: 0.85rem 1rem; border-radius: 10px;
+      font-weight: 700; font-size: 0.88rem; text-decoration: none;
       transition: border-color 0.2s;
     }
     .btn-sms:hover { border-color: var(--green); }
 
-    /* URGENCY STRIP */
-    .urgency {
-      background: linear-gradient(135deg, #0f1a00, #1a2f00);
-      border: 1px solid rgba(163,255,0,0.2);
-      border-radius: 16px; padding: 2.5rem;
-      text-align: center; margin: 3rem 0;
-    }
-    .urgency h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; margin-bottom: 0.5rem; }
-    .urgency p { color: var(--muted); margin-bottom: 1.75rem; font-size: 0.92rem; }
-    .spots { display: flex; gap: 0.4rem; justify-content: center; margin-bottom: 1.5rem; }
-    .spot { width: 28px; height: 8px; border-radius: 100px; background: var(--green); }
-    .spot.taken { background: #222; }
-    .spots-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.5rem; }
-    .spots-label strong { color: var(--green); }
+    /* COMPARISON TABLE */
+    .compare-wrap { overflow-x: auto; }
+    .compare { width: 100%; border-collapse: collapse; }
+    .compare th, .compare td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    .compare th { font-size: 0.75rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; background: var(--card); }
+    .compare th.pkg-col { text-align: center; }
+    .compare td.pkg-col { text-align: center; font-weight: 700; }
+    .compare tr:hover td { background: rgba(255,255,255,0.02); }
+    .check { color: var(--green); font-size: 1rem; font-weight: 900; }
+    .dash { color: #333; }
+    .compare .elite-col { background: rgba(163,255,0,0.03); }
+    .compare .feature-name { color: var(--white); font-weight: 600; }
 
     /* FAQ */
-    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; max-width: 680px; }
-    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
-    .faq-q { padding: 1.1rem 1.25rem; font-size: 0.92rem; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .faq-q::after { content: '+'; color: var(--green); font-size: 1.2rem; font-weight: 400; }
-    .faq-a { padding: 0 1.25rem 1.1rem; font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      padding: 1.25rem 1.5rem; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: rgba(255,255,255,0.02); }
+    .faq-q::after { content: '+'; font-size: 1.2rem; color: var(--green); font-weight: 300; transition: transform 0.2s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a { display: none; padding: 0 1.5rem 1.25rem; font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+    .faq-item.open .faq-a { display: block; }
 
     /* CONTACT */
-    .contact-box { max-width: 520px; margin: 0 auto; text-align: center; }
-    .contact-box h2 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 0.75rem; }
-    .contact-box p { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; }
-    .contact-btns { display: flex; flex-direction: column; gap: 0.85rem; }
-    .c-email {
+    .contact-box { background: linear-gradient(135deg, rgba(163,255,0,0.05) 0%, transparent 100%); border: 1px solid rgba(163,255,0,0.15); border-radius: 24px; padding: 4rem 2.5rem; text-align: center; max-width: 700px; margin: 0 auto; }
+    .contact-box h2 { font-size: 2.5rem; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 0.75rem; }
+    .contact-box p { color: var(--muted); font-size: 0.95rem; max-width: 420px; margin: 0 auto 2.5rem; line-height: 1.75; }
+    .contact-btns { display: flex; flex-direction: column; gap: 0.85rem; max-width: 380px; margin: 0 auto 1.5rem; }
+    .c-email, .c-sms {
       display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-      background: var(--green); color: #000;
-      padding: 1.1rem 1.5rem; border-radius: 14px;
-      font-weight: 900; font-size: 1rem; text-decoration: none;
-      transition: opacity 0.15s, transform 0.15s;
-      box-shadow: 0 0 32px rgba(163,255,0,0.2);
+      padding: 1.1rem 1.5rem; border-radius: 12px;
+      font-weight: 800; font-size: 0.9rem; text-decoration: none;
+      transition: transform 0.15s, opacity 0.15s;
     }
-    .c-email:hover { opacity: 0.9; transform: translateY(-2px); }
-    .c-sms {
-      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-      background: transparent; border: 1px solid var(--border); color: #fff;
-      padding: 1.1rem 1.5rem; border-radius: 14px;
-      font-weight: 700; font-size: 1rem; text-decoration: none;
-      transition: border-color 0.2s;
-    }
-    .c-sms:hover { border-color: var(--green); }
-    .contact-note { margin-top: 1.25rem; font-size: 0.78rem; color: #444; }
+    .c-email { background: var(--green); color: #000; box-shadow: 0 0 30px rgba(163,255,0,0.25); }
+    .c-email:hover { transform: translateY(-2px); }
+    .c-sms { background: #1a1a1f; border: 1px solid var(--border); color: var(--white); }
+    .c-sms:hover { border-color: var(--green); transform: translateY(-2px); }
+    .contact-note { font-size: 0.78rem; color: #444; line-height: 1.8; }
 
     /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 1.5rem; text-align: center;
-      color: var(--muted); font-size: 0.8rem;
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: #fff; }
+    footer { border-top: 1px solid var(--border); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; max-width: 1100px; margin: 0 auto; }
+    footer p { color: #333; font-size: 0.78rem; }
+    footer a { color: #444; font-size: 0.78rem; text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--green); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-border { border-top: 1px solid var(--border); }
 
-    @media (max-width: 640px) {
-      .nav-links a:not(.nav-cta) { display: none; }
-      .hero h1 { letter-spacing: -2px; }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .bento { grid-template-columns: 1fr; }
+      .bento-card.wide { grid-column: span 1; }
+      .section { padding: 4rem 1.25rem; }
+      .pkg-grid { grid-template-columns: 1fr; }
+      .port-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .contact-box { padding: 2.5rem 1.5rem; }
+      .contact-box h2 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -261,142 +309,243 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Site<span>Up</span></div>
+  <a class="logo" href="#">Site<span>Up</span></a>
   <div class="nav-links">
-    <a href="#how">How It Works</a>
-    <a href="#work">Our Work</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
     <a href="#pricing">Pricing</a>
-    <a href="#contact" class="nav-cta" onclick="ping('email')">Get Started</a>
+    <a href="#faq">FAQ</a>
+    <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BName%5D%0ABusiness%3A%20%5BBusiness%5D%0APackage%20interested%20in%3A%20%5BPackage%5D%0A%0ADetails%3A" class="nav-cta" onclick="ping('email')">Get Started →</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
-<!-- GRAND OPENING BANNER -->
-<div class="banner">
-  🎉 Grand Opening Special — First 5 clients get a FREE domain + 30 days free updates
-  <span>·</span>
-  Only <strong>3 spots left</strong>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#work" onclick="toggleMenu()">Work</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BName%5D%0ABusiness%3A%20%5BBusiness%5D%0APackage%20interested%20in%3A%20%5BPackage%5D%0A%0ADetails%3A" class="m-cta" onclick="ping('email');toggleMenu()">Get Started →</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>🎉 Grand Opening — First 5 clients get free domain</span><span>·</span>
+    <span>💳 Only $100 to start</span><span>·</span>
+    <span>⚡ Live in 3–5 days</span><span>·</span>
+    <span>🌍 100% Remote — Worldwide</span><span>·</span>
+    <span>🎉 Grand Opening — First 5 clients get free domain</span><span>·</span>
+    <span>💳 Only $100 to start</span><span>·</span>
+    <span>⚡ Live in 3–5 days</span><span>·</span>
+    <span>🌍 100% Remote — Worldwide</span><span>·</span>
+  </div>
 </div>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">🔨 Web Design for Contractors & Small Businesses</div>
-  <h1>Your competitors<br/><span class="accent">are online.</span><br/><span class="dim">Are you?</span></h1>
-  <p class="hero-sub">We build clean, professional websites that get you found on Google and turn visitors into paying customers.</p>
-  <p class="hero-proof">Starting at <strong>$500</strong> · Live in <strong>3–5 days</strong> · <strong>No monthly fees, ever</strong></p>
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><div class="badge-dot"></div> Now accepting new clients — 3 spots left</div>
+  <h1>Your business<br>deserves a <span class="accent">website</span><br><span class="dim">that converts.</span></h1>
+  <p class="hero-sub">We build stunning, high-converting websites for businesses worldwide. Fast turnaround. You own it forever.</p>
+  <p class="hero-proof">Starting at <strong>$500</strong> · Only <strong>$100 deposit</strong> · Live in <strong>3–5 days</strong></p>
   <div class="cta-group">
-    <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0AAdditional%20info%3A%20%5BTell%20us%20about%20your%20business%5D" class="cta-primary" onclick="ping('email')">📧 Email Us Now</a>
-    <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20getting%20a%20website." class="cta-secondary" onclick="ping('sms')">💬 Text (757) 334-5771</a>
+    <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BName%5D%0ABusiness%3A%20%5BBusiness%5D%0APackage%3A%20%5BPackage%5D%0A%0ADetails%3A" class="cta-primary" onclick="ping('email')">Start My Website →</a>
+    <a href="#work" class="cta-secondary">See Our Work</a>
   </div>
   <div class="trust-row">
-    <div class="t">$100 deposit to start</div>
-    <div class="t">You own your site</div>
-    <div class="t">Same-day response</div>
+    <div class="t">$100 deposit only</div>
+    <div class="t">You own it forever</div>
+    <div class="t">No monthly fees</div>
     <div class="t">100% remote</div>
   </div>
-</section>
+</div>
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat-item"><div class="stat-n">3–5</div><div class="stat-l">Days to go live</div></div>
   <div class="stat-item"><div class="stat-n">$500</div><div class="stat-l">Starting price</div></div>
-  <div class="stat-item"><div class="stat-n">$0</div><div class="stat-l">Monthly fees</div></div>
-  <div class="stat-item"><div class="stat-n">100%</div><div class="stat-l">You own it</div></div>
+  <div class="stat-item"><div class="stat-n">$100</div><div class="stat-l">To get started today</div></div>
+  <div class="stat-item"><div class="stat-n">3–5</div><div class="stat-l">Days to go live</div></div>
+  <div class="stat-item"><div class="stat-n">100%</div><div class="stat-l">You own it outright</div></div>
+  <div class="stat-item"><div class="stat-n">0</div><div class="stat-l">Monthly fees ever</div></div>
 </div>
 
-<!-- PROBLEM -->
-<div class="section" id="why">
-  <div class="section-label">The Problem</div>
-  <div class="section-title">No website = losing jobs daily</div>
-  <p class="section-sub">When someone needs a contractor, the first thing they do is Google it. If you're not there, they call someone who is.</p>
-  <div class="problem-grid">
-    <div class="prob-item">
-      <div class="prob-icon">📵</div>
-      <h3>Invisible on Google</h3>
-      <p>97% of people search online before hiring a contractor. Without a website, you don't exist to them.</p>
+<!-- SERVICES -->
+<div class="section" id="services" style="border-top:1px solid var(--border);">
+  <div class="section-label">What We Do</div>
+  <div class="section-title">Everything your<br>business needs online</div>
+  <p class="section-sub">From a simple 1-page site to a full e-commerce store — we build it, you own it.</p>
+  <div class="bento">
+    <div class="bento-card wide">
+      <div class="bento-icon">🎨</div>
+      <h3>Custom Web Design</h3>
+      <p>Every site is built from scratch to match your brand. No templates, no cookie-cutter layouts — just clean, professional design that looks expensive.</p>
+      <span class="bento-tag">All Packages</span>
     </div>
-    <div class="prob-item">
-      <div class="prob-icon">📉</div>
-      <h3>Losing to competitors</h3>
-      <p>Your competitors with websites are getting those calls — even if your work is better than theirs.</p>
+    <div class="bento-card">
+      <div class="bento-icon">🛒</div>
+      <h3>E-Commerce Stores</h3>
+      <p>Sell products online with a full store, cart, and checkout. Perfect for clothing brands, retail, and product-based businesses.</p>
+      <span class="bento-tag">Elite Package</span>
     </div>
-    <div class="prob-item">
-      <div class="prob-icon">🤝</div>
-      <h3>Hard to look legit</h3>
-      <p>Customers trust businesses with a professional web presence. No site = no credibility.</p>
+    <div class="bento-card">
+      <div class="bento-icon">📱</div>
+      <h3>Mobile Optimized</h3>
+      <p>Every site looks perfect on phones, tablets, and desktops. Over 70% of traffic is mobile — we make sure yours converts.</p>
+      <span class="bento-tag">All Packages</span>
     </div>
-    <div class="prob-item">
-      <div class="prob-icon">💸</div>
-      <h3>Leaving money on the table</h3>
-      <p>A single new customer can pay for your entire website. It pays for itself with one job.</p>
+    <div class="bento-card">
+      <div class="bento-icon">🔍</div>
+      <h3>SEO Setup</h3>
+      <p>Meta tags, schema markup, sitemaps, Google Search Console — built in so Google can find and rank your site from day one.</p>
+      <span class="bento-tag">Pro & Elite</span>
+    </div>
+    <div class="bento-card wide">
+      <div class="bento-icon">🔑</div>
+      <h3>Full Ownership Handoff</h3>
+      <p>When your site is done and paid, you get everything — the files, the domain login, hosting credentials, analytics access, and a walkthrough so you know how to manage it yourself. No lock-in. No dependency on us.</p>
+      <span class="bento-tag">All Packages</span>
+    </div>
+    <div class="bento-card">
+      <div class="bento-icon">⚡</div>
+      <h3>Fast Turnaround</h3>
+      <p>3–5 days from deposit to launch. Need it faster? Elite gets priority 72-hour builds.</p>
+      <span class="bento-tag">Priority Available</span>
+    </div>
+    <div class="bento-card">
+      <div class="bento-icon">🌍</div>
+      <h3>100% Remote</h3>
+      <p>We work with clients worldwide. Everything is handled online — no meetings required.</p>
+      <span class="bento-tag">Worldwide</span>
+    </div>
+    <div class="bento-card">
+      <div class="bento-icon">🎯</div>
+      <h3>Conversion Focused</h3>
+      <p>Every button, headline, and layout decision is made to turn visitors into paying customers.</p>
+      <span class="bento-tag">All Packages</span>
     </div>
   </div>
 </div>
 
 <!-- HOW IT WORKS -->
-<div class="section" id="how" style="border-top:1px solid var(--border);">
-  <div class="section-label">The Process</div>
-  <div class="section-title">From zero to live in days</div>
-  <p class="section-sub">We handle everything. You just answer a few quick questions.</p>
-  <div class="steps">
-    <div class="step"><div class="step-num">01</div><h3>You reach out</h3><p>Email or text us. Tell us your business name, what you do, and which package interests you.</p></div>
-    <div class="step"><div class="step-num">02</div><h3>$100 deposit</h3><p>Send the deposit via CashApp ($kinsleybazemore8) or Venmo (@Mrbazemore) to lock in your spot.</p></div>
-    <div class="step"><div class="step-num">03</div><h3>We build it</h3><p>We design and build your full website in 3–5 days. You review and approve before it goes live.</p></div>
-    <div class="step"><div class="step-num">04</div><h3>You go live</h3><p>Your site is launched, indexed on Google, and ready to bring in customers. Balance due at launch.</p></div>
+<div style="border-top:1px solid var(--border); background: #080809;">
+  <div class="section" id="process">
+    <div class="section-label">How It Works</div>
+    <div class="section-title">From $100 deposit<br>to live site in days</div>
+    <p class="section-sub">A simple, transparent process. No surprises, no hidden fees.</p>
+    <div class="process-steps">
+      <div class="p-step">
+        <div class="p-num">1</div>
+        <h3>Send $100 Deposit</h3>
+        <p>CashApp or Venmo. Work starts immediately after payment hits.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">2</div>
+        <h3>We Build Your Site</h3>
+        <p>Send us your info, logo, and photos. We design everything else.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">3</div>
+        <h3>You Review & Approve</h3>
+        <p>We send a live preview link. Request changes — we revise until it's perfect.</p>
+      </div>
+      <div class="p-step">
+        <div class="p-num">4</div>
+        <h3>Pay Balance & Launch</h3>
+        <p>Pay the remaining balance, we transfer full ownership. Your site goes live.</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- PORTFOLIO -->
 <div class="section" id="work" style="border-top:1px solid var(--border);">
-  <div class="section-label">Portfolio</div>
-  <div class="section-title">Built for businesses like yours</div>
-  <p class="section-sub">Clean, fast, mobile-ready sites that actually get results.</p>
+  <div class="section-label">Our Work</div>
+  <div class="section-title">Built by SiteUp Agency</div>
+  <p class="section-sub">Every site is custom. Here's a sample of what we can build for your business.</p>
   <div class="port-grid">
-    <div class="port-card">
-      <div class="port-preview" style="background:linear-gradient(135deg,#0f2027,#2c5364)">
-        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🔧
+    <a href="/vrstl.html" target="_blank" style="text-decoration:none;">
+      <div class="port-card">
+        <div class="port-preview" style="background: linear-gradient(135deg, #000 0%, #1a0000 100%);">
+          <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+          <div style="font-family:monospace;font-size:2.5rem;font-weight:900;letter-spacing:0.2em;color:#fff;">VRSTL</div>
+        </div>
+        <div class="port-info">
+          <h3>VRSTL Clothing</h3>
+          <p>Streetwear brand with full online store, product grid & dark aesthetic.</p>
+          <span class="port-tag">E-Commerce · Streetwear</span>
+        </div>
       </div>
-      <div class="port-info"><h3>Smith Plumbing Co.</h3><p>5-page site with quote form & service areas</p><span class="port-tag">Plumbing</span></div>
+    </a>
+    <div class="port-card">
+      <div class="port-preview" style="background: linear-gradient(135deg, #0a1628 0%, #1a2f4a 100%);">
+        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div style="font-size:3rem;">🔧</div>
+      </div>
+      <div class="port-info">
+        <h3>Smith Plumbing Co.</h3>
+        <p>Local plumber with service pages, photo gallery, and Google Maps embed.</p>
+        <span class="port-tag">Contractor · Local Business</span>
+      </div>
     </div>
     <div class="port-card">
-      <div class="port-preview" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">
-        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🏠
+      <div class="port-preview" style="background: linear-gradient(135deg, #0d1f0d 0%, #1a3a1a 100%);">
+        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div style="font-size:3rem;">🌿</div>
       </div>
-      <div class="port-info"><h3>Peak Roofing & Repair</h3><p>Landing page with gallery & emergency CTA</p><span class="port-tag">Roofing</span></div>
+      <div class="port-info">
+        <h3>Green Edge Landscaping</h3>
+        <p>Landscaping company with before/after gallery and instant quote form.</p>
+        <span class="port-tag">Contractor · Home Services</span>
+      </div>
     </div>
     <div class="port-card">
-      <div class="port-preview" style="background:linear-gradient(135deg,#134e5e,#71b280)">
-        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🌿
+      <div class="port-preview" style="background: linear-gradient(135deg, #1a1200 0%, #2a2000 100%);">
+        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div style="font-size:3rem;">🏠</div>
       </div>
-      <div class="port-info"><h3>Green Edge Landscaping</h3><p>Seasonal packages, gallery & booking</p><span class="port-tag">Landscaping</span></div>
+      <div class="port-info">
+        <h3>Peak Roofing Solutions</h3>
+        <p>Roofing contractor site with emergency CTA, financing info, and reviews.</p>
+        <span class="port-tag">Contractor · Roofing</span>
+      </div>
     </div>
     <div class="port-card">
-      <div class="port-preview" style="background:linear-gradient(135deg,#0f0c29,#302b63)">
-        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>❄️
+      <div class="port-preview" style="background: linear-gradient(135deg, #0d0d1f 0%, #1a1a3a 100%);">
+        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div style="font-size:3rem;">❄️</div>
       </div>
-      <div class="port-info"><h3>CoolAir HVAC Services</h3><p>SEO-optimized with 24/7 contact button</p><span class="port-tag">HVAC</span></div>
+      <div class="port-info">
+        <h3>CoolAir HVAC Services</h3>
+        <p>HVAC company with seasonal promotions, service areas, and booking links.</p>
+        <span class="port-tag">Contractor · HVAC</span>
+      </div>
     </div>
     <div class="port-card">
-      <div class="port-preview" style="background:linear-gradient(135deg,#373b44,#4286f4)">
-        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🎨
+      <div class="port-preview" style="background: linear-gradient(135deg, #1a0a0a 0%, #2a1a1a 100%);">
+        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>
+        <div style="font-size:3rem;">🎨</div>
       </div>
-      <div class="port-info"><h3>Elite Coat Painters</h3><p>Portfolio with project photos & quote form</p><span class="port-tag">Painting</span></div>
-    </div>
-    <div class="port-card">
-      <div class="port-preview" style="background:linear-gradient(135deg,#200122,#6f0000)">
-        <div class="port-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>⚡
+      <div class="port-info">
+        <h3>Elite Coat Painters</h3>
+        <p>Painting company with color portfolio, client photos, and free estimate CTA.</p>
+        <span class="port-tag">Contractor · Painting</span>
       </div>
-      <div class="port-info"><h3>Spark Electric LLC</h3><p>Service list, licensing info & fast quote</p><span class="port-tag">Electrical</span></div>
     </div>
   </div>
 </div>
 
-<!-- PACKAGES -->
-<div class="section" id="pricing" style="border-top:1px solid var(--border);">
+<!-- PRICING -->
+<div style="border-top:1px solid var(--border); background: #080809;">
+<div class="section" id="pricing">
   <div class="section-label">Pricing</div>
-  <div class="section-title">Simple, flat-rate pricing</div>
-  <p class="section-sub">No hidden fees. No monthly charges. One price, you own it forever.</p>
+  <div class="section-title">Simple, flat-rate pricing.<br>No surprises.</div>
+  <p class="section-sub">One price, you own it forever. No monthly fees. No subscriptions. Ever.</p>
 
-  <!-- URGENCY BOX -->
   <div class="urgency">
     <h2>🎉 Grand Opening — Limited Spots</h2>
     <p>First 5 clients get a <strong style="color:var(--green)">FREE domain (1 year)</strong> + <strong style="color:var(--green)">30 days free updates</strong> included with any package.</p>
@@ -408,30 +557,29 @@
       <div class="spot"></div>
     </div>
     <div class="spots-label"><strong>3 spots remaining</strong> at this special rate</div>
-    <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0AAdditional%20info%3A%20%5BTell%20us%20about%20your%20business%5D" class="cta-primary" onclick="ping('email')" style="display:inline-block;">Claim My Spot →</a>
+    <a href="mailto:kinsleybazemore@gmail.com?subject=Claim%20My%20Spot%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%20I%20want%20to%20claim%20a%20grand%20opening%20spot%21%0A%0AName%3A%0ABusiness%3A%0APackage%3A" class="cta-primary" onclick="ping('email')" style="display:inline-block;">Claim My Spot →</a>
   </div>
 
   <div class="pkg-grid">
-
     <!-- BASIC -->
     <div class="pkg">
       <div class="pkg-tier">Basic</div>
       <div class="pkg-price">$500</div>
-      <div class="pkg-deposit">Only $100 to start · $400 on delivery</div>
-      <div class="pkg-tagline">Get online fast. Perfect for new businesses that just need a clean, professional presence.</div>
+      <div class="pkg-deposit">$100 now · $400 on delivery</div>
+      <div class="pkg-tagline">Get online fast. Clean, professional presence for new businesses.</div>
       <ul class="pkg-features">
         <li>1-page custom website</li>
-        <li>Mobile-friendly design</li>
         <li>Your logo, colors & photos</li>
+        <li>Mobile-friendly design</li>
         <li>Email & SMS contact buttons</li>
-        <li>Hosted free on GitHub Pages</li>
+        <li>Free hosting (GitHub Pages)</li>
         <li>Live in 3–5 days</li>
-        <li>You own it 100% — no subscriptions</li>
-        <li>Full file handoff after payment</li>
+        <li>100% ownership — full file handoff</li>
+        <li>No monthly fees, ever</li>
       </ul>
       <div class="pkg-btns">
-        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20Basic%20%24500&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%3A%20Basic%20%24500%0A%0ATell%20us%20about%20your%20business%3A" class="btn-email" onclick="ping('email')">📧 Get Started</a>
-        <a href="sms:7573345771?body=Hi%20Kinsley%21%20I%27m%20interested%20in%20the%20Basic%20%24500%20package.%20My%20name%20is%20%5BName%5D%20and%20my%20business%20is%20%5BBusiness%5D." class="btn-sms" onclick="ping('sms')">💬 Text to Start</a>
+        <a href="mailto:kinsleybazemore@gmail.com?subject=Basic%20%24500%20Package&body=Hi%20Kinsley%2C%0A%0AName%3A%20%5BYour%20Name%5D%0ABusiness%3A%20%5BBusiness%20Name%5D%0APackage%3A%20Basic%20%24500%0A%0AAbout%20my%20business%3A" class="btn-email" onclick="ping('email')">📧 Get Started</a>
+        <a href="sms:7573345771?body=Hi%20Kinsley%21%20I%27m%20interested%20in%20the%20Basic%20%24500%20website%20package.%20My%20name%20is%20%5BName%5D%20and%20my%20business%20is%20%5BBusiness%5D." class="btn-sms" onclick="ping('sms')">💬 Text to Start</a>
       </div>
     </div>
 
@@ -440,21 +588,21 @@
       <div class="pkg-badge">⭐ Most Popular</div>
       <div class="pkg-tier">Starter</div>
       <div class="pkg-price">$1,000</div>
-      <div class="pkg-deposit">Only $100 to start · $900 on delivery</div>
-      <div class="pkg-tagline">A full multi-page site. Everything clients need to trust you and contact you.</div>
+      <div class="pkg-deposit">$100 now · $900 on delivery</div>
+      <div class="pkg-tagline">Full multi-page site. Everything clients need to trust you and reach out.</div>
       <ul class="pkg-features">
         <li>5-page website (Home, About, Services, Gallery, Contact)</li>
         <li>Custom design with your branding</li>
-        <li>Photo gallery section</li>
+        <li>Photo gallery</li>
         <li>Google Maps embed</li>
-        <li>Mobile-friendly & fast-loading</li>
-        <li>Hosted free on GitHub Pages</li>
+        <li>Mobile-friendly & fast</li>
+        <li>Free hosting included</li>
         <li>Live in 3–5 days</li>
-        <li>You own it 100% — full file handoff</li>
-        <li>Login credentials to everything</li>
+        <li>Full file handoff + login credentials</li>
+        <li>No monthly fees, ever</li>
       </ul>
       <div class="pkg-btns">
-        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20Starter%20%241%2C000&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%3A%20Starter%20%241%2C000%0A%0ATell%20us%20about%20your%20business%3A" class="btn-email" onclick="ping('email')">📧 Get Started</a>
+        <a href="mailto:kinsleybazemore@gmail.com?subject=Starter%20%241%2C000%20Package&body=Hi%20Kinsley%2C%0A%0AName%3A%20%5BYour%20Name%5D%0ABusiness%3A%20%5BBusiness%20Name%5D%0APackage%3A%20Starter%20%241%2C000%0A%0AAbout%20my%20business%3A" class="btn-email" onclick="ping('email')">📧 Get Started</a>
         <a href="sms:7573345771?body=Hi%20Kinsley%21%20I%27m%20interested%20in%20the%20Starter%20%241%2C000%20package.%20My%20name%20is%20%5BName%5D%20and%20my%20business%20is%20%5BBusiness%5D." class="btn-sms" onclick="ping('sms')">💬 Text to Start</a>
       </div>
     </div>
@@ -463,7 +611,7 @@
     <div class="pkg">
       <div class="pkg-tier">Pro</div>
       <div class="pkg-price">$1,500</div>
-      <div class="pkg-deposit">Only $100 to start · $1,400 on delivery</div>
+      <div class="pkg-deposit">$100 now · $1,400 on delivery</div>
       <div class="pkg-tagline">Built to rank on Google and convert visitors into paying customers.</div>
       <ul class="pkg-features">
         <li>Everything in Starter</li>
@@ -471,22 +619,22 @@
         <li>Free domain included (1 year)</li>
         <li>Google Business profile setup</li>
         <li>Google Analytics installed</li>
-        <li>30 days free edits after launch</li>
         <li>Custom domain email setup</li>
-        <li>Full file handoff + login to everything</li>
-        <li>Walkthrough video so you know how to manage it</li>
+        <li>30 days free edits after launch</li>
+        <li>Full ownership handoff + walkthrough video</li>
       </ul>
       <div class="pkg-btns">
-        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20Pro%20%241%2C500&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%3A%20Pro%20%241%2C500%0A%0ATell%20us%20about%20your%20business%3A" class="btn-email" onclick="ping('email')">📧 Get Started</a>
+        <a href="mailto:kinsleybazemore@gmail.com?subject=Pro%20%241%2C500%20Package&body=Hi%20Kinsley%2C%0A%0AName%3A%20%5BYour%20Name%5D%0ABusiness%3A%20%5BBusiness%20Name%5D%0APackage%3A%20Pro%20%241%2C500%0A%0AAbout%20my%20business%3A" class="btn-email" onclick="ping('email')">📧 Get Started</a>
         <a href="sms:7573345771?body=Hi%20Kinsley%21%20I%27m%20interested%20in%20the%20Pro%20%241%2C500%20package.%20My%20name%20is%20%5BName%5D%20and%20my%20business%20is%20%5BBusiness%5D." class="btn-sms" onclick="ping('sms')">💬 Text to Start</a>
       </div>
     </div>
 
     <!-- ELITE -->
-    <div class="pkg">
+    <div class="pkg elite">
+      <div class="pkg-badge">👑 Best Value</div>
       <div class="pkg-tier">Elite</div>
       <div class="pkg-price">$2,500</div>
-      <div class="pkg-deposit">Only $100 to start · $2,400 on delivery</div>
+      <div class="pkg-deposit">$100 now · $2,400 on delivery</div>
       <div class="pkg-tagline">Full white-glove service. We handle every single detail — you just approve and launch.</div>
       <ul class="pkg-features">
         <li>Everything in Pro</li>
@@ -496,19 +644,53 @@
         <li>Product photo sourcing & editing</li>
         <li>Social media profiles set up & branded</li>
         <li>Priority 3–5 day turnaround</li>
-        <li>Hosted in YOUR account — you own everything</li>
-        <li>Domain registered in your name</li>
+        <li>Domain registered in YOUR name</li>
+        <li>Hosting in YOUR account — you own everything</li>
         <li>60 days free edits after launch</li>
-        <li>Walkthrough call so you can manage it yourself</li>
+        <li>1-on-1 walkthrough call to manage it yourself</li>
         <li>Looks like an $8,000 agency site</li>
       </ul>
       <div class="pkg-btns">
-        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20Elite%20%242%2C500&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%3A%20Elite%20%242%2C500%0A%0ATell%20us%20about%20your%20business%3A" class="btn-email" onclick="ping('email')">📧 Get Started</a>
+        <a href="mailto:kinsleybazemore@gmail.com?subject=Elite%20%242%2C500%20Package&body=Hi%20Kinsley%2C%0A%0AName%3A%20%5BYour%20Name%5D%0ABusiness%3A%20%5BBusiness%20Name%5D%0APackage%3A%20Elite%20%242%2C500%0A%0AAbout%20my%20business%3A" class="btn-email" onclick="ping('email')">📧 Get Started</a>
         <a href="sms:7573345771?body=Hi%20Kinsley%21%20I%27m%20interested%20in%20the%20Elite%20%242%2C500%20package.%20My%20name%20is%20%5BName%5D%20and%20my%20business%20is%20%5BBusiness%5D." class="btn-sms" onclick="ping('sms')">💬 Text to Start</a>
       </div>
     </div>
-
   </div>
+
+  <!-- COMPARISON TABLE -->
+  <div style="margin-top:3rem;">
+    <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:1.5rem;text-align:center;">Compare All Packages</h3>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="pkg-col">Basic<br><span style="font-size:1rem;color:var(--white)">$500</span></th>
+            <th class="pkg-col">Starter<br><span style="font-size:1rem;color:var(--white)">$1,000</span></th>
+            <th class="pkg-col">Pro<br><span style="font-size:1rem;color:var(--white)">$1,500</span></th>
+            <th class="pkg-col elite-col">Elite<br><span style="font-size:1rem;color:var(--green)">$2,500</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="feature-name">Custom Design</td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Mobile Optimized</td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Pages</td><td class="pkg-col" style="color:#aaa">1</td><td class="pkg-col" style="color:#aaa">5</td><td class="pkg-col" style="color:#aaa">5+</td><td class="pkg-col elite-col" style="color:var(--green);font-weight:800">Unlimited</td></tr>
+          <tr><td class="feature-name">Full Ownership Handoff</td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Free Domain (1 year)</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">SEO Setup</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Google Analytics</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="check">✓</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">E-Commerce Store</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Custom Logo & Branding</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Professional Copywriting</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Social Media Setup</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Free Edits After Launch</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col" style="color:#aaa">30 days</td><td class="pkg-col elite-col" style="color:var(--green);font-weight:800">60 days</td></tr>
+          <tr><td class="feature-name">Walkthrough Call</td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col"><span class="dash">—</span></td><td class="pkg-col elite-col"><span class="check">✓</span></td></tr>
+          <tr><td class="feature-name">Deposit to Start</td><td class="pkg-col" style="color:var(--green);font-weight:700">$100</td><td class="pkg-col" style="color:var(--green);font-weight:700">$100</td><td class="pkg-col" style="color:var(--green);font-weight:700">$100</td><td class="pkg-col elite-col" style="color:var(--green);font-weight:800">$100</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 </div>
 
 <!-- FAQ -->
@@ -517,12 +699,14 @@
   <div class="section-title">Common questions</div>
   <p class="section-sub">Everything you need to know before getting started.</p>
   <div class="faq-list">
-    <div class="faq-item"><div class="faq-q">How does payment work?</div><div class="faq-a">You send a $100 deposit via CashApp ($kinsleybazemore8) or Venmo (@Mrbazemore) to get started. The remaining balance is due when your site is done and you approve it — before we hand over the files.</div></div>
-    <div class="faq-item"><div class="faq-q">How fast can you build my site?</div><div class="faq-a">Most sites are done in 3–5 business days after we receive your deposit and basic business info. Elite packages may take up to 7 days due to the extra branding work.</div></div>
-    <div class="faq-item"><div class="faq-q">Do I need to know anything about websites?</div><div class="faq-a">Not at all. You just tell us your business name, what you do, and what you want. We handle all the design, writing, and technical setup.</div></div>
-    <div class="faq-item"><div class="faq-q">Will I own my website?</div><div class="faq-a">100%. Once you pay in full, the site is yours. No ongoing fees, no subscriptions. You own the files, the domain, everything.</div></div>
-    <div class="faq-item"><div class="faq-q">Can you help me get found on Google?</div><div class="faq-a">Yes. Every site we build is SEO-ready from day one. The Pro and Elite packages include a full SEO setup and Google Business profile to help you rank faster.</div></div>
-    <div class="faq-item"><div class="faq-q">What if I don't like the design?</div><div class="faq-a">We send you a preview before the site goes live. If you want changes, we make them. We don't launch anything until you're happy with it.</div></div>
+    <div class="faq-item"><div class="faq-q">How does payment work?</div><div class="faq-a">You send a $100 deposit via CashApp ($kinsleybazemore8) or Venmo (@Mrbazemore) to get started. The remaining balance is due when your site is done and you approve it — before we hand over the files. Simple as that.</div></div>
+    <div class="faq-item"><div class="faq-q">How fast can you build my site?</div><div class="faq-a">Most sites are done in 3–5 business days after we receive your deposit and your business info. Elite packages get priority treatment and can be done in as little as 72 hours.</div></div>
+    <div class="faq-item"><div class="faq-q">Do I need to know anything about websites?</div><div class="faq-a">Not at all. Just tell us your business name, what you do, and what you want it to look like. We handle all the design, writing, and technical setup. You just approve and launch.</div></div>
+    <div class="faq-item"><div class="faq-q">Will I actually own my website?</div><div class="faq-a">100%. Once you pay in full, everything is transferred to you — the files, the domain, the hosting credentials, analytics access. No ongoing fees, no subscriptions, no lock-in. It's yours forever.</div></div>
+    <div class="faq-item"><div class="faq-q">What if I don't like the design?</div><div class="faq-a">We send you a live preview before the site goes live. If you want changes, we make them. We don't launch anything until you love it. Revisions are included in every package.</div></div>
+    <div class="faq-item"><div class="faq-q">Can you build an online store?</div><div class="faq-a">Yes — the Elite package includes a full e-commerce store where you can sell products, manage inventory, and accept payments. Perfect for clothing brands, retail, and product businesses.</div></div>
+    <div class="faq-item"><div class="faq-q">Do you work with businesses outside the US?</div><div class="faq-a">Absolutely. We're 100% remote and work with clients worldwide. Everything is handled online — no location restrictions.</div></div>
+    <div class="faq-item"><div class="faq-q">Can you help me get found on Google?</div><div class="faq-a">Yes. Every site we build is SEO-ready. The Pro and Elite packages include full SEO setup, Google Business profile, Google Analytics, and Search Console to help you rank faster and track your traffic.</div></div>
   </div>
 </div>
 
@@ -531,37 +715,47 @@
   <div class="contact-box">
     <div class="section-label" style="text-align:center;">Ready to start?</div>
     <h2>Let's build your site</h2>
-    <p>Reach out today and we'll reply same day. No pressure, no commitments — just a quick conversation.</p>
+    <p>Reach out today and we'll reply same day. $100 deposit. Live in 3–5 days.</p>
     <div class="contact-btns">
-      <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0AAdditional%20info%3A%20%5BTell%20us%20about%20your%20business%5D" class="c-email" onclick="ping('email')">📧 kinsleybazemore@gmail.com</a>
-      <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20getting%20a%20website." class="c-sms" onclick="ping('sms')">💬 Text (757) 334-5771</a>
+      <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AName%3A%20%5BYour%20Name%5D%0ABusiness%3A%20%5BBusiness%20Name%5D%0APackage%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%5D%0A%0AAbout%20my%20business%3A" class="c-email" onclick="ping('email')">📧 kinsleybazemore@gmail.com</a>
+      <a href="sms:7573345771?body=Hi%20Kinsley%21%20I%27m%20interested%20in%20getting%20a%20website.%20My%20name%20is%20%5BName%5D%20and%20my%20business%20is%20%5BBusiness%5D." class="c-sms" onclick="ping('sms')">💬 Text (757) 334-5771</a>
     </div>
-    <p class="contact-note">⚡ Same-day response · 💳 $100 to start · 🌍 We work with businesses worldwide</p>
+    <p class="contact-note">⚡ Same-day response &nbsp;·&nbsp; 💳 $100 to start &nbsp;·&nbsp; 🌍 We work worldwide &nbsp;·&nbsp; 🔑 You own it forever</p>
   </div>
 </div>
 
-<footer>
-  © 2026 SiteUp Agency &nbsp;·&nbsp;
-  <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20getting%20a%20website." onclick="ping('sms')">(757) 334-5771</a>
-  &nbsp;·&nbsp;
-  <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0AAdditional%20info%3A%20%5BTell%20us%20about%20your%20business%5D" onclick="ping('email')">kinsleybazemore@gmail.com</a>
-</footer>
+<div class="footer-border">
+  <footer>
+    <div class="logo">Site<span style="color:var(--green)">Up</span> Agency</div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="mailto:kinsleybazemore@gmail.com">Contact</a>
+    </div>
+    <p>© 2026 SiteUp Agency · Built different.</p>
+  </footer>
+</div>
 
 <script>
-  window.scrollTo(0, 0);
-
   function ping(type) {
-    const BOT  = '8650502700:AAFqCLCIJgJYXLYcEOJV_ZerhvIR3KcxXnI';
-    const CHAT = '8495088312';
-    const msg  = type === 'email'
-      ? '📧 EMAIL CLICK on siteupagency.com\n\nSomeone just tapped your email link — check your inbox, they may be reaching out now!'
-      : '💬 TEXT CLICK on siteupagency.com\n\nSomeone just tapped your phone number — watch for a text from a new number!';
-    fetch('https://api.telegram.org/bot' + BOT + '/sendMessage', {
+    fetch('https://api.telegram.org/bot7777430035:AAFmfvpFFtrgGn_LBNHrPTOqIRFDdkHh5B4/sendMessage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: CHAT, text: msg })
-    });
+      body: JSON.stringify({ chat_id: '8495088312', text: '🔥 LEAD ALERT: Someone clicked the ' + type.toUpperCase() + ' button on siteupagency.com!' })
+    }).catch(() => {});
   }
+
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
 </script>
 
 </body>
