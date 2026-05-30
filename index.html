@@ -73,14 +73,14 @@
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: var(--green); color: #000; padding: 0.85rem 1.75rem;
       border-radius: 12px; font-weight: 800; font-size: 1rem;
-      text-decoration: none; transition: opacity 0.2s; border: none; cursor: pointer;
+      text-decoration: none; transition: opacity 0.2s;
     }
     .btn-primary:hover { opacity: 0.85; }
     .btn-secondary {
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: transparent; border: 1px solid var(--border); color: var(--text);
       padding: 0.85rem 1.75rem; border-radius: 12px; font-weight: 700; font-size: 0.95rem;
-      text-decoration: none; transition: border-color 0.2s; cursor: pointer;
+      text-decoration: none; transition: border-color 0.2s;
     }
     .btn-secondary:hover { border-color: var(--green); }
 
@@ -119,46 +119,30 @@
     .mockup-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
     .mockup-info p { font-size: 0.8rem; color: var(--muted); }
 
-    /* BOOKING FORM */
-    #booking {
-      padding: 5rem 1.5rem;
-      background: linear-gradient(180deg, var(--dark) 0%, #0d0d0d 100%);
-    }
-    .booking-inner { max-width: 680px; margin: 0 auto; }
-    .form-card {
+    /* CONTACT SECTION */
+    .contact-box {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 20px; padding: 2.5rem 2rem;
+      border-radius: 24px; padding: 3.5rem 2rem; text-align: center;
+      max-width: 580px; margin: 0 auto;
     }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
-    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: #1a1a1a; border: 1px solid var(--border); border-radius: 10px;
-      color: var(--text); padding: 0.75rem 1rem; font-size: 0.95rem;
-      font-family: 'Inter', sans-serif; transition: border-color 0.2s; outline: none;
+    .contact-box h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 0.75rem; }
+    .contact-box p { color: var(--muted); margin-bottom: 2.5rem; font-size: 1rem; }
+    .contact-btns { display: flex; flex-direction: column; gap: 1rem; max-width: 360px; margin: 0 auto; }
+    .contact-btn-email {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      background: var(--green); color: #000; padding: 1.1rem 1.5rem;
+      border-radius: 14px; font-weight: 800; font-size: 1rem; text-decoration: none;
+      transition: opacity 0.2s;
     }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--green); }
-    .form-group select option { background: #1a1a1a; }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit {
-      width: 100%; padding: 1rem; background: var(--green); color: #000;
-      border: none; border-radius: 12px; font-size: 1rem; font-weight: 800;
-      cursor: pointer; transition: opacity 0.2s; margin-top: 0.5rem;
+    .contact-btn-email:hover { opacity: 0.85; }
+    .contact-btn-sms {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      background: transparent; border: 1px solid var(--border); color: var(--text);
+      padding: 1.1rem 1.5rem; border-radius: 14px; font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; transition: border-color 0.2s;
     }
-    .form-submit:hover { opacity: 0.85; }
-    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* SUCCESS STATE */
-    .form-success {
-      display: none; text-align: center; padding: 2rem 1rem;
-    }
-    .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
-    .form-success h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; }
-    .form-success p { color: var(--muted); font-size: 0.95rem; }
+    .contact-btn-sms:hover { border-color: var(--green); }
+    .contact-note { margin-top: 1.5rem; font-size: 0.8rem; color: var(--muted); }
 
     /* FOOTER */
     footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
@@ -168,7 +152,6 @@
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -180,7 +163,6 @@
   <div class="nav-links">
     <a href="#why-us">Why Us</a>
     <a href="#our-work">Our Work</a>
-    <a href="#booking">Book Now</a>
     <a href="#contact">Contact</a>
   </div>
   <div class="hamburger" onclick="openDrawer()">
@@ -194,10 +176,9 @@
   <button class="drawer-close" onclick="closeDrawer()">✕</button>
   <a href="#why-us" onclick="closeDrawer()">Why Us</a>
   <a href="#our-work" onclick="closeDrawer()">Our Work</a>
-  <a href="#booking" onclick="closeDrawer()">📅 Book Now</a>
   <a href="#contact" onclick="closeDrawer()">Contact</a>
-  <a href="sms:7573345771" onclick="closeDrawer()">💬 Text Us</a>
-  <a href="mailto:kinsleybazemore@gmail.com" onclick="closeDrawer()">📧 Email Us</a>
+  <a href="sms:7573345771" onclick="trackContact('sms'); closeDrawer();">💬 Text Us</a>
+  <a href="mailto:kinsleybazemore@gmail.com" onclick="trackContact('email'); closeDrawer();">📧 Email Us</a>
 </div>
 
 <!-- HERO -->
@@ -206,7 +187,7 @@
   <h1>Your business deserves<br/><span>a website that works</span></h1>
   <p>We build fast, professional websites that get you more calls, more quotes, and more customers — without the agency price tag.</p>
   <div class="hero-btns">
-    <a href="#booking" class="btn-primary">📅 Book a Free Consultation</a>
+    <a href="#contact" class="btn-primary">📧 Get In Touch</a>
     <a href="#our-work" class="btn-secondary">See Our Work</a>
   </div>
 </div>
@@ -230,7 +211,7 @@
     <div class="why-card"><div class="why-icon">📱</div><h3>Mobile-first design</h3><p>Over 70% of customers find businesses on their phones. Your site will look perfect on every device.</p></div>
     <div class="why-card"><div class="why-icon">🎯</div><h3>Built to convert</h3><p>We don't just make pretty sites — we build pages designed to turn visitors into paying customers.</p></div>
     <div class="why-card"><div class="why-icon">🔍</div><h3>SEO included</h3><p>Every site comes with basic SEO so Google can find you. Pro and Elite packages include full SEO setup.</p></div>
-    <div class="why-card"><div class="why-icon">🤝</div><h3>Real support</h3><p>You deal with us directly — no outsourcing, no runaround. We're reachable by phone and email every day.</p></div>
+    <div class="why-card"><div class="why-icon">🤝</div><h3>Real support</h3><p>You deal with us directly — no outsourcing, no runaround. We're reachable by phone and text every day.</p></div>
   </div>
 </section>
 
@@ -250,7 +231,7 @@
       <div class="mockup-preview" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
         <div class="browser-bar"><div class="browser-dot" style="background:#ff5f57"></div><div class="browser-dot" style="background:#febc2e"></div><div class="browser-dot" style="background:#28c840"></div></div>🏠
       </div>
-      <div class="mockup-info"><h3>Peak Roofing & Repair</h3><p>Landing page with before/after gallery and emergency contact CTA</p></div>
+      <div class="mockup-info"><h3>Peak Roofing &amp; Repair</h3><p>Landing page with before/after gallery and emergency contact CTA</p></div>
     </div>
     <div class="mockup-card">
       <div class="mockup-preview" style="background: linear-gradient(135deg, #134e5e, #71b280);">
@@ -262,7 +243,7 @@
       <div class="mockup-preview" style="background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);">
         <div class="browser-bar"><div class="browser-dot" style="background:#ff5f57"></div><div class="browser-dot" style="background:#febc2e"></div><div class="browser-dot" style="background:#28c840"></div></div>❄️
       </div>
-      <div class="mockup-info"><h3>CoolAir HVAC Services</h3><p>SEO-optimized site with service pages and 24/7 emergency call button</p></div>
+      <div class="mockup-info"><h3>CoolAir HVAC Services</h3><p>SEO-optimized site with service pages and 24/7 emergency text button</p></div>
     </div>
     <div class="mockup-card">
       <div class="mockup-preview" style="background: linear-gradient(135deg, #373b44, #4286f4);">
@@ -279,104 +260,32 @@
   </div>
 </section>
 
-<!-- BOOKING FORM -->
-<div id="booking">
-  <div class="booking-inner">
-    <div class="section-label" style="text-align:center;">Book a Consultation</div>
-    <div class="section-title" style="text-align:center; max-width:100%;">Get your free website quote</div>
-    <p style="color:var(--muted); text-align:center; margin-bottom:2rem;">Fill out the form below and we'll reach out within a few hours. No pressure, no commitment.</p>
-
-    <div class="form-card">
-      <div id="formContent">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Your Name *</label>
-            <input type="text" id="ownerName" placeholder="John Smith" required />
-          </div>
-          <div class="form-group">
-            <label>Business Name *</label>
-            <input type="text" id="businessName" placeholder="Smith Plumbing Co." required />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Phone Number *</label>
-            <input type="tel" id="phone" placeholder="(757) 000-0000" required />
-          </div>
-          <div class="form-group">
-            <label>Email Address *</label>
-            <input type="email" id="email" placeholder="john@smithplumbing.com" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>What type of business are you? *</label>
-          <select id="businessType">
-            <option value="">Select your industry...</option>
-            <option>Plumbing</option>
-            <option>Roofing</option>
-            <option>HVAC</option>
-            <option>Landscaping / Lawn Care</option>
-            <option>Painting</option>
-            <option>Electrical</option>
-            <option>General Contractor</option>
-            <option>Cleaning Services</option>
-            <option>Flooring</option>
-            <option>Masonry / Concrete</option>
-            <option>Tree Service</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Which package are you interested in?</label>
-          <select id="packageInterest">
-            <option value="">Not sure yet — let's talk</option>
-            <option value="Basic — $500">Basic — $500 (1-page site)</option>
-            <option value="Starter — $1,000">Starter — $1,000 (5-page site)</option>
-            <option value="Pro — $1,500">Pro — $1,500 (SEO + domain)</option>
-            <option value="Elite — $2,500">Elite — $2,500 (full service)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Tell us about your business</label>
-          <textarea id="message" placeholder="What do you do, where are you located, and what are you hoping your website does for you?"></textarea>
-        </div>
-        <button class="form-submit" id="submitBtn" onclick="submitBooking()">🚀 Request Free Consultation</button>
-      </div>
-
-      <div class="form-success" id="formSuccess">
-        <div class="success-icon">✅</div>
-        <h3>We got your request!</h3>
-        <p>Thanks for reaching out. Kinsley will be in touch within a few hours.</p>
-        <p style="margin-top:0.75rem;">In the meantime, feel free to text us at <a href="sms:7573345771" style="color:var(--green); font-weight:700;">(757) 334-5771</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- CONTACT -->
 <section id="contact">
-  <div style="background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 3rem 2rem; text-align: center; max-width: 600px; margin: 0 auto;">
-    <div class="section-label" style="justify-content: center; display: flex;">Get In Touch</div>
-    <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 1rem;">Prefer to reach out directly?</h2>
-    <p style="color: var(--muted); margin-bottom: 2rem;">We respond fast — usually within a few hours. 🚀</p>
-    <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 360px; margin: 0 auto;">
-      <a href="sms:7573345771" style="display:flex; align-items:center; justify-content:center; gap:0.75rem; background: var(--green); color: #000; padding: 1rem; border-radius: 12px; font-weight: 800; font-size: 1rem; text-decoration: none;">
+  <div class="contact-box">
+    <div class="section-label" style="justify-content:center; display:flex;">Contact</div>
+    <h2>Ready to get started?</h2>
+    <p>Reach out and we'll get back to you fast — usually same day. 🚀</p>
+    <div class="contact-btns">
+      <a href="mailto:kinsleybazemore@gmail.com" class="contact-btn-email" onclick="trackContact('email')">
+        📧 Email Us
+      </a>
+      <a href="sms:7573345771" class="contact-btn-sms" onclick="trackContact('sms')">
         💬 Text (757) 334-5771
       </a>
-      <a href="mailto:kinsleybazemore@gmail.com" style="display:flex; align-items:center; justify-content:center; gap:0.75rem; background: transparent; border: 1px solid var(--border); color: var(--text); padding: 1rem; border-radius: 12px; font-weight: 700; font-size: 0.95rem; text-decoration: none;">
-        📧 kinsleybazemore@gmail.com
-      </a>
     </div>
-    <p style="margin-top: 2rem; font-size: 0.8rem; color: var(--muted);">📍 100% remote — we work with businesses worldwide</p>
+    <p class="contact-note">📍 100% remote — we work with businesses worldwide</p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 SiteUp Agency · <a href="sms:7573345771">(757) 334-5771</a> · <a href="mailto:kinsleybazemore@gmail.com">kinsleybazemore@gmail.com</a> · <a href="https://siteupagency.com">siteupagency.com</a></p>
+  <p>© 2026 SiteUp Agency · <a href="sms:7573345771" onclick="trackContact('sms')">(757) 334-5771</a> · <a href="mailto:kinsleybazemore@gmail.com" onclick="trackContact('email')">kinsleybazemore@gmail.com</a> · <a href="https://siteupagency.com">siteupagency.com</a></p>
 </footer>
 
 <script>
+  window.scrollTo(0, 0);
+
   function openDrawer() {
     document.getElementById('drawer').classList.add('open');
     document.getElementById('drawerOverlay').classList.add('open');
@@ -385,48 +294,20 @@
     document.getElementById('drawer').classList.remove('open');
     document.getElementById('drawerOverlay').classList.remove('open');
   }
-  window.scrollTo(0, 0);
 
-  async function submitBooking() {
-    const name = document.getElementById('ownerName').value.trim();
-    const business = document.getElementById('businessName').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const industry = document.getElementById('businessType').value;
-    const pkg = document.getElementById('packageInterest').value || 'Not sure yet';
-    const message = document.getElementById('message').value.trim();
+  function trackContact(type) {
+    const BOT_TOKEN = '8650502700:AAFqCLCIJgJYXLYcEOJV_ZerhvIR3KcxXnI';
+    const CHAT_ID = '8495088312';
+    const emoji = type === 'email' ? '📧' : '💬';
+    const label = type === 'email' ? 'Email clicked' : 'Phone/Text clicked';
+    const detail = type === 'email' ? 'kinsleybazemore@gmail.com' : '(757) 334-5771';
+    const msg = `${emoji} CONTACT CLICK — SiteUp Agency\n\n🔔 Someone just tapped: ${label}\n📌 Link: ${detail}\n🌐 Page: siteupagency.com\n\n⚡ They're interested — be ready!`;
 
-    if (!name || !business || !phone || !email) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    try {
-      const res = await fetch('https://api.base44.com/api/apps/6a188b2648676353d29c9b67/entities/Lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'api_key': 'no-key' },
-        body: JSON.stringify({
-          owner_name: name,
-          business_name: business,
-          phone: phone,
-          email: email,
-          niche: pkg,
-          notes: (industry ? '[' + industry + '] ' : '') + message,
-          status: 'New'
-        })
-      });
-
-      document.getElementById('formContent').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    } catch(e) {
-      btn.disabled = false;
-      btn.textContent = '🚀 Request Free Consultation';
-      alert('Something went wrong. Please text us directly at (757) 334-5771');
-    }
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
+    });
   }
 </script>
 </body>
