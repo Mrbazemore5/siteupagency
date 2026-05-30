@@ -1263,10 +1263,11 @@ function submitOrder(){
   var orderDate = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   var balDue = (it.price||0) - 100;
 
-  fetch('https://superagent-d29c9b67.base44.app/functions/submitOrder',{
+  fetch('https://superagent-d29c9b67.base44.app/functions/siteup',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
+      type:'order',
       name:n, business:b, email:e, phone:ph,
       pkg:it.name, price:it.price,
       payment_method: lastPaymentMethod || 'Unknown',
