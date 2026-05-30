@@ -12,7 +12,6 @@
     :root { --green: #a3ff00; --dark: #0a0a0a; --card: #111; --border: #1e1e1e; --muted: #888; }
     body { font-family: 'Inter', sans-serif; background: var(--dark); color: #fff; line-height: 1.6; }
 
-    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -22,18 +21,11 @@
     }
     .logo { font-size: 1.3rem; font-weight: 900; }
     .logo span { color: var(--green); }
-    .nav-right { display: flex; gap: 1.25rem; }
-    .nav-right a {
-      color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;
-      transition: color 0.2s;
-    }
+    .nav-right { display: flex; gap: 1.25rem; align-items: center; }
+    .nav-right a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
     .nav-right a:hover { color: #fff; }
-    .nav-cta {
-      background: var(--green); color: #000 !important; padding: 0.45rem 1.1rem;
-      border-radius: 8px; font-weight: 700 !important; font-size: 0.85rem !important;
-    }
+    .nav-cta { background: var(--green); color: #000 !important; padding: 0.45rem 1.1rem; border-radius: 8px; font-weight: 700 !important; font-size: 0.85rem !important; }
 
-    /* HERO */
     .hero {
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center; text-align: center;
@@ -45,55 +37,33 @@
       padding: 0.35rem 1rem; border-radius: 100px;
       font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 1.5rem;
     }
-    .hero h1 {
-      font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 900;
-      line-height: 1.05; letter-spacing: -2px; max-width: 750px; margin-bottom: 1.25rem;
-    }
+    .hero h1 { font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -2px; max-width: 750px; margin-bottom: 1.25rem; }
     .hero h1 span { color: var(--green); }
     .hero p { color: var(--muted); font-size: 1.1rem; max-width: 480px; margin-bottom: 2.5rem; }
 
     .btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-    .btn-g {
-      background: var(--green); color: #000; padding: 0.9rem 1.75rem;
-      border-radius: 12px; font-weight: 800; font-size: 0.95rem; text-decoration: none;
-      transition: opacity 0.2s;
-    }
+    .btn-g { background: var(--green); color: #000; padding: 0.9rem 1.75rem; border-radius: 12px; font-weight: 800; font-size: 0.95rem; text-decoration: none; transition: opacity 0.2s; }
     .btn-g:hover { opacity: 0.85; }
-    .btn-o {
-      background: transparent; border: 1px solid var(--border); color: #fff;
-      padding: 0.9rem 1.75rem; border-radius: 12px; font-weight: 600;
-      font-size: 0.95rem; text-decoration: none; transition: border-color 0.2s;
-    }
+    .btn-o { background: transparent; border: 1px solid var(--border); color: #fff; padding: 0.9rem 1.75rem; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: border-color 0.2s; }
     .btn-o:hover { border-color: var(--green); }
 
-    /* STATS */
-    .stats {
-      display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
-      padding: 2.5rem 1.5rem;
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    }
+    .stats { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; padding: 2.5rem 1.5rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .stat { text-align: center; }
     .stat-n { font-size: 2rem; font-weight: 900; color: var(--green); }
     .stat-l { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
 
-    /* SECTION */
     .sec { padding: 5rem 1.5rem; max-width: 1060px; margin: 0 auto; }
     .sec-tag { color: var(--green); font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.6rem; }
     .sec-title { font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 0.75rem; }
     .sec-sub { color: var(--muted); font-size: 0.95rem; max-width: 460px; margin-bottom: 2.5rem; }
 
-    /* GRID */
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
-    .card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      padding: 1.75rem; transition: border-color 0.2s, transform 0.2s;
-    }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; transition: border-color 0.2s, transform 0.2s; }
     .card:hover { border-color: var(--green); transform: translateY(-2px); }
     .card-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
     .card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.4rem; }
     .card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
 
-    /* PORTFOLIO */
     .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
     .pcard { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
     .pcard:hover { border-color: var(--green); transform: translateY(-2px); }
@@ -104,68 +74,41 @@
     .pcard-body h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
     .pcard-body p { font-size: 0.78rem; color: var(--muted); }
 
-    /* CONTACT */
-    .contact-wrap { max-width: 480px; margin: 0 auto; text-align: center; }
-    .contact-wrap h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 0.75rem; }
-    .contact-wrap p { color: var(--muted); margin-bottom: 2rem; }
-    .contact-btns { display: flex; flex-direction: column; gap: 0.85rem; }
-    .cbtn-email {
-      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-      background: var(--green); color: #000; padding: 1rem 1.5rem;
-      border-radius: 12px; font-weight: 800; font-size: 0.95rem; text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .cbtn-email:hover { opacity: 0.85; }
-    .cbtn-sms {
-      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-      background: transparent; border: 1px solid var(--border); color: #fff;
-      padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.95rem;
-      text-decoration: none; transition: border-color 0.2s;
-    }
-    .cbtn-sms:hover { border-color: var(--green); }
-    .contact-note { margin-top: 1.25rem; font-size: 0.78rem; color: var(--muted); }
-
-
-    /* PACKAGES */
     .pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
-    .pkg-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-      padding: 1.75rem; display: flex; flex-direction: column; gap: 0.6rem;
-      transition: border-color 0.2s, transform 0.2s; position: relative;
-    }
+    .pkg-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.6rem; transition: border-color 0.2s, transform 0.2s; position: relative; }
     .pkg-card:hover { border-color: var(--green); transform: translateY(-2px); }
     .pkg-popular { border-color: var(--green); }
-    .pkg-badge {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--green); color: #000; font-size: 0.72rem; font-weight: 800;
-      padding: 0.2rem 0.85rem; border-radius: 100px; white-space: nowrap;
-    }
+    .pkg-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--green); color: #000; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.85rem; border-radius: 100px; white-space: nowrap; }
     .pkg-name { font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
     .pkg-price { font-size: 2.2rem; font-weight: 900; color: #fff; letter-spacing: -1px; }
     .pkg-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
     .pkg-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
     .pkg-list li { font-size: 0.85rem; color: #ccc; }
-    .pkg-btn {
-      display: block; text-align: center; margin-top: 1.25rem;
-      background: var(--green); color: #000; padding: 0.75rem 1rem;
-      border-radius: 10px; font-weight: 800; font-size: 0.9rem; text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .pkg-btn:hover { opacity: 0.85; }
+    .pkg-btns { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.25rem; }
+    .pkg-email { display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--green); color: #000; padding: 0.75rem 1rem; border-radius: 10px; font-weight: 800; font-size: 0.88rem; text-decoration: none; transition: opacity 0.2s; }
+    .pkg-email:hover { opacity: 0.85; }
+    .pkg-sms { display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: transparent; border: 1px solid var(--border); color: #fff; padding: 0.75rem 1rem; border-radius: 10px; font-weight: 600; font-size: 0.88rem; text-decoration: none; transition: border-color 0.2s; }
+    .pkg-sms:hover { border-color: var(--green); }
 
-    /* FOOTER */
+    .contact-wrap { max-width: 480px; margin: 0 auto; text-align: center; }
+    .contact-wrap h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 0.75rem; }
+    .contact-wrap p { color: var(--muted); margin-bottom: 2rem; }
+    .contact-btns { display: flex; flex-direction: column; gap: 0.85rem; }
+    .cbtn-email { display: flex; align-items: center; justify-content: center; gap: 0.6rem; background: var(--green); color: #000; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 800; font-size: 0.95rem; text-decoration: none; transition: opacity 0.2s; }
+    .cbtn-email:hover { opacity: 0.85; }
+    .cbtn-sms { display: flex; align-items: center; justify-content: center; gap: 0.6rem; background: transparent; border: 1px solid var(--border); color: #fff; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: border-color 0.2s; }
+    .cbtn-sms:hover { border-color: var(--green); }
+    .contact-note { margin-top: 1.25rem; font-size: 0.78rem; color: var(--muted); }
+
     footer { border-top: 1px solid var(--border); padding: 1.75rem 1.5rem; text-align: center; color: var(--muted); font-size: 0.82rem; }
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: #fff; }
 
-    @media (max-width: 640px) {
-      .nav-right a:not(.nav-cta) { display: none; }
-    }
+    @media (max-width: 640px) { .nav-right a:not(.nav-cta) { display: none; } }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="logo">Site<span>Up</span></div>
   <div class="nav-right">
@@ -181,8 +124,8 @@
   <h1>Get a website that<br/><span>gets you hired</span></h1>
   <p>Fast, clean, affordable websites for contractors and small businesses. Launched in 3–5 days. Starting at $500.</p>
   <div class="btns">
-    <a href="mailto:kinsleybazemore@gmail.com" class="btn-g" onclick="trackContact('email')">📧 Email Us</a>
-    <a href="sms:7573345771" class="btn-o" onclick="trackContact('sms')">💬 Text (757) 334-5771</a>
+    <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0AAdditional%20info%3A%20%5BTell%20us%20a%20bit%20about%20your%20business%20and%20what%20you%20need%5D" class="btn-g" onclick="trackContact('email')">📧 Email Us</a>
+    <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20the%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%20package." class="btn-o" onclick="trackContact('sms')">💬 Text (757) 334-5771</a>
   </div>
 </div>
 
@@ -204,7 +147,7 @@
     <div class="card"><div class="card-icon">💰</div><h3>Affordable</h3><p>Starting at $500. No monthly fees, ever. You own it outright.</p></div>
     <div class="card"><div class="card-icon">📱</div><h3>Mobile-first</h3><p>Looks perfect on every phone, tablet, and desktop.</p></div>
     <div class="card"><div class="card-icon">🎯</div><h3>Built to convert</h3><p>Designed to turn visitors into calls, quotes, and customers.</p></div>
-    <div class="card"><div class="card-icon">🔍</div><h3>SEO ready</h3><p>Google-friendly from day one. Pro & Elite get full SEO setup.</p></div>
+    <div class="card"><div class="card-icon">🔍</div><h3>SEO ready</h3><p>Google-friendly from day one. Pro &amp; Elite get full SEO setup.</p></div>
     <div class="card"><div class="card-icon">🤝</div><h3>Direct access</h3><p>You talk to us — not a call center. Real people, fast replies.</p></div>
   </div>
 </div>
@@ -215,67 +158,35 @@
   <div class="sec-title">Our work</div>
   <p class="sec-sub">Real sites built for real contractors.</p>
   <div class="grid-2">
-    <div class="pcard">
-      <div class="pcard-img" style="background:linear-gradient(135deg,#0f2027,#2c5364)">
-        <div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🔧
-      </div>
-      <div class="pcard-body"><h3>Smith Plumbing Co.</h3><p>5-page site with quote form & service areas</p></div>
-    </div>
-    <div class="pcard">
-      <div class="pcard-img" style="background:linear-gradient(135deg,#1a1a2e,#0f3460)">
-        <div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🏠
-      </div>
-      <div class="pcard-body"><h3>Peak Roofing &amp; Repair</h3><p>Landing page with gallery & emergency CTA</p></div>
-    </div>
-    <div class="pcard">
-      <div class="pcard-img" style="background:linear-gradient(135deg,#134e5e,#71b280)">
-        <div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🌿
-      </div>
-      <div class="pcard-body"><h3>Green Edge Landscaping</h3><p>Seasonal packages, gallery & online booking</p></div>
-    </div>
-    <div class="pcard">
-      <div class="pcard-img" style="background:linear-gradient(135deg,#0f0c29,#24243e)">
-        <div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>❄️
-      </div>
-      <div class="pcard-body"><h3>CoolAir HVAC Services</h3><p>SEO-optimized with 24/7 contact button</p></div>
-    </div>
-    <div class="pcard">
-      <div class="pcard-img" style="background:linear-gradient(135deg,#373b44,#4286f4)">
-        <div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🎨
-      </div>
-      <div class="pcard-body"><h3>Elite Coat Painters</h3><p>Portfolio with project photos & quote form</p></div>
-    </div>
-    <div class="pcard">
-      <div class="pcard-img" style="background:linear-gradient(135deg,#200122,#6f0000)">
-        <div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🧱
-      </div>
-      <div class="pcard-body"><h3>Cornerstone Masonry</h3><p>Project showcase with free estimate form</p></div>
-    </div>
+    <div class="pcard"><div class="pcard-img" style="background:linear-gradient(135deg,#0f2027,#2c5364)"><div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🔧</div><div class="pcard-body"><h3>Smith Plumbing Co.</h3><p>5-page site with quote form &amp; service areas</p></div></div>
+    <div class="pcard"><div class="pcard-img" style="background:linear-gradient(135deg,#1a1a2e,#0f3460)"><div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🏠</div><div class="pcard-body"><h3>Peak Roofing &amp; Repair</h3><p>Landing page with gallery &amp; emergency CTA</p></div></div>
+    <div class="pcard"><div class="pcard-img" style="background:linear-gradient(135deg,#134e5e,#71b280)"><div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🌿</div><div class="pcard-body"><h3>Green Edge Landscaping</h3><p>Seasonal packages, gallery &amp; online booking</p></div></div>
+    <div class="pcard"><div class="pcard-img" style="background:linear-gradient(135deg,#0f0c29,#24243e)"><div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>❄️</div><div class="pcard-body"><h3>CoolAir HVAC Services</h3><p>SEO-optimized with 24/7 contact button</p></div></div>
+    <div class="pcard"><div class="pcard-img" style="background:linear-gradient(135deg,#373b44,#4286f4)"><div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🎨</div><div class="pcard-body"><h3>Elite Coat Painters</h3><p>Portfolio with project photos &amp; quote form</p></div></div>
+    <div class="pcard"><div class="pcard-img" style="background:linear-gradient(135deg,#200122,#6f0000)"><div class="pcard-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div></div>🧱</div><div class="pcard-body"><h3>Cornerstone Masonry</h3><p>Project showcase with free estimate form</p></div></div>
   </div>
 </div>
 
-
-<!-- SERVICES / PACKAGES -->
+<!-- SERVICES + PACKAGES -->
 <div class="sec" id="services">
   <div class="sec-tag">What We Do</div>
   <div class="sec-title">Services &amp; Pricing</div>
   <p class="sec-sub">Everything you need to get online and start winning more jobs.</p>
-
-  <!-- WHAT WE DO -->
-  <div class="grid-3" style="margin-bottom:3rem;">
-    <div class="card"><div class="card-icon">🎨</div><h3>Custom Web Design</h3><p>We design your site from scratch — no templates. Clean, professional, and built around your business.</p></div>
-    <div class="card"><div class="card-icon">📝</div><h3>Copywriting</h3><p>We write all the content for you. No blank pages — we tell your story in a way that gets customers calling.</p></div>
-    <div class="card"><div class="card-icon">🌐</div><h3>Domain &amp; Hosting Setup</h3><p>We handle your domain registration and hosting setup so you don't have to figure any of it out.</p></div>
-    <div class="card"><div class="card-icon">🔍</div><h3>SEO Optimization</h3><p>We set up your site so Google can find it — keywords, page titles, descriptions, and local SEO basics.</p></div>
-    <div class="card"><div class="card-icon">📱</div><h3>Mobile Optimization</h3><p>Every site we build looks and works perfectly on phones — where most of your customers are searching.</p></div>
-    <div class="card"><div class="card-icon">🛠️</div><h3>Edits &amp; Updates</h3><p>Need to change something after launch? We've got you. Pro &amp; Elite clients get 30 days of free updates.</p></div>
+  <div class="grid-3" style="margin-bottom:3.5rem;">
+    <div class="card"><div class="card-icon">🎨</div><h3>Custom Web Design</h3><p>Designed from scratch around your business — no generic templates.</p></div>
+    <div class="card"><div class="card-icon">📝</div><h3>Copywriting</h3><p>We write all the content for you. Your story, told in a way that gets customers calling.</p></div>
+    <div class="card"><div class="card-icon">🌐</div><h3>Domain &amp; Hosting</h3><p>We handle domain setup and hosting so you don't have to figure any of it out.</p></div>
+    <div class="card"><div class="card-icon">🔍</div><h3>SEO Optimization</h3><p>Built so Google can find you — keywords, titles, descriptions, and local SEO.</p></div>
+    <div class="card"><div class="card-icon">📱</div><h3>Mobile Optimization</h3><p>Looks and works perfectly on phones — where most of your customers are searching.</p></div>
+    <div class="card"><div class="card-icon">🛠️</div><h3>Edits &amp; Updates</h3><p>Need a change after launch? Pro &amp; Elite clients get 30 days of free updates.</p></div>
   </div>
 
-  <!-- PACKAGES -->
   <div class="sec-tag">Packages</div>
   <div class="sec-title" style="margin-bottom:0.5rem;">Pick your plan</div>
-  <p class="sec-sub">$100 deposit to get started. Balance due when your site goes live.</p>
+  <p class="sec-sub">$100 deposit to start. Balance due when your site goes live.</p>
   <div class="pkg-grid">
+
+    <!-- BASIC -->
     <div class="pkg-card">
       <div class="pkg-name">Basic</div>
       <div class="pkg-price">$500</div>
@@ -286,11 +197,13 @@
         <li>✅ Contact button</li>
         <li>✅ Live in 3–5 days</li>
       </ul>
-      <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1.25rem;">
-        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0A%5BTell%20us%20anything%20else%20about%20your%20business%5D" class="pkg-btn" onclick="trackContact('email')" style="margin-top:0;">📧 Email Us</a>
-        <a href="sms:7573345771?body=Hi%20Kinsley!%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%20and%20I%27m%20interested%20in%20the%20%5BPackage%20or%20Not%20Sure%5D%20package." class="pkg-btn" onclick="trackContact('sms')" style="margin-top:0;background:transparent;border:1px solid var(--border);color:#fff;">💬 Text Us</a>
+      <div class="pkg-btns">
+        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20Basic%20%24500%0A%0AAdditional%20info%3A%20%5BTell%20us%20a%20bit%20about%20your%20business%20and%20what%20you%20need%5D" class="pkg-email" onclick="trackContact('email')">📧 Email Us</a>
+        <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20the%20Basic%20%24500%20package." class="pkg-sms" onclick="trackContact('sms')">💬 Text Us</a>
       </div>
     </div>
+
+    <!-- STARTER -->
     <div class="pkg-card pkg-popular">
       <div class="pkg-badge">Most Popular</div>
       <div class="pkg-name">Starter</div>
@@ -298,16 +211,18 @@
       <div class="pkg-desc">A full site that covers everything.</div>
       <ul class="pkg-list">
         <li>✅ 5-page website</li>
-        <li>✅ Services, About, Contact pages</li>
-        <li>✅ Quote request form</li>
+        <li>✅ Services, About &amp; Contact pages</li>
+        <li>✅ Quote request button</li>
         <li>✅ Google Maps embed</li>
         <li>✅ Mobile-friendly design</li>
       </ul>
-      <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1.25rem;">
-        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0A%5BTell%20us%20anything%20else%20about%20your%20business%5D" class="pkg-btn" onclick="trackContact('email')" style="margin-top:0;">📧 Email Us</a>
-        <a href="sms:7573345771?body=Hi%20Kinsley!%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%20and%20I%27m%20interested%20in%20the%20%5BPackage%20or%20Not%20Sure%5D%20package." class="pkg-btn" onclick="trackContact('sms')" style="margin-top:0;background:transparent;border:1px solid var(--border);color:#fff;">💬 Text Us</a>
+      <div class="pkg-btns">
+        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20Starter%20%241%2C000%0A%0AAdditional%20info%3A%20%5BTell%20us%20a%20bit%20about%20your%20business%20and%20what%20you%20need%5D" class="pkg-email" onclick="trackContact('email')">📧 Email Us</a>
+        <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20the%20Starter%20%241%2C000%20package." class="pkg-sms" onclick="trackContact('sms')">💬 Text Us</a>
       </div>
     </div>
+
+    <!-- PRO -->
     <div class="pkg-card">
       <div class="pkg-name">Pro</div>
       <div class="pkg-price">$1,500</div>
@@ -319,11 +234,13 @@
         <li>✅ Google Business setup</li>
         <li>✅ 30 days free updates</li>
       </ul>
-      <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1.25rem;">
-        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0A%5BTell%20us%20anything%20else%20about%20your%20business%5D" class="pkg-btn" onclick="trackContact('email')" style="margin-top:0;">📧 Email Us</a>
-        <a href="sms:7573345771?body=Hi%20Kinsley!%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%20and%20I%27m%20interested%20in%20the%20%5BPackage%20or%20Not%20Sure%5D%20package." class="pkg-btn" onclick="trackContact('sms')" style="margin-top:0;background:transparent;border:1px solid var(--border);color:#fff;">💬 Text Us</a>
+      <div class="pkg-btns">
+        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20Pro%20%241%2C500%0A%0AAdditional%20info%3A%20%5BTell%20us%20a%20bit%20about%20your%20business%20and%20what%20you%20need%5D" class="pkg-email" onclick="trackContact('email')">📧 Email Us</a>
+        <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20the%20Pro%20%241%2C500%20package." class="pkg-sms" onclick="trackContact('sms')">💬 Text Us</a>
       </div>
     </div>
+
+    <!-- ELITE -->
     <div class="pkg-card">
       <div class="pkg-name">Elite</div>
       <div class="pkg-price">$2,500</div>
@@ -335,11 +252,12 @@
         <li>✅ Social media setup</li>
         <li>✅ Priority support</li>
       </ul>
-      <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1.25rem;">
-        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0A%5BTell%20us%20anything%20else%20about%20your%20business%5D" class="pkg-btn" onclick="trackContact('email')" style="margin-top:0;">📧 Email Us</a>
-        <a href="sms:7573345771?body=Hi%20Kinsley!%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%20and%20I%27m%20interested%20in%20the%20%5BPackage%20or%20Not%20Sure%5D%20package." class="pkg-btn" onclick="trackContact('sms')" style="margin-top:0;background:transparent;border:1px solid var(--border);color:#fff;">💬 Text Us</a>
+      <div class="pkg-btns">
+        <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20Elite%20%242%2C500%0A%0AAdditional%20info%3A%20%5BTell%20us%20a%20bit%20about%20your%20business%20and%20what%20you%20need%5D" class="pkg-email" onclick="trackContact('email')">📧 Email Us</a>
+        <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20the%20Elite%20%242%2C500%20package." class="pkg-sms" onclick="trackContact('sms')">💬 Text Us</a>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -350,30 +268,29 @@
     <h2>Let's build your site</h2>
     <p>Reach out and we'll get back to you same day. No pressure.</p>
     <div class="contact-btns">
-      <a href="mailto:kinsleybazemore@gmail.com" class="cbtn-email" onclick="trackContact('email')">📧 kinsleybazemore@gmail.com</a>
-      <a href="sms:7573345771" class="cbtn-sms" onclick="trackContact('sms')">💬 Text (757) 334-5771</a>
+      <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0AAdditional%20info%3A%20%5BTell%20us%20a%20bit%20about%20your%20business%20and%20what%20you%20need%5D" class="cbtn-email" onclick="trackContact('email')">📧 kinsleybazemore@gmail.com</a>
+      <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20the%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%20package." class="cbtn-sms" onclick="trackContact('sms')">💬 Text (757) 334-5771</a>
     </div>
     <p class="contact-note">📍 100% remote — we work with businesses worldwide</p>
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
   © 2026 SiteUp Agency &nbsp;·&nbsp;
-  <a href="sms:7573345771" onclick="trackContact('sms')">(757) 334-5771</a> &nbsp;·&nbsp;
-  <a href="mailto:kinsleybazemore@gmail.com" onclick="trackContact('email')">kinsleybazemore@gmail.com</a>
+  <a href="sms:7573345771?body=Hi%20Kinsley%21%20My%20name%20is%20%5BYour%20Name%5D%2C%20my%20business%20is%20%5BBusiness%20Name%5D%2C%20and%20I%27m%20interested%20in%20getting%20a%20website." onclick="trackContact('sms')">(757) 334-5771</a> &nbsp;·&nbsp;
+  <a href="mailto:kinsleybazemore@gmail.com?subject=Website%20Inquiry%20%E2%80%94%20SiteUp%20Agency&body=Hi%20Kinsley%2C%0A%0AMy%20name%20is%20%5BYour%20Name%5D%0ABusiness%3A%20%5BYour%20Business%20Name%5D%0APackage%20I%27m%20interested%20in%3A%20%5BBasic%20%24500%20%2F%20Starter%20%241%2C000%20%2F%20Pro%20%241%2C500%20%2F%20Elite%20%242%2C500%20%2F%20Not%20sure%5D%0A%0AAdditional%20info%3A%20%5BTell%20us%20a%20bit%20about%20your%20business%20and%20what%20you%20need%5D" onclick="trackContact('email')">kinsleybazemore@gmail.com</a>
 </footer>
 
 <script>
   window.scrollTo(0,0);
 
   function trackContact(type) {
-    const BOT = '8650502700:AAFqCLCIJgJYXLYcEOJV_ZerhvIR3KcxXnI';
+    const BOT  = '8650502700:AAFqCLCIJgJYXLYcEOJV_ZerhvIR3KcxXnI';
     const CHAT = '8495088312';
-    const msg = type === 'email'
+    const msg  = type === 'email'
       ? '📧 EMAIL CLICK — SiteUp Agency\n\nSomeone just tapped your email link on siteupagency.com\n\n⚡ Check your inbox — they may be reaching out now!'
       : '💬 TEXT CLICK — SiteUp Agency\n\nSomeone just tapped your phone number on siteupagency.com\n\n⚡ Watch for a text from a new number!';
-    fetch(`https://api.telegram.org/bot${BOT}/sendMessage`, {
+    fetch('https://api.telegram.org/bot' + BOT + '/sendMessage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: CHAT, text: msg })
