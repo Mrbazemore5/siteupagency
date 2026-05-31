@@ -9,7 +9,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--blue:#0057b8;--ice:#e8f4ff;--dark:#0a0f1e;--text:#1e2a3a;--muted:#5a6a7e;--light:#f0f7ff;--border:#d0e4f7}
 body{font-family:'Inter',sans-serif;color:var(--text);background:#fff}
-nav{background:#fff;border-bottom:1px solid var(--border);padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,87,184,.08)}
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:38px;z-index:100;box-shadow:0 2px 10px rgba(0,87,184,.08)}
 .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
 .logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#0057b8,#0088d4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
 .logo-text{font-size:1.05rem;font-weight:800;color:var(--dark)}
@@ -77,8 +77,15 @@ footer{background:var(--dark);padding:2.5rem 2rem;text-align:center;color:#3a4a5
 @media(max-width:768px){.plans-grid{grid-template-columns:1fr;max-width:360px;margin:3rem auto 0}.nav-links{display:none}}
 </style>
 </head>
-<body>
-<div class="emergency-banner">🚨 24/7 Emergency Service Available — Call Now: (757) 334-5771</div>
+<body><div style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#a3ff00;color:#000;text-align:center;padding:.55rem 1rem;font-size:.78rem;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:1rem;">
+  🎨 DEMO SITE — Built by <a href="https://siteupagency.com" target="_blank" style="color:#000;font-weight:900;text-decoration:underline;">SiteUp Agency</a> · This is a sample portfolio site, not a real business. &nbsp;<a href="https://siteupagency.com#contact" target="_blank" style="background:#000;color:#a3ff00;padding:.25rem .75rem;border-radius:100px;text-decoration:none;font-size:.72rem;font-weight:800;">Get Your Site →</a>
+</div>
+<div style="height:38px"></div>
+<div style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#a3ff00;color:#000;text-align:center;padding:.55rem 1rem;font-size:.78rem;font-weight:700;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:1rem;">
+  🎨 DEMO SITE — Built by <a href="https://siteupagency.com" target="_blank" style="color:#000;font-weight:900;text-decoration:underline;">SiteUp Agency</a> · This is a sample portfolio site, not a real business. &nbsp;<a href="https://siteupagency.com#contact" target="_blank" style="background:#000;color:#a3ff00;padding:.25rem .75rem;border-radius:100px;text-decoration:none;font-size:.72rem;font-weight:800;">Get Your Site →</a>
+</div>
+<div style="height:38px"></div>
+<div class="emergency-banner">🚨 24/7 Emergency Service Available — Call Now: (555) 867-5309</div>
 <nav>
   <a class="logo" href="#"><div class="logo-icon">❄️</div><span class="logo-text">CoolAir <span>HVAC</span></span></a>
   <ul class="nav-links"><li><a href="#services">Services</a></li><li><a href="#plans">Plans</a></li><li><a href="#reviews">Reviews</a></li></ul>
@@ -92,7 +99,7 @@ footer{background:var(--dark);padding:2.5rem 2rem;text-align:center;color:#3a4a5
       <p>Installation, repair, and maintenance for all makes and models. Serving Portsmouth, Chesapeake, and Suffolk for over 15 years. 24/7 emergency response.</p>
       <div class="hero-btns">
         <a href="#contact" class="btn-blue">Schedule Service →</a>
-        <a href="tel:7573345771" class="btn-emergency">🚨 Emergency Line</a>
+        <a href="tel:5558675309" class="btn-emergency">🚨 Emergency Line</a>
       </div>
       <div class="hero-badges">
         <div class="trust-badge">✓ NATE Certified Technicians</div>
@@ -162,7 +169,7 @@ footer{background:var(--dark);padding:2.5rem 2rem;text-align:center;color:#3a4a5
 <div class="cta-section" id="contact">
   <h2>Need HVAC Service Today?</h2>
   <p>Same-day service available. 24/7 emergency line always open.</p>
-  <a href="tel:7573345771" class="btn-white">📞 Call (757) 334-5771</a>
+  <a href="tel:5558675309" class="btn-white">📞 Call (555) 867-5309</a>
 </div>
 <footer>© 2026 CoolAir HVAC Services · Portsmouth, VA · NATE Certified · Licensed & Insured</footer>
 </body>
