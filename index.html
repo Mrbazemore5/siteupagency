@@ -905,25 +905,92 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 let chatOpen = false;
 let chatHistory = [];
 
-const BOT_RESPONSES = {
-  price: ["Our packages start at just $69 to kick off — and you don't pay that until you've already seen your free preview and love it. 🙌\n\nPackages:\n• Basic — $500 total (1-page site)\n• Starter — $1,000 (5-page site)\n• Pro — $1,500 (SEO + domain)\n• Elite — $2,500 (full service)\n\nWant me to grab you a free preview?"],
-  preview: ["Here's how it works: we build a real working version of your site before you pay a single dollar. If you love it, pay $69 to kick off the full build. If not — walk away, no invoice. 💯\n\nFill out the form at the bottom of the page to get started!"],
-  time: ["Most sites are delivered within 3 business days of kickoff. ⚡ Rush builds available on request."],
-  own: ["Yes — 100% yours. At launch we hand you everything: domain login, hosting access, all the files. No lock-in, ever."],
-  change: ["Just text us! No tickets, no portals. After launch you text a change and it's done same day. 📱"],
-  contact: ["You can reach us by:\n• Filling out the form below 👇\n• Emailing kinsleybazemore@gmail.com\n• Or just reply here and I'll get you sorted!"],
-  default: ["Great question! The best next step is filling out the short form at the bottom of the page — takes 60 seconds and gets your free preview started. No payment required. 🚀", "I'd love to help with that! Drop your info in the form below and we'll reach out via text within 24 hours. 💬", "Totally get it. Here's the short version: free preview first, you approve it, then pay $69 to kick off. You own everything at the end. Sound good? 🙌"]
-};
-
 function getResponse(msg) {
   const m = msg.toLowerCase();
-  if (m.match(/price|cost|how much|pricing|package|pay|dollar|\$/)) return BOT_RESPONSES.price[0];
-  if (m.match(/preview|how.*work|process|start/)) return BOT_RESPONSES.preview[0];
-  if (m.match(/how long|time|days|fast|quick|deliver/)) return BOT_RESPONSES.time[0];
-  if (m.match(/own|mine|keep|domain|files|lock/)) return BOT_RESPONSES.own[0];
-  if (m.match(/change|update|edit|fix|revision/)) return BOT_RESPONSES.change[0];
-  if (m.match(/contact|reach|email|phone|talk/)) return BOT_RESPONSES.contact[0];
-  return BOT_RESPONSES.default[Math.floor(Math.random() * BOT_RESPONSES.default.length)];
+
+  // OWNER / WHO
+  if (m.match(/who.*own|who.*run|who.*behind|who.*built|who.*creat|who.*found|who.*start|owner|founder|your name|your team|who are you|who made/))
+    return "SiteUp Agency was founded by Kinsley Bazemore. 👋 Kinsley started the agency to help contractors and local businesses get professional websites without the headache — fast, affordable, and with zero tech stress on your end.";
+
+  // WHEN FOUNDED / HOW LONG
+  if (m.match(/when.*start|when.*found|when.*creat|when.*made|how long.*around|how long.*open|how long.*business|how old|year.*start|start.*year/))
+    return "SiteUp Agency launched in 2026. We're new, hungry, and we out-work everyone. 💪 Being newer means we care more about every single client — your project isn't just a number to us.";
+
+  // LOCATION
+  if (m.match(/where.*located|where.*based|your location|what city|what state|address|local|virginia|remote/))
+    return "We're 100% remote and serve clients nationwide — so it doesn't matter where you're located. 🌎 We work with businesses across the US entirely online. No need to meet in person.";
+
+  // WHAT DO YOU DO
+  if (m.match(/what do you do|what.*offer|what.*service|what.*sell|what.*provide|tell me about|explain|describe/))
+    return "We build professional websites for contractors and local businesses. 🏗️\n\nHere's the deal:\n• We build a free preview of your site first — no payment required\n• You approve it, then pay $69 to kick off the full build\n• Site is live in 3 business days\n• You own everything at launch\n\nServices include custom design, SEO, mobile optimization, domain setup, and ongoing updates.";
+
+  // PRICING
+  if (m.match(/price|cost|how much|pricing|package|\$|afford|cheap|expens|rates|charge/))
+    return "Here's exactly what it costs:\n\n💰 Free Preview — $0 (you see your site before paying anything)\n⚡ Kickoff Fee — $69 (paid only after you approve the preview)\n🚀 Full Balance — due at launch:\n   • Basic: $500 total (1-page)\n   • Starter: $1,000 (5-page)\n   • Pro: $1,500 (SEO + domain)\n   • Elite: $2,500 (full service)\n\nDon't love the preview? Walk away — you've paid nothing.";
+
+  // FREE PREVIEW
+  if (m.match(/preview|free.*site|see.*site|before.*pay|sample|demo|example/))
+    return "The free preview is exactly what it sounds like — we build a real, working version of your website before you pay a single dollar. 🎁\n\nIt has your business name, your services, your area. You review it, tell us what to tweak, and only pay $69 to kick off the full build after you say yes. If you don't like it — no charge, no hard feelings.";
+
+  // HOW LONG / TIMELINE
+  if (m.match(/how long|timeline|turnaround|days|fast|quick|when.*ready|deliver|rush/))
+    return "⚡ First look at your real site: 3 business days after kickoff.\n\nHere's the full timeline:\n1. Fill out the form → we confirm by text\n2. We build your free preview\n3. You approve it\n4. Pay $69 kickoff fee\n5. Send us your logo & photos\n6. Live site in 3 business days\n\nRush builds available if you need it faster — just mention it!";
+
+  // OWNERSHIP
+  if (m.match(/own|mine|keep|domain|files|lock|contract|stuck|cancel/))
+    return "Yes — everything is 100% yours at launch. 🔑\n\nWe hand you:\n• Your domain login\n• Hosting access\n• All source files and code\n\nNo lock-in, no monthly contract, no holding anything hostage. Once you pay the final balance — it's yours forever.";
+
+  // CHANGES / UPDATES
+  if (m.match(/change|update|edit|fix|revision|after.*launch|ongoing|support|maintain/))
+    return "After your site launches, just text us. 📱 No tickets, no dashboards, no portals.\n\nNeed to update your hours? Add a new service? Swap a photo? Send a text and it's done same day.\n\nWe also offer ongoing maintenance plans if you want us to handle everything long-term.";
+
+  // PAYMENT METHOD
+  if (m.match(/pay.*how|cashapp|venmo|card|credit|payment method|how.*pay/))
+    return "We accept:\n💳 CashApp — $kinsleybazemore8\n💳 Venmo — @Mrbazemore\n\nThe $69 kickoff deposit is all you pay upfront. The remaining balance is due when your site is complete and you've approved it. Simple as that.";
+
+  // REFUND
+  if (m.match(/refund|money back|guarant|risk|cancel/))
+    return "Our model eliminates the risk entirely. 🛡️\n\nYou see your free preview before paying anything. Don't like it? Walk away — no charge.\n\nAfter the $69 kickoff, we work until you're 100% satisfied before collecting the final balance. You never pay for something you haven't approved.";
+
+  // SEO
+  if (m.match(/seo|google|rank|search|traffic|found online/))
+    return "Yes, SEO is baked in! 🔍\n\nEvery site we build includes:\n• SEO-optimized page titles & descriptions\n• Fast load speeds (Google loves this)\n• Mobile-first design\n• Schema markup\n• Google-indexable sitemap\n\nOur Pro and Elite packages include a full SEO foundation with keyword targeting for your area and trade.";
+
+  // MOBILE
+  if (m.match(/mobile|phone|tablet|responsive|iphone|android/))
+    return "Every single site we build is fully mobile-optimized. 📱\n\nOver 70% of people searching for contractors are on their phones. Your site will look sharp and load fast on every device — phone, tablet, and desktop.";
+
+  // CONTACT
+  if (m.match(/contact|reach|email|call|phone|talk|speak|get in touch/))
+    return "Best ways to reach us:\n\n📧 Email: kinsleybazemore@gmail.com\n📝 Form: scroll to the bottom of this page\n\nWe typically respond within a few hours. For the fastest response, fill out the form below — we'll text you back! 💬";
+
+  // EXAMPLES / PORTFOLIO
+  if (m.match(/example|portfolio|work|past.*project|seen.*site|show me|sample/))
+    return "Check out our portfolio section above — you can click into fully built sample sites for:\n\n🏠 Peak Ridge Roofing\n🌿 Green Edge Lawn Care\n🎨 Two Koats Painting\n❄️ CoolAir HVAC\n\nEach one is a real, full website we built as a demo. Click any card to see the live site! 👆";
+
+  // TRUST / LEGIT
+  if (m.match(/legit|real|trust|scam|fake|verified|review|proof/))
+    return "Totally fair to ask! 💯\n\nHere's why we're legit:\n• Free preview model — you see the site before paying anything\n• You own all files at launch — no lock-in\n• Real portfolio sites you can click through right now\n• We only collect payment after you approve your site\n\nStill unsure? Fill out the form — zero risk to get your free preview started.";
+
+  // NICHE / INDUSTRIES
+  if (m.match(/niche|industry|type.*business|kind.*business|who.*for|who.*work with|contractor|plumb|roof|hvac|landscap|paint|electric/))
+    return "We specialize in contractors and local service businesses:\n\n🔨 Roofers\n🌿 Landscapers & Lawn Care\n🎨 Painters\n❄️ HVAC Companies\n🔧 Plumbers\n⚡ Electricians\n🚿 Pressure Washers\n🏗️ General Contractors\n\n...and really any local business that needs more customers online. If you serve a local area, we can build something that gets you found.";
+
+  // HELLO / GREETINGS
+  if (m.match(/^(hi|hey|hello|sup|yo|what'?s up|howdy|hiya|good morning|good afternoon|good evening).{0,10}$/))
+    return "Hey! 👋 Welcome to SiteUp Agency. I can answer pretty much anything — pricing, how it works, who we are, turnaround time, you name it. What do you want to know?";
+
+  // THANKS
+  if (m.match(/thank|thanks|appreciate|helpful|great|awesome|perfect|love it/))
+    return "Of course! 😊 That's what I'm here for. Ready to get your free preview started? Just fill out the quick form at the bottom — takes about 60 seconds. No payment needed!";
+
+  // DEFAULT
+  const defaults = [
+    "Good question! I can answer pretty much anything about SiteUp Agency — pricing, timeline, who we are, how the free preview works, SEO, you name it. What do you want to know? 🙌",
+    "Happy to help! Try asking me about pricing, how the free preview works, who founded the agency, turnaround time — anything really. 💬",
+    "I might need a bit more context on that one! But feel free to ask about our packages, process, who we are, or how to get started. 🚀"
+  ];
+  return defaults[Math.floor(Math.random() * defaults.length)];
 }
 
 function toggleChat() {
@@ -984,6 +1051,7 @@ function autoResize(el) {
 
 </body>
 </html>
+
 
 
 
