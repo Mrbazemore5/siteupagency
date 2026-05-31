@@ -258,6 +258,21 @@ footer { background: var(--dark); border-top: 1px solid #1f2937; padding: 3rem 2
   .trust-badges { gap: 1.5rem; }
   .footer-top { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+.nav-pay-btn {
+  background: transparent;
+  color: var(--lime);
+  border: 1.5px solid var(--lime);
+  padding: .5rem 1.1rem;
+  border-radius: 8px;
+  font-size: .82rem;
+  font-weight: 700;
+  text-decoration: none;
+  margin-right: .5rem;
+  transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.nav-pay-btn:hover { background: var(--lime); color: #000; }
 </style>
 </head>
 <body>
@@ -280,7 +295,7 @@ footer { background: var(--dark); border-top: 1px solid #1f2937; padding: 3rem 2
     <a class="nav-text-btn" href="sms:7573345771">
       <span>💬</span> Text Us
     </a>
-    <a class="nav-cta" href="#contact">Get Your Free Preview →</a>
+    <a class="nav-pay-btn" href="pay.html">💳 Pay Deposit</a><a class="nav-cta" href="#contact">Get Your Free Preview →</a>
   </div>
   <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
 </nav>
