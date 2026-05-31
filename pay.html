@@ -78,8 +78,8 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
 .num-wrap{position:relative}
 .num-wrap input{padding-right:3.2rem}
 .card-type{position:absolute;right:.8rem;top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:800;color:var(--lime)}
-.card-brands{display:flex;gap:.4rem;margin-bottom:.25rem}
-.brand-tag{background:#1a1a1a;border:1px solid #252525;border-radius:4px;padding:.2rem .5rem;font-size:.65rem;font-weight:700;color:#444}
+
+
 .submit-btn{background:var(--lime);color:#000;border:none;padding:1rem;border-radius:10px;font-size:.95rem;font-weight:900;cursor:pointer;width:100%;transition:.15s;display:flex;align-items:center;justify-content:center;gap:.5rem}
 .submit-btn:hover{background:#b8ff26}
 .submit-btn:disabled{background:#1a1a1a;color:#333;cursor:not-allowed}
@@ -204,9 +204,7 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
     <button class="method" onclick="switchMethod('venmo',this)">
       <div class="method-ico">💙</div><div class="method-lbl">Venmo</div>
     </button>
-    <button class="method" onclick="switchMethod('card',this)">
-      <div class="method-ico">💳</div><div class="method-lbl">Card</div>
-    </button>
+
   </div>
 
   <!-- CASHAPP -->
@@ -249,13 +247,7 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
     </div>
   </div>
 
-  <!-- CARD -->
-  <div class="panel" id="p-card">
-    <div class="card-form">
-      <div>
-        <div style="font-size:.8rem;color:var(--muted);margin-bottom:.5rem">Pay with debit or credit card</div>
-        <div class="card-brands"><div class="brand-tag">VISA</div><div class="brand-tag">MC</div><div class="brand-tag">AMEX</div><div class="brand-tag">DISCOVER</div></div>
-      </div>
+  
       <div class="f"><label>Full Name</label><input type="text" id="cName" placeholder="John Smith" autocomplete="name"></div>
       <div class="f"><label>Email Address</label><input type="email" id="cEmail" placeholder="you@email.com" autocomplete="email"></div>
       <div class="f"><label>Phone Number</label><input type="tel" id="cPhone" placeholder="(757) 000-0000"></div>
