@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Edge Lawn Care — Norfolk, VA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#2d7a2d;--light-green:#4caf50;--dark:#111;--text:#2d2d2d;--muted:#666;--light:#f5faf5;--border:#e0ede0}
+body{font-family:'Inter',sans-serif;color:var(--text);background:#fff}
+nav{background:#fff;border-bottom:3px solid var(--green);padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.logo-text{font-size:1.1rem;font-weight:800;color:var(--dark)}
+.logo-text span{color:var(--green)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;padding:.6rem 1.4rem;border-radius:6px;font-size:.88rem;font-weight:700;text-decoration:none}
+/* HERO */
+.hero{background:linear-gradient(135deg,#0a2a0a,#1a4d1a,#0a2a0a);padding:6rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'🌿';position:absolute;font-size:20rem;opacity:.03;top:-5rem;right:-5rem;transform:rotate(20deg)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(76,175,80,.15);border:1px solid rgba(76,175,80,.3);color:#81c784;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;color:#fff;letter-spacing:-2px;line-height:1.05;margin-bottom:1.25rem}
+.hero h1 em{color:var(--light-green);font-style:normal}
+.hero p{font-size:1rem;color:rgba(255,255,255,.7);max-width:540px;margin:0 auto 2rem;line-height:1.8}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-green{background:var(--green);color:#fff;padding:.9rem 2rem;border-radius:8px;font-size:.92rem;font-weight:700;text-decoration:none}
+.btn-outline{background:transparent;color:#fff;padding:.9rem 2rem;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,.25)}
+.pricing-ribbon{background:var(--light-green);color:#fff;display:inline-block;padding:.4rem 1.25rem;border-radius:100px;font-size:.78rem;font-weight:700;margin-top:1.5rem}
+/* SERVICES */
+.services{padding:5rem 2rem;background:#fff}
+.container{max-width:1100px;margin:0 auto}
+.section-tag{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:.5rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--dark);letter-spacing:-1px;margin-bottom:.75rem}
+.section-sub{font-size:1rem;color:var(--muted);max-width:500px;line-height:1.75;margin-bottom:3rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
+.service-card{background:var(--light);border:1.5px solid var(--border);border-radius:14px;padding:1.75rem;transition:border-color .2s}
+.service-card:hover{border-color:var(--green)}
+.service-icon{font-size:1.8rem;margin-bottom:.75rem}
+.service-name{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.35rem}
+.service-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+/* PACKAGES */
+.packages{padding:5rem 2rem;background:var(--light)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.pkg-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:2rem;text-align:center}
+.pkg-card.popular{border-color:var(--green);box-shadow:0 6px 30px rgba(45,122,45,.12)}
+.pkg-badge{background:var(--green);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .85rem;border-radius:100px;display:inline-block;margin-bottom:.75rem}
+.pkg-name{font-size:1.1rem;font-weight:800;color:var(--dark);margin-bottom:.35rem}
+.pkg-price{font-size:2.5rem;font-weight:900;color:var(--green);letter-spacing:-1px;line-height:1;margin:1rem 0 .25rem}
+.pkg-price span{font-size:.9rem;font-weight:500;color:var(--muted)}
+.pkg-desc{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem}
+.pkg-features{list-style:none;text-align:left;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pkg-features li{font-size:.82rem;color:var(--text);display:flex;gap:.5rem}
+.pkg-features li::before{content:'✓';color:var(--green);font-weight:800}
+.pkg-btn{display:block;background:var(--green);color:#fff;padding:.75rem;border-radius:8px;font-size:.85rem;font-weight:700;text-decoration:none;text-align:center}
+.pkg-btn.outline{background:transparent;border:1.5px solid var(--border);color:var(--dark)}
+/* REVIEWS */
+.reviews{padding:5rem 2rem}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.review-card{background:var(--light);border-radius:14px;padding:1.75rem;border:1px solid var(--border)}
+.stars{color:#f59e0b;margin-bottom:.75rem}
+.review-text{font-size:.88rem;color:var(--muted);line-height:1.75;font-style:italic;margin-bottom:1rem}
+.reviewer{font-size:.82rem;font-weight:700;color:var(--dark)}
+/* CTA */
+.cta-section{background:var(--green);padding:5rem 2rem;text-align:center}
+.cta-section h2{font-size:clamp(2rem,5vw,3rem);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:1rem}
+.cta-section p{color:rgba(255,255,255,.85);font-size:1rem;margin-bottom:2rem}
+.btn-white{background:#fff;color:var(--green);padding:1rem 2.5rem;border-radius:8px;font-size:.95rem;font-weight:800;text-decoration:none;display:inline-block}
+footer{background:var(--dark);padding:2.5rem 2rem;text-align:center;color:#555;font-size:.82rem}
+@media(max-width:768px){.pkg-grid{grid-template-columns:1fr;max-width:360px;margin:3rem auto 0}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#"><div class="logo-icon">🌿</div><span class="logo-text">Green Edge <span>Lawn Care</span></span></a>
+  <ul class="nav-links"><li><a href="#services">Services</a></li><li><a href="#packages">Packages</a></li><li><a href="#reviews">Reviews</a></li></ul>
+  <a class="nav-cta" href="#contact">Get a Quote</a>
+</nav>
+<div class="hero">
+  <div class="hero-badge">🌟 Norfolk's Top-Rated Lawn Service</div>
+  <h1>A Lawn You're <em>Proud</em> to Show Off</h1>
+  <p>Professional lawn care, landscaping, and yard maintenance for homeowners and businesses across Norfolk. Weekly, bi-weekly, or one-time service.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-green">Get a Free Quote →</a>
+    <a href="#packages" class="btn-outline">See Packages ↓</a>
+  </div>
+  <div class="pricing-ribbon">Starting at just $45/visit</div>
+</div>
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-tag">Services</div>
+    <div class="section-title">Everything Your Yard Needs</div>
+    <p class="section-sub">From weekly mowing to full landscaping overhauls — we handle it all.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🌾</div><div class="service-name">Lawn Mowing</div><div class="service-desc">Weekly or bi-weekly cuts with edging and blowout included every visit.</div></div>
+      <div class="service-card"><div class="service-icon">✂️</div><div class="service-name">Hedge Trimming</div><div class="service-desc">Clean, shaped shrubs and hedges that give your property a polished look.</div></div>
+      <div class="service-card"><div class="service-icon">🌱</div><div class="service-name">Fertilization</div><div class="service-desc">Seasonal treatments that keep your grass thick, green, and weed-free.</div></div>
+      <div class="service-card"><div class="service-icon">🍂</div><div class="service-name">Leaf Removal</div><div class="service-desc">Full yard cleanups in fall — leaves, debris, and clippings hauled away.</div></div>
+      <div class="service-card"><div class="service-icon">🏡</div><div class="service-name">Landscaping</div><div class="service-desc">Mulching, planting, and full yard redesigns to boost curb appeal.</div></div>
+      <div class="service-card"><div class="service-icon">💧</div><div class="service-name">Irrigation</div><div class="service-desc">Sprinkler installs, repairs, and seasonal startup/shutdown service.</div></div>
+    </div>
+  </div>
+</section>
+<section class="packages" id="packages">
+  <div class="container">
+    <div class="section-tag">Pricing</div>
+    <div class="section-title">Simple, Honest Pricing</div>
+    <p class="section-sub">No hidden fees. No contracts. Cancel anytime.</p>
+    <div class="pkg-grid">
+      <div class="pkg-card">
+        <div class="pkg-name">Basic</div>
+        <div class="pkg-price">$45<span>/visit</span></div>
+        <div class="pkg-desc">Perfect for small yards</div>
+        <ul class="pkg-features"><li>Mowing & edging</li><li>Blowout included</li><li>Up to 5,000 sq ft</li><li>Weekly or bi-weekly</li></ul>
+        <a href="#contact" class="pkg-btn outline">Get Started</a>
+      </div>
+      <div class="pkg-card popular">
+        <div class="pkg-badge">Most Popular</div>
+        <div class="pkg-name">Standard</div>
+        <div class="pkg-price">$75<span>/visit</span></div>
+        <div class="pkg-desc">Best for most homes</div>
+        <ul class="pkg-features"><li>Everything in Basic</li><li>Hedge trimming</li><li>Up to 10,000 sq ft</li><li>Fertilization (seasonal)</li></ul>
+        <a href="#contact" class="pkg-btn">Get Started</a>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-name">Premium</div>
+        <div class="pkg-price">$120<span>/visit</span></div>
+        <div class="pkg-desc">Full-service yard care</div>
+        <ul class="pkg-features"><li>Everything in Standard</li><li>Leaf & debris removal</li><li>Unlimited sq ft</li><li>Priority scheduling</li></ul>
+        <a href="#contact" class="pkg-btn outline">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-tag">Reviews</div>
+    <div class="section-title">Happy Customers All Over Norfolk</div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"My yard looks better than it ever has. They come every week like clockwork and I never have to think about it. Worth every penny."</p><div class="reviewer">Patricia M. · Norfolk</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Switched from another company and the difference is night and day. Edges are crisp, they clean up everything, and pricing is fair."</p><div class="reviewer">Darius W. · Chesapeake</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Had them do a full cleanup and landscaping refresh before selling my house. Neighbors were stopping to ask who did the yard!"</p><div class="reviewer">Lisa R. · Portsmouth</div></div>
+    </div>
+  </div>
+</section>
+<div class="cta-section" id="contact">
+  <h2>Ready for a Lawn You Love?</h2>
+  <p>Get a free quote today — no commitment required.</p>
+  <a href="tel:7573345771" class="btn-white">📞 Call for a Free Quote</a>
+</div>
+<footer>© 2026 Green Edge Lawn Care · Norfolk, VA · Serving Hampton Roads</footer>
+</body>
+</html>
