@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peak Ridge Roofing — Virginia Beach, VA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#c0392b;--dark:#1a1a1a;--text:#333;--muted:#666;--light:#f8f8f8;--border:#e5e5e5}
+body{font-family:'Inter',sans-serif;color:var(--text);background:#fff}
+/* NAV */
+nav{background:#fff;border-bottom:2px solid var(--red);padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem}
+.logo-text{font-size:1.1rem;font-weight:800;color:var(--dark);letter-spacing:-.5px}
+.logo-text span{color:var(--red)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500}
+.nav-links a:hover{color:var(--red)}
+.nav-cta{background:var(--red);color:#fff;padding:.6rem 1.4rem;border-radius:6px;font-size:.88rem;font-weight:700;text-decoration:none}
+/* HERO */
+.hero{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a0000 0%,#3d0000 40%,#1a0000 100%);z-index:0}
+.hero-bg::after{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="0,100 50,0 100,100" fill="rgba(192,57,43,0.15)"/></svg>') center/cover;opacity:.4}
+.hero-content{position:relative;z-index:1;padding:4rem 2rem;max-width:700px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.4);color:#ff8a80;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-2px;margin-bottom:1.25rem}
+.hero h1 span{color:var(--red)}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:2rem;max-width:540px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-red{background:var(--red);color:#fff;padding:.9rem 2rem;border-radius:8px;font-size:.92rem;font-weight:700;text-decoration:none;display:inline-block}
+.btn-outline{background:transparent;color:#fff;padding:.9rem 2rem;border-radius:8px;font-size:.92rem;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,.3);display:inline-block}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;flex-wrap:wrap}
+.stat{color:white}
+.stat-num{font-size:2rem;font-weight:900;color:var(--red);line-height:1}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,.5);margin-top:.2rem}
+/* SERVICES */
+.services{padding:5rem 2rem;background:#fff}
+.container{max-width:1100px;margin:0 auto}
+.section-tag{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--dark);letter-spacing:-1px;margin-bottom:.75rem}
+.section-sub{font-size:1rem;color:var(--muted);max-width:500px;line-height:1.75;margin-bottom:3rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem}
+.service-card{padding:2rem;border:1.5px solid var(--border);border-radius:14px;transition:border-color .2s,box-shadow .2s}
+.service-card:hover{border-color:var(--red);box-shadow:0 4px 20px rgba(192,57,43,.1)}
+.service-icon{font-size:2rem;margin-bottom:1rem}
+.service-name{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:.4rem}
+.service-desc{font-size:.83rem;color:var(--muted);line-height:1.65}
+/* WHY US */
+.why{padding:5rem 2rem;background:var(--light)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.why-text h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--dark);letter-spacing:-1px;margin-bottom:1.25rem}
+.why-text p{font-size:.92rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.check-list{display:flex;flex-direction:column;gap:.85rem}
+.check-item{display:flex;gap:.75rem;align-items:flex-start;font-size:.88rem;color:var(--text)}
+.check-item::before{content:'✓';background:var(--red);color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;flex-shrink:0;margin-top:1px}
+.why-visual{background:var(--dark);border-radius:20px;padding:2.5rem;color:white}
+.why-stat{margin-bottom:2rem}
+.why-stat-num{font-size:2.8rem;font-weight:900;color:var(--red);line-height:1}
+.why-stat-label{font-size:.82rem;color:#888;margin-top:.2rem}
+/* REVIEWS */
+.reviews{padding:5rem 2rem;background:#fff}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:3rem}
+.review-card{background:var(--light);border-radius:14px;padding:1.75rem;border:1px solid var(--border)}
+.stars{color:#f59e0b;font-size:.85rem;margin-bottom:.75rem}
+.review-text{font-size:.88rem;color:var(--muted);line-height:1.75;font-style:italic;margin-bottom:1.25rem}
+.reviewer{font-size:.82rem;font-weight:700;color:var(--dark)}
+.reviewer span{font-weight:400;color:var(--muted)}
+/* CTA */
+.cta-section{background:var(--red);padding:5rem 2rem;text-align:center}
+.cta-section h2{font-size:clamp(2rem,5vw,3rem);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:1rem}
+.cta-section p{color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:2rem}
+.btn-white{background:#fff;color:var(--red);padding:1rem 2.5rem;border-radius:8px;font-size:.95rem;font-weight:800;text-decoration:none;display:inline-block}
+/* FOOTER */
+footer{background:var(--dark);padding:3rem 2rem;text-align:center;color:#555;font-size:.82rem}
+footer strong{color:#888}
+@media(max-width:768px){.why-grid{grid-template-columns:1fr}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#"><div class="logo-icon">🏠</div><span class="logo-text">Peak Ridge <span>Roofing</span></span></a>
+  <ul class="nav-links"><li><a href="#services">Services</a></li><li><a href="#why">About</a></li><li><a href="#reviews">Reviews</a></li></ul>
+  <a class="nav-cta" href="#contact">Get Free Estimate</a>
+</nav>
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⭐ Rated #1 Roofer in Virginia Beach</div>
+    <h1>Virginia Beach's Most <span>Trusted</span> Roofing Contractor</h1>
+    <p>From storm damage repairs to full roof replacements — we've protected over 500 homes across Hampton Roads. Licensed, insured, and backed by a 10-year workmanship warranty.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-red">Get Your Free Estimate →</a>
+      <a href="#services" class="btn-outline">Our Services ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Roofs Completed</div></div>
+      <div class="stat"><div class="stat-num">10yr</div><div class="stat-label">Workmanship Warranty</div></div>
+      <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Google Rating</div></div>
+    </div>
+  </div>
+</div>
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-tag">What We Do</div>
+    <div class="section-title">Roofing Services</div>
+    <p class="section-sub">Every job done right the first time — or we come back and fix it free.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🔨</div><div class="service-name">Roof Replacement</div><div class="service-desc">Full tear-off and replacement with top-grade shingles, underlayment, and ventilation systems.</div></div>
+      <div class="service-card"><div class="service-icon">🔧</div><div class="service-name">Roof Repairs</div><div class="service-desc">Leak fixes, missing shingles, flashing repair — fast response, same-week scheduling.</div></div>
+      <div class="service-card"><div class="service-icon">⛈️</div><div class="service-name">Storm Damage</div><div class="service-desc">Insurance claim experts. We document damage, work with your adjuster, and restore fast.</div></div>
+      <div class="service-card"><div class="service-icon">🏠</div><div class="service-name">New Construction</div><div class="service-desc">New build roofing from framing to final inspection — on schedule, every time.</div></div>
+      <div class="service-card"><div class="service-icon">🔍</div><div class="service-name">Roof Inspections</div><div class="service-desc">Free visual inspection with a detailed report. Know the condition of your roof today.</div></div>
+      <div class="service-card"><div class="service-icon">🌿</div><div class="service-name">Gutters & Fascia</div><div class="service-desc">Gutter installation, cleaning, and fascia board replacement to protect your roofline.</div></div>
+    </div>
+  </div>
+</section>
+<section class="why" id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-text">
+        <h2>Why Hampton Roads Homeowners Choose Us</h2>
+        <p>We're not a national franchise — we're local, family-owned, and we stand behind every single job. When you call us, you talk to the owner.</p>
+        <div class="check-list">
+          <div class="check-item">Licensed & fully insured in Virginia</div>
+          <div class="check-item">10-year workmanship warranty on all replacements</div>
+          <div class="check-item">Free estimates — no pressure, no gimmicks</div>
+          <div class="check-item">Insurance claim assistance at no extra cost</div>
+          <div class="check-item">Same-week scheduling on most repairs</div>
+        </div>
+      </div>
+      <div class="why-visual">
+        <div class="why-stat"><div class="why-stat-num">500+</div><div class="why-stat-label">Roofs completed across Hampton Roads</div></div>
+        <hr style="border:none;border-top:1px solid #2a2a2a;margin:1.5rem 0">
+        <div class="why-stat"><div class="why-stat-num">12 yrs</div><div class="why-stat-label">Serving Virginia Beach & surrounding areas</div></div>
+        <hr style="border:none;border-top:1px solid #2a2a2a;margin:1.5rem 0">
+        <div class="why-stat"><div class="why-stat-num">$0</div><div class="why-stat-label">Cost for your free estimate & inspection</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-tag">Reviews</div>
+    <div class="section-title">What Our Customers Say</div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"After the hurricane, Peak Ridge was out the next morning and had our roof tarped within hours. Replacement was done in two days. Outstanding work."</p><div class="reviewer">Mike D. <span>· Virginia Beach</span></div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"They worked directly with my insurance company and I paid almost nothing out of pocket. Honest, fast, and the new roof looks incredible."</p><div class="reviewer">Sandra K. <span>· Chesapeake</span></div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Called about a leak on Monday, they came out Tuesday, fixed Thursday. Pricing was fair and they cleaned up the yard completely. 10/10."</p><div class="reviewer">James T. <span>· Norfolk</span></div></div>
+    </div>
+  </div>
+</section>
+<div class="cta-section" id="contact">
+  <h2>Ready for Your Free Estimate?</h2>
+  <p>No pressure. No gimmicks. Just an honest assessment and a fair price.</p>
+  <a href="tel:7573345771" class="btn-white">📞 Call (757) 334-5771</a>
+</div>
+<footer><strong>Peak Ridge Roofing</strong> · Virginia Beach, VA · Licensed & Insured · © 2026</footer>
+</body>
+</html>
