@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VRSTL Site Guide — How to Manage Your Website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --black: #000; --white: #f0f0f0; --accent: #ff2d2d; --border: #1a1a1a; --card: #0a0a0a; --muted: #555; --green: #00ff88; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'Space Grotesk', sans-serif; line-height: 1.6; }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+  /* NAV */
+  nav { position: sticky; top: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
+  .nav-logo { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; letter-spacing: 0.2em; }
+  .nav-logo span { color: var(--accent); }
+  .nav-badge { background: var(--accent); color: white; font-size: 0.65rem; font-weight: 700; padding: 0.3rem 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* HERO */
+  .hero { padding: 5rem 2rem 4rem; text-align: center; background: radial-gradient(ellipse at 50% 0%, #1a0000 0%, #000 60%); border-bottom: 1px solid var(--border); }
+  .hero-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; border: 1px solid rgba(255,45,45,0.3); padding: 0.4rem 1rem; margin-bottom: 1.5rem; }
+  .hero h1 { font-family: 'Space Mono', monospace; font-size: clamp(2rem, 6vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.5px; }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero p { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto; line-height: 1.75; }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+
+  /* TOC */
+  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 3rem; }
+  .toc h3 { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.25rem; }
+  .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .toc-list a { color: #888; text-decoration: none; font-size: 0.88rem; display: flex; align-items: center; gap: 0.75rem; transition: color 0.2s; }
+  .toc-list a:hover { color: var(--white); }
+  .toc-num { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--accent); width: 20px; }
+
+  /* SECTIONS */
+  .guide-section { margin-bottom: 4rem; }
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .section-num { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.2em; }
+  .section-header h2 { font-size: 1.4rem; font-weight: 700; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 1.25rem; }
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; gap: 1.25rem; align-items: flex-start; }
+  .step-icon { width: 40px; height: 40px; background: rgba(255,45,45,0.1); border: 1px solid rgba(255,45,45,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .step-content h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .step-content p { font-size: 0.84rem; color: #777; line-height: 1.7; }
+
+  /* CODE BLOCKS */
+  .code-block { background: #080808; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #a0ff80; overflow-x: auto; position: relative; }
+  .code-block .comment { color: #444; }
+  .code-block .highlight { color: var(--accent); }
+  .code-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #333; margin-bottom: 0.5rem; }
+
+  /* TIP BOX */
+  .tip { background: rgba(0,255,136,0.04); border: 1px solid rgba(0,255,136,0.15); border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; display: flex; gap: 0.75rem; align-items: flex-start; }
+  .tip-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .tip p { font-size: 0.83rem; color: #aaa; line-height: 1.65; }
+  .tip strong { color: var(--green); }
+
+  .warning { background: rgba(255,45,45,0.04); border: 1px solid rgba(255,45,45,0.15); border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; display: flex; gap: 0.75rem; align-items: flex-start; }
+  .warning p { font-size: 0.83rem; color: #aaa; line-height: 1.65; }
+  .warning strong { color: var(--accent); }
+
+  /* FIELD TABLE */
+  .field-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  .field-table th { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.75rem 1rem; background: var(--card); border-bottom: 1px solid var(--border); }
+  .field-table td { font-size: 0.83rem; padding: 0.85rem 1rem; border-bottom: 1px solid #0f0f0f; color: #ccc; vertical-align: top; }
+  .field-table tr:last-child td { border-bottom: none; }
+  .field-table code { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent); background: rgba(255,45,45,0.08); padding: 0.15rem 0.4rem; border-radius: 3px; }
+
+  /* FAQ */
+  .faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.75rem; overflow: hidden; }
+  .faq-q { padding: 1.1rem 1.25rem; font-weight: 600; font-size: 0.88rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+  .faq-q:hover { background: #0a0a0a; }
+  .faq-q::after { content: '+'; font-size: 1.1rem; color: var(--accent); transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { display: none; padding: 0 1.25rem 1.1rem; font-size: 0.84rem; color: var(--muted); line-height: 1.75; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* CONTACT CTA */
+  .help-box { background: linear-gradient(135deg, rgba(255,45,45,0.06) 0%, transparent 100%); border: 1px solid rgba(255,45,45,0.2); border-radius: 16px; padding: 3rem 2rem; text-align: center; }
+  .help-box h3 { font-family: 'Space Mono', monospace; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .help-box p { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.75rem; line-height: 1.7; }
+  .help-btn { display: inline-block; background: var(--accent); color: white; padding: 0.9rem 2rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 700; margin: 0 0.4rem 0.5rem; transition: opacity 0.2s; }
+  .help-btn:hover { opacity: 0.85; }
+  .help-btn.outline { background: transparent; border: 1px solid #2a2a2a; color: var(--white); }
+  .help-btn.outline:hover { border-color: var(--white); }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: #2a2a2a; font-size: 0.75rem; }
+
+  @media (max-width: 600px) {
+    .container { padding: 2.5rem 1.25rem; }
+    .step { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">VR<span>S</span>TL — Site Guide</div>
+  <div class="nav-badge">Owner's Manual</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Built by SiteUp Agency</div>
+  <h1>Your Website.<br><em>Your Control.</em></h1>
+  <p>Everything you need to know to manage, update, and grow your VRSTL website on your own.</p>
+</div>
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h3>What's in this guide</h3>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">01</span> How to access and edit your site files</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span> How to change product names, prices & descriptions</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span> How to add a new product</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span> How to remove a product</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span> How to update product photos</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span> How to change colors, fonts & branding</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> How to update contact info & social links</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span> FAQ</a></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="guide-section" id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>How to Access & Edit Your Site</h2>
+    </div>
+    <p style="color:#777;font-size:0.88rem;margin-bottom:1.5rem;line-height:1.75;">Your site lives on GitHub — a free platform that hosts your files and publishes them live to your domain. Here's how to get in and make changes.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon">1️⃣</div>
+        <div class="step-content">
+          <h4>Go to github.com and sign in</h4>
+          <p>Your GitHub account was set up for you. Use your login credentials provided by SiteUp Agency. Go to <strong>github.com</strong> and click "Sign In."</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">2️⃣</div>
+        <div class="step-content">
+          <h4>Find your repository</h4>
+          <p>Once logged in, click your profile icon → "Your repositories." You'll see a repo named after your site (e.g. <strong>vrstl</strong>). Click it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">3️⃣</div>
+        <div class="step-content">
+          <h4>Open index.html</h4>
+          <p>Click on the file called <strong>index.html</strong> — this is your entire website in one file. Click the pencil ✏️ icon in the top right to edit it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">4️⃣</div>
+        <div class="step-content">
+          <h4>Make your changes & save</h4>
+          <p>Edit whatever you want, then scroll down and click <strong>"Commit changes"</strong> → then click the green <strong>"Commit changes"</strong> button. Your site updates live in about 60 seconds.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tip" style="margin-top:1.25rem;">
+      <div class="tip-icon">💡</div>
+      <p><strong>Pro tip:</strong> Use <strong>Ctrl+F</strong> (or Cmd+F on Mac) inside the editor to search for any word on your site. This makes finding what you want to change super fast.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="guide-section" id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Change Product Names, Prices & Descriptions</h2>
+    </div>
+    <p style="color:#777;font-size:0.88rem;margin-bottom:1.25rem;line-height:1.75;">All your product info is stored in one place inside the code — a section called <strong>products</strong>. It looks like this:</p>
+    <div class="code-label">Find this section in your file (search for "const products")</div>
+    <div class="code-block">
+const products = [<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id: 0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name: <span class="highlight">'Racing Zip Hoodie — Blue'</span>, <span class="comment">← Change the name here</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;price: <span class="highlight">180</span>, <span class="comment">← Change the price here (numbers only, no $)</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;img: <span class="highlight">'YOUR_IMAGE_URL_HERE'</span>, <span class="comment">← Image link goes here</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;sizes: <span class="highlight">['XS','S','M','L','XL']</span>, <span class="comment">← Edit available sizes</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;soldout: <span class="highlight">[]</span> <span class="comment">← Put sizes here to mark them sold out e.g. ['XS','S']</span><br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;{ <span class="comment">...next product...</span> }<br>
+];
+    </div>
+    <table class="field-table">
+      <thead><tr><th>Field</th><th>What it does</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><code>name</code></td><td>The product title shown on the site</td><td>'Racing Zip Hoodie — Blue'</td></tr>
+        <tr><td><code>price</code></td><td>Price in dollars — numbers only, no $ sign</td><td>180</td></tr>
+        <tr><td><code>img</code></td><td>Link to the product photo</td><td>'https://...'</td></tr>
+        <tr><td><code>sizes</code></td><td>Available sizes shown to shoppers</td><td>['XS','S','M','L','XL']</td></tr>
+        <tr><td><code>soldout</code></td><td>Sizes that are sold out — they'll appear greyed out</td><td>['XS']</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="guide-section" id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Add a New Product</h2>
+    </div>
+    <p style="color:#777;font-size:0.88rem;margin-bottom:1.25rem;line-height:1.75;">Adding a new product takes two steps — add it to the product list AND add its card to the shop grid.</p>
+
+    <h4 style="font-size:0.88rem;font-weight:700;margin-bottom:0.75rem;margin-top:1.25rem;">Step 1 — Add to the products list</h4>
+    <p style="color:#777;font-size:0.84rem;margin-bottom:0.75rem;">Find <code style="font-family:'Space Mono',monospace;color:var(--accent);background:rgba(255,45,45,0.08);padding:0.15rem 0.4rem;">const products = [</code> and add a new entry. Copy this template:</p>
+    <div class="code-block">
+  {<br>
+&nbsp;&nbsp;id: <span class="highlight">4</span>, <span class="comment">← Use the next number (if you have 4 products, use 4)</span><br>
+&nbsp;&nbsp;name: <span class="highlight">'Your Product Name'</span>,<br>
+&nbsp;&nbsp;price: <span class="highlight">120</span>,<br>
+&nbsp;&nbsp;img: <span class="highlight">'https://your-image-link.com/photo.jpg'</span>,<br>
+&nbsp;&nbsp;sizes: <span class="highlight">['XS','S','M','L','XL']</span>,<br>
+&nbsp;&nbsp;soldout: <span class="highlight">[]</span><br>
+  },
+    </div>
+
+    <h4 style="font-size:0.88rem;font-weight:700;margin-bottom:0.75rem;margin-top:1.5rem;">Step 2 — Add the product card to the shop grid</h4>
+    <p style="color:#777;font-size:0.84rem;margin-bottom:0.75rem;">Find the shop grid section (search for <code style="font-family:'Space Mono',monospace;color:var(--accent);background:rgba(255,45,45,0.08);padding:0.15rem 0.4rem;">shop-grid</code>) and paste this card, changing the number to match your product's id:</p>
+    <div class="code-block">
+&lt;div class="product-card" onclick="openModal(<span class="highlight">4</span>)"&gt;<br>
+&nbsp;&nbsp;&lt;div class="product-img"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="<span class="highlight">YOUR_IMAGE_URL</span>" alt="<span class="highlight">Product Name</span>" loading="lazy"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="p-badge"&gt;<span class="highlight">New</span>&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="p-overlay"&gt;&lt;button class="quick-add" onclick="event.stopPropagation();openModal(<span class="highlight">4</span>)"&gt;Select Size&lt;/button&gt;&lt;/div&gt;<br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;&lt;div class="p-info"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="p-name"&gt;<span class="highlight">Your Product Name</span>&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="p-bottom"&gt;&lt;span class="p-price"&gt;$<span class="highlight">120</span>&lt;/span&gt;&lt;span class="p-sizes"&gt;<span class="highlight">XS · S · M · L · XL</span>&lt;/span&gt;&lt;/div&gt;<br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&lt;/div&gt;
+    </div>
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <p><strong>Badge options:</strong> Change the badge text to <strong>New</strong>, <strong>Limited</strong>, <strong>Hot</strong>, <strong>Sale</strong> — or remove the badge line entirely if you don't want one.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="guide-section" id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Remove a Product</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon">🗑️</div>
+        <div class="step-content">
+          <h4>Delete from products list</h4>
+          <p>Find <code style="font-family:'Space Mono',monospace;color:var(--accent);">const products = [</code> and delete the entire <code style="font-family:'Space Mono',monospace;color:var(--accent);">{ ... },</code> block for that product.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">🗑️</div>
+        <div class="step-content">
+          <h4>Delete the product card</h4>
+          <p>Search for the product name in the file, find its <code style="font-family:'Space Mono',monospace;color:var(--accent);">&lt;div class="product-card"&gt;</code> block and delete it all the way to the closing <code style="font-family:'Space Mono',monospace;color:var(--accent);">&lt;/div&gt;</code>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="warning">
+      <div class="tip-icon">⚠️</div>
+      <p><strong>Important:</strong> After removing a product, renumber the remaining products so their <code style="font-family:'Space Mono',monospace;color:var(--accent);">id</code> values stay in order starting from 0. Also update the <code style="font-family:'Space Mono',monospace;color:var(--accent);">onclick="openModal(X)"</code> numbers to match.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="guide-section" id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Update Product Photos</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon">📸</div>
+        <div class="step-content">
+          <h4>Upload your photo somewhere online</h4>
+          <p>Your photo needs to be hosted online to use it on the site. Free options: <strong>Google Drive</strong> (set to public link), <strong>Imgur.com</strong> (free image hosting), or your own Instagram post link. Upload your photo and copy the direct image link.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">🔗</div>
+        <div class="step-content">
+          <h4>Replace the img link in the products list</h4>
+          <p>Find your product in <code style="font-family:'Space Mono',monospace;color:var(--accent);">const products</code>, replace the <code style="font-family:'Space Mono',monospace;color:var(--accent);">img:</code> value with your new photo link.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon">🖼️</div>
+        <div class="step-content">
+          <h4>Also update the card image</h4>
+          <p>Find the product card in the HTML, update the <code style="font-family:'Space Mono',monospace;color:var(--accent);">src="..."</code> inside the <code style="font-family:'Space Mono',monospace;color:var(--accent);">&lt;img&gt;</code> tag to match your new URL.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <p><strong>Best image size:</strong> Use square or portrait photos (3:4 ratio). Minimum 800px wide. The cleaner the background, the better it looks on the site.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="guide-section" id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Change Colors, Fonts & Branding</h2>
+    </div>
+    <p style="color:#777;font-size:0.88rem;margin-bottom:1.25rem;line-height:1.75;">All your brand colors are set in one place at the top of the file inside <code style="font-family:'Space Mono',monospace;color:var(--accent);">:root { }</code>. Change them here and it updates everywhere on the site.</p>
+    <div class="code-block">
+:root {<br>
+&nbsp;&nbsp;--black: <span class="highlight">#000</span>; <span class="comment">← Main background color</span><br>
+&nbsp;&nbsp;--white: <span class="highlight">#f0f0f0</span>; <span class="comment">← Main text color</span><br>
+&nbsp;&nbsp;--accent: <span class="highlight">#ff2d2d</span>; <span class="comment">← Your brand color (currently red) — change this to any color</span><br>
+&nbsp;&nbsp;--border: <span class="highlight">#1a1a1a</span>; <span class="comment">← Subtle border lines</span><br>
+&nbsp;&nbsp;--muted: <span class="highlight">#555</span>; <span class="comment">← Secondary text color</span><br>
+}
+    </div>
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <p><strong>To pick a color:</strong> Google "color picker" and find your color. Copy the <strong>hex code</strong> (starts with #) and paste it in place of the existing one.</p>
+    </div>
+    <p style="color:#777;font-size:0.84rem;margin-top:1.25rem;line-height:1.75;">To change the font, find the Google Fonts link at the top of the file and replace <strong>'Space Grotesk'</strong> or <strong>'Space Mono'</strong> with any Google Font name.</p>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="guide-section" id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Update Contact Info & Social Links</h2>
+    </div>
+    <p style="color:#777;font-size:0.88rem;margin-bottom:1.25rem;line-height:1.75;">Search the file for these terms to find and update your contact details:</p>
+    <table class="field-table">
+      <thead><tr><th>Search for</th><th>What to change it to</th></tr></thead>
+      <tbody>
+        <tr><td><code>vrstlofficial@gmail.com</code></td><td>Your actual email address</td></tr>
+        <tr><td><code>@vrstl</code></td><td>Your actual Instagram handle</td></tr>
+        <tr><td><code>Worldwide · 5–10 business days</code></td><td>Your actual shipping info</td></tr>
+        <tr><td><code>Est. 2024</code></td><td>Your actual founding year</td></tr>
+        <tr><td><code>Free Shipping Over $150</code></td><td>Your actual free shipping threshold</td></tr>
+      </tbody>
+    </table>
+    <div class="tip">
+      <div class="tip-icon">💡</div>
+      <p><strong>Social links:</strong> In the footer, find the <code style="font-family:'Space Mono',monospace;color:var(--accent);">href="#"</code> next to Instagram, TikTok, Twitter — replace <code style="font-family:'Space Mono',monospace;color:var(--accent);">#</code> with your actual profile URL.</p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="guide-section" id="s8">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq-item"><div class="faq-q">My site isn't updating after I save — what do I do?</div><div class="faq-a">GitHub Pages can take up to 2 minutes to update. Try hard-refreshing your browser: press <strong>Ctrl + Shift + R</strong> (Windows) or <strong>Cmd + Shift + R</strong> (Mac). If it still doesn't update after 5 minutes, check that you clicked "Commit changes" properly.</div></div>
+    <div class="faq-item"><div class="faq-q">How do I mark something as sold out?</div><div class="faq-a">Find your product in <code style="font-family:'Space Mono',monospace;color:var(--accent);">const products</code> and add the sold out sizes to the <code style="font-family:'Space Mono',monospace;color:var(--accent);">soldout: []</code> array. For example: <code style="font-family:'Space Mono',monospace;color:var(--accent);">soldout: ['XS', 'S']</code>. Those sizes will appear greyed out on the site.</div></div>
+    <div class="faq-item"><div class="faq-q">How do I change the free shipping amount?</div><div class="faq-a">Search the file for <code style="font-family:'Space Mono',monospace;color:var(--accent);">FREE_SHIPPING = 150</code> and change 150 to whatever amount you want. Also update the text in the ticker bar that says "Free Shipping Over $150."</div></div>
+    <div class="faq-item"><div class="faq-q">Can I add a discount or sale price?</div><div class="faq-a">Yes! In the product card HTML, you can add a strikethrough original price. Example: <code style="font-family:'Space Mono',monospace;color:var(--accent);">&lt;s style="color:#333"&gt;$180&lt;/s&gt; $120</code>. Also update the price in the products list to the sale price.</div></div>
+    <div class="faq-item"><div class="faq-q">How do I connect a real payment processor?</div><div class="faq-a">Currently checkout sends an email order. To accept real online payments, you'd need to connect Stripe or PayPal. Contact SiteUp Agency and we can set this up for you as an add-on.</div></div>
+    <div class="faq-item"><div class="faq-q">I broke something — how do I undo?</div><div class="faq-a">In GitHub, go to your file's history by clicking <strong>"History"</strong> on the file page. You can click any past version and restore it. You can never permanently lose your site as long as it's on GitHub.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I add more pages?</div><div class="faq-a">Yes — create a new file in your GitHub repo (e.g. <strong>sizing.html</strong>) and link to it from your nav menu. Contact SiteUp Agency if you want us to build additional pages for you.</div></div>
+  </div>
+
+  <!-- HELP CTA -->
+  <div class="help-box">
+    <h3>Need help with something?</h3>
+    <p>If you ever get stuck or want something changed that's beyond this guide, SiteUp Agency is here. We respond same day.</p>
+    <a href="mailto:kinsleybazemore@gmail.com?subject=VRSTL Site Help&body=Hi! I need help with my VRSTL website. Here's what I'm trying to do:" class="help-btn">📧 Email SiteUp Agency</a>
+    <a href="sms:7573345771?body=Hi! I need help with my VRSTL website." class="help-btn outline">💬 Text Us</a>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 VRSTL · Built by <a href="https://siteupagency.com" style="color:var(--accent);text-decoration:none;">SiteUp Agency</a>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+  });
+</script>
+</body>
+</html>
