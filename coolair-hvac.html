@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoolAir HVAC Services — Portsmouth, VA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#0057b8;--ice:#e8f4ff;--dark:#0a0f1e;--text:#1e2a3a;--muted:#5a6a7e;--light:#f0f7ff;--border:#d0e4f7}
+body{font-family:'Inter',sans-serif;color:var(--text);background:#fff}
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,87,184,.08)}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#0057b8,#0088d4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.logo-text{font-size:1.05rem;font-weight:800;color:var(--dark)}
+.logo-text span{color:var(--blue)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500}
+.nav-links a:hover{color:var(--blue)}
+.emergency-banner{background:var(--blue);color:#fff;text-align:center;padding:.45rem 1rem;font-size:.78rem;font-weight:600;letter-spacing:.02em}
+.nav-cta{background:var(--blue);color:#fff;padding:.6rem 1.4rem;border-radius:6px;font-size:.88rem;font-weight:700;text-decoration:none}
+/* HERO */
+.hero{background:linear-gradient(160deg,var(--dark) 0%,#0a2040 60%,#0d1a2e 100%);padding:6rem 2rem;position:relative;overflow:hidden}
+.hero::before{content:'❄️';position:absolute;font-size:25rem;opacity:.03;top:-8rem;right:-8rem}
+.container{max-width:1100px;margin:0 auto}
+.hero-inner{max-width:620px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,87,184,.25);border:1px solid rgba(0,136,212,.35);color:#60bfff;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.5rem,6vw,4.2rem);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-1.5px;margin-bottom:1.25rem}
+.hero h1 span{color:#60bfff}
+.hero p{font-size:1rem;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:2rem;max-width:500px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-blue{background:var(--blue);color:#fff;padding:.9rem 2rem;border-radius:8px;font-size:.92rem;font-weight:700;text-decoration:none}
+.btn-emergency{background:#e53935;color:#fff;padding:.9rem 2rem;border-radius:8px;font-size:.92rem;font-weight:700;text-decoration:none}
+.hero-badges{display:flex;gap:1.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.trust-badge{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.7);font-size:.78rem;font-weight:500}
+/* SERVICES */
+.services{padding:5rem 2rem;background:#fff}
+.section-tag{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--dark);letter-spacing:-1px;margin-bottom:.75rem}
+.section-sub{font-size:1rem;color:var(--muted);max-width:500px;line-height:1.75;margin-bottom:3rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem}
+.service-card{background:var(--light);border:1.5px solid var(--border);border-radius:14px;padding:1.75rem;transition:border-color .2s}
+.service-card:hover{border-color:var(--blue)}
+.service-icon{font-size:1.8rem;margin-bottom:.75rem}
+.service-name{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.35rem}
+.service-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+.emergency-card{background:linear-gradient(135deg,#c62828,#e53935);border:none;color:white}
+.emergency-card .service-name,.emergency-card .service-desc{color:white}
+/* PLANS */
+.plans{padding:5rem 2rem;background:var(--light)}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.plan-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:2rem}
+.plan-card.popular{border-color:var(--blue);box-shadow:0 6px 30px rgba(0,87,184,.12)}
+.plan-badge{background:var(--blue);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .85rem;border-radius:100px;display:inline-block;margin-bottom:.75rem}
+.plan-name{font-size:1.1rem;font-weight:800;color:var(--dark);margin-bottom:.5rem}
+.plan-price{font-size:2.5rem;font-weight:900;color:var(--blue);letter-spacing:-1px;line-height:1;margin-bottom:.25rem}
+.plan-price span{font-size:.85rem;font-weight:500;color:var(--muted)}
+.plan-desc{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.plan-features li{font-size:.82rem;color:var(--text);display:flex;gap:.5rem}
+.plan-features li::before{content:'✓';color:var(--blue);font-weight:800}
+.plan-btn{display:block;background:var(--blue);color:#fff;padding:.75rem;border-radius:8px;font-size:.85rem;font-weight:700;text-decoration:none;text-align:center}
+.plan-btn.outline{background:transparent;border:1.5px solid var(--border);color:var(--dark)}
+/* REVIEWS */
+.reviews{padding:5rem 2rem}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.review-card{background:var(--light);border-radius:14px;padding:1.75rem;border:1px solid var(--border)}
+.stars{color:#f59e0b;margin-bottom:.75rem}
+.review-text{font-size:.88rem;color:var(--muted);line-height:1.75;font-style:italic;margin-bottom:1rem}
+.reviewer{font-size:.82rem;font-weight:700;color:var(--dark)}
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--blue),#0041a0);padding:5rem 2rem;text-align:center}
+.cta-section h2{font-size:clamp(2rem,5vw,3rem);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:1rem}
+.cta-section p{color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:2rem}
+.btn-white{background:#fff;color:var(--blue);padding:1rem 2.5rem;border-radius:8px;font-size:.95rem;font-weight:800;text-decoration:none;display:inline-block}
+footer{background:var(--dark);padding:2.5rem 2rem;text-align:center;color:#3a4a5a;font-size:.82rem}
+@media(max-width:768px){.plans-grid{grid-template-columns:1fr;max-width:360px;margin:3rem auto 0}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<div class="emergency-banner">🚨 24/7 Emergency Service Available — Call Now: (757) 334-5771</div>
+<nav>
+  <a class="logo" href="#"><div class="logo-icon">❄️</div><span class="logo-text">CoolAir <span>HVAC</span></span></a>
+  <ul class="nav-links"><li><a href="#services">Services</a></li><li><a href="#plans">Plans</a></li><li><a href="#reviews">Reviews</a></li></ul>
+  <a class="nav-cta" href="#contact">Schedule Service</a>
+</nav>
+<div class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">❄️ Portsmouth's Most Trusted HVAC Company</div>
+      <h1>Stay <span>Cool</span> in Summer.<br>Warm in Winter.</h1>
+      <p>Installation, repair, and maintenance for all makes and models. Serving Portsmouth, Chesapeake, and Suffolk for over 15 years. 24/7 emergency response.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-blue">Schedule Service →</a>
+        <a href="tel:7573345771" class="btn-emergency">🚨 Emergency Line</a>
+      </div>
+      <div class="hero-badges">
+        <div class="trust-badge">✓ NATE Certified Technicians</div>
+        <div class="trust-badge">✓ Same-Day Service</div>
+        <div class="trust-badge">✓ 100% Satisfaction Guarantee</div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-tag">Services</div>
+    <div class="section-title">Everything HVAC, Done Right</div>
+    <p class="section-sub">From a broken AC in August to a furnace that won't start in January — we're there fast.</p>
+    <div class="services-grid">
+      <div class="service-card emergency-card"><div class="service-icon">🚨</div><div class="service-name">24/7 Emergency Repair</div><div class="service-desc">No extra charge for nights or weekends. We show up when you need us most.</div></div>
+      <div class="service-card"><div class="service-icon">❄️</div><div class="service-name">AC Repair</div><div class="service-desc">All makes and models diagnosed and repaired fast — same day on most calls.</div></div>
+      <div class="service-card"><div class="service-icon">🔥</div><div class="service-name">Heating Repair</div><div class="service-desc">Furnace, heat pump, or boiler — we have the parts on the truck for most repairs.</div></div>
+      <div class="service-card"><div class="service-icon">🏠</div><div class="service-name">New Installation</div><div class="service-desc">Full system installs with manufacturer warranty and our 5-year labor guarantee.</div></div>
+      <div class="service-card"><div class="service-icon">🔧</div><div class="service-name">Maintenance</div><div class="service-desc">Seasonal tune-ups that prevent breakdowns and extend the life of your system.</div></div>
+      <div class="service-card"><div class="service-icon">💨</div><div class="service-name">Air Quality</div><div class="service-desc">Duct cleaning, air purifiers, and humidity control for a healthier home.</div></div>
+    </div>
+  </div>
+</section>
+<section class="plans" id="plans">
+  <div class="container">
+    <div class="section-tag">Maintenance Plans</div>
+    <div class="section-title">Protect Your Investment</div>
+    <p class="section-sub">Regular maintenance prevents 90% of breakdowns. Pick a plan and never worry again.</p>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-name">Basic</div>
+        <div class="plan-price">$99<span>/yr</span></div>
+        <div class="plan-desc">Essential coverage</div>
+        <ul class="plan-features"><li>1 annual tune-up</li><li>Filter replacement</li><li>Priority scheduling</li><li>10% off repairs</li></ul>
+        <a href="#contact" class="plan-btn outline">Get Started</a>
+      </div>
+      <div class="plan-card popular">
+        <div class="plan-badge">Best Value</div>
+        <div class="plan-name">Comfort</div>
+        <div class="plan-price">$179<span>/yr</span></div>
+        <div class="plan-desc">Full seasonal coverage</div>
+        <ul class="plan-features"><li>Spring AC tune-up</li><li>Fall heating tune-up</li><li>Filters included</li><li>15% off repairs</li><li>Priority emergency service</li></ul>
+        <a href="#contact" class="plan-btn">Get Started</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">$299<span>/yr</span></div>
+        <div class="plan-desc">Maximum protection</div>
+        <ul class="plan-features"><li>Everything in Comfort</li><li>Duct inspection</li><li>20% off all parts</li><li>Free service calls</li><li>No overtime charges</li></ul>
+        <a href="#contact" class="plan-btn outline">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-tag">Reviews</div>
+    <div class="section-title">What Portsmouth Homeowners Say</div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"AC went out on a Friday night in July. CoolAir was there by 9pm and had it fixed in an hour. No extra charge for the emergency call. These guys are incredible."</p><div class="reviewer">Robert H. · Portsmouth</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Replaced our whole system and the difference in our electric bill is unreal. Down almost $80/month. Install team was clean and professional."</p><div class="reviewer">Tamara F. · Chesapeake</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Been on the maintenance plan for 3 years. Never had a breakdown. Worth every penny for the peace of mind alone."</p><div class="reviewer">Gary M. · Suffolk</div></div>
+    </div>
+  </div>
+</section>
+<div class="cta-section" id="contact">
+  <h2>Need HVAC Service Today?</h2>
+  <p>Same-day service available. 24/7 emergency line always open.</p>
+  <a href="tel:7573345771" class="btn-white">📞 Call (757) 334-5771</a>
+</div>
+<footer>© 2026 CoolAir HVAC Services · Portsmouth, VA · NATE Certified · Licensed & Insured</footer>
+</body>
+</html>
