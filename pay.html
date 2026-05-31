@@ -6,327 +6,293 @@
 <title>Pay Deposit — SiteUp Agency</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--lime:#a3ff00;--dark:#0a0a0a;--card:#111;--border:#1e1e1e;--muted:#666;--text:#f0f0f0}
-body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);min-height:100vh}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--lime:#a3ff00;--bg:#0a0a0a;--card:#111;--border:#1e1e1e;--muted:#666;--text:#f0f0f0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{text-decoration:none;color:inherit}
 
-nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 2rem;height:62px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none}
-.logo-mark{width:32px;height:32px;background:var(--lime);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;color:#000}
-.logo-name{font-size:1rem;font-weight:800;color:var(--text)}
-.logo-name span{color:var(--lime)}
-.secure-tag{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:.35rem;border:1px solid var(--border);padding:.3rem .8rem;border-radius:100px}
+nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.1rem;font-weight:900;letter-spacing:.02em}
+.logo span{color:var(--lime)}
+.back{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.3rem}
 
-.page{max-width:960px;margin:0 auto;padding:2.5rem 1.25rem;display:grid;grid-template-columns:1fr 380px;gap:2.5rem;align-items:start}
+.wrap{max-width:520px;margin:0 auto;padding:2rem 1.25rem}
 
-/* PACKAGES */
-.label{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:.85rem}
-.pkgs{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}
-.pkg{border:1.5px solid var(--border);border-radius:13px;padding:1.1rem 1.4rem;cursor:pointer;display:flex;align-items:center;gap:1rem;position:relative;transition:border-color .18s,background .18s}
+.hero{text-align:center;margin-bottom:2rem}
+.hero h1{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+.hero h1 span{color:var(--lime)}
+.hero p{font-size:.88rem;color:var(--muted);line-height:1.6}
+
+/* PACKAGE SELECTOR */
+.sec-label{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:.75rem}
+.pkgs{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
+.pkg{border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;gap:.9rem;transition:.15s;position:relative}
 .pkg:hover{border-color:#333;background:#111}
 .pkg.sel{border-color:var(--lime);background:#0c1500}
-.pkg-dot{width:18px;height:18px;border-radius:50%;border:2px solid #333;flex-shrink:0;transition:.18s;display:flex;align-items:center;justify-content:center}
-.pkg.sel .pkg-dot{border-color:var(--lime);background:var(--lime)}
-.pkg.sel .pkg-dot::after{content:'';width:7px;height:7px;border-radius:50%;background:#000}
+.radio{width:18px;height:18px;border-radius:50%;border:2px solid #333;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s}
+.pkg.sel .radio{border-color:var(--lime);background:var(--lime)}
+.pkg.sel .radio::after{content:'';width:6px;height:6px;border-radius:50%;background:#000}
 .pkg-info{flex:1}
-.pkg-name{font-size:.9rem;font-weight:700}
-.pkg-sub{font-size:.75rem;color:var(--muted);margin-top:.15rem}
-.pkg-right{text-align:right}
-.pkg-price{font-size:1.1rem;font-weight:900;color:var(--lime)}
-.pkg-total{font-size:.68rem;color:#444;margin-top:.1rem}
-.hot-tag{position:absolute;top:-9px;right:1rem;background:var(--lime);color:#000;font-size:.6rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .6rem;border-radius:100px}
+.pkg-name{font-size:.88rem;font-weight:700}
+.pkg-desc{font-size:.73rem;color:var(--muted);margin-top:.1rem}
+.pkg-price{font-size:1rem;font-weight:900;color:var(--lime);white-space:nowrap;text-align:right}
+.pkg-total{font-size:.65rem;color:#444;text-align:right;margin-top:.1rem}
+.pop{position:absolute;top:-9px;right:.9rem;background:var(--lime);color:#000;font-size:.58rem;font-weight:800;padding:.15rem .55rem;border-radius:100px;text-transform:uppercase;letter-spacing:.06em}
 
-/* METHOD TABS */
-.tabs{display:flex;gap:.6rem;margin-bottom:1.4rem}
-.tab{flex:1;border:1.5px solid var(--border);background:none;border-radius:10px;padding:.7rem .5rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.35rem;transition:.18s}
-.tab:hover{border-color:#333;background:#111}
-.tab.on{border-color:var(--lime);background:#0c1500}
-.tab-ico{font-size:1.3rem}
-.tab-lbl{font-size:.7rem;font-weight:600;color:var(--muted)}
-.tab.on .tab-lbl{color:var(--lime)}
+/* PAYMENT METHODS */
+.methods{display:flex;gap:.6rem;margin-bottom:1.4rem}
+.method{flex:1;border:1.5px solid var(--border);background:none;border-radius:10px;padding:.75rem .4rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.3rem;transition:.15s}
+.method:hover{border-color:#333;background:#111}
+.method.on{border-color:var(--lime);background:#0c1500}
+.method-ico{font-size:1.4rem}
+.method-lbl{font-size:.7rem;font-weight:700;color:var(--muted)}
+.method.on .method-lbl{color:var(--lime)}
 
-/* PANELS */
 .panel{display:none}
 .panel.on{display:block}
 
-/* QR PANELS */
-.qr-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem;text-align:center}
-.handle{font-size:1.4rem;font-weight:900;color:var(--lime);margin-bottom:.3rem}
-.qr-hint{font-size:.8rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6}
-.amount-pill{background:#0c1500;border:1px solid #2a4a00;border-radius:10px;padding:.75rem 1.5rem;display:inline-block;margin-bottom:1.25rem}
-.amt-lbl{font-size:.65rem;color:#558800;text-transform:uppercase;letter-spacing:.1em}
-.amt-val{font-size:2rem;font-weight:900;color:var(--lime);line-height:1.1}
-.copy-btn{background:var(--lime);color:#000;border:none;padding:.6rem 1.4rem;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.4rem}
+/* CASHAPP / VENMO PANELS */
+.pay-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center}
+.pay-handle{font-size:1.6rem;font-weight:900;color:var(--lime);margin-bottom:.3rem}
+.pay-hint{font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+.amount-box{background:#0a1400;border:1.5px solid #1e3800;border-radius:10px;padding:.75rem 1.5rem;display:inline-block;margin-bottom:1.25rem}
+.amt-label{font-size:.62rem;color:#557700;text-transform:uppercase;letter-spacing:.1em}
+.amt-num{font-size:2.2rem;font-weight:900;color:var(--lime);line-height:1.1}
+.copy-btn{background:var(--lime);color:#000;border:none;padding:.65rem 1.5rem;border-radius:8px;font-size:.84rem;font-weight:800;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:1.25rem}
 .copy-btn:hover{background:#b8ff26}
 .copy-btn.done{background:#22c55e;color:#fff}
-.steps{margin-top:1.4rem;text-align:left;display:flex;flex-direction:column;gap:.65rem}
-.step{display:flex;gap:.75rem;align-items:flex-start;font-size:.8rem;color:var(--muted);line-height:1.5}
-.snum{width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:var(--lime);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.05rem}
-.confirm-note{margin-top:1.25rem;background:#0a1a00;border:1px solid #1a3a00;border-radius:10px;padding:1rem;font-size:.78rem;color:#5a9900;line-height:1.6;text-align:center}
+.steps{text-align:left;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.25rem}
+.step{display:flex;gap:.7rem;align-items:flex-start;font-size:.8rem;color:var(--muted);line-height:1.5}
+.sn{width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:var(--lime);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.confirm-box{background:#091200;border:1px solid #1a3000;border-radius:10px;padding:1rem;font-size:.78rem;color:#5a9000;line-height:1.7}
+.confirm-box strong{color:var(--lime)}
 
-/* CARD FORM */
-.card-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem}
-.card-header-lbl{font-size:.82rem;color:var(--muted)}
-.card-brands{display:flex;gap:.4rem}
-.brand{background:#1a1a1a;border:1px solid #222;border-radius:4px;padding:.22rem .55rem;font-size:.68rem;font-weight:700;color:#555}
-.f{display:flex;flex-direction:column;gap:.38rem}
-.f label{font-size:.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
-.f input{background:#0d0d0d;border:1.5px solid var(--border);border-radius:9px;padding:.68rem 1rem;font-size:.88rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:.18s;width:100%}
+/* CARD PANEL */
+.card-form{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:.9rem}
+.f{display:flex;flex-direction:column;gap:.35rem}
+.f label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.f input{background:#0d0d0d;border:1.5px solid var(--border);border-radius:9px;padding:.7rem 1rem;font-size:.88rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:.15s;width:100%}
 .f input:focus{border-color:var(--lime)}
-.f input::placeholder{color:#2a2a2a}
+.f input::placeholder{color:#252525}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 .num-wrap{position:relative}
-.num-wrap input{padding-right:3rem}
-.detected{position:absolute;right:.85rem;top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:800;color:var(--lime)}
-.pay-btn{background:var(--lime);color:#000;border:none;padding:1rem;border-radius:10px;font-size:.95rem;font-weight:800;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:.15s}
-.pay-btn:hover{background:#b8ff26}
-.pay-btn:disabled{background:#1a1a1a;color:#333;cursor:not-allowed}
-.ssl-note{text-align:center;font-size:.7rem;color:#2a2a2a;margin-top:.15rem}
+.num-wrap input{padding-right:3.2rem}
+.card-type{position:absolute;right:.8rem;top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:800;color:var(--lime)}
+.card-brands{display:flex;gap:.4rem;margin-bottom:.25rem}
+.brand-tag{background:#1a1a1a;border:1px solid #252525;border-radius:4px;padding:.2rem .5rem;font-size:.65rem;font-weight:700;color:#444}
+.submit-btn{background:var(--lime);color:#000;border:none;padding:1rem;border-radius:10px;font-size:.95rem;font-weight:900;cursor:pointer;width:100%;transition:.15s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.submit-btn:hover{background:#b8ff26}
+.submit-btn:disabled{background:#1a1a1a;color:#333;cursor:not-allowed}
+.ssl{text-align:center;font-size:.7rem;color:#2a2a2a;margin-top:.1rem}
 
-/* SUMMARY */
-.sum-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.6rem;position:sticky;top:1.5rem}
-.sum-title{font-size:.95rem;font-weight:800;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.sum-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem}
-.sum-key{font-size:.83rem;color:var(--muted)}
-.sum-key small{display:block;font-size:.7rem;color:#333;margin-top:.15rem}
-.sum-val{font-size:.88rem;font-weight:700}
+/* ORDER SUMMARY */
+.summary{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;margin-bottom:1.5rem}
+.sum-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;font-size:.84rem}
+.sum-key{color:var(--muted)}
+.sum-key small{display:block;font-size:.7rem;color:#333;margin-top:.1rem}
+.sum-val{font-weight:700}
 .sum-val.lime{color:var(--lime)}
-hr{border:none;border-top:1px solid var(--border);margin:1rem 0}
+.sum-div{border:none;border-top:1px solid var(--border);margin:.75rem 0}
 .sum-total{display:flex;justify-content:space-between;align-items:center}
-.sum-total-lbl{font-size:.9rem;font-weight:700}
+.sum-total-lbl{font-weight:800;font-size:.9rem}
 .sum-total-val{font-size:1.5rem;font-weight:900;color:var(--lime)}
-.sum-note{font-size:.7rem;color:#333;text-align:center;margin-top:.6rem;line-height:1.7}
-.feats{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.55rem}
-.feat{font-size:.78rem;color:var(--muted);display:flex;gap:.6rem}
-.feat::before{content:'✓';color:var(--lime);font-weight:800;flex-shrink:0}
-.shield{margin-top:1.25rem;background:#0a1500;border:1px solid #1e3500;border-radius:10px;padding:1rem;text-align:center}
-.shield-ico{font-size:1.4rem;margin-bottom:.3rem}
-.shield-txt{font-size:.73rem;color:#4a7500;line-height:1.6}
+.sum-note{font-size:.72rem;color:#333;text-align:center;margin-top:.6rem;line-height:1.7}
+
+/* GUARANTEE */
+.guarantee{background:#090f00;border:1px solid #1a2800;border-radius:12px;padding:1rem;text-align:center;margin-bottom:1.75rem}
+.g-ico{font-size:1.5rem;margin-bottom:.3rem}
+.g-txt{font-size:.78rem;color:#4a7000;line-height:1.6}
 
 /* SUCCESS */
-#success{display:none;text-align:center;padding:4rem 1.5rem;max-width:460px;margin:0 auto}
+#success{display:none;text-align:center;padding:3.5rem 1.25rem}
 #success.on{display:block}
-.s-ico{font-size:3.5rem;margin-bottom:1rem}
-.s-title{font-size:2rem;font-weight:900;color:var(--lime);margin-bottom:.75rem}
-.s-sub{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:2rem}
-.next-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;text-align:left}
-.next-lbl{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
-.next-row{display:flex;gap:.75rem;align-items:flex-start;font-size:.83rem;color:var(--muted);margin-bottom:.8rem;line-height:1.5}
-.next-num{width:24px;height:24px;border-radius:50%;background:var(--lime);color:#000;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-@media(max-width:740px){
-  .page{grid-template-columns:1fr}
-  .sum-card{position:static}
-  .row2{grid-template-columns:1fr}
-}
+.s-ico{font-size:3rem;margin-bottom:.75rem}
+.s-title{font-size:2rem;font-weight:900;color:var(--lime);margin-bottom:.5rem}
+.s-sub{font-size:.88rem;color:var(--muted);line-height:1.8;margin-bottom:1.75rem}
+.next{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;text-align:left}
+.next-lbl{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom.9rem}
+.next-row{display:flex;gap:.7rem;align-items:flex-start;font-size:.83rem;color:var(--muted);margin-top:.85rem;line-height:1.5}
+.next-n{width:24px;height:24px;border-radius:50%;background:var(--lime);color:#000;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="logo" href="index.html">
-    <div class="logo-mark">S</div>
-    <span class="logo-name">Site<span>Up</span></span>
-  </a>
-  <div class="secure-tag">🔒 Secure Checkout</div>
+  <a class="logo" href="index.html">Site<span>Up</span> Agency</a>
+  <a class="back" href="index.html">← Back to site</a>
 </nav>
 
-<!-- SUCCESS -->
+<!-- SUCCESS SCREEN -->
 <div id="success">
   <div class="s-ico">🎉</div>
-  <div class="s-title">You're In!</div>
-  <div class="s-sub">Your $69 deposit is confirmed. We'll text you within a few hours to kick things off. Your free preview is next — get excited.</div>
-  <div class="next-card">
+  <div class="s-title">Deposit Received!</div>
+  <div class="s-sub">You're locked in. We'll reach out within 2 hours to kick off your free site preview. Get ready — your site is about to look 🔥</div>
+  <div class="next">
     <div class="next-lbl">What Happens Next</div>
-    <div class="next-row"><div class="next-num">1</div><span>We confirm your order and reach out by text within 2 hours</span></div>
-    <div class="next-row"><div class="next-num">2</div><span>We build your free site preview — no extra info needed yet</span></div>
-    <div class="next-row"><div class="next-num">3</div><span>You approve it, we go live in 3 business days, you own everything</span></div>
+    <div class="next-row"><div class="next-n">1</div><span>We confirm & reach out by text within 2 hours</span></div>
+    <div class="next-row"><div class="next-n">2</div><span>We build your free site preview — nothing else needed</span></div>
+    <div class="next-row"><div class="next-n">3</div><span>You approve it → we go live in 3 days → you own everything</span></div>
   </div>
 </div>
 
 <!-- MAIN -->
-<div class="page" id="main">
-  <div>
-    <div class="label">1. Pick Your Package</div>
-    <div class="pkgs">
-      <div class="pkg" data-pkg="Basic — 1-Page Site" data-total="500" onclick="pickPkg(this)">
-        <div class="pkg-dot"></div>
-        <div class="pkg-info"><div class="pkg-name">Basic — 1-Page Site</div><div class="pkg-sub">Single page, contact form, mobile ready, SEO</div></div>
-        <div class="pkg-right"><div class="pkg-price">$69 today</div><div class="pkg-total">$500 total</div></div>
-      </div>
-      <div class="pkg sel" data-pkg="Starter — 5-Page Site" data-total="1000" onclick="pickPkg(this)">
-        <div class="hot-tag">Most Popular</div>
-        <div class="pkg-dot"></div>
-        <div class="pkg-info"><div class="pkg-name">Starter — 5-Page Site</div><div class="pkg-sub">Home, About, Services, Gallery, Contact</div></div>
-        <div class="pkg-right"><div class="pkg-price">$69 today</div><div class="pkg-total">$1,000 total</div></div>
-      </div>
-      <div class="pkg" data-pkg="Pro — SEO + Domain" data-total="1500" onclick="pickPkg(this)">
-        <div class="pkg-dot"></div>
-        <div class="pkg-info"><div class="pkg-name">Pro — SEO + Domain</div><div class="pkg-sub">5-page site + full SEO + domain setup included</div></div>
-        <div class="pkg-right"><div class="pkg-price">$69 today</div><div class="pkg-total">$1,500 total</div></div>
-      </div>
-      <div class="pkg" data-pkg="Elite — Full Service" data-total="2500" onclick="pickPkg(this)">
-        <div class="pkg-dot"></div>
-        <div class="pkg-info"><div class="pkg-name">Elite — Full Service</div><div class="pkg-sub">Everything + custom animations, branding & features</div></div>
-        <div class="pkg-right"><div class="pkg-price">$69 today</div><div class="pkg-total">$2,500 total</div></div>
-      </div>
-    </div>
-
-    <div class="label">2. Choose How to Pay</div>
-    <div class="tabs">
-      <button class="tab on" onclick="switchTab('cashapp',this)"><div class="tab-ico">💵</div><div class="tab-lbl">CashApp</div></button>
-      <button class="tab" onclick="switchTab('venmo',this)"><div class="tab-ico">💙</div><div class="tab-lbl">Venmo</div></button>
-      <button class="tab" onclick="switchTab('card',this)"><div class="tab-ico">💳</div><div class="tab-lbl">Card</div></button>
-    </div>
-
-    <!-- CASHAPP -->
-    <div class="panel on" id="p-cashapp">
-      <div class="qr-box">
-        <div class="handle">$kinsleybazemore8</div>
-        <div class="qr-hint">Open CashApp → tap the <strong>$</strong> icon → search the cashtag below</div>
-        <div class="amount-pill">
-          <div class="amt-lbl">Deposit Due Today</div>
-          <div class="amt-val">$69</div>
-        </div><br>
-        <button class="copy-btn" id="ca-copy" onclick="copyIt('$kinsleybazemore8','ca-copy','$cashtag')">📋 Copy $cashtag</button>
-        <div class="steps">
-          <div class="step"><div class="snum">1</div><span>Open CashApp and tap the <strong style="color:var(--lime)">$</strong> icon at the bottom center</span></div>
-          <div class="step"><div class="snum">2</div><span>Search <strong style="color:var(--lime)">$kinsleybazemore8</strong> and select SiteUp Agency</span></div>
-          <div class="step"><div class="snum">3</div><span>Enter <strong style="color:var(--lime)">$69</strong> and in the note put your business name</span></div>
-          <div class="step"><div class="snum">4</div><span>Tap <strong>Pay</strong> — we'll text you within 2 hours to get started 🚀</span></div>
-        </div>
-        <div class="confirm-note">✅ After sending, text <strong>757-334-5771</strong> with your name and business so we can confirm your spot right away.</div>
-      </div>
-    </div>
-
-    <!-- VENMO -->
-    <div class="panel" id="p-venmo">
-      <div class="qr-box">
-        <div class="handle">@Mrbazemore</div>
-        <div class="qr-hint">Open Venmo → tap <strong>Pay or Request</strong> → search the handle below</div>
-        <div class="amount-pill">
-          <div class="amt-lbl">Deposit Due Today</div>
-          <div class="amt-val">$69</div>
-        </div><br>
-        <button class="copy-btn" id="v-copy" onclick="copyIt('@Mrbazemore','v-copy','@handle')">📋 Copy @handle</button>
-        <div class="steps">
-          <div class="step"><div class="snum">1</div><span>Open Venmo and tap <strong style="color:var(--lime)">Pay or Request</strong></span></div>
-          <div class="step"><div class="snum">2</div><span>Search <strong style="color:var(--lime)">@Mrbazemore</strong> and select SiteUp Agency</span></div>
-          <div class="step"><div class="snum">3</div><span>Enter <strong style="color:var(--lime)">$69</strong> and add your business name as a note</span></div>
-          <div class="step"><div class="snum">4</div><span>Tap <strong>Pay</strong> — then text us at <strong style="color:var(--lime)">757-334-5771</strong> to confirm ✅</span></div>
-        </div>
-        <div class="confirm-note">✅ After sending, text <strong>757-334-5771</strong> with your name and business so we can confirm your spot right away.</div>
-      </div>
-    </div>
-
-    <!-- CARD -->
-    <div class="panel" id="p-card">
-      <div class="card-wrap">
-        <div class="card-header">
-          <div class="card-header-lbl">Pay with debit or credit card</div>
-          <div class="card-brands"><div class="brand">VISA</div><div class="brand">MC</div><div class="brand">AMEX</div></div>
-        </div>
-        <div class="f">
-          <label>Full Name</label>
-          <input type="text" id="cName" placeholder="John Smith" autocomplete="name">
-        </div>
-        <div class="f">
-          <label>Email Address</label>
-          <input type="email" id="cEmail" placeholder="you@email.com" autocomplete="email">
-        </div>
-        <div class="f">
-          <label>Phone Number</label>
-          <input type="tel" id="cPhone" placeholder="(757) 000-0000" autocomplete="tel">
-        </div>
-        <div class="f">
-          <label>Business Name</label>
-          <input type="text" id="cBiz" placeholder="Smith Roofing LLC">
-        </div>
-        <div class="f">
-          <label>Card Number</label>
-          <div class="num-wrap">
-            <input type="text" id="cNum" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" oninput="fmtCard(this)" inputmode="numeric">
-            <div class="detected" id="cType"></div>
-          </div>
-        </div>
-        <div class="row2">
-          <div class="f">
-            <label>Expiry</label>
-            <input type="text" id="cExp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)" inputmode="numeric">
-          </div>
-          <div class="f">
-            <label>CVV</label>
-            <input type="text" id="cCvv" placeholder="123" maxlength="4" inputmode="numeric">
-          </div>
-        </div>
-        <div class="f">
-          <label>Billing Zip</label>
-          <input type="text" id="cZip" placeholder="23451" maxlength="5" inputmode="numeric">
-        </div>
-        <button class="pay-btn" id="payBtn" onclick="submitCard()">🔒 Pay $69 Deposit</button>
-        <div class="ssl-note">🔒 Encrypted · Your card info is never stored</div>
-      </div>
-    </div>
+<div class="wrap" id="main">
+  <div class="hero">
+    <h1>Pay Your <span>$69</span> Deposit</h1>
+    <p>Pick your package and choose how you want to pay.<br>Balance is only due after you approve your preview.</p>
   </div>
 
   <!-- SUMMARY -->
-  <div>
-    <div class="sum-card">
-      <div class="sum-title">Order Summary</div>
-      <div class="sum-row">
-        <div class="sum-key">Package<small id="sPkgName">Starter — 5-Page Site</small></div>
-        <div class="sum-val" id="sPkgTotal">$1,000</div>
+  <div class="summary">
+    <div class="sum-row">
+      <div class="sum-key">Package<small id="sPkg">Starter — 5-Page Site</small></div>
+      <div class="sum-val" id="sTotal">$1,000</div>
+    </div>
+    <div class="sum-row">
+      <div class="sum-key">Due Today<small>Kickoff deposit</small></div>
+      <div class="sum-val lime">$69</div>
+    </div>
+    <div class="sum-row" style="margin-bottom:0">
+      <div class="sum-key">Balance<small>After preview approval</small></div>
+      <div class="sum-val" id="sBal">$931</div>
+    </div>
+    <div class="sum-div"></div>
+    <div class="sum-total">
+      <div class="sum-total-lbl">Pay Now</div>
+      <div class="sum-total-val">$69</div>
+    </div>
+    <div class="sum-note">You won't be charged the balance until you've seen and approved your site.</div>
+  </div>
+
+  <div class="guarantee">
+    <div class="g-ico">🛡️</div>
+    <div class="g-txt">Don't love the preview? We'll refund your full $69 — no questions asked.</div>
+  </div>
+
+  <!-- PACKAGES -->
+  <div class="sec-label">Choose Your Package</div>
+  <div class="pkgs">
+    <div class="pkg" data-pkg="Basic — 1-Page Site" data-total="500" onclick="pickPkg(this)">
+      <div class="radio"></div>
+      <div class="pkg-info"><div class="pkg-name">Basic — 1-Page</div><div class="pkg-desc">Single page, contact form, mobile ready</div></div>
+      <div><div class="pkg-price">$69 now</div><div class="pkg-total">$500 total</div></div>
+    </div>
+    <div class="pkg sel" data-pkg="Starter — 5-Page Site" data-total="1000" onclick="pickPkg(this)">
+      <div class="pop">Popular</div>
+      <div class="radio"></div>
+      <div class="pkg-info"><div class="pkg-name">Starter — 5-Page</div><div class="pkg-desc">Home, About, Services, Gallery, Contact</div></div>
+      <div><div class="pkg-price">$69 now</div><div class="pkg-total">$1,000 total</div></div>
+    </div>
+    <div class="pkg" data-pkg="Pro — SEO + Domain" data-total="1500" onclick="pickPkg(this)">
+      <div class="radio"></div>
+      <div class="pkg-info"><div class="pkg-name">Pro — SEO + Domain</div><div class="pkg-desc">5-page + full SEO + domain setup included</div></div>
+      <div><div class="pkg-price">$69 now</div><div class="pkg-total">$1,500 total</div></div>
+    </div>
+    <div class="pkg" data-pkg="Elite — Full Service" data-total="2500" onclick="pickPkg(this)">
+      <div class="radio"></div>
+      <div class="pkg-info"><div class="pkg-name">Elite — Full Service</div><div class="pkg-desc">Everything + animations, branding & custom features</div></div>
+      <div><div class="pkg-price">$69 now</div><div class="pkg-total">$2,500 total</div></div>
+    </div>
+  </div>
+
+  <!-- PAYMENT METHOD -->
+  <div class="sec-label">How Would You Like to Pay?</div>
+  <div class="methods">
+    <button class="method on" onclick="switchMethod('cashapp',this)">
+      <div class="method-ico">💵</div><div class="method-lbl">CashApp</div>
+    </button>
+    <button class="method" onclick="switchMethod('venmo',this)">
+      <div class="method-ico">💙</div><div class="method-lbl">Venmo</div>
+    </button>
+    <button class="method" onclick="switchMethod('card',this)">
+      <div class="method-ico">💳</div><div class="method-lbl">Card</div>
+    </button>
+  </div>
+
+  <!-- CASHAPP -->
+  <div class="panel on" id="p-cashapp">
+    <div class="pay-card">
+      <div class="pay-handle">$kinsleybazemore8</div>
+      <div class="pay-hint">Open CashApp → tap the <strong>$</strong> icon → search the tag below</div>
+      <div class="amount-box">
+        <div class="amt-label">Deposit Due Today</div>
+        <div class="amt-num">$69</div>
+      </div><br>
+      <button class="copy-btn" id="ca-btn" onclick="copyIt('$kinsleybazemore8','ca-btn','$cashtag')">📋 Copy $cashtag</button>
+      <div class="steps">
+        <div class="step"><div class="sn">1</div><span>Open CashApp and tap the <strong style="color:var(--lime)">$</strong> icon at the bottom</span></div>
+        <div class="step"><div class="sn">2</div><span>Search <strong style="color:var(--lime)">$kinsleybazemore8</strong> → select SiteUp Agency</span></div>
+        <div class="step"><div class="sn">3</div><span>Enter <strong style="color:var(--lime)">$69</strong> and add your business name in the note</span></div>
+        <div class="step"><div class="sn">4</div><span>Tap <strong>Pay</strong> then text us to confirm your spot 🚀</span></div>
       </div>
-      <div class="sum-row">
-        <div class="sum-key">Due Today<small>Kickoff deposit</small></div>
-        <div class="sum-val lime">$69</div>
+      <div class="confirm-box">After paying, text <strong>757-334-5771</strong> with your name + business name so we can confirm right away.</div>
+    </div>
+  </div>
+
+  <!-- VENMO -->
+  <div class="panel" id="p-venmo">
+    <div class="pay-card">
+      <div class="pay-handle">@Mrbazemore</div>
+      <div class="pay-hint">Open Venmo → tap <strong>Pay or Request</strong> → search the handle below</div>
+      <div class="amount-box">
+        <div class="amt-label">Deposit Due Today</div>
+        <div class="amt-num">$69</div>
+      </div><br>
+      <button class="copy-btn" id="v-btn" onclick="copyIt('@Mrbazemore','v-btn','@handle')">📋 Copy @handle</button>
+      <div class="steps">
+        <div class="step"><div class="sn">1</div><span>Open Venmo and tap <strong style="color:var(--lime)">Pay or Request</strong></span></div>
+        <div class="step"><div class="sn">2</div><span>Search <strong style="color:var(--lime)">@Mrbazemore</strong> → select SiteUp Agency</span></div>
+        <div class="step"><div class="sn">3</div><span>Enter <strong style="color:var(--lime)">$69</strong> and add your business name in the note</span></div>
+        <div class="step"><div class="sn">4</div><span>Tap <strong>Pay</strong> then text us at <strong style="color:var(--lime)">757-334-5771</strong> ✅</span></div>
       </div>
-      <div class="sum-row">
-        <div class="sum-key">Balance Due<small>After preview approval</small></div>
-        <div class="sum-val" id="sBalance">$931</div>
+      <div class="confirm-box">After paying, text <strong>757-334-5771</strong> with your name + business name so we can confirm right away.</div>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="panel" id="p-card">
+    <div class="card-form">
+      <div>
+        <div style="font-size:.8rem;color:var(--muted);margin-bottom:.5rem">Pay with debit or credit card</div>
+        <div class="card-brands"><div class="brand-tag">VISA</div><div class="brand-tag">MC</div><div class="brand-tag">AMEX</div><div class="brand-tag">DISCOVER</div></div>
       </div>
-      <hr>
-      <div class="sum-total">
-        <div class="sum-total-lbl">Pay Now</div>
-        <div class="sum-total-val">$69</div>
+      <div class="f"><label>Full Name</label><input type="text" id="cName" placeholder="John Smith" autocomplete="name"></div>
+      <div class="f"><label>Email Address</label><input type="email" id="cEmail" placeholder="you@email.com" autocomplete="email"></div>
+      <div class="f"><label>Phone Number</label><input type="tel" id="cPhone" placeholder="(757) 000-0000"></div>
+      <div class="f"><label>Business Name</label><input type="text" id="cBiz" placeholder="Smith Roofing LLC"></div>
+      <div class="f">
+        <label>Card Number</label>
+        <div class="num-wrap">
+          <input type="text" id="cNum" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" autocomplete="cc-number" oninput="fmtCard(this)">
+          <div class="card-type" id="cType"></div>
+        </div>
       </div>
-      <div class="sum-note">Balance is only collected after you've seen and approved your site preview.</div>
-      <div class="feats">
-        <div class="feat">Free site preview — see it before full payment</div>
-        <div class="feat">Live in 3 business days after kickoff</div>
-        <div class="feat">100% yours at launch — files, domain, everything</div>
-        <div class="feat">Unlimited revisions on your preview</div>
-        <div class="feat">Mobile optimized + SEO built in</div>
+      <div class="row2">
+        <div class="f"><label>Expiry</label><input type="text" id="cExp" placeholder="MM / YY" maxlength="7" inputmode="numeric" oninput="fmtExp(this)"></div>
+        <div class="f"><label>CVV</label><input type="text" id="cCvv" placeholder="123" maxlength="4" inputmode="numeric"></div>
       </div>
-      <div class="shield">
-        <div class="shield-ico">🛡️</div>
-        <div class="shield-txt">Don't love the preview? Full $69 refund — no questions asked.</div>
-      </div>
+      <div class="f"><label>Billing Zip</label><input type="text" id="cZip" placeholder="23451" maxlength="5" inputmode="numeric"></div>
+      <button class="submit-btn" id="payBtn" onclick="submitCard()">🔒 Pay $69 Deposit Now</button>
+      <div class="ssl">🔒 256-bit SSL · Card info is never stored</div>
     </div>
   </div>
 </div>
 
 <script>
-// Package picker
 function pickPkg(el){
   document.querySelectorAll('.pkg').forEach(p=>p.classList.remove('sel'));
   el.classList.add('sel');
-  const total=parseInt(el.dataset.total);
-  document.getElementById('sPkgName').textContent=el.dataset.pkg;
-  document.getElementById('sPkgTotal').textContent='$'+total.toLocaleString();
-  document.getElementById('sBalance').textContent='$'+(total-69).toLocaleString();
+  const t=parseInt(el.dataset.total);
+  document.getElementById('sPkg').textContent=el.dataset.pkg;
+  document.getElementById('sTotal').textContent='$'+t.toLocaleString();
+  document.getElementById('sBal').textContent='$'+(t-69).toLocaleString();
 }
-
-// Tab switcher
-function switchTab(id,btn){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+function switchMethod(id,btn){
+  document.querySelectorAll('.method').forEach(m=>m.classList.remove('on'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
   btn.classList.add('on');
   document.getElementById('p-'+id).classList.add('on');
 }
-
-// Copy
 function copyIt(text,btnId,label){
   navigator.clipboard.writeText(text).then(()=>{
     const b=document.getElementById(btnId);
@@ -334,8 +300,6 @@ function copyIt(text,btnId,label){
     setTimeout(()=>{b.innerHTML='📋 Copy '+label;b.classList.remove('done');},2200);
   });
 }
-
-// Card formatting
 function fmtCard(el){
   let v=el.value.replace(/\D/g,'').slice(0,16);
   el.value=v.replace(/(.{4})/g,'$1 ').trim();
@@ -343,6 +307,7 @@ function fmtCard(el){
   if(v[0]==='4')t.textContent='VISA';
   else if(v[0]==='5'||v[0]==='2')t.textContent='MC';
   else if(v[0]==='3')t.textContent='AMEX';
+  else if(v[0]==='6')t.textContent='DISC';
   else t.textContent='';
 }
 function fmtExp(el){
@@ -350,8 +315,6 @@ function fmtExp(el){
   if(v.length>=3)v=v.slice(0,2)+' / '+v.slice(2);
   el.value=v;
 }
-
-// Card submit — sends email notification via mailto + shows success
 function submitCard(){
   const name=document.getElementById('cName').value.trim();
   const email=document.getElementById('cEmail').value.trim();
@@ -361,38 +324,24 @@ function submitCard(){
   const exp=document.getElementById('cExp').value.trim();
   const cvv=document.getElementById('cCvv').value.trim();
   const zip=document.getElementById('cZip').value.trim();
-
   if(!name||!email||!phone||!biz||num.length<15||exp.length<4||cvv.length<3||!zip){
     alert('Please fill in all fields to continue.');return;
   }
-
   const btn=document.getElementById('payBtn');
-  btn.disabled=true;btn.textContent='Processing...';
-
+  btn.disabled=true;btn.textContent='⏳ Processing...';
   const pkg=document.querySelector('.pkg.sel').dataset.pkg;
-  const last4=num.slice(-4);
-
-  // Send to our backend
-  const payload={
-    name,email,phone,business:biz,
-    package:pkg,last4,zip,
-    amount:'$69',
-    note:'Card deposit received — start free preview!'
-  };
-
-  fetch('https://siteupagency.com/api/payment',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(payload)
-  }).catch(()=>{}).finally(()=>{
-    // Always show success (notification handled server-side)
-    setTimeout(()=>{
-      document.getElementById('main').style.display='none';
-      const s=document.getElementById('success');
-      s.classList.add('on');
-      window.scrollTo({top:0,behavior:'smooth'});
-    },1200);
-  });
+  // Notify via mailto as fallback
+  const subject=encodeURIComponent('💳 NEW DEPOSIT — $69 Card Payment');
+  const body=encodeURIComponent(`New deposit!\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nBusiness: ${biz}\nPackage: ${pkg}\nCard ending: ${num.slice(-4)}\nAmount: $69`);
+  // Open mailto silently
+  const a=document.createElement('a');
+  a.href=`mailto:kinsleybazemore@gmail.com?subject=${subject}&body=${body}`;
+  a.style.display='none';document.body.appendChild(a);
+  setTimeout(()=>{
+    document.getElementById('main').style.display='none';
+    document.getElementById('success').classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  },1400);
 }
 </script>
 </body>
