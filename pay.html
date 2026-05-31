@@ -12,19 +12,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 a{text-decoration:none;color:inherit}
 
 nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:1.1rem;font-weight:900;letter-spacing:.02em}
-.logo span{color:var(--lime)}
+.logo{font-size:1.1rem;font-weight:900}.logo span{color:var(--lime)}
 .back{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.3rem}
 
 .wrap{max-width:520px;margin:0 auto;padding:2rem 1.25rem}
-
 .hero{text-align:center;margin-bottom:2rem}
 .hero h1{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
 .hero h1 span{color:var(--lime)}
 .hero p{font-size:.88rem;color:var(--muted);line-height:1.6}
 
-/* PACKAGE SELECTOR */
 .sec-label{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:.75rem}
+
+/* PACKAGES */
 .pkgs{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.75rem}
 .pkg{border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;gap:.9rem;transition:.15s;position:relative}
 .pkg:hover{border-color:#333;background:#111}
@@ -39,59 +38,11 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
 .pkg-total{font-size:.65rem;color:#444;text-align:right;margin-top:.1rem}
 .pop{position:absolute;top:-9px;right:.9rem;background:var(--lime);color:#000;font-size:.58rem;font-weight:800;padding:.15rem .55rem;border-radius:100px;text-transform:uppercase;letter-spacing:.06em}
 
-/* PAYMENT METHODS */
-.methods{display:flex;gap:.6rem;margin-bottom:1.4rem}
-.method{flex:1;border:1.5px solid var(--border);background:none;border-radius:10px;padding:.75rem .4rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.3rem;transition:.15s}
-.method:hover{border-color:#333;background:#111}
-.method.on{border-color:var(--lime);background:#0c1500}
-.method-ico{font-size:1.4rem}
-.method-lbl{font-size:.7rem;font-weight:700;color:var(--muted)}
-.method.on .method-lbl{color:var(--lime)}
-
-.panel{display:none}
-.panel.on{display:block}
-
-/* CASHAPP / VENMO PANELS */
-.pay-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center}
-.pay-handle{font-size:1.6rem;font-weight:900;color:var(--lime);margin-bottom:.3rem}
-.pay-hint{font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
-.amount-box{background:#0a1400;border:1.5px solid #1e3800;border-radius:10px;padding:.75rem 1.5rem;display:inline-block;margin-bottom:1.25rem}
-.amt-label{font-size:.62rem;color:#557700;text-transform:uppercase;letter-spacing:.1em}
-.amt-num{font-size:2.2rem;font-weight:900;color:var(--lime);line-height:1.1}
-.copy-btn{background:var(--lime);color:#000;border:none;padding:.65rem 1.5rem;border-radius:8px;font-size:.84rem;font-weight:800;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:1.25rem}
-.copy-btn:hover{background:#b8ff26}
-.copy-btn.done{background:#22c55e;color:#fff}
-.steps{text-align:left;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.25rem}
-.step{display:flex;gap:.7rem;align-items:flex-start;font-size:.8rem;color:var(--muted);line-height:1.5}
-.sn{width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:var(--lime);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.confirm-box{background:#091200;border:1px solid #1a3000;border-radius:10px;padding:1rem;font-size:.78rem;color:#5a9000;line-height:1.7}
-.confirm-box strong{color:var(--lime)}
-
-/* CARD PANEL */
-.card-form{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:.9rem}
-.f{display:flex;flex-direction:column;gap:.35rem}
-.f label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
-.f input{background:#0d0d0d;border:1.5px solid var(--border);border-radius:9px;padding:.7rem 1rem;font-size:.88rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:.15s;width:100%}
-.f input:focus{border-color:var(--lime)}
-.f input::placeholder{color:#252525}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.num-wrap{position:relative}
-.num-wrap input{padding-right:3.2rem}
-.card-type{position:absolute;right:.8rem;top:50%;transform:translateY(-50%);font-size:.72rem;font-weight:800;color:var(--lime)}
-
-
-.submit-btn{background:var(--lime);color:#000;border:none;padding:1rem;border-radius:10px;font-size:.95rem;font-weight:900;cursor:pointer;width:100%;transition:.15s;display:flex;align-items:center;justify-content:center;gap:.5rem}
-.submit-btn:hover{background:#b8ff26}
-.submit-btn:disabled{background:#1a1a1a;color:#333;cursor:not-allowed}
-.ssl{text-align:center;font-size:.7rem;color:#2a2a2a;margin-top:.1rem}
-
-/* ORDER SUMMARY */
+/* SUMMARY */
 .summary{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;margin-bottom:1.5rem}
 .sum-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;font-size:.84rem}
-.sum-key{color:var(--muted)}
-.sum-key small{display:block;font-size:.7rem;color:#333;margin-top:.1rem}
-.sum-val{font-weight:700}
-.sum-val.lime{color:var(--lime)}
+.sum-key{color:var(--muted)}.sum-key small{display:block;font-size:.7rem;color:#333;margin-top:.1rem}
+.sum-val{font-weight:700}.sum-val.lime{color:var(--lime)}
 .sum-div{border:none;border-top:1px solid var(--border);margin:.75rem 0}
 .sum-total{display:flex;justify-content:space-between;align-items:center}
 .sum-total-lbl{font-weight:800;font-size:.9rem}
@@ -103,6 +54,47 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
 .g-ico{font-size:1.5rem;margin-bottom:.3rem}
 .g-txt{font-size:.78rem;color:#4a7000;line-height:1.6}
 
+/* METHOD TABS */
+.methods{display:flex;gap:.6rem;margin-bottom:1.4rem}
+.method{flex:1;border:1.5px solid var(--border);background:none;border-radius:10px;padding:.75rem .4rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.3rem;transition:.15s}
+.method:hover{border-color:#333;background:#111}
+.method.on{border-color:var(--lime);background:#0c1500}
+.method-ico{font-size:1.4rem}
+.method-lbl{font-size:.7rem;font-weight:700;color:var(--muted)}
+.method.on .method-lbl{color:var(--lime)}
+
+.panel{display:none}.panel.on{display:block}
+
+/* QR PANELS */
+.pay-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-align:center}
+.pay-handle{font-size:1.6rem;font-weight:900;color:var(--lime);margin-bottom:.3rem}
+.pay-hint{font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
+.amount-box{background:#0a1400;border:1.5px solid #1e3800;border-radius:10px;padding:.75rem 1.5rem;display:inline-block;margin-bottom:1.25rem}
+.amt-label{font-size:.62rem;color:#557700;text-transform:uppercase;letter-spacing:.1em}
+.amt-num{font-size:2.2rem;font-weight:900;color:var(--lime);line-height:1.1}
+.copy-btn{background:var(--lime);color:#000;border:none;padding:.65rem 1.5rem;border-radius:8px;font-size:.84rem;font-weight:800;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:1.25rem}
+.copy-btn:hover{background:#b8ff26}.copy-btn.done{background:#22c55e;color:#fff}
+.steps{text-align:left;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.25rem}
+.step{display:flex;gap:.7rem;align-items:flex-start;font-size:.8rem;color:var(--muted);line-height:1.5}
+.sn{width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:var(--lime);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.confirm-box{background:#091200;border:1px solid #1a3000;border-radius:10px;padding:1rem;font-size:.78rem;color:#5a9000;line-height:1.7}
+.confirm-box strong{color:var(--lime)}
+
+/* STRIPE CARD PANEL */
+.card-panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
+.card-intro{font-size:.83rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;text-align:center}
+.f{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.9rem}
+.f label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.f input{background:#0d0d0d;border:1.5px solid var(--border);border-radius:9px;padding:.7rem 1rem;font-size:.88rem;color:var(--text);font-family:'Inter',sans-serif;outline:none;transition:.15s;width:100%}
+.f input:focus{border-color:var(--lime)}
+.f input::placeholder{color:#252525}
+.stripe-btn{background:var(--lime);color:#000;border:none;padding:1rem;border-radius:10px;font-size:.95rem;font-weight:900;cursor:pointer;width:100%;transition:.15s;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.5rem}
+.stripe-btn:hover{background:#b8ff26}
+.stripe-btn:disabled{background:#1a1a1a;color:#333;cursor:not-allowed}
+.stripe-note{text-align:center;font-size:.72rem;color:#2a2a2a;margin-top:.6rem;line-height:1.6}
+.stripe-badges{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.5rem}
+.badge{background:#1a1a1a;border:1px solid #252525;border-radius:4px;padding:.2rem .5rem;font-size:.65rem;font-weight:700;color:#444}
+
 /* SUCCESS */
 #success{display:none;text-align:center;padding:3.5rem 1.25rem}
 #success.on{display:block}
@@ -110,7 +102,7 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
 .s-title{font-size:2rem;font-weight:900;color:var(--lime);margin-bottom:.5rem}
 .s-sub{font-size:.88rem;color:var(--muted);line-height:1.8;margin-bottom:1.75rem}
 .next{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;text-align:left}
-.next-lbl{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom.9rem}
+.next-lbl{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
 .next-row{display:flex;gap:.7rem;align-items:flex-start;font-size:.83rem;color:var(--muted);margin-top:.85rem;line-height:1.5}
 .next-n{width:24px;height:24px;border-radius:50%;background:var(--lime);color:#000;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 </style>
@@ -119,10 +111,10 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
 
 <nav>
   <a class="logo" href="index.html">Site<span>Up</span> Agency</a>
-  <a class="back" href="index.html">← Back to site</a>
+  <a class="back" href="index.html">← Back</a>
 </nav>
 
-<!-- SUCCESS SCREEN -->
+<!-- SUCCESS -->
 <div id="success">
   <div class="s-ico">🎉</div>
   <div class="s-title">Deposit Received!</div>
@@ -130,7 +122,7 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
   <div class="next">
     <div class="next-lbl">What Happens Next</div>
     <div class="next-row"><div class="next-n">1</div><span>We confirm & reach out by text within 2 hours</span></div>
-    <div class="next-row"><div class="next-n">2</div><span>We build your free site preview — nothing else needed</span></div>
+    <div class="next-row"><div class="next-n">2</div><span>We build your free site preview — nothing else needed from you yet</span></div>
     <div class="next-row"><div class="next-n">3</div><span>You approve it → we go live in 3 days → you own everything</span></div>
   </div>
 </div>
@@ -139,7 +131,7 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
 <div class="wrap" id="main">
   <div class="hero">
     <h1>Pay Your <span>$69</span> Deposit</h1>
-    <p>Pick your package and choose how you want to pay.<br>Balance is only due after you approve your preview.</p>
+    <p>Pick your package and pay however you want.<br>Balance only due after you approve your preview.</p>
   </div>
 
   <!-- SUMMARY -->
@@ -161,34 +153,34 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
       <div class="sum-total-lbl">Pay Now</div>
       <div class="sum-total-val">$69</div>
     </div>
-    <div class="sum-note">You won't be charged the balance until you've seen and approved your site.</div>
+    <div class="sum-note">Balance collected only after you've approved your site preview.</div>
   </div>
 
   <div class="guarantee">
     <div class="g-ico">🛡️</div>
-    <div class="g-txt">Don't love the preview? We'll refund your full $69 — no questions asked.</div>
+    <div class="g-txt">Don't love the preview? Full $69 refund — no questions asked.</div>
   </div>
 
   <!-- PACKAGES -->
   <div class="sec-label">Choose Your Package</div>
   <div class="pkgs">
-    <div class="pkg" data-pkg="Basic — 1-Page Site" data-total="500" onclick="pickPkg(this)">
+    <div class="pkg" data-pkg="basic" data-total="500" onclick="pickPkg(this)">
       <div class="radio"></div>
       <div class="pkg-info"><div class="pkg-name">Basic — 1-Page</div><div class="pkg-desc">Single page, contact form, mobile ready</div></div>
       <div><div class="pkg-price">$69 now</div><div class="pkg-total">$500 total</div></div>
     </div>
-    <div class="pkg sel" data-pkg="Starter — 5-Page Site" data-total="1000" onclick="pickPkg(this)">
+    <div class="pkg sel" data-pkg="starter" data-total="1000" onclick="pickPkg(this)">
       <div class="pop">Popular</div>
       <div class="radio"></div>
       <div class="pkg-info"><div class="pkg-name">Starter — 5-Page</div><div class="pkg-desc">Home, About, Services, Gallery, Contact</div></div>
       <div><div class="pkg-price">$69 now</div><div class="pkg-total">$1,000 total</div></div>
     </div>
-    <div class="pkg" data-pkg="Pro — SEO + Domain" data-total="1500" onclick="pickPkg(this)">
+    <div class="pkg" data-pkg="pro" data-total="1500" onclick="pickPkg(this)">
       <div class="radio"></div>
       <div class="pkg-info"><div class="pkg-name">Pro — SEO + Domain</div><div class="pkg-desc">5-page + full SEO + domain setup included</div></div>
       <div><div class="pkg-price">$69 now</div><div class="pkg-total">$1,500 total</div></div>
     </div>
-    <div class="pkg" data-pkg="Elite — Full Service" data-total="2500" onclick="pickPkg(this)">
+    <div class="pkg" data-pkg="elite" data-total="2500" onclick="pickPkg(this)">
       <div class="radio"></div>
       <div class="pkg-info"><div class="pkg-name">Elite — Full Service</div><div class="pkg-desc">Everything + animations, branding & custom features</div></div>
       <div><div class="pkg-price">$69 now</div><div class="pkg-total">$2,500 total</div></div>
@@ -204,7 +196,9 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
     <button class="method" onclick="switchMethod('venmo',this)">
       <div class="method-ico">💙</div><div class="method-lbl">Venmo</div>
     </button>
-
+    <button class="method" onclick="switchMethod('card',this)">
+      <div class="method-ico">💳</div><div class="method-lbl">Card</div>
+    </button>
   </div>
 
   <!-- CASHAPP -->
@@ -212,18 +206,15 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
     <div class="pay-card">
       <div class="pay-handle">$kinsleybazemore8</div>
       <div class="pay-hint">Open CashApp → tap the <strong>$</strong> icon → search the tag below</div>
-      <div class="amount-box">
-        <div class="amt-label">Deposit Due Today</div>
-        <div class="amt-num">$69</div>
-      </div><br>
+      <div class="amount-box"><div class="amt-label">Deposit Due Today</div><div class="amt-num">$69</div></div><br>
       <button class="copy-btn" id="ca-btn" onclick="copyIt('$kinsleybazemore8','ca-btn','$cashtag')">📋 Copy $cashtag</button>
       <div class="steps">
         <div class="step"><div class="sn">1</div><span>Open CashApp and tap the <strong style="color:var(--lime)">$</strong> icon at the bottom</span></div>
         <div class="step"><div class="sn">2</div><span>Search <strong style="color:var(--lime)">$kinsleybazemore8</strong> → select SiteUp Agency</span></div>
-        <div class="step"><div class="sn">3</div><span>Enter <strong style="color:var(--lime)">$69</strong> and add your business name in the note</span></div>
-        <div class="step"><div class="sn">4</div><span>Tap <strong>Pay</strong> then text us to confirm your spot 🚀</span></div>
+        <div class="step"><div class="sn">3</div><span>Enter <strong style="color:var(--lime)">$69</strong> — add your business name in the note</span></div>
+        <div class="step"><div class="sn">4</div><span>Tap <strong>Pay</strong> then text us to confirm 🚀</span></div>
       </div>
-      <div class="confirm-box">After paying, text <strong>757-334-5771</strong> with your name + business name so we can confirm right away.</div>
+      <div class="confirm-box">After paying, text <strong>757-334-5771</strong> with your name + business name to confirm your spot instantly.</div>
     </div>
   </div>
 
@@ -231,109 +222,122 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
   <div class="panel" id="p-venmo">
     <div class="pay-card">
       <div class="pay-handle">@Mrbazemore</div>
-      <div class="pay-hint">Open Venmo → tap <strong>Pay or Request</strong> → search the handle below</div>
-      <div class="amount-box">
-        <div class="amt-label">Deposit Due Today</div>
-        <div class="amt-num">$69</div>
-      </div><br>
+      <div class="pay-hint">Open Venmo → tap <strong>Pay or Request</strong> → search the handle</div>
+      <div class="amount-box"><div class="amt-label">Deposit Due Today</div><div class="amt-num">$69</div></div><br>
       <button class="copy-btn" id="v-btn" onclick="copyIt('@Mrbazemore','v-btn','@handle')">📋 Copy @handle</button>
       <div class="steps">
         <div class="step"><div class="sn">1</div><span>Open Venmo and tap <strong style="color:var(--lime)">Pay or Request</strong></span></div>
         <div class="step"><div class="sn">2</div><span>Search <strong style="color:var(--lime)">@Mrbazemore</strong> → select SiteUp Agency</span></div>
-        <div class="step"><div class="sn">3</div><span>Enter <strong style="color:var(--lime)">$69</strong> and add your business name in the note</span></div>
-        <div class="step"><div class="sn">4</div><span>Tap <strong>Pay</strong> then text us at <strong style="color:var(--lime)">757-334-5771</strong> ✅</span></div>
+        <div class="step"><div class="sn">3</div><span>Enter <strong style="color:var(--lime)">$69</strong> — add your business name as a note</span></div>
+        <div class="step"><div class="sn">4</div><span>Tap <strong>Pay</strong> then text <strong style="color:var(--lime)">757-334-5771</strong> ✅</span></div>
       </div>
-      <div class="confirm-box">After paying, text <strong>757-334-5771</strong> with your name + business name so we can confirm right away.</div>
+      <div class="confirm-box">After paying, text <strong>757-334-5771</strong> with your name + business name to confirm your spot instantly.</div>
     </div>
   </div>
 
-  
-      <div class="f"><label>Full Name</label><input type="text" id="cName" placeholder="John Smith" autocomplete="name"></div>
-      <div class="f"><label>Email Address</label><input type="email" id="cEmail" placeholder="you@email.com" autocomplete="email"></div>
-      <div class="f"><label>Phone Number</label><input type="tel" id="cPhone" placeholder="(757) 000-0000"></div>
-      <div class="f"><label>Business Name</label><input type="text" id="cBiz" placeholder="Smith Roofing LLC"></div>
+  <!-- STRIPE CARD -->
+  <div class="panel" id="p-card">
+    <div class="card-panel">
+      <div class="card-intro">Enter your details below — you'll be sent to Stripe's secure checkout to pay with any card.</div>
       <div class="f">
-        <label>Card Number</label>
-        <div class="num-wrap">
-          <input type="text" id="cNum" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" autocomplete="cc-number" oninput="fmtCard(this)">
-          <div class="card-type" id="cType"></div>
-        </div>
+        <label>Your Name</label>
+        <input type="text" id="cName" placeholder="John Smith" autocomplete="name">
       </div>
-      <div class="row2">
-        <div class="f"><label>Expiry</label><input type="text" id="cExp" placeholder="MM / YY" maxlength="7" inputmode="numeric" oninput="fmtExp(this)"></div>
-        <div class="f"><label>CVV</label><input type="text" id="cCvv" placeholder="123" maxlength="4" inputmode="numeric"></div>
+      <div class="f">
+        <label>Email Address</label>
+        <input type="email" id="cEmail" placeholder="you@email.com" autocomplete="email">
       </div>
-      <div class="f"><label>Billing Zip</label><input type="text" id="cZip" placeholder="23451" maxlength="5" inputmode="numeric"></div>
-      <button class="submit-btn" id="payBtn" onclick="submitCard()">🔒 Pay $69 Deposit Now</button>
-      <div class="ssl">🔒 256-bit SSL · Card info is never stored</div>
+      <div class="f">
+        <label>Business Name</label>
+        <input type="text" id="cBiz" placeholder="Smith Roofing LLC">
+      </div>
+      <button class="stripe-btn" id="stripeBtn" onclick="goStripe()">
+        💳 Pay $69 with Card →
+      </button>
+      <div class="stripe-note">You'll be redirected to Stripe's secure checkout page.</div>
+      <div class="stripe-badges">
+        <div class="badge">VISA</div>
+        <div class="badge">MC</div>
+        <div class="badge">AMEX</div>
+        <div class="badge">🔒 Stripe</div>
+      </div>
     </div>
   </div>
+
 </div>
 
 <script>
-function pickPkg(el){
-  document.querySelectorAll('.pkg').forEach(p=>p.classList.remove('sel'));
-  el.classList.add('sel');
-  const t=parseInt(el.dataset.total);
-  document.getElementById('sPkg').textContent=el.dataset.pkg;
-  document.getElementById('sTotal').textContent='$'+t.toLocaleString();
-  document.getElementById('sBal').textContent='$'+(t-69).toLocaleString();
-}
-function switchMethod(id,btn){
-  document.querySelectorAll('.method').forEach(m=>m.classList.remove('on'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
-  btn.classList.add('on');
-  document.getElementById('p-'+id).classList.add('on');
-}
-function copyIt(text,btnId,label){
-  navigator.clipboard.writeText(text).then(()=>{
-    const b=document.getElementById(btnId);
-    b.textContent='✅ Copied!';b.classList.add('done');
-    setTimeout(()=>{b.innerHTML='📋 Copy '+label;b.classList.remove('done');},2200);
-  });
-}
-function fmtCard(el){
-  let v=el.value.replace(/\D/g,'').slice(0,16);
-  el.value=v.replace(/(.{4})/g,'$1 ').trim();
-  const t=document.getElementById('cType');
-  if(v[0]==='4')t.textContent='VISA';
-  else if(v[0]==='5'||v[0]==='2')t.textContent='MC';
-  else if(v[0]==='3')t.textContent='AMEX';
-  else if(v[0]==='6')t.textContent='DISC';
-  else t.textContent='';
-}
-function fmtExp(el){
-  let v=el.value.replace(/\D/g,'').slice(0,4);
-  if(v.length>=3)v=v.slice(0,2)+' / '+v.slice(2);
-  el.value=v;
-}
-function submitCard(){
-  const name=document.getElementById('cName').value.trim();
-  const email=document.getElementById('cEmail').value.trim();
-  const phone=document.getElementById('cPhone').value.trim();
-  const biz=document.getElementById('cBiz').value.trim();
-  const num=document.getElementById('cNum').value.replace(/\s/g,'');
-  const exp=document.getElementById('cExp').value.trim();
-  const cvv=document.getElementById('cCvv').value.trim();
-  const zip=document.getElementById('cZip').value.trim();
-  if(!name||!email||!phone||!biz||num.length<15||exp.length<4||cvv.length<3||!zip){
-    alert('Please fill in all fields to continue.');return;
-  }
-  const btn=document.getElementById('payBtn');
-  btn.disabled=true;btn.textContent='⏳ Processing...';
-  const pkg=document.querySelector('.pkg.sel').dataset.pkg;
-  // Notify via mailto as fallback
-  const subject=encodeURIComponent('💳 NEW DEPOSIT — $69 Card Payment');
-  const body=encodeURIComponent(`New deposit!\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nBusiness: ${biz}\nPackage: ${pkg}\nCard ending: ${num.slice(-4)}\nAmount: $69`);
-  // Open mailto silently
-  const a=document.createElement('a');
-  a.href=`mailto:kinsleybazemore@gmail.com?subject=${subject}&body=${body}`;
-  a.style.display='none';document.body.appendChild(a);
-  setTimeout(()=>{
-    document.getElementById('main').style.display='none';
+const BACKEND = 'https://superagent-d29c9b67.base44.app/functions/stripeCheckout';
+
+// Check for success/cancel in URL
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('success') === '1') {
+    document.getElementById('main').style.display = 'none';
     document.getElementById('success').classList.add('on');
     window.scrollTo({top:0,behavior:'smooth'});
-  },1400);
+  }
+});
+
+function pickPkg(el) {
+  document.querySelectorAll('.pkg').forEach(p => p.classList.remove('sel'));
+  el.classList.add('sel');
+  const t = parseInt(el.dataset.total);
+  document.getElementById('sPkg').textContent = el.querySelector('.pkg-name').textContent;
+  document.getElementById('sTotal').textContent = '$' + t.toLocaleString();
+  document.getElementById('sBal').textContent = '$' + (t - 69).toLocaleString();
+}
+
+function switchMethod(id, btn) {
+  document.querySelectorAll('.method').forEach(m => m.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('p-' + id).classList.add('on');
+}
+
+function copyIt(text, btnId, label) {
+  navigator.clipboard.writeText(text).then(() => {
+    const b = document.getElementById(btnId);
+    b.textContent = '✅ Copied!'; b.classList.add('done');
+    setTimeout(() => { b.innerHTML = '📋 Copy ' + label; b.classList.remove('done'); }, 2200);
+  });
+}
+
+async function goStripe() {
+  const name = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const biz = document.getElementById('cBiz').value.trim();
+
+  if (!name || !email || !biz) {
+    alert('Please fill in your name, email, and business name to continue.');
+    return;
+  }
+
+  const btn = document.getElementById('stripeBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Creating checkout...';
+
+  const pkg = document.querySelector('.pkg.sel').dataset.pkg;
+
+  try {
+    const res = await fetch(BACKEND, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pkg, customer_name: name, customer_email: email, business_name: biz })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('Something went wrong. Please try CashApp or Venmo instead.');
+      btn.disabled = false;
+      btn.textContent = '💳 Pay $69 with Card →';
+    }
+  } catch (e) {
+    alert('Connection error. Please try CashApp or Venmo instead.');
+    btn.disabled = false;
+    btn.textContent = '💳 Pay $69 with Card →';
+  }
 }
 </script>
 </body>
