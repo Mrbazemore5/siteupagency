@@ -63,8 +63,8 @@ nav {
 .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(163,255,0,0.1); border: 1px solid rgba(163,255,0,0.3); color: #a3ff00; font-size: 0.75rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 2rem; letter-spacing: 0.02em; text-transform: uppercase; }
 .hero-tag::before { content: '●'; color: #a3ff00; font-size: 0.5rem; }
 .hero h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -2px; color: #f0f0f0; margin-bottom: 0.5rem; }
-.hero h1 .rotating-wrap { display: block; min-height: 1.1em; position: relative; }
-.hero h1 .rotating { color: #a3ff00; display: inline-block; transition: opacity 0.4s, transform 0.4s; }
+.hero h1 .rotating-wrap { display: block; height: 1.15em; position: relative; overflow: hidden; }
+.hero h1 .rotating { color: #a3ff00; display: block; position: absolute; left: 0; right: 0; text-align: center; transition: opacity 0.35s ease, transform 0.35s ease; white-space: nowrap; }
 .hero-sub { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: #555; letter-spacing: -0.5px; margin-bottom: 1.75rem; }
 .hero-desc { font-size: 1.05rem; color: #888; max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.75; }
 .hero-desc em { font-style: italic; color: #f0f0f0; }
@@ -729,14 +729,14 @@ let idx = 0;
 const el = document.getElementById('rotatingText');
 setInterval(() => {
   el.style.opacity = '0';
-  el.style.transform = 'translateY(10px)';
+  el.style.transform = 'translateY(8px)';
   setTimeout(() => {
     idx = (idx + 1) % niches.length;
     el.textContent = niches[idx];
     el.style.opacity = '1';
     el.style.transform = 'translateY(0)';
-  }, 400);
-}, 2500);
+  }, 350);
+}, 2800);
 
 // MOBILE MENU
 function toggleMobile() {
@@ -780,6 +780,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </script>
 </body>
 </html>
+
 
 
 
