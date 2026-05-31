@@ -778,8 +778,213 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
+
+<!-- CHAT WIDGET -->
+<style>
+#chat-bubble {
+  position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 9999;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: #a3ff00; color: #000;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; cursor: pointer;
+  box-shadow: 0 4px 24px rgba(163,255,0,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#chat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 30px rgba(163,255,0,0.55); }
+#chat-bubble .bubble-badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #ff4444; border: 2px solid #000;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; font-weight: 800; color: white;
+}
+#chat-window {
+  position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 9998;
+  width: 360px; max-width: calc(100vw - 2rem);
+  background: #0d0d0d; border: 1px solid #1e1e1e;
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.6);
+  display: none; flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  animation: chatSlideUp 0.25s ease;
+}
+@keyframes chatSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+#chat-window.open { display: flex; }
+.chat-header {
+  background: #111; padding: 1rem 1.25rem;
+  display: flex; align-items: center; gap: .75rem;
+  border-bottom: 1px solid #1e1e1e;
+}
+.chat-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #a3ff00; display: flex; align-items: center;
+  justify-content: center; font-size: 1rem; flex-shrink: 0;
+}
+.chat-header-text .chat-name { font-size: .88rem; font-weight: 700; color: #f0f0f0; }
+.chat-header-text .chat-status { font-size: .72rem; color: #22c55e; display: flex; align-items: center; gap: .3rem; }
+.chat-header-text .chat-status::before { content:'●'; font-size: .5rem; }
+.chat-close { margin-left: auto; background: none; border: none; color: #555; font-size: 1.2rem; cursor: pointer; padding: 0 .25rem; }
+.chat-close:hover { color: #f0f0f0; }
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 1.25rem;
+  display: flex; flex-direction: column; gap: .85rem;
+  max-height: 320px; min-height: 200px;
+}
+.chat-messages::-webkit-scrollbar { width: 3px; }
+.chat-messages::-webkit-scrollbar-thumb { background: #1e1e1e; }
+.msg { display: flex; flex-direction: column; max-width: 85%; }
+.msg.bot { align-self: flex-start; }
+.msg.user { align-self: flex-end; }
+.msg-bubble {
+  padding: .65rem 1rem; border-radius: 14px;
+  font-size: .83rem; line-height: 1.6;
+}
+.msg.bot .msg-bubble { background: #1a1a1a; color: #d0d0d0; border-bottom-left-radius: 4px; }
+.msg.user .msg-bubble { background: #a3ff00; color: #000; font-weight: 600; border-bottom-right-radius: 4px; }
+.msg-time { font-size: .65rem; color: #444; margin-top: .25rem; padding: 0 .25rem; }
+.msg.user .msg-time { text-align: right; }
+.typing-indicator { display: flex; gap: 4px; align-items: center; padding: .65rem 1rem; background: #1a1a1a; border-radius: 14px; border-bottom-left-radius: 4px; width: fit-content; }
+.typing-indicator span { width: 6px; height: 6px; border-radius: 50%; background: #555; animation: typingDot 1.2s infinite; }
+.typing-indicator span:nth-child(2) { animation-delay: .2s; }
+.typing-indicator span:nth-child(3) { animation-delay: .4s; }
+@keyframes typingDot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+.chat-input-area {
+  padding: .85rem 1rem; border-top: 1px solid #1a1a1a;
+  display: flex; gap: .6rem; align-items: flex-end;
+}
+.chat-input-area textarea {
+  flex: 1; background: #1a1a1a; border: 1px solid #2a2a2a;
+  border-radius: 12px; padding: .6rem .9rem;
+  font-size: .83rem; color: #f0f0f0; font-family: 'Inter', sans-serif;
+  resize: none; outline: none; max-height: 100px; line-height: 1.5;
+  transition: border-color .2s;
+}
+.chat-input-area textarea:focus { border-color: #a3ff00; }
+.chat-input-area textarea::placeholder { color: #444; }
+.chat-send {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #a3ff00; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; flex-shrink: 0; transition: background .2s;
+}
+.chat-send:hover { background: #b8ff26; }
+.chat-powered { text-align: center; padding: .4rem; font-size: .62rem; color: #2a2a2a; }
+</style>
+
+<div id="chat-bubble" onclick="toggleChat()">
+  💬
+  <div class="bubble-badge">1</div>
+</div>
+
+<div id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">⚡</div>
+    <div class="chat-header-text">
+      <div class="chat-name">SiteUp Agency</div>
+      <div class="chat-status">Online now</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">
+      <div class="msg-bubble">Hey! 👋 I'm here to help. Got questions about pricing, what's included, or want to see examples? Ask me anything.</div>
+      <div class="msg-time">Just now</div>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <textarea id="chatInput" placeholder="Ask something..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button class="chat-send" onclick="sendMessage()">➤</button>
+  </div>
+  <div class="chat-powered">Powered by SiteUp AI</div>
+</div>
+
+<script>
+let chatOpen = false;
+let chatHistory = [];
+
+const BOT_RESPONSES = {
+  price: ["Our packages start at just $69 to kick off — and you don't pay that until you've already seen your free preview and love it. 🙌\n\nPackages:\n• Basic — $500 total (1-page site)\n• Starter — $1,000 (5-page site)\n• Pro — $1,500 (SEO + domain)\n• Elite — $2,500 (full service)\n\nWant me to grab you a free preview?"],
+  preview: ["Here's how it works: we build a real working version of your site before you pay a single dollar. If you love it, pay $69 to kick off the full build. If not — walk away, no invoice. 💯\n\nFill out the form at the bottom of the page to get started!"],
+  time: ["Most sites are delivered within 3 business days of kickoff. ⚡ Rush builds available on request."],
+  own: ["Yes — 100% yours. At launch we hand you everything: domain login, hosting access, all the files. No lock-in, ever."],
+  change: ["Just text us! No tickets, no portals. After launch you text a change and it's done same day. 📱"],
+  contact: ["You can reach us by:\n• Filling out the form below 👇\n• Emailing kinsleybazemore@gmail.com\n• Or just reply here and I'll get you sorted!"],
+  default: ["Great question! The best next step is filling out the short form at the bottom of the page — takes 60 seconds and gets your free preview started. No payment required. 🚀", "I'd love to help with that! Drop your info in the form below and we'll reach out via text within 24 hours. 💬", "Totally get it. Here's the short version: free preview first, you approve it, then pay $69 to kick off. You own everything at the end. Sound good? 🙌"]
+};
+
+function getResponse(msg) {
+  const m = msg.toLowerCase();
+  if (m.match(/price|cost|how much|pricing|package|pay|dollar|\$/)) return BOT_RESPONSES.price[0];
+  if (m.match(/preview|how.*work|process|start/)) return BOT_RESPONSES.preview[0];
+  if (m.match(/how long|time|days|fast|quick|deliver/)) return BOT_RESPONSES.time[0];
+  if (m.match(/own|mine|keep|domain|files|lock/)) return BOT_RESPONSES.own[0];
+  if (m.match(/change|update|edit|fix|revision/)) return BOT_RESPONSES.change[0];
+  if (m.match(/contact|reach|email|phone|talk/)) return BOT_RESPONSES.contact[0];
+  return BOT_RESPONSES.default[Math.floor(Math.random() * BOT_RESPONSES.default.length)];
+}
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const win = document.getElementById('chat-window');
+  const badge = document.querySelector('.bubble-badge');
+  if (chatOpen) { win.classList.add('open'); badge.style.display='none'; document.getElementById('chatInput').focus(); }
+  else { win.classList.remove('open'); }
+}
+
+function addMessage(text, type) {
+  const msgs = document.getElementById('chatMessages');
+  const now = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  const div = document.createElement('div');
+  div.className = 'msg ' + type;
+  div.innerHTML = '<div class="msg-bubble">' + text.replace(/\n/g,'<br>') + '</div><div class="msg-time">' + now + '</div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg bot'; div.id = 'typingMsg';
+  div.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingMsg');
+  if (t) t.remove();
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = ''; input.style.height = 'auto';
+  addMessage(text, 'user');
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMessage(getResponse(text), 'bot');
+  }, 900 + Math.random() * 600);
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+</script>
+<!-- END CHAT WIDGET -->
+
 </body>
 </html>
+
 
 
 
