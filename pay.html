@@ -196,9 +196,7 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
     <button class="method" onclick="switchMethod('venmo',this)">
       <div class="method-ico">💙</div><div class="method-lbl">Venmo</div>
     </button>
-    <button class="method" onclick="switchMethod('card',this)">
-      <div class="method-ico">💳</div><div class="method-lbl">Card</div>
-    </button>
+
   </div>
 
   <!-- CASHAPP -->
@@ -232,35 +230,6 @@ nav{background:#0d0d0d;border-bottom:1px solid var(--border);padding:0 1.5rem;he
         <div class="step"><div class="sn">4</div><span>Tap <strong>Pay</strong> then text <strong style="color:var(--lime)">757-334-5771</strong> ✅</span></div>
       </div>
       <div class="confirm-box">After paying, text <strong>757-334-5771</strong> with your name + business name to confirm your spot instantly.</div>
-    </div>
-  </div>
-
-  <!-- STRIPE CARD -->
-  <div class="panel" id="p-card">
-    <div class="card-panel">
-      <div class="card-intro">Enter your details below — you'll be sent to Stripe's secure checkout to pay with any card.</div>
-      <div class="f">
-        <label>Your Name</label>
-        <input type="text" id="cName" placeholder="John Smith" autocomplete="name">
-      </div>
-      <div class="f">
-        <label>Email Address</label>
-        <input type="email" id="cEmail" placeholder="you@email.com" autocomplete="email">
-      </div>
-      <div class="f">
-        <label>Business Name</label>
-        <input type="text" id="cBiz" placeholder="Smith Roofing LLC">
-      </div>
-      <button class="stripe-btn" id="stripeBtn" onclick="goStripe()">
-        💳 Pay $69 with Card →
-      </button>
-      <div class="stripe-note">You'll be redirected to Stripe's secure checkout page.</div>
-      <div class="stripe-badges">
-        <div class="badge">VISA</div>
-        <div class="badge">MC</div>
-        <div class="badge">AMEX</div>
-        <div class="badge">🔒 Stripe</div>
-      </div>
     </div>
   </div>
 
