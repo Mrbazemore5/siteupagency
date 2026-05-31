@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Koats Painting — Chesapeake, VA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#1a3a5c;--gold:#e8a020;--dark:#0f0f0f;--text:#2d2d2d;--muted:#666;--light:#f7f9fc;--border:#e2e8f0}
+body{font-family:'Inter',sans-serif;color:var(--text);background:#fff}
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 12px rgba(0,0,0,.06)}
+.logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.logo-icon{width:38px;height:38px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.logo-text{font-size:1.05rem;font-weight:800;color:var(--dark)}
+.logo-text em{color:var(--gold);font-style:normal}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:500}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{background:var(--blue);color:#fff;padding:.6rem 1.4rem;border-radius:6px;font-size:.88rem;font-weight:700;text-decoration:none}
+/* HERO */
+.hero{background:linear-gradient(160deg,var(--blue) 0%,#0a1f36 100%);padding:7rem 2rem 5rem;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;right:0;width:400px;height:400px;background:radial-gradient(circle,rgba(232,160,32,.15),transparent 70%);pointer-events:none}
+.container{max-width:1100px;margin:0 auto}
+.hero-inner{max-width:640px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.3);color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem 1rem;border-radius:100px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.5rem,6vw,4.2rem);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-1.5px;margin-bottom:1.25rem}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{font-size:1rem;color:rgba(255,255,255,.72);line-height:1.8;margin-bottom:2rem;max-width:500px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:#fff;padding:.9rem 2rem;border-radius:8px;font-size:.92rem;font-weight:700;text-decoration:none}
+.btn-outline{background:transparent;color:#fff;padding:.9rem 2rem;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;border:1.5px solid rgba(255,255,255,.25)}
+.hero-guarantee{margin-top:2rem;display:flex;align-items:center;gap:.75rem;color:rgba(255,255,255,.55);font-size:.82rem}
+.hero-guarantee::before{content:'✓';color:var(--gold);font-weight:800}
+/* GALLERY / BEFORE-AFTER */
+.gallery{padding:5rem 2rem;background:#fff}
+.section-tag{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--dark);letter-spacing:-1px;margin-bottom:.75rem}
+.section-sub{font-size:1rem;color:var(--muted);max-width:500px;line-height:1.75;margin-bottom:3rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.gallery-card{border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.gallery-img{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.gallery-img.exterior{background:linear-gradient(135deg,#d4e8f7,#b8d4e8)}
+.gallery-img.interior{background:linear-gradient(135deg,#f0e8d4,#e8d8b8)}
+.gallery-img.commercial{background:linear-gradient(135deg,#d4d4d4,#c0c0c0)}
+.gallery-label{position:absolute;bottom:.75rem;left:.75rem;background:rgba(0,0,0,.6);color:#fff;font-size:.68rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;letter-spacing:.05em}
+.gallery-body{padding:1rem 1.25rem}
+.gallery-title{font-size:.92rem;font-weight:700;color:var(--dark)}
+.gallery-sub{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+/* SERVICES */
+.services{padding:5rem 2rem;background:var(--light)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem}
+.service-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1.75rem;transition:border-color .2s,box-shadow .2s}
+.service-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(26,58,92,.08)}
+.service-icon{font-size:1.75rem;margin-bottom:.75rem}
+.service-name{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.35rem}
+.service-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+/* PROCESS */
+.process{padding:5rem 2rem;background:#fff}
+.steps{display:flex;gap:0;margin-top:3rem;position:relative}
+.steps::before{content:'';position:absolute;top:24px;left:2rem;right:2rem;height:2px;background:var(--border);z-index:0}
+.step{flex:1;text-align:center;padding:0 1rem;position:relative;z-index:1}
+.step-circle{width:48px;height:48px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.95rem;margin:0 auto 1rem}
+.step-title{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:.35rem}
+.step-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+/* REVIEWS */
+.reviews{padding:5rem 2rem;background:var(--light)}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.review-card{background:#fff;border-radius:14px;padding:1.75rem;border:1px solid var(--border)}
+.stars{color:#f59e0b;margin-bottom:.75rem}
+.review-text{font-size:.88rem;color:var(--muted);line-height:1.75;font-style:italic;margin-bottom:1rem}
+.reviewer{font-size:.82rem;font-weight:700;color:var(--dark)}
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--blue),#0a1f36);padding:5rem 2rem;text-align:center}
+.cta-section h2{font-size:clamp(2rem,5vw,3rem);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:1rem}
+.cta-section p{color:rgba(255,255,255,.75);font-size:1rem;margin-bottom:2rem}
+.btn-gold-lg{background:var(--gold);color:#fff;padding:1rem 2.5rem;border-radius:8px;font-size:.95rem;font-weight:800;text-decoration:none;display:inline-block}
+footer{background:var(--dark);padding:2.5rem 2rem;text-align:center;color:#555;font-size:.82rem}
+@media(max-width:768px){.gallery-grid{grid-template-columns:1fr}.steps{flex-direction:column;gap:1.5rem}.steps::before{display:none}.nav-links{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#"><div class="logo-icon">🎨</div><span class="logo-text">Two Koats <em>Painting</em></span></a>
+  <ul class="nav-links"><li><a href="#gallery">Work</a></li><li><a href="#services">Services</a></li><li><a href="#reviews">Reviews</a></li></ul>
+  <a class="nav-cta" href="#contact">Free Estimate</a>
+</nav>
+<div class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">🏆 5-Star Rated · Chesapeake's #1 Painter</div>
+      <h1>Flawless Finish.<br><em>Every Single Time.</em></h1>
+      <p>Interior and exterior painting for residential and commercial properties across Chesapeake, Virginia Beach, and Norfolk. Clean crews, premium paints, zero mess left behind.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-gold">Get Your Free Estimate →</a>
+        <a href="#gallery" class="btn-outline">See Our Work ↓</a>
+      </div>
+      <div class="hero-guarantee">Licensed & insured · 2-year paint warranty · No mess guarantee</div>
+    </div>
+  </div>
+</div>
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-tag">Our Work</div>
+    <div class="section-title">Recent Projects</div>
+    <p class="section-sub">Every project is treated like it's our own home — meticulous prep, premium paint, flawless finish.</p>
+    <div class="gallery-grid">
+      <div class="gallery-card"><div class="gallery-img exterior">🏠<span class="gallery-label">EXTERIOR</span></div><div class="gallery-body"><div class="gallery-title">Colonial Home Repaint</div><div class="gallery-sub">Virginia Beach · Full exterior</div></div></div>
+      <div class="gallery-card"><div class="gallery-img interior">🛋️<span class="gallery-label">INTERIOR</span></div><div class="gallery-body"><div class="gallery-title">Living Room Refresh</div><div class="gallery-sub">Chesapeake · 4-room project</div></div></div>
+      <div class="gallery-card"><div class="gallery-img commercial">🏢<span class="gallery-label">COMMERCIAL</span></div><div class="gallery-body"><div class="gallery-title">Office Building</div><div class="gallery-sub">Norfolk · Full interior repaint</div></div></div>
+    </div>
+  </div>
+</section>
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-tag">Services</div>
+    <div class="section-title">What We Paint</div>
+    <p class="section-sub">Residential, commercial, interior, or exterior — we do it all with the same level of care.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">🏠</div><div class="service-name">Exterior Painting</div><div class="service-desc">Full prep, priming, and two coats. We protect your landscaping and clean up everything.</div></div>
+      <div class="service-card"><div class="service-icon">🛋️</div><div class="service-name">Interior Painting</div><div class="service-desc">Walls, ceilings, trim, doors — perfect edges and zero drips every time.</div></div>
+      <div class="service-card"><div class="service-icon">🏢</div><div class="service-name">Commercial</div><div class="service-desc">Office spaces, retail, and warehouses — scheduled around your business hours.</div></div>
+      <div class="service-card"><div class="service-icon">🚪</div><div class="service-name">Cabinets & Trim</div><div class="service-desc">Spray-finished kitchen cabinets and trim that look factory-new.</div></div>
+      <div class="service-card"><div class="service-icon">🏚️</div><div class="service-name">Deck Staining</div><div class="service-desc">Pressure wash, sand, and stain or paint for a deck that lasts years longer.</div></div>
+      <div class="service-card"><div class="service-icon">🔧</div><div class="service-name">Drywall Repair</div><div class="service-desc">We patch holes and cracks before painting — no subcontractors needed.</div></div>
+    </div>
+  </div>
+</section>
+<section class="process">
+  <div class="container">
+    <div class="section-tag">Process</div>
+    <div class="section-title">How It Works</div>
+    <div class="steps">
+      <div class="step"><div class="step-circle">1</div><div class="step-title">Free Estimate</div><div class="step-desc">We come out, assess the job, and give you a transparent quote — same day.</div></div>
+      <div class="step"><div class="step-circle">2</div><div class="step-title">Color Consult</div><div class="step-desc">Not sure what color? We'll help you pick something that looks amazing.</div></div>
+      <div class="step"><div class="step-circle">3</div><div class="step-title">We Prep</div><div class="step-desc">Full surface prep — sanding, patching, priming. The work that makes paint last.</div></div>
+      <div class="step"><div class="step-circle">4</div><div class="step-title">We Paint</div><div class="step-desc">Two coats, clean lines, and a final walkthrough with you before we leave.</div></div>
+    </div>
+  </div>
+</section>
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-tag">Reviews</div>
+    <div class="section-title">What Clients Say</div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Our entire house exterior looks brand new. The crew was on time, professional, and cleaned everything up spotlessly. Can't recommend enough."</p><div class="reviewer">Kevin & Amy S. · Chesapeake</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Had them do 5 rooms including ceilings. The lines are incredibly sharp and they matched our existing trim color perfectly. Absolutely worth it."</p><div class="reviewer">Nicole B. · Virginia Beach</div></div>
+      <div class="review-card"><div class="stars">★★★★★</div><p class="review-text">"Did our office building — 3,200 sq ft. Finished over a weekend so we weren't disrupted. Paint job is immaculate. Will use again."</p><div class="reviewer">Apex Realty Group · Norfolk</div></div>
+    </div>
+  </div>
+</section>
+<div class="cta-section" id="contact">
+  <h2>Get Your Free Estimate Today</h2>
+  <p>We'll come out, assess the job, and give you a no-pressure quote — same day.</p>
+  <a href="tel:7573345771" class="btn-gold-lg">📞 Call (757) 334-5771</a>
+</div>
+<footer>© 2026 Two Koats Painting · Chesapeake, VA · Licensed & Insured</footer>
+</body>
+</html>
