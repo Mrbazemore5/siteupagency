@@ -521,22 +521,40 @@ setInterval(createParticle, 300);
 
 // COUNTDOWN - hours left in the day
 function updateCountdown() {
+  // Use America/New_York timezone — synced to her birthday June 25, 2026 midnight ET
   const now = new Date();
-  const birthday = new Date('2026-06-25T00:00:00');
+  
+  // June 25 2026 midnight in America/New_York = UTC-4 (EDT) = 04:00 UTC June 25
+  const birthday = new Date('2026-06-25T04:00:00Z');
+  
   const diff = birthday - now;
+  
   if (diff <= 0) {
-    document.getElementById('cd-d').textContent = '00';
-    document.getElementById('cd-h').textContent = '00';
-    document.getElementById('cd-m').textContent = '00';
-    document.getElementById('cd-s').textContent = '00';
-    document.querySelector('.cd-title').textContent = '🎂 Happy Birthday Jakiya! 🎂';
-    document.querySelector('.countdown-section div[style]').textContent = "Today is YOUR day, Queen! 👑💕";
+    document.getElementById('cd-d').textContent = '🎂';
+    document.getElementById('cd-h').textContent = '🎂';
+    document.getElementById('cd-m').textContent = '🎂';
+    document.getElementById('cd-s').textContent = '🎂';
+    document.querySelector('.cd-title').textContent = '🎉 Happy Birthday Jakiya! 🎉';
+    document.querySelector('.countdown-section > div:last-child').textContent = "Today is YOUR day, Queen! 👑💕";
+    // Launch confetti
+    for(let i=0;i<30;i++){
+      setTimeout(()=>{
+        const spark = document.createElement('div');
+        spark.style.cssText='position:fixed;left:'+Math.random()*100+'vw;top:'+Math.random()*100+'vh;font-size:'+(Math.random()*30+15)+'px;pointer-events:none;z-index:9999;animation:float 3s linear forwards';
+        spark.textContent=['🎂','🎉','🎊','💕','👑','🌹','✨'][Math.floor(Math.random()*7)];
+        document.body.appendChild(spark);
+        setTimeout(()=>spark.remove(),3000);
+      }, i*100);
+    }
     return;
   }
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor((diff%86400000)/3600000);
-  const m = Math.floor((diff%3600000)/60000);
-  const s = Math.floor((diff%60000)/1000);
+  
+  const totalSecs = Math.floor(diff / 1000);
+  const d = Math.floor(totalSecs / 86400);
+  const h = Math.floor((totalSecs % 86400) / 3600);
+  const m = Math.floor((totalSecs % 3600) / 60);
+  const s = totalSecs % 60;
+  
   document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
   document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
   document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
