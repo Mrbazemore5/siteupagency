@@ -479,13 +479,14 @@ footer{
 </section>
 
 <section class="countdown-section">
-  <div class="cd-title">🎂 Celebrating You All Day Long 🎂</div>
+  <div class="cd-title">🎂 Counting Down to Jakiya's Birthday 🎂</div>
   <div class="cd-boxes">
-    <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-label">Hours Left</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-label">Days</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-label">Hours</div></div>
     <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-label">Minutes</div></div>
     <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Seconds</div></div>
   </div>
-  <div style="margin-top:1.5rem;color:rgba(255,255,255,.3);font-size:.8rem">of your special day remaining 💕</div>
+  <div style="margin-top:1.5rem;color:rgba(255,255,255,.3);font-size:.8rem">until your special day, beautiful 💕</div>
 </section>
 
 <!-- FOOTER -->
@@ -521,12 +522,22 @@ setInterval(createParticle, 300);
 // COUNTDOWN - hours left in the day
 function updateCountdown() {
   const now = new Date();
-  const end = new Date(now);
-  end.setHours(23,59,59,999);
-  const diff = end - now;
-  const h = Math.floor(diff/3600000);
+  const birthday = new Date('2026-06-25T00:00:00');
+  const diff = birthday - now;
+  if (diff <= 0) {
+    document.getElementById('cd-d').textContent = '00';
+    document.getElementById('cd-h').textContent = '00';
+    document.getElementById('cd-m').textContent = '00';
+    document.getElementById('cd-s').textContent = '00';
+    document.querySelector('.cd-title').textContent = '🎂 Happy Birthday Jakiya! 🎂';
+    document.querySelector('.countdown-section div[style]').textContent = "Today is YOUR day, Queen! 👑💕";
+    return;
+  }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
   const m = Math.floor((diff%3600000)/60000);
   const s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
   document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
   document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
   document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
