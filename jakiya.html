@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Jakiya 🎂💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Dancing+Script:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --pink:#ff6eb4;
+  --rose:#ff2d7a;
+  --purple:#c44dff;
+  --gold:#ffd700;
+  --lavender:#e8b4ff;
+  --cream:#fff9fc;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:#0a0008;
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+
+/* FLOATING PARTICLES */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0}
+@keyframes float{
+  0%{transform:translateY(100vh) rotate(0deg);opacity:1}
+  100%{transform:translateY(-100px) rotate(720deg);opacity:0}
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:2rem 1.5rem;
+  z-index:1;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background: radial-gradient(ellipse at 50% 0%, #3d0030 0%, #1a0020 40%, #0a0008 100%);
+  z-index:0;
+}
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,110,180,0.15) 0%, transparent 70%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  animation:pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}50%{transform:translate(-50%,-50%) scale(1.2);opacity:1}}
+
+.crown{font-size:3.5rem;margin-bottom:.5rem;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.hero-subtitle{
+  font-family:'Dancing Script',cursive;
+  font-size:1.3rem;
+  color:var(--lavender);
+  margin-bottom:.75rem;
+  letter-spacing:.05em;
+}
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.5rem,12vw,7rem);
+  font-weight:900;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--pink) 40%, var(--purple) 80%, var(--gold) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1;
+  margin-bottom:.5rem;
+  animation:shimmer 3s ease-in-out infinite;
+  background-size:200%;
+}
+@keyframes shimmer{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+
+.hero-hb{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(1.8rem,6vw,3.2rem);
+  color:var(--pink);
+  margin-bottom:1.5rem;
+  text-shadow:0 0 30px rgba(255,110,180,.6);
+}
+
+.hero-msg{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:clamp(1.1rem,3.5vw,1.6rem);
+  color:#fff;
+  max-width:600px;
+  line-height:1.7;
+  text-shadow:0 2px 20px rgba(0,0,0,.5);
+  margin-bottom:2rem;
+}
+.hero-msg span{color:var(--pink)}
+
+.hearts-row{font-size:2rem;letter-spacing:.5rem;animation:heartbeat 1.5s ease-in-out infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+/* SCROLL INDICATOR */
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  color:rgba(255,255,255,.4);font-size:.75rem;letter-spacing:.1em;
+  animation:fadeUpDown 2s ease-in-out infinite;
+}
+@keyframes fadeUpDown{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0)}50%{opacity:.8;transform:translateX(-50%) translateY(-6px)}}
+
+/* PHOTO SECTION */
+.photos-section{
+  position:relative;z-index:1;
+  padding:5rem 1.5rem;
+  text-align:center;
+  background:linear-gradient(180deg,#0a0008 0%,#1a0025 50%,#0a0008 100%);
+}
+.sec-title{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(2rem,6vw,3rem);
+  color:var(--gold);
+  margin-bottom:.5rem;
+}
+.sec-sub{
+  font-size:.9rem;
+  color:rgba(255,255,255,.4);
+  margin-bottom:3rem;
+  font-style:italic;
+}
+
+.photo-placeholder-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.5rem;
+  max-width:900px;
+  margin:0 auto;
+}
+.photo-slot{
+  border-radius:20px;
+  overflow:hidden;
+  border:2px solid rgba(255,110,180,.3);
+  aspect-ratio:4/5;
+  background:linear-gradient(135deg,#2d0025,#1a0035);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:.5rem;
+  color:rgba(255,255,255,.2);
+  font-size:.85rem;
+  position:relative;
+  transition:.3s;
+  cursor:pointer;
+}
+.photo-slot:hover{border-color:var(--pink);transform:scale(1.02)}
+.photo-slot img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.photo-slot-ico{font-size:2.5rem}
+
+/* MESSAGES */
+.messages-section{
+  position:relative;z-index:1;
+  padding:5rem 1.5rem;
+  max-width:800px;
+  margin:0 auto;
+}
+.msg-card{
+  background:linear-gradient(135deg,rgba(255,110,180,.08),rgba(196,77,255,.08));
+  border:1px solid rgba(255,110,180,.2);
+  border-radius:24px;
+  padding:2.5rem 2rem;
+  margin-bottom:1.5rem;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+.msg-card:hover{border-color:rgba(255,110,180,.5);transform:translateY(-3px)}
+.msg-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--pink),var(--purple),var(--gold));
+}
+.msg-emoji{font-size:2rem;margin-bottom:.75rem}
+.msg-text{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:clamp(1rem,2.5vw,1.2rem);
+  line-height:1.9;
+  color:rgba(255,255,255,.9);
+}
+.msg-text span{color:var(--pink);font-weight:700;font-style:normal}
+.msg-from{
+  margin-top:1.25rem;
+  font-family:'Dancing Script',cursive;
+  font-size:1.1rem;
+  color:var(--lavender);
+  text-align:right;
+}
+
+/* COUNTDOWN */
+.countdown-section{
+  position:relative;z-index:1;
+  text-align:center;
+  padding:4rem 1.5rem;
+  background:linear-gradient(180deg,#0a0008,#200015 50%,#0a0008);
+}
+.cd-title{
+  font-family:'Dancing Script',cursive;
+  font-size:1.8rem;
+  color:var(--lavender);
+  margin-bottom:2rem;
+}
+.cd-boxes{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cd-box{
+  background:rgba(255,110,180,.1);
+  border:1px solid rgba(255,110,180,.3);
+  border-radius:16px;
+  padding:1.25rem 1.5rem;
+  min-width:90px;
+}
+.cd-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.5rem;
+  font-weight:900;
+  color:var(--pink);
+  line-height:1;
+}
+.cd-label{font-size:.65rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  text-align:center;
+  padding:4rem 1.5rem;
+  background:linear-gradient(180deg,#0a0008,#1a0020);
+}
+.footer-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,8vw,4rem);
+  font-weight:900;
+  color:var(--pink);
+  text-shadow:0 0 60px rgba(255,45,122,.4);
+  margin-bottom:.5rem;
+}
+.footer-love{
+  font-family:'Dancing Script',cursive;
+  font-size:1.6rem;
+  color:var(--gold);
+  margin-bottom:2rem;
+}
+.footer-hearts{font-size:2.5rem;letter-spacing:.8rem;animation:heartbeat 1.5s ease-in-out infinite}
+
+/* FIREWORKS */
+.firework{position:fixed;pointer-events:none;z-index:999}
+
+/* LETTER SECTION */
+.letter-section{
+  position:relative;z-index:1;
+  padding:5rem 1.5rem;
+  background:linear-gradient(180deg,#0a0008 0%,#150010 40%,#0a0008 100%);
+}
+.letter-inner{
+  max-width:720px;
+  margin:0 auto;
+  background:linear-gradient(135deg,rgba(255,45,122,.06),rgba(196,77,255,.06));
+  border:1px solid rgba(255,110,180,.15);
+  border-radius:28px;
+  padding:3rem 2.5rem;
+  position:relative;
+  overflow:hidden;
+}
+.letter-inner::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--pink),var(--purple),var(--pink),var(--gold));
+}
+.letter-inner::after{
+  content:'💕';
+  position:absolute;
+  font-size:8rem;
+  opacity:.03;
+  right:-1rem;
+  bottom:-1rem;
+}
+.letter-header{text-align:center;margin-bottom:2.5rem}
+.letter-rose{font-size:2.5rem;margin-bottom:.5rem;animation:bounce 3s ease-in-out infinite}
+.letter-label{
+  font-family:'Dancing Script',cursive;
+  font-size:1.8rem;
+  color:var(--gold);
+  margin-bottom:.3rem;
+}
+.letter-date{
+  font-size:.78rem;
+  color:rgba(255,255,255,.3);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.letter-body{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(.95rem,2.2vw,1.1rem);
+  line-height:2;
+  color:rgba(255,255,255,.85);
+}
+.letter-body p{margin-bottom:1.5rem}
+.letter-body p:first-child{
+  font-size:clamp(1.1rem,2.5vw,1.3rem);
+  font-weight:700;
+  color:#fff;
+}
+.letter-body span{color:var(--pink);font-weight:700;font-style:normal}
+.letter-sign{
+  font-family:'Dancing Script',cursive;
+  font-size:1.4rem;
+  color:var(--lavender);
+  text-align:right;
+  margin-top:1rem;
+  padding-top:1.5rem;
+  border-top:1px solid rgba(255,110,180,.1);
+}
+
+@media(max-width:600px){
+  .letter-inner{padding:2rem 1.25rem}
+}
+
+
+.photo-slot .photo-caption{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  background:linear-gradient(to top, rgba(0,0,0,.85), transparent);
+  color:rgba(255,255,255,.85);
+  font-size:.75rem;
+  padding:.75rem .75rem .6rem;
+  text-align:center;
+  font-family:'Dancing Script',cursive;
+  font-size:.95rem;
+  z-index:2;
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div style="position:relative;z-index:1">
+    <div class="crown">👑</div>
+    <div class="hero-subtitle">Today we celebrate</div>
+    <div class="hero-name">Jakiya</div>
+    <div class="hero-name" style="font-size:clamp(2rem,7vw,4.5rem);margin-top:-.5rem">Morris</div>
+    <div class="hero-hb">🎂 Happy Birthday, Beautiful 🎂</div>
+    <div class="hero-msg">
+      "<span>Happy birthday Jakiya</span>.. I love you more than words could ever say. You deserve every single thing the world has to offer — today and every day. 💕"
+    </div>
+    <div class="hearts-row">💕 💖 🌹 💖 💕</div>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL DOWN</span>
+    <span>↓</span>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section class="photos-section">
+  <div class="sec-title">📸 Our Beautiful Moments</div>
+  <div class="sec-sub">Every moment we shared — captured forever 💕</div>
+  <div class="photo-placeholder-grid">
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/b4b17abb8_IMG_3005.jpg" alt="Car ride together 🚗" loading="lazy">
+      <div class="photo-caption">Car ride together 🚗</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/5455b6cde_IMG_2889.jpg" alt="Visor mirror moment ✨" loading="lazy">
+      <div class="photo-caption">Visor mirror moment ✨</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/307472334_IMG_2879.jpg" alt="Sunshine & smiles ☀️" loading="lazy">
+      <div class="photo-caption">Sunshine & smiles ☀️</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/f7d47df16_IMG_1549.jpg" alt="Laughing together 😂💕" loading="lazy">
+      <div class="photo-caption">Laughing together 😂💕</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/a1d14d939_IMG_1287.jpg" alt="Foreheads touching 🥹" loading="lazy">
+      <div class="photo-caption">Foreheads touching 🥹</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/3ad1dfd69_IMG_1237.jpg" alt="School days 📚" loading="lazy">
+      <div class="photo-caption">School days 📚</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/9cd248b11_IMG_1187.jpg" alt="Leaning on you 💙" loading="lazy">
+      <div class="photo-caption">Leaning on you 💙</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/d666b2b8a_IMG_0045.jpg" alt="Caught her slipping 😍" loading="lazy">
+      <div class="photo-caption">Caught her slipping 😍</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/374148d72_IMG_0917.jpg" alt="Roller skating date 🛼" loading="lazy">
+      <div class="photo-caption">Roller skating date 🛼</div>
+    </div>
+    <div class="photo-slot">
+      <img src="https://media.base44.com/images/public/6a188b2648676353d29c9b67/018213384_IMG_0050.jpg" alt="Cozy together 🍬" loading="lazy">
+      <div class="photo-caption">Cozy together 🍬</div>
+    </div>
+  </div>
+</section>
+
+<!-- MESSAGES -->
+<section class="messages-section">
+  <div style="text-align:center;margin-bottom:3rem">
+    <div class="sec-title">💌 From My Heart to Yours</div>
+  </div>
+
+  <div class="msg-card">
+    <div class="msg-emoji">🌹</div>
+    <div class="msg-text">
+      Happy birthday to the most beautiful soul I know. <span>Jakiya</span>, you walked into my life and changed everything — the way I see the world, the way I feel, the way I smile. You are my favorite person and I thank God for you every single day.
+    </div>
+    <div class="msg-from">— Always yours 💕</div>
+  </div>
+
+  <div class="msg-card">
+    <div class="msg-emoji">✨</div>
+    <div class="msg-text">
+      You are <span>magic</span>. Not the kind you read about — the real kind. The kind that lights up a whole room just by walking in it. The kind that makes everything feel better just by being there. That's you, <span>Jakiya</span>. That's always been you.
+    </div>
+    <div class="msg-from">— With all my love 💖</div>
+  </div>
+
+  <div class="msg-card">
+    <div class="msg-emoji">💫</div>
+    <div class="msg-text">
+      On your birthday I just want you to know — you are <span>so loved</span>. Not just by me, but by everyone who's ever been lucky enough to know you. You give so much of yourself to others. Today is YOUR day. Let the world pour back into you. 🎂
+    </div>
+    <div class="msg-from">— Happy Birthday Queen 👑</div>
+  </div>
+
+  <div class="msg-card" id="extra-messages">
+    <div class="msg-emoji">🎉</div>
+    <div class="msg-text">
+      Another year older, another year more <span>incredible</span>. You keep getting better, keep getting stronger, keep getting more beautiful — inside and out. I don't know how you do it but I'm just glad I get to watch. Here's to YOU, babe. <span>Happy Birthday Jakiya.</span> 🥂
+    </div>
+    <div class="msg-from">— I love you ❤️</div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+
+<!-- LETTER SECTION -->
+<section class="letter-section">
+  <div class="letter-inner">
+    <div class="letter-header">
+      <div class="letter-rose">🌹</div>
+      <div class="letter-label">A Letter From My Heart</div>
+      <div class="letter-date">1 Year, 8 Months & 8 Days Together</div>
+    </div>
+    <div class="letter-body">
+      <p>My beautiful <span>Jakiya</span>,</p>
+      <p>Today marks <span>1 year, 8 months, and 8 days</span> since we started this journey together, and that means more to me than I can fully put into words. Even though we're on a no-contact break right now, not a day goes by that I don't think about you and everything we've shared. The silence has given me a lot of time to reflect on us, our memories, our growth, and just how much of an impact you've had on my life.</p>
+      <p>Over these past <span>1 year, 8 months, and 8 days</span>, we've experienced so much together. We've had beautiful moments that made me feel like the luckiest person in the world, and we've also faced challenges that tested us in ways neither of us expected. Through all of it, you became someone I deeply loved, trusted, and cared for. You brought light into my life when things felt dark, and your presence became something I never took for granted.</p>
+      <p>Being apart right now has made me realize how much I cherish the little things — the conversations we'd have, hearing about your day, <span>your smile, your laugh</span>, and the comfort of simply knowing you were there. Sometimes life pulls people into seasons where they need space to heal, think, and grow, and while this break hasn't been easy for me, I respect it because I care about you and want what's best for both of us.</p>
+      <p>No matter what the future holds, I will always be grateful for the love, lessons, and memories we've shared. You've been an important part of my life and my heart, and that will never change. On this <span>1 year, 8 months, and 8 days</span>, I just want you to know that <span>I miss you</span>, I care about you deeply, and I hope this time apart brings us both clarity, healing, and peace.</p>
+      <p>Thank you for every moment, every lesson, and every memory. <span>You'll always mean so much to me.</span></p>
+    </div>
+    <div class="letter-sign">With all my love, always 💕</div>
+  </div>
+</section>
+
+<section class="countdown-section">
+  <div class="cd-title">🎂 Celebrating You All Day Long 🎂</div>
+  <div class="cd-boxes">
+    <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-label">Hours Left</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-label">Minutes</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Seconds</div></div>
+  </div>
+  <div style="margin-top:1.5rem;color:rgba(255,255,255,.3);font-size:.8rem">of your special day remaining 💕</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Jakiya Morris 💕</div>
+  <div class="footer-love">You are my everything 🌹</div>
+  <div class="footer-hearts">💕 💖 💕</div>
+  <div style="margin-top:2rem;font-size:.75rem;color:rgba(255,255,255,.2)">Made with love, just for you 🎂</div>
+</footer>
+
+<script>
+// PARTICLES
+const colors = ['#ff6eb4','#ffd700','#c44dff','#ff2d7a','#e8b4ff','#fff'];
+const shapes = ['💕','💖','🌹','✨','🎉','🎊','⭐','💫','🌸'];
+const container = document.getElementById('particles');
+
+function createParticle() {
+  const p = document.createElement('div');
+  const useEmoji = Math.random() > 0.5;
+  if (useEmoji) {
+    p.style.cssText = `position:absolute;font-size:${Math.random()*16+10}px;left:${Math.random()*100}%;animation:float ${Math.random()*8+6}s linear infinite;animation-delay:${Math.random()*5}s;opacity:0`;
+    p.textContent = shapes[Math.floor(Math.random()*shapes.length)];
+  } else {
+    const size = Math.random()*6+3;
+    p.style.cssText = `position:absolute;width:${size}px;height:${size}px;border-radius:50%;background:${colors[Math.floor(Math.random()*colors.length)]};left:${Math.random()*100}%;animation:float ${Math.random()*8+6}s linear infinite;animation-delay:${Math.random()*5}s;opacity:0`;
+  }
+  container.appendChild(p);
+  setTimeout(() => p.remove(), 14000);
+}
+
+setInterval(createParticle, 300);
+
+// COUNTDOWN - hours left in the day
+function updateCountdown() {
+  const now = new Date();
+  const end = new Date(now);
+  end.setHours(23,59,59,999);
+  const diff = end - now;
+  const h = Math.floor(diff/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+// SPARKLE on click
+document.addEventListener('click', e => {
+  for(let i=0;i<6;i++){
+    const spark = document.createElement('div');
+    spark.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:${Math.random()*20+10}px;pointer-events:none;z-index:9999;animation:float 1.5s linear forwards;transform:translate(-50%,-50%)`;
+    spark.textContent=shapes[Math.floor(Math.random()*shapes.length)];
+    document.body.appendChild(spark);
+    setTimeout(()=>spark.remove(),1500);
+  }
+});
+</script>
+</body>
+</html>
