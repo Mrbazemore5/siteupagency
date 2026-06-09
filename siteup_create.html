@@ -121,6 +121,7 @@ textarea#prompt::placeholder{color:rgba(255,255,255,.22)}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:rgba(15,15,15,.95);border:1px solid rgba(163,255,0,.25);color:#fff;padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:.25s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
+  <script src="https://js.puter.com/v2/"></script>
 </head>
 <body>
 <div class="grid-bg"></div>
@@ -222,8 +223,8 @@ const typeConfig = {
 };
 
 const typeSteps = {
-  image:        ['Reading your description...','Building visual prompt...','Searching AI image database...','Fetching your results...'],
-  logo:         ['Reading brand details...','Building logo prompt...','Generating logo concepts...','Fetching your results...'],
+  image:        ['Reading your prompt...','Warming up FLUX AI...','Generating with FLUX Schnell...','Finalizing 4 images...'],
+  logo:         ['Reading brand brief...','Warming up FLUX AI...','Generating logo concepts...','Finalizing 4 concepts...'],
   video_script: ['Understanding your business...','Writing hook and opening...','Scripting all scenes...','Adding CTA and captions...'],
   post:         ['Analyzing your audience...','Writing the hook...','Crafting body and CTA...','Adding hashtags...'],
   email:        ['Reading your goal...','Writing subject line...','Drafting body copy...','Polishing CTA and P.S....'],
@@ -292,36 +293,48 @@ async function generate() {
   const steps = typeSteps[currentType];
   showProgress(steps);
 
-  // Animate steps while waiting for API
   let stepIdx = 0;
   const stepTimer = setInterval(() => {
-    if (stepIdx < steps.length - 1) {
-      stepIdx++;
-      updateStep(stepIdx, steps);
-    }
+    if (stepIdx < steps.length - 1) { stepIdx++; updateStep(stepIdx, steps); }
   }, 2200);
 
   try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: currentType, prompt })
-    });
+    // ── IMAGE & LOGO — use Puter.js (100% free, no API key) ──────────────────
+    if (currentType === 'image' || currentType === 'logo') {
+      clearInterval(stepTimer);
+      steps.forEach((_,i) => markStepDone(i));
+      await delay(300);
 
-    clearInterval(stepTimer);
+      // Generate 4 images in parallel with FLUX Schnell via Puter.js
+      const imagePrompt = currentType === 'logo'
+        ? `professional logo design: ${prompt}, clean vector style, white background, minimal`
+        : prompt;
 
-    if (!res.ok) throw new Error(`Server error ${res.status}`);
-    const data = await res.json();
+      const jobs = Array.from({length: 4}, () =>
+        puter.ai.txt2img(imagePrompt, { model: 'black-forest-labs/flux-schnell' })
+          .then(imgEl => imgEl.src)
+          .catch(() => null)
+      );
 
-    if (!data.success) throw new Error(data.error || 'Generation failed. Please try again.');
+      const results = await Promise.all(jobs);
+      const urls = results.filter(Boolean);
 
-    // Mark all steps done
-    steps.forEach((_,i) => markStepDone(i));
-    await delay(400);
+      if (urls.length === 0) throw new Error('Image generation failed. Please try again.');
+      showImageResult(prompt, urls, 'flux');
 
-    if (data.type === 'images') {
-      showImageResult(prompt, data.urls, data.source);
+    // ── ALL TEXT TYPES — use backend (OpenRouter) ─────────────────────────────
     } else {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: currentType, prompt })
+      });
+      clearInterval(stepTimer);
+      if (!res.ok) throw new Error(`Server error ${res.status}`);
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error || 'Generation failed. Please try again.');
+      steps.forEach((_,i) => markStepDone(i));
+      await delay(400);
       showTextResult(prompt, data.text);
     }
 
@@ -381,7 +394,7 @@ function markStepDone(i) {
 function showImageResult(prompt, urls, source) {
   currentResult = { type:'image', prompt, urls };
   const wrap = document.getElementById('outputWrap');
-  const sourceLabel = source === 'lexica' ? 'AI Image Search' : 'AI Generated';
+  const sourceLabel = source === 'flux' ? '✨ FLUX AI' : source === 'openverse' ? 'Photo Search' : 'AI Generated';
 
   wrap.innerHTML = `
     <div class="res-header">
