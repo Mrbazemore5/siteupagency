@@ -473,8 +473,8 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-btn ghost"><span class="nav-icon">→</span> Login</a>
-  <a href="#mainPrompt" class="nav-btn white">Sign up free</a>
+  <a href="/login.html" class="nav-btn ghost" id="navLogin"><span class="nav-icon">→</span> Login</a>
+  <a href="/signup.html" class="nav-btn white" id="navSignup">Sign up free</a>
 </nav>
 
 <!-- HERO -->
@@ -791,7 +791,7 @@ footer{
     <p>Documents, media, code — generated, downloadable, yours. Start free, no credit card required.</p>
     <div class="cta-btns">
       <a href="#mainPrompt" class="cta-main" onclick="document.getElementById('mainPrompt').focus()">Start creating free</a>
-      <a href="#mainPrompt" class="cta-sec" onclick="document.getElementById('mainPrompt').focus()">Sign in</a>
+      <a href="/login.html" class="cta-sec">Sign in</a>
     </div>
     <div class="cta-note">All your content is encrypted, and you own everything SiteUp creates.</div>
   </div>
@@ -937,6 +937,30 @@ document.getElementById('mainPrompt').addEventListener('keydown',e=>{
 });
 
 function closeModal(){document.getElementById('modal').classList.remove('open');}
+</script>
+
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem("su_session")||"null");
+    if(s && Date.now()-s.ts < 7*24*60*60*1000){
+      var login=document.getElementById("navLogin");
+      var signup=document.getElementById("navSignup");
+      if(login){ login.textContent="→ Dashboard"; login.href="/"; }
+      if(signup){
+        signup.textContent="👤 "+s.name.split(" ")[0];
+        signup.style.background="rgba(255,255,255,.1)";
+        signup.addEventListener("click",function(e){
+          e.preventDefault();
+          if(confirm("Sign out of SiteUp?")){
+            localStorage.removeItem("su_session");
+            window.location.reload();
+          }
+        });
+      }
+    }
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
