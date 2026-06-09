@@ -15,38 +15,22 @@ body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;min-height:100
 .field label{display:block;font-size:13px;font-weight:600;color:rgba(255,255,255,.55);margin-bottom:7px}
 .input-wrap{position:relative;display:flex;align-items:center}
 .input-icon{position:absolute;left:14px;color:rgba(255,255,255,.3);font-size:15px;pointer-events:none}
-.field input{
-  width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
-  border-radius:12px;padding:14px 14px 14px 42px;
-  font-size:15px;color:#fff;font-family:'Inter',sans-serif;
-  outline:none;transition:border-color .2s,background .2s;
-}
+.field input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 14px 14px 42px;font-size:15px;color:#fff;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s,background .2s}
 .field input::placeholder{color:rgba(255,255,255,.25)}
 .field input:focus{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.1)}
 .eye{position:absolute;right:14px;cursor:pointer;color:rgba(255,255,255,.3);font-size:15px;background:none;border:none;transition:color .15s}
 .eye:hover{color:rgba(255,255,255,.6)}
-.btn-main{
-  width:100%;padding:14px;border-radius:12px;
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);
-  color:#fff;font-size:15px;font-weight:700;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all .18s;margin-bottom:20px;
-}
+.btn-main{width:100%;padding:14px;border-radius:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .18s;margin-bottom:20px}
 .btn-main:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3)}
 .btn-main:disabled{opacity:.5;cursor:not-allowed}
 .divider{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .divider span{font-size:13px;color:rgba(255,255,255,.3);white-space:nowrap}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
-.btn-oauth{
-  width:100%;padding:13px;border-radius:12px;
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  color:rgba(255,255,255,.8);font-size:14px;font-weight:600;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  transition:all .18s;margin-bottom:10px;
-}
+.btn-oauth{width:100%;padding:13px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .18s;margin-bottom:10px;position:relative}
 .btn-oauth:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff}
-.g-logo{width:18px;height:18px}
-.apple-logo{font-size:17px;line-height:1}
+.btn-oauth:disabled{opacity:.5;cursor:not-allowed}
+.g-logo{width:18px;height:18px;flex-shrink:0}
+.apple-icon{width:18px;height:18px;flex-shrink:0}
 .bottom-link{text-align:center;font-size:14px;color:rgba(255,255,255,.35);margin-top:22px}
 .bottom-link a{color:rgba(255,255,255,.7);text-decoration:none;font-weight:600;transition:color .15s}
 .bottom-link a:hover{color:#fff}
@@ -55,8 +39,9 @@ body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;min-height:100
 .forgot a:hover{color:rgba(255,255,255,.7)}
 .error-msg{background:rgba(255,60,60,.12);border:1px solid rgba(255,60,60,.25);border-radius:10px;padding:11px 14px;font-size:13px;color:#ff6b6b;margin-bottom:14px;display:none}
 .success-msg{background:rgba(60,255,100,.1);border:1px solid rgba(60,255,100,.2);border-radius:10px;padding:11px 14px;font-size:13px;color:#4ade80;margin-bottom:14px;display:none}
-.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:none}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:none;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
+.oauth-spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.15);border-top-color:rgba(255,255,255,.7);border-radius:50%;animation:spin .6s linear infinite;display:none;position:absolute;right:14px}
 </style>
 </head>
 <body>
@@ -79,7 +64,7 @@ body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;min-height:100
     <div class="input-wrap">
       <span class="input-icon">🔒</span>
       <input type="password" id="password" placeholder="Enter password" autocomplete="current-password">
-      <button class="eye" onclick="togglePw('password',this)">👁</button>
+      <button class="eye" onclick="togglePw()">👁</button>
     </div>
   </div>
 
@@ -90,83 +75,137 @@ body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;min-height:100
 
   <div class="divider"><span>Or continue with</span></div>
 
-  <button class="btn-oauth" onclick="googleAuth()">
-    <svg class="g-logo" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-    Sign in with Google
+  <!-- Google OAuth Button -->
+  <button class="btn-oauth" id="googleBtn" onclick="oauthLogin('google')">
+    <svg class="g-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+    </svg>
+    <span id="googleText">Continue with Google</span>
+    <span class="oauth-spinner" id="googleSpinner"></span>
   </button>
 
-  <button class="btn-oauth" onclick="appleAuth()">
-    <span class="apple-logo">🍎</span>
-    Sign in with Apple
+  <!-- Apple OAuth Button -->
+  <button class="btn-oauth" id="appleBtn" onclick="oauthLogin('apple')">
+    <svg class="apple-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+    <span id="appleText">Continue with Apple</span>
+    <span class="oauth-spinner" id="appleSpinner"></span>
   </button>
 
   <div class="bottom-link">Don't have an account? <a href="/signup.html">Sign Up</a></div>
-  <div class="forgot"><a href="#" onclick="forgotPw()">Forgot password?</a></div>
+  <div class="forgot"><a href="#" onclick="forgotPw(event)">Forgot password?</a></div>
 </div>
 
-<!-- Firebase -->
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, OAuthProvider, sendPasswordResetEmail, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+<script>
+// ─── SUPABASE CONFIG ──────────────────────────────────────────────
+const SUPABASE_URL = 'https://tdiflsuwmdvlobksczpr.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Grw4UtyxUg-0fh48ziRKcg_AJuyvSJN';
+const SITE_URL     = 'https://siteupagency.com';
+// ─────────────────────────────────────────────────────────────────
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDsiteup2026xKinsleyBazemore_auth",
-  authDomain: "siteup-auth.firebaseapp.com",
-  projectId: "siteup-auth"
-};
+// If already logged in, redirect home
+const stored = localStorage.getItem('sb_session');
+if (stored) {
+  try {
+    const sess = JSON.parse(stored);
+    if (sess.access_token && sess.expires_at > Date.now()/1000) {
+      window.location.href = '/';
+    }
+  } catch(e) { localStorage.removeItem('sb_session'); }
+}
 
-// ─── We use a lightweight custom auth via localStorage + our own backend ───
-// Since Firebase requires a real project setup, we'll use a clean email/password
-// system with localStorage for demo + Google OAuth via a hosted auth worker
-
-window.togglePw = (id, btn) => {
-  const inp = document.getElementById(id);
+window.togglePw = () => {
+  const inp = document.getElementById('password');
+  const btn = inp.parentNode.querySelector('.eye');
   inp.type = inp.type === 'password' ? 'text' : 'password';
   btn.textContent = inp.type === 'password' ? '👁' : '🙈';
 };
 
-function showErr(msg){ const e=document.getElementById('errMsg'); e.textContent=msg; e.style.display='block'; document.getElementById('sucMsg').style.display='none'; }
+function showErr(msg){ const e=document.getElementById('errMsg'); e.innerHTML=msg; e.style.display='block'; document.getElementById('sucMsg').style.display='none'; }
 function showSuc(msg){ const e=document.getElementById('sucMsg'); e.textContent=msg; e.style.display='block'; document.getElementById('errMsg').style.display='none'; }
-function setLoading(on){ document.getElementById('loginSpinner').style.display=on?'inline-block':'none'; document.getElementById('loginText').style.display=on?'none':'inline'; document.getElementById('loginBtn').disabled=on; }
+function setLoading(on){
+  document.getElementById('loginSpinner').style.display = on ? 'inline-block' : 'none';
+  document.getElementById('loginText').style.display = on ? 'none' : 'inline';
+  document.getElementById('loginBtn').disabled = on;
+}
+function setOAuthLoading(provider, on){
+  document.getElementById(provider+'Btn').disabled = on;
+  document.getElementById(provider+'Text').style.opacity = on ? '0.5' : '1';
+  document.getElementById(provider+'Spinner').style.display = on ? 'inline-block' : 'none';
+}
 
+// ─── EMAIL LOGIN ──────────────────────────────────────────────────
 window.doLogin = async () => {
   const email = document.getElementById('email').value.trim();
-  const pw = document.getElementById('password').value;
-  if(!email||!pw){ showErr('Please enter your email and password.'); return; }
+  const pw    = document.getElementById('password').value;
+  if (!email || !pw) { showErr('Please enter your email and password.'); return; }
   setLoading(true);
-  // Simulate auth check against localStorage users
-  const users = JSON.parse(localStorage.getItem('su_users')||'{}');
-  await new Promise(r=>setTimeout(r,800));
-  if(users[email] && users[email].pw === btoa(pw)){
-    localStorage.setItem('su_session', JSON.stringify({email, name:users[email].name, ts:Date.now()}));
+  try {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+      body: JSON.stringify({ email, password: pw })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error_description || data.msg || 'Login failed');
+    saveSession(data);
     showSuc('Welcome back! Redirecting...');
-    setTimeout(()=>{ window.location.href='/'; }, 1000);
-  } else {
+    setTimeout(() => { window.location.href = getRedirect(); }, 900);
+  } catch(err) {
     setLoading(false);
-    showErr('Invalid email or password. <a href="/signup.html" style="color:#ff9a9a">Create an account</a>');
+    if (err.message.toLowerCase().includes('invalid') || err.message.toLowerCase().includes('credentials')) {
+      showErr('Incorrect email or password. <a href="/signup.html" style="color:#ff9a9a">Create account →</a>');
+    } else if (err.message.toLowerCase().includes('confirm')) {
+      showErr('Please verify your email first — check your inbox.');
+    } else {
+      showErr(err.message);
+    }
   }
 };
 
-window.googleAuth = () => {
-  // Google One Tap / OAuth redirect
-  showErr('Google sign-in requires a live backend. Use email sign-up for now.');
+// ─── OAUTH (Google / Apple) ────────────────────────────────────────
+window.oauthLogin = (provider) => {
+  setOAuthLoading(provider, true);
+  const redirectTo = encodeURIComponent(`${SITE_URL}/auth-callback.html`);
+  window.location.href = `${SUPABASE_URL}/auth/v1/authorize?provider=${provider}&redirect_to=${redirectTo}`;
 };
 
-window.appleAuth = () => {
-  showErr('Apple sign-in requires a live backend. Use email sign-up for now.');
-};
-
-window.forgotPw = () => {
+// ─── FORGOT PASSWORD ──────────────────────────────────────────────
+window.forgotPw = async (e) => {
+  e.preventDefault();
   const email = document.getElementById('email').value.trim();
-  if(!email){ showErr('Enter your email address first.'); return; }
-  showSuc('If that email exists, a reset link has been sent.');
+  if (!email) { showErr('Enter your email address above first.'); return; }
+  try {
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/recover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+      body: JSON.stringify({ email, redirect_to: `${SITE_URL}/login.html` })
+    });
+    if (res.ok) showSuc('Reset link sent! Check your email.');
+    else showErr('Could not send reset link. Check your email address.');
+  } catch { showErr('Network error. Try again.'); }
 };
 
-document.addEventListener('keydown', e => { if(e.key==='Enter') window.doLogin(); });
+// ─── SESSION ──────────────────────────────────────────────────────
+function saveSession(data) {
+  localStorage.setItem('sb_session', JSON.stringify({
+    access_token:  data.access_token,
+    refresh_token: data.refresh_token,
+    expires_at:    data.expires_at || (Math.floor(Date.now()/1000) + (data.expires_in || 3600)),
+    user:          data.user
+  }));
+}
+function getRedirect() {
+  const p = new URLSearchParams(window.location.search).get('redirect');
+  return p || '/';
+}
 
-// Auto redirect if already logged in
-const sess = localStorage.getItem('su_session');
-if(sess){ try{ const s=JSON.parse(sess); if(Date.now()-s.ts < 7*24*60*60*1000) window.location.href='/'; }catch(e){} }
+// Enter key triggers login
+document.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
 </script>
 </body>
 </html>
