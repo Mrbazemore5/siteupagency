@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SiteUp — AI Creation Studio</title>
+<title>SiteUp — AI Video & Image Generator</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -136,18 +136,18 @@ textarea#prompt::placeholder{color:rgba(255,255,255,.22)}
 </nav>
 
 <div class="hero">
-  <div class="hero-eyebrow">⚡ Real AI — No Fakes</div>
-  <h1>Create <em>anything</em><br>in seconds.</h1>
-  <p class="hero-sub">Type what you need. Real AI generates scripts, images, social posts, email copy, and more — instantly.</p>
+  <div class="hero-eyebrow">⚡ Free AI Generator</div>
+  <h1>Generate <em>AI content</em><br>in seconds.</h1>
+  <p class="hero-sub">Type what you need. Real AI generates videos, images, social posts, scripts, and logos — instantly.</p>
 
   <div class="type-tabs">
     <div class="type-tab active" onclick="setType('image',this)">🖼️ AI Image</div>
     <div class="type-tab" onclick="setType('logo',this)">✏️ Logo</div>
     <div class="type-tab" onclick="setType('video_script',this)">🎬 Video Script</div>
     <div class="type-tab" onclick="setType('post',this)">📱 Social Post</div>
-    <div class="type-tab" onclick="setType('email',this)">📧 Email</div>
-    <div class="type-tab" onclick="setType('website',this)">🌐 Website Copy</div>
-    <div class="type-tab" onclick="setType('flyer',this)">📄 Flyer</div>
+    <div class="type-tab" onclick="setType('email',this)">📧 Email Copy</div>
+    <div class="type-tab" onclick="setType('caption',this)">🔥 Viral Caption</div>
+    <div class="type-tab" onclick="setType('ad',this)">💰 Ad Script</div>
   </div>
 
   <div class="prompt-wrap">
@@ -189,15 +189,15 @@ textarea#prompt::placeholder{color:rgba(255,255,255,.22)}
       <div class="ex-title">HVAC Cold Email</div>
       <div class="ex-desc">Full email with subject, body, and CTA</div>
     </div>
-    <div class="ex-card" onclick="quickFill('website','Homepage copy for a painting company in Virginia Beach, professional residential painters')">
-      <div class="ex-icon">🌐</div>
-      <div class="ex-title">Painter Homepage</div>
-      <div class="ex-desc">Hero, services, about, and CTA copy</div>
+    <div class="ex-card" onclick="quickFill('caption','Satisfying before and after room makeover transformation, clean aesthetic, trending audio')">
+      <div class="ex-icon">🔥</div>
+      <div class="ex-title">Viral TikTok Caption</div>
+      <div class="ex-desc">Hook + caption + trending hashtags</div>
     </div>
-    <div class="ex-card" onclick="quickFill('flyer','Door hanger flyer for pressure washing, 20% off first clean, Virginia Beach')">
-      <div class="ex-icon">📄</div>
-      <div class="ex-title">Pressure Wash Flyer</div>
-      <div class="ex-desc">Print-ready flyer text for door hangers</div>
+    <div class="ex-card" onclick="quickFill('ad','15-second TikTok ad for a skincare brand, before/after, targeting Gen Z women 18-25')">
+      <div class="ex-icon">💰</div>
+      <div class="ex-title">TikTok Ad Script</div>
+      <div class="ex-desc">Full 15-sec ad with hook, CTA & offer</div>
     </div>
   </div>
 </div>
@@ -217,8 +217,8 @@ const typeConfig = {
   video_script: { label:'Video Script',  placeholder:'Describe your video — e.g. "30-sec promo for my roofing company, targets homeowners"',          chips:['30-sec roofing promo','HVAC summer special','Plumbing emergency ad','Landscaping spring deal','Painting before/after'] },
   post:         { label:'Social Post',   placeholder:'Describe your post — e.g. "Instagram post for summer HVAC special, fun and engaging"',          chips:['HVAC summer deal','Roofing before/after','New business launch','5-star review post','Holiday promo'] },
   email:        { label:'Email',         placeholder:'Describe your email — e.g. "Cold outreach to homeowners offering a free roof inspection"',       chips:['Free inspection offer','Follow-up email','Seasonal promo','New customer welcome','Re-engagement email'] },
-  website:      { label:'Website Copy',  placeholder:'Describe your site — e.g. "Homepage for an HVAC company in Virginia Beach, professional"',      chips:['HVAC homepage','Roofing services page','Plumbing about page','Landscaping homepage','Painter services page'] },
-  flyer:        { label:'Flyer',         placeholder:'Describe your flyer — e.g. "Door hanger for pressure washing, 20% off, Virginia Beach"',        chips:['Pressure wash special','Roof inspection offer','HVAC tune-up deal','Lawn care seasonal','Painting estimate CTA'] },
+  caption:      { label:'Viral Caption',  placeholder:'Describe your video — e.g. "Satisfying before/after room makeover, funny reaction caption"',  chips:['Before/after makeover','Satisfying clean video','Funny fail compilation','Day in my life','Trending sound idea'] },
+  ad:           { label:'Ad Script',      placeholder:'Describe your ad — e.g. "15-sec TikTok ad for a new clothing brand targeting Gen Z"',           chips:['TikTok product ad','Instagram story ad','YouTube pre-roll','Facebook video ad','Reels promotional'] },
 };
 
 const typeSteps = {
@@ -227,8 +227,8 @@ const typeSteps = {
   video_script: ['Understanding your business...','Writing hook and opening...','Scripting all scenes...','Adding CTA and captions...'],
   post:         ['Analyzing your audience...','Writing the hook...','Crafting body and CTA...','Adding hashtags...'],
   email:        ['Reading your goal...','Writing subject line...','Drafting body copy...','Polishing CTA and P.S....'],
-  website:      ['Understanding your brand...','Writing hero section...','Crafting services copy...','Adding trust signals...'],
-  flyer:        ['Reading your offer...','Writing headline...','Crafting bullet points...','Adding urgency line...'],
+  caption:      ['Analyzing the trend...','Writing the hook...','Crafting caption text...','Adding hashtag strategy...'],
+  ad:           ['Understanding your product...','Writing the hook...','Scripting scenes...','Adding CTA and offer...'],
 };
 
 function setType(type, el) {
