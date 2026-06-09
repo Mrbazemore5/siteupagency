@@ -3,71 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SiteUp — Sign Up Free</title>
+<title>SiteUp — Sign Up</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 .su-logo-top{position:fixed;top:22px;left:24px;font-size:13px;font-weight:900;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none}
 .card{width:100%;max-width:380px}
-.brand{text-align:center;font-size:22px;font-weight:900;letter-spacing:8px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:28px}
-.toggle-row{display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:4px;margin-bottom:24px}
-.toggle-btn{flex:1;padding:9px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;background:transparent;border:none;color:rgba(255,255,255,.4);transition:all .18s}
-.toggle-btn.active{background:rgba(255,255,255,.12);color:#fff}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:13px;font-weight:600;color:rgba(255,255,255,.55);margin-bottom:6px}
+.brand{text-align:center;font-size:22px;font-weight:900;letter-spacing:8px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:8px}
+.subtitle{text-align:center;font-size:14px;color:rgba(255,255,255,.35);margin-bottom:32px}
+/* Toggle */
+.toggle-wrap{display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:4px;margin-bottom:28px}
+.toggle-btn{flex:1;padding:9px;border-radius:9px;border:none;background:transparent;color:rgba(255,255,255,.45);font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif}
+.toggle-btn.active{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.15)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:600;color:rgba(255,255,255,.55);margin-bottom:7px}
 .input-wrap{position:relative;display:flex;align-items:center}
 .input-icon{position:absolute;left:14px;color:rgba(255,255,255,.3);font-size:15px;pointer-events:none}
-.field input{
-  width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
-  border-radius:12px;padding:13px 14px 13px 42px;
-  font-size:15px;color:#fff;font-family:'Inter',sans-serif;
-  outline:none;transition:border-color .2s,background .2s;
-}
+.field input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 14px 14px 42px;font-size:15px;color:#fff;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s,background .2s}
 .field input::placeholder{color:rgba(255,255,255,.25)}
 .field input:focus{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.1)}
 .eye{position:absolute;right:14px;cursor:pointer;color:rgba(255,255,255,.3);font-size:15px;background:none;border:none;transition:color .15s}
 .eye:hover{color:rgba(255,255,255,.6)}
-.btn-main{
-  width:100%;padding:14px;border-radius:12px;
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);
-  color:#fff;font-size:15px;font-weight:700;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all .18s;margin-top:6px;margin-bottom:20px;
-}
+.btn-main{width:100%;padding:14px;border-radius:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .18s;margin-bottom:20px}
 .btn-main:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3)}
 .btn-main:disabled{opacity:.5;cursor:not-allowed}
-.divider{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.divider{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .divider span{font-size:13px;color:rgba(255,255,255,.3);white-space:nowrap}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
-.btn-oauth{
-  width:100%;padding:13px;border-radius:12px;
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  color:rgba(255,255,255,.8);font-size:14px;font-weight:600;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  transition:all .18s;margin-bottom:10px;
-}
+.btn-oauth{width:100%;padding:13px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .18s;margin-bottom:10px;position:relative}
 .btn-oauth:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff}
-.g-logo{width:18px;height:18px}
-.bottom-link{text-align:center;font-size:14px;color:rgba(255,255,255,.35);margin-top:18px}
+.btn-oauth:disabled{opacity:.5;cursor:not-allowed}
+.g-logo{width:18px;height:18px;flex-shrink:0}
+.apple-icon{width:18px;height:18px;flex-shrink:0}
+.terms{font-size:12px;color:rgba(255,255,255,.25);text-align:center;margin-top:14px;line-height:1.6}
+.terms a{color:rgba(255,255,255,.4);text-decoration:none}
+.bottom-link{text-align:center;font-size:14px;color:rgba(255,255,255,.35);margin-top:20px}
 .bottom-link a{color:rgba(255,255,255,.7);text-decoration:none;font-weight:600;transition:color .15s}
 .bottom-link a:hover{color:#fff}
-.error-msg{background:rgba(255,60,60,.12);border:1px solid rgba(255,60,60,.25);border-radius:10px;padding:11px 14px;font-size:13px;color:#ff6b6b;margin-bottom:12px;display:none}
-.success-msg{background:rgba(60,255,100,.1);border:1px solid rgba(60,255,100,.2);border-radius:10px;padding:11px 14px;font-size:13px;color:#4ade80;margin-bottom:12px;display:none}
-.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:none}
+.error-msg{background:rgba(255,60,60,.12);border:1px solid rgba(255,60,60,.25);border-radius:10px;padding:11px 14px;font-size:13px;color:#ff6b6b;margin-bottom:14px;display:none}
+.success-msg{background:rgba(60,255,100,.1);border:1px solid rgba(60,255,100,.2);border-radius:10px;padding:11px 14px;font-size:13px;color:#4ade80;margin-bottom:14px;display:none}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:none;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-.strength{display:flex;gap:4px;margin-top:6px}
-.strength-bar{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,.08);transition:background .3s}
+.oauth-spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.15);border-top-color:rgba(255,255,255,.7);border-radius:50%;animation:spin .6s linear infinite;display:none;position:absolute;right:14px}
+#teamField{display:none}
 </style>
 </head>
 <body>
 <a href="/" class="su-logo-top">SITEUP</a>
 <div class="card">
   <div class="brand">SITEUP</div>
+  <div class="subtitle">Create your free account</div>
 
-  <div class="toggle-row">
-    <button class="toggle-btn active" onclick="setType('personal',this)">Personal</button>
-    <button class="toggle-btn" onclick="setType('team',this)">Team</button>
+  <!-- Personal / Team Toggle -->
+  <div class="toggle-wrap">
+    <button class="toggle-btn active" id="personalBtn" onclick="setType('personal')">Personal</button>
+    <button class="toggle-btn" id="teamBtn" onclick="setType('team')">Team</button>
   </div>
 
   <div class="error-msg" id="errMsg"></div>
@@ -77,15 +68,15 @@ body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;min-height:100
     <label>Full Name</label>
     <div class="input-wrap">
       <span class="input-icon">👤</span>
-      <input type="text" id="name" placeholder="Enter your full name" autocomplete="name">
+      <input type="text" id="name" placeholder="Your name" autocomplete="name">
     </div>
   </div>
 
-  <div class="field" id="teamField" style="display:none">
+  <div class="field" id="teamField">
     <label>Team / Company Name</label>
     <div class="input-wrap">
       <span class="input-icon">🏢</span>
-      <input type="text" id="team" placeholder="Your company name">
+      <input type="text" id="teamName" placeholder="Your company name">
     </div>
   </div>
 
@@ -101,82 +92,138 @@ body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;min-height:100
     <label>Password</label>
     <div class="input-wrap">
       <span class="input-icon">🔒</span>
-      <input type="password" id="password" placeholder="Enter password" autocomplete="new-password" oninput="checkStrength(this.value)">
-      <button class="eye" onclick="togglePw('password',this)">👁</button>
-    </div>
-    <div class="strength" id="strength"><div class="strength-bar"></div><div class="strength-bar"></div><div class="strength-bar"></div><div class="strength-bar"></div></div>
-  </div>
-
-  <div class="field">
-    <label>Confirm Password</label>
-    <div class="input-wrap">
-      <span class="input-icon">🔒</span>
-      <input type="password" id="confirm" placeholder="Enter password again" autocomplete="new-password">
-      <button class="eye" onclick="togglePw('confirm',this)">👁</button>
+      <input type="password" id="password" placeholder="Min. 8 characters" autocomplete="new-password">
+      <button class="eye" onclick="togglePw()">👁</button>
     </div>
   </div>
 
-  <button class="btn-main" id="regBtn" onclick="doRegister()">
-    <span class="spinner" id="regSpinner"></span>
-    <span id="regText">→ Register</span>
+  <button class="btn-main" id="signupBtn" onclick="doSignup()">
+    <span class="spinner" id="signupSpinner"></span>
+    <span id="signupText">→ Create Account</span>
   </button>
 
-  <div class="divider"><span>Or continue with</span></div>
+  <div class="divider"><span>Or sign up with</span></div>
 
-  <button class="btn-oauth" onclick="googleAuth()">
-    <svg class="g-logo" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-    Sign up with Google
+  <!-- Google OAuth -->
+  <button class="btn-oauth" id="googleBtn" onclick="oauthLogin('google')">
+    <svg class="g-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+    </svg>
+    <span id="googleText">Sign up with Google</span>
+    <span class="oauth-spinner" id="googleSpinner"></span>
   </button>
 
+  <!-- Apple OAuth -->
+  <button class="btn-oauth" id="appleBtn" onclick="oauthLogin('apple')">
+    <svg class="apple-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+    <span id="appleText">Sign up with Apple</span>
+    <span class="oauth-spinner" id="appleSpinner"></span>
+  </button>
+
+  <div class="terms">By signing up, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a></div>
   <div class="bottom-link">Already have an account? <a href="/login.html">Login</a></div>
 </div>
 
 <script>
-window.togglePw = (id,btn)=>{const i=document.getElementById(id);i.type=i.type==='password'?'text':'password';btn.textContent=i.type==='password'?'👁':'🙈'};
-window.setType=(t,btn)=>{document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('teamField').style.display=t==='team'?'block':'none'};
+// ─── SUPABASE CONFIG ──────────────────────────────────────────────
+const SUPABASE_URL = 'https://tdiflsuwmdvlobksczpr.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Grw4UtyxUg-0fh48ziRKcg_AJuyvSJN';
+const SITE_URL     = 'https://siteupagency.com';
+// ─────────────────────────────────────────────────────────────────
 
-function showErr(msg){const e=document.getElementById('errMsg');e.innerHTML=msg;e.style.display='block';document.getElementById('sucMsg').style.display='none'}
-function showSuc(msg){const e=document.getElementById('sucMsg');e.textContent=msg;e.style.display='block';document.getElementById('errMsg').style.display='none'}
-function setLoading(on){document.getElementById('regSpinner').style.display=on?'inline-block':'none';document.getElementById('regText').style.display=on?'none':'inline';document.getElementById('regBtn').disabled=on}
-
-window.checkStrength = v => {
-  const bars = document.querySelectorAll('.strength-bar');
-  let score = 0;
-  if(v.length>=8)score++;
-  if(/[A-Z]/.test(v))score++;
-  if(/[0-9]/.test(v))score++;
-  if(/[^a-zA-Z0-9]/.test(v))score++;
-  const colors=['#ff4444','#ff8800','#ffcc00','#22c55e'];
-  bars.forEach((b,i)=>{b.style.background=i<score?(colors[score-1]||'rgba(255,255,255,.08)'):'rgba(255,255,255,.08)'});
+let acctType = 'personal';
+window.setType = (t) => {
+  acctType = t;
+  document.getElementById('personalBtn').classList.toggle('active', t === 'personal');
+  document.getElementById('teamBtn').classList.toggle('active', t === 'team');
+  document.getElementById('teamField').style.display = t === 'team' ? 'block' : 'none';
 };
 
-window.googleAuth = ()=>{ showErr('Google sign-in requires a live backend. Use email sign-up for now.'); };
+window.togglePw = () => {
+  const inp = document.getElementById('password');
+  const btn = inp.parentNode.querySelector('.eye');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+};
 
-window.doRegister = async () => {
-  const name = document.getElementById('name').value.trim();
+function showErr(msg){ const e=document.getElementById('errMsg'); e.innerHTML=msg; e.style.display='block'; document.getElementById('sucMsg').style.display='none'; }
+function showSuc(msg){ const e=document.getElementById('sucMsg'); e.innerHTML=msg; e.style.display='block'; document.getElementById('errMsg').style.display='none'; }
+function setLoading(on){
+  document.getElementById('signupSpinner').style.display = on ? 'inline-block' : 'none';
+  document.getElementById('signupText').style.display = on ? 'none' : 'inline';
+  document.getElementById('signupBtn').disabled = on;
+}
+function setOAuthLoading(provider, on){
+  document.getElementById(provider+'Btn').disabled = on;
+  document.getElementById(provider+'Text').style.opacity = on ? '0.5' : '1';
+  document.getElementById(provider+'Spinner').style.display = on ? 'inline-block' : 'none';
+}
+
+// ─── EMAIL SIGNUP ─────────────────────────────────────────────────
+window.doSignup = async () => {
+  const name  = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
-  const pw = document.getElementById('password').value;
-  const pw2 = document.getElementById('confirm').value;
-  if(!name) { showErr('Please enter your full name.'); return; }
-  if(!email||!email.includes('@')) { showErr('Please enter a valid email address.'); return; }
-  if(pw.length < 6) { showErr('Password must be at least 6 characters.'); return; }
-  if(pw !== pw2) { showErr('Passwords do not match.'); return; }
+  const pw    = document.getElementById('password').value;
+  const team  = document.getElementById('teamName').value.trim();
+
+  if (!name)  { showErr('Please enter your name.'); return; }
+  if (!email) { showErr('Please enter your email.'); return; }
+  if (!pw || pw.length < 8) { showErr('Password must be at least 8 characters.'); return; }
+
   setLoading(true);
-  const users = JSON.parse(localStorage.getItem('su_users')||'{}');
-  await new Promise(r=>setTimeout(r,900));
-  if(users[email]){ setLoading(false); showErr('An account with that email already exists. <a href="/login.html" style="color:#ff9a9a">Login instead</a>'); return; }
-  users[email] = { name, pw: btoa(pw), created: Date.now() };
-  localStorage.setItem('su_users', JSON.stringify(users));
-  localStorage.setItem('su_session', JSON.stringify({email, name, ts: Date.now()}));
-  showSuc('Account created! Welcome to SiteUp 🎉 Redirecting...');
-  setTimeout(()=>{ window.location.href='/'; }, 1200);
+  try {
+    const metadata = { full_name: name, account_type: acctType };
+    if (acctType === 'team' && team) metadata.team_name = team;
+
+    const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+      body: JSON.stringify({ email, password: pw, data: metadata })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.msg || data.error_description || 'Signup failed');
+
+    // If email confirmation required
+    if (data.id && !data.access_token) {
+      showSuc('✅ Account created! Check your email to confirm your address, then <a href="/login.html" style="color:#4ade80">login here</a>.');
+      setLoading(false);
+    } else if (data.access_token) {
+      // Auto-confirmed — save session and redirect
+      localStorage.setItem('sb_session', JSON.stringify({
+        access_token:  data.access_token,
+        refresh_token: data.refresh_token,
+        expires_at:    data.expires_at || (Math.floor(Date.now()/1000) + 3600),
+        user:          data.user
+      }));
+      showSuc('🎉 Welcome to SiteUp! Redirecting...');
+      setTimeout(() => { window.location.href = '/'; }, 1000);
+    } else {
+      throw new Error(data.msg || 'Something went wrong');
+    }
+  } catch(err) {
+    setLoading(false);
+    if (err.message.toLowerCase().includes('already registered') || err.message.toLowerCase().includes('already exists')) {
+      showErr('Email already registered. <a href="/login.html" style="color:#ff9a9a">Login instead →</a>');
+    } else {
+      showErr(err.message);
+    }
+  }
 };
 
-document.addEventListener('keydown', e=>{ if(e.key==='Enter') window.doRegister(); });
+// ─── OAUTH (Google / Apple) ────────────────────────────────────────
+window.oauthLogin = (provider) => {
+  setOAuthLoading(provider, true);
+  const redirectTo = encodeURIComponent(`${SITE_URL}/auth-callback.html`);
+  window.location.href = `${SUPABASE_URL}/auth/v1/authorize?provider=${provider}&redirect_to=${redirectTo}`;
+};
 
-// Auto redirect if already logged in
-const sess = localStorage.getItem('su_session');
-if(sess){ try{ const s=JSON.parse(sess); if(Date.now()-s.ts < 7*24*60*60*1000) window.location.href='/'; }catch(e){} }
+// Enter key
+document.addEventListener('keydown', e => { if (e.key === 'Enter') doSignup(); });
 </script>
 </body>
 </html>
