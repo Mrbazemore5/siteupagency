@@ -121,7 +121,6 @@ textarea#prompt::placeholder{color:rgba(255,255,255,.22)}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:rgba(15,15,15,.95);border:1px solid rgba(163,255,0,.25);color:#fff;padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:.25s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
-  <script src="https://js.puter.com/v2/"></script>
 </head>
 <body>
 <div class="grid-bg"></div>
@@ -296,33 +295,34 @@ async function generate() {
   let stepIdx = 0;
   const stepTimer = setInterval(() => {
     if (stepIdx < steps.length - 1) { stepIdx++; updateStep(stepIdx, steps); }
-  }, 2200);
+  }, 2000);
 
   try {
-    // ── IMAGE & LOGO — use Puter.js (100% free, no API key) ──────────────────
+    // ── IMAGE & LOGO — Pollinations AI (100% free, no login, no API key) ──────
     if (currentType === 'image' || currentType === 'logo') {
       clearInterval(stepTimer);
-      steps.forEach((_,i) => markStepDone(i));
-      await delay(300);
 
-      // Generate 4 images in parallel with FLUX Schnell via Puter.js
       const imagePrompt = currentType === 'logo'
-        ? `professional logo design: ${prompt}, clean vector style, white background, minimal`
+        ? `professional logo design: ${prompt}, clean vector style, white background, minimal, bold`
         : prompt;
 
-      const jobs = Array.from({length: 4}, () =>
-        puter.ai.txt2img(imagePrompt, { model: 'black-forest-labs/flux-schnell' })
-          .then(imgEl => imgEl.src)
-          .catch(() => null)
+      // Build 4 unique Pollinations URLs with different seeds
+      const seeds = [
+        Math.floor(Math.random() * 9000) + 1000,
+        Math.floor(Math.random() * 9000) + 1000,
+        Math.floor(Math.random() * 9000) + 1000,
+        Math.floor(Math.random() * 9000) + 1000
+      ];
+      const encoded = encodeURIComponent(imagePrompt);
+      const urls = seeds.map(s =>
+        `https://image.pollinations.ai/prompt/${encoded}?model=flux&width=1024&height=1024&seed=${s}&nologo=true&enhance=true`
       );
 
-      const results = await Promise.all(jobs);
-      const urls = results.filter(Boolean);
-
-      if (urls.length === 0) throw new Error('Image generation failed. Please try again.');
+      steps.forEach((_,i) => markStepDone(i));
+      await delay(200);
       showImageResult(prompt, urls, 'flux');
 
-    // ── ALL TEXT TYPES — use backend (OpenRouter) ─────────────────────────────
+    // ── ALL TEXT TYPES — backend (OpenRouter) ─────────────────────────────────
     } else {
       const res = await fetch(API_URL, {
         method: 'POST',
@@ -394,7 +394,7 @@ function markStepDone(i) {
 function showImageResult(prompt, urls, source) {
   currentResult = { type:'image', prompt, urls };
   const wrap = document.getElementById('outputWrap');
-  const sourceLabel = source === 'flux' ? '✨ FLUX AI' : source === 'openverse' ? 'Photo Search' : 'AI Generated';
+  const sourceLabel = source === 'flux' ? '✨ FLUX AI' : 'AI Generated';
 
   wrap.innerHTML = `
     <div class="res-header">
