@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiteUp — Signing you in...</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0a0a0f;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.wrap{text-align:center;padding:40px}
+.logo{font-size:18px;font-weight:900;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:40px}
+.spinner-big{width:48px;height:48px;border:3px solid rgba(255,255,255,.1);border-top-color:rgba(255,255,255,.7);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 28px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.status{font-size:16px;color:rgba(255,255,255,.5);font-weight:500}
+.error-box{background:rgba(255,60,60,.12);border:1px solid rgba(255,60,60,.25);border-radius:12px;padding:20px;max-width:360px;margin:0 auto}
+.error-title{font-size:16px;font-weight:700;color:#ff6b6b;margin-bottom:8px}
+.error-msg{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:20px}
+.btn{display:inline-block;padding:11px 24px;border-radius:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:14px;font-weight:600;text-decoration:none;transition:all .18s}
+.btn:hover{background:rgba(255,255,255,.18)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">SITEUP</div>
+  <div id="loading">
+    <div class="spinner-big"></div>
+    <div class="status" id="statusText">Completing sign in...</div>
+  </div>
+  <div id="errorBox" class="error-box" style="display:none">
+    <div class="error-title">Sign in failed</div>
+    <div class="error-msg" id="errorMsg"></div>
+    <a href="/login.html" class="btn">← Back to Login</a>
+  </div>
+</div>
+
+<script>
+// ─── SUPABASE CONFIG ──────────────────────────────────────────────
+const SUPABASE_URL = 'https://tdiflsuwmdvlobksczpr.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Grw4UtyxUg-0fh48ziRKcg_AJuyvSJN';
+// ─────────────────────────────────────────────────────────────────
+
+function showError(msg) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('errorBox').style.display = 'block';
+  document.getElementById('errorMsg').textContent = msg;
+}
+
+async function handleCallback() {
+  try {
+    // Supabase returns tokens in the URL hash after OAuth
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+
+    const accessToken  = params.get('access_token');
+    const refreshToken = params.get('refresh_token');
+    const expiresIn    = params.get('expires_in');
+    const errorParam   = params.get('error');
+    const errorDesc    = params.get('error_description');
+
+    // Also check query params (some flows use ?code=)
+    const qParams    = new URLSearchParams(window.location.search);
+    const code       = qParams.get('code');
+    const qError     = qParams.get('error');
+    const qErrorDesc = qParams.get('error_description');
+
+    if (errorParam || qError) {
+      throw new Error(errorDesc || qErrorDesc || 'OAuth sign in was cancelled or failed.');
+    }
+
+    if (accessToken) {
+      // Hash-based flow (implicit) — tokens are directly in the URL
+      document.getElementById('statusText').textContent = 'Getting your profile...';
+
+      // Fetch user info
+      const userRes = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+        headers: { 'Authorization': `Bearer ${accessToken}`, 'apikey': SUPABASE_KEY }
+      });
+      const user = await userRes.json();
+
+      // Save session
+      const session = {
+        access_token:  accessToken,
+        refresh_token: refreshToken,
+        expires_at:    Math.floor(Date.now()/1000) + parseInt(expiresIn || 3600),
+        user:          user
+      };
+      localStorage.setItem('sb_session', JSON.stringify(session));
+      document.getElementById('statusText').textContent = 'Success! Redirecting...';
+      setTimeout(() => { window.location.href = '/'; }, 800);
+
+    } else if (code) {
+      // PKCE flow — exchange code for tokens
+      document.getElementById('statusText').textContent = 'Verifying with server...';
+
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=pkce`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+        body: JSON.stringify({ auth_code: code })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.msg || data.error_description || 'Token exchange failed');
+
+      const session = {
+        access_token:  data.access_token,
+        refresh_token: data.refresh_token,
+        expires_at:    data.expires_at || (Math.floor(Date.now()/1000) + (data.expires_in || 3600)),
+        user:          data.user
+      };
+      localStorage.setItem('sb_session', JSON.stringify(session));
+      document.getElementById('statusText').textContent = 'Success! Redirecting...';
+      setTimeout(() => { window.location.href = '/'; }, 800);
+
+    } else {
+      // No tokens and no code — might be landing here directly
+      const existing = localStorage.getItem('sb_session');
+      if (existing) {
+        window.location.href = '/';
+      } else {
+        showError('No authentication data found. Please try signing in again.');
+      }
+    }
+  } catch(err) {
+    showError(err.message || 'Something went wrong. Please try again.');
+  }
+}
+
+handleCallback();
+</script>
+</body>
+</html>
