@@ -3,1072 +3,565 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SiteUp Agency — Websites for Contractors & Local Businesses</title>
-<meta name="description" content="We build websites for contractors and local businesses. You see your site before you pay a dollar." />
-<meta property="og:title" content="SiteUp Agency — You pay nothing until you love it." />
-<meta property="og:description" content="We build a real working preview of your site — before you pay a single dollar." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>SiteUp — The Ultimate Creation Machine</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --accent: #a3ff00;
-  --accent-dark: #a3ff00;
-  --dark: #0a0a0a;
-  --text: #f0f0f0;
-  --muted: #888;
-  --light: #111;
-  --border: #1e1e1e;
-  --white: #0a0a0a;
-}
-html { scroll-behavior: smooth; }
-body { background: #000; color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-thumb { background: var(--accent); }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--lime:#a3ff00;--bg:#0c0c14;--card:rgba(255,255,255,.04);--border:rgba(255,255,255,.08)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden;min-height:100vh}
+
+/* BG */
+.bg-grad{position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse 90% 55% at 50% -5%,rgba(100,30,200,.6) 0%,transparent 65%),
+             radial-gradient(ellipse 55% 45% at 85% 55%,rgba(50,10,140,.4) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 40% at 10% 75%,rgba(80,20,160,.3) 0%,transparent 60%),
+             #0c0c14;
+  pointer-events:none}
 
 /* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(0,0,0,0.97); backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 2rem; height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-.nav-logo-icon { width: 32px; height: 32px; background: var(--dark); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-.nav-logo-icon svg { width: 18px; height: 18px; fill: var(--accent); }
-.nav-logo-text { font-size: 1rem; font-weight: 800; color: #f0f0f0; letter-spacing: -0.3px; }
-.nav-logo-text span { color: var(--accent-dark); }
-.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-.nav-links a { color: #888; text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: #fff; }
-.nav-right { display: flex; align-items: center; gap: 1rem; }
-.nav-text-btn { display: flex; align-items: center; gap: 0.4rem; color: #888; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: color 0.2s; }
-.nav-text-btn:hover { color: #fff; }
-.nav-cta {
-  background: #a3ff00; color: #000;
-  padding: 0.6rem 1.25rem; border-radius: 8px;
-  font-size: 0.85rem; font-weight: 600; text-decoration: none;
-  transition: background 0.2s; white-space: nowrap;
-}
-.nav-cta:hover { background: #b8ff26; }
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-.hamburger span { width: 22px; height: 2px; background: var(--dark); display: block; transition: all 0.3s; }
-.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; z-index: 99; flex-direction: column; gap: 1.25rem; }
-.mobile-menu.open { display: flex; }
-.mobile-menu a { color: var(--dark); text-decoration: none; font-size: 1rem; font-weight: 500; }
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;
+  backdrop-filter:blur(18px);background:rgba(12,12,20,.7);border-bottom:1px solid var(--border)}
+.logo{font-size:18px;font-weight:900;letter-spacing:6px;text-transform:uppercase;color:#fff}
+.logo em{font-style:normal;color:var(--lime)}
+.nav-btns{display:flex;gap:10px}
+.nb{padding:9px 20px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;border:none;transition:all .15s}
+.nb.ghost{background:rgba(255,255,255,.07);color:#ccc;border:1px solid var(--border)}
+.nb.ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+.nb.solid{background:#fff;color:#000}
+.nb.solid:hover{background:var(--lime)}
 
 /* HERO */
-.hero { padding: 9rem 2rem 5rem; text-align: center; background: #000; }
-.hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(163,255,0,0.1); border: 1px solid rgba(163,255,0,0.3); color: #a3ff00; font-size: 0.75rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 2rem; letter-spacing: 0.02em; text-transform: uppercase; }
-.hero-tag::before { content: '●'; color: #a3ff00; font-size: 0.5rem; }
-.hero h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -2px; color: #f0f0f0; margin-bottom: 0.5rem; }
-.hero h1 .rotating-wrap { display: block; height: 1.15em; position: relative; overflow: hidden; }
-.hero h1 .rotating { color: #a3ff00; display: block; position: absolute; left: 0; right: 0; text-align: center; transition: opacity 0.35s ease, transform 0.35s ease; white-space: nowrap; }
-.hero-sub { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: #555; letter-spacing: -0.5px; margin-bottom: 1.75rem; }
-.hero-desc { font-size: 1.05rem; color: #888; max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.75; }
-.hero-desc em { font-style: italic; color: #f0f0f0; }
-.hero-desc strong { color: #f0f0f0; font-weight: 700; }
-.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
-.btn-dark { background: #a3ff00; color: #000; padding: 0.9rem 2rem; border-radius: 10px; font-size: 0.92rem; font-weight: 700; text-decoration: none; transition: background 0.2s; display: inline-block; }
-.btn-dark:hover { background: #b8ff26; }
-.btn-ghost { background: transparent; color: #f0f0f0; padding: 0.9rem 2rem; border-radius: 10px; font-size: 0.92rem; font-weight: 600; text-decoration: none; border: 1.5px solid #333; transition: border-color 0.2s; display: inline-block; }
-.btn-ghost:hover { border-color: #555; }
-.hero-review { background: #111; border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem 2rem; max-width: 520px; margin: 0 auto; text-align: left; }
-.stars { color: #f59e0b; font-size: 0.9rem; margin-bottom: 0.75rem; }
-.hero-review p { font-size: 0.9rem; color: #888; line-height: 1.7; font-style: italic; margin-bottom: 0.75rem; }
-.reviewer { font-size: 0.8rem; color: #555; font-weight: 500; }
-.trust-badges { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid #1e1e1e; }
-.trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: #555; font-weight: 500; }
-.trust-item span { font-size: 1rem; }
+.hero{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;padding:100px 20px 44px}
+h1{font-size:clamp(46px,9vw,100px);font-weight:900;letter-spacing:-3px;line-height:1.0;max-width:860px;margin-bottom:22px}
+.hero-sub{font-size:clamp(16px,2.2vw,20px);color:rgba(255,255,255,.5);max-width:580px;line-height:1.7;margin-bottom:50px}
+.hero-sub span{color:rgba(255,255,255,.9)}
 
-/* SECTION COMMONS */
-section { padding: 5rem 2rem; }
-.container { max-width: 1100px; margin: 0 auto; }
-.section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #a3ff00; margin-bottom: 0.75rem; }
-.section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; letter-spacing: -1px; color: #f0f0f0; margin-bottom: 1rem; line-height: 1.1; }
-.section-sub { font-size: 1rem; color: #888; max-width: 540px; line-height: 1.75; }
+/* PROMPT */
+.pbox{width:100%;max-width:700px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);
+  border-radius:18px;overflow:hidden;backdrop-filter:blur(14px);transition:border-color .2s,box-shadow .2s;margin-bottom:18px}
+.pbox:focus-within{border-color:rgba(163,255,0,.4);box-shadow:0 0 0 4px rgba(163,255,0,.06)}
+.pbox textarea{width:100%;background:transparent;border:none;outline:none;color:#fff;
+  font-size:17px;font-family:'Inter',sans-serif;resize:none;padding:20px 20px 8px;min-height:64px;line-height:1.5}
+.pbox textarea::placeholder{color:rgba(255,255,255,.28)}
+.pbox-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 14px}
+.pbox-plus{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid var(--border);
+  color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.pbox-plus:hover{background:rgba(255,255,255,.15)}
+.pbox-send{width:38px;height:38px;border-radius:11px;background:var(--lime);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .18s}
+.pbox-send:hover{background:#bcff33;transform:scale(1.07)}
+.pbox-send svg{width:15px;height:15px}
 
-/* WORK */
-.work-section { background: #0a0a0a; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-.work-card { background: #111; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: box-shadow 0.25s, transform 0.25s; cursor: pointer; }
-.work-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-3px); }
-.work-card-img { aspect-ratio: 16/10; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-.work-card-img .mock-site { width: 85%; background: white; border-radius: 6px; padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-.mock-bar { height: 8px; background: #e5e7eb; border-radius: 4px; margin-bottom: 6px; }
-.mock-bar.short { width: 60%; }
-.mock-bar.accent { background: var(--accent); width: 40%; }
-.mock-line { height: 5px; background: #f3f4f6; border-radius: 3px; margin-bottom: 4px; }
-.mock-line.short { width: 70%; }
-.work-card-tag { position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.6); color: white; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 100px; }
-.work-card-body { padding: 1.25rem 1.5rem; }
-.work-card-name { font-size: 1rem; font-weight: 700; color: #f0f0f0; margin-bottom: 0.25rem; }
-.work-card-location { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem; }
-.work-card-quote { font-size: 0.82rem; color: #888; line-height: 1.65; font-style: italic; }
+/* TAGS STRIP */
+.strip{width:100%;overflow:hidden;position:relative;z-index:5;
+  mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);
+  -webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);
+  margin:4px 0 60px}
+.strip-inner{display:flex;gap:10px;width:max-content;animation:scrollL 35s linear infinite}
+.strip-inner:hover{animation-play-state:paused}
+@keyframes scrollL{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.stag{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:999px;
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.65);white-space:nowrap;cursor:pointer;transition:all .15s}
+.stag:hover{background:rgba(163,255,0,.1);border-color:rgba(163,255,0,.25);color:#fff}
 
-/* PAIN POINTS */
-.pain-section { background: var(--dark); }
-.pain-section .section-label { color: #a3ff00; }
-.pain-section .section-title { color: white; }
-.pain-section .section-sub { color: #6b7280; }
-.pain-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; max-width: 620px; }
-.pain-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
-.pain-check { width: 22px; height: 22px; background: rgba(163,255,0,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-.pain-check::after { content: '✓'; color: var(--accent); font-size: 0.75rem; font-weight: 800; }
-.pain-item p { font-size: 0.9rem; color: #d1d5db; line-height: 1.65; }
-.pain-cta { margin-top: 2.5rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-.btn-accent { background: var(--accent); color: var(--dark); padding: 0.9rem 2rem; border-radius: 10px; font-size: 0.92rem; font-weight: 800; text-decoration: none; transition: background 0.2s; display: inline-block; }
-.btn-accent:hover { background: #b8ff26; }
-.pain-note { font-size: 0.8rem; color: #6b7280; }
+/* COMMUNITY GRID - like supercool's output gallery */
+.section{position:relative;z-index:5;max-width:1200px;margin:0 auto;padding:0 24px 80px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+.sec-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:1px}
+.sec-big{font-size:22px;font-weight:800;margin-top:4px}
+.see-more{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+.see-more:hover{color:var(--lime)}
+
+.gallery{columns:4;gap:12px}
+@media(max-width:900px){.gallery{columns:2}}
+@media(max-width:500px){.gallery{columns:1}}
+.gcard{break-inside:avoid;margin-bottom:12px;border-radius:14px;overflow:hidden;border:1px solid var(--border);
+  background:var(--card);cursor:pointer;transition:transform .2s,border-color .2s;position:relative}
+.gcard:hover{transform:translateY(-4px);border-color:rgba(163,255,0,.2)}
+.gcard-img{width:100%;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden}
+.gcard-img .emoji{font-size:clamp(32px,5vw,56px);padding:28px 0;
+  animation:float 5s ease-in-out infinite;position:relative;z-index:1}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.gcard-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.03) 50%,transparent 65%);
+  animation:shimmer 3.5s infinite}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
+.gcard-foot{padding:11px 14px;border-top:1px solid var(--border)}
+.gcard-name{font-size:13px;font-weight:700;margin-bottom:3px}
+.gcard-type{font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px;display:inline-block}
+.t-video{background:rgba(163,255,0,.12);color:var(--lime);border:1px solid rgba(163,255,0,.2)}
+.t-image{background:rgba(100,149,255,.12);color:#6495ff;border:1px solid rgba(100,149,255,.2)}
+.t-music{background:rgba(255,80,200,.12);color:#ff50c8;border:1px solid rgba(255,80,200,.2)}
+.t-code {background:rgba(255,149,0,.12);color:#ff9500;border:1px solid rgba(255,149,0,.2)}
+.t-doc  {background:rgba(0,229,255,.12);color:#00e5ff;border:1px solid rgba(0,229,255,.2)}
+.t-pres {background:rgba(255,100,100,.12);color:#ff6464;border:1px solid rgba(255,100,100,.2)}
+
+/* gradient bg per card */
+.bg-v1{background:linear-gradient(135deg,#0e0020,#1a0040)}
+.bg-v2{background:linear-gradient(135deg,#001a08,#003315)}
+.bg-v3{background:linear-gradient(135deg,#1a0010,#380020)}
+.bg-v4{background:linear-gradient(135deg,#001020,#002040)}
+.bg-v5{background:linear-gradient(135deg,#1a0e00,#382000)}
+.bg-v6{background:linear-gradient(135deg,#0a0a0a,#1a1a1a)}
+.bg-v7{background:linear-gradient(135deg,#001510,#003020)}
+.bg-v8{background:linear(135deg,#150015,#2a002a)}
+.bg-v8{background:linear-gradient(135deg,#150015,#2a002a)}
+.bg-v9{background:linear-gradient(135deg,#00100a,#001f14)}
+.bg-v10{background:linear-gradient(135deg,#0f0005,#200010)}
+.bg-v11{background:linear-gradient(135deg,#050f1a,#0a1a30)}
+.bg-v12{background:linear-gradient(135deg,#1a1000,#302000)}
+
+/* WHAT IT DOES */
+.what-section{position:relative;z-index:5;max-width:1100px;margin:0 auto;padding:0 24px 80px;text-align:center}
+.what-label{font-size:12px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.what-title{font-size:clamp(28px,5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.05;margin-bottom:14px}
+.what-sub{font-size:16px;color:rgba(255,255,255,.4);margin-bottom:54px;max-width:600px;margin-left:auto;margin-right:auto}
+
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:700px){.what-grid{grid-template-columns:1fr}}
+.wcard{border-radius:20px;padding:28px 24px;border:1px solid var(--border);
+  background:var(--card);text-align:left;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.wcard:hover{border-color:rgba(163,255,0,.2);transform:translateY(-3px)}
+.wcard::before{content:'';position:absolute;top:-60px;right:-60px;width:160px;height:160px;
+  border-radius:50%;opacity:.07;pointer-events:none}
+.wc1::before{background:var(--lime)} .wc2::before{background:#6495ff} .wc3::before{background:#ff50c8}
+.wc4::before{background:#ff9500}    .wc5::before{background:#00e5ff} .wc6::before{background:#ff6464}
+.wcard-icon{font-size:34px;margin-bottom:16px;display:block}
+.wcard-name{font-size:18px;font-weight:800;margin-bottom:8px}
+.wcard-desc{font-size:14px;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:16px}
+.wcard-tags{display:flex;flex-wrap:wrap;gap:6px}
+.wtag{padding:3px 10px;border-radius:5px;font-size:11px;font-weight:600;
+  background:rgba(255,255,255,.06);border:1px solid var(--border);color:rgba(255,255,255,.45)}
 
 /* HOW IT WORKS */
-.how-section { background: #000; }
-.steps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-.step-card { padding: 2rem; border: 1.5px solid #1e1e1e; border-radius: 16px; position: relative; transition: border-color 0.2s, box-shadow 0.2s; }
-.step-card:hover { border-color: #a3ff00; box-shadow: 0 0 0 4px rgba(163,255,0,0.08); }
-.step-num { font-size: 3rem; font-weight: 900; color: #1a1a1a; letter-spacing: -2px; line-height: 1; margin-bottom: 1rem; }
-.step-title { font-size: 1rem; font-weight: 700; color: #f0f0f0; margin-bottom: 0.5rem; }
-.step-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
-.step-card.highlight { border-color: #a3ff00; background: rgba(163,255,0,0.05); }
-.step-card.highlight .step-num { color: #a3ff00; }
-.how-footer { margin-top: 2.5rem; text-align: center; background: #0a0a0a; border: 1px solid #1e1e1e; border-radius: 16px; padding: 1.5rem 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-.how-footer p { font-size: 0.88rem; color: #888; line-height: 1.7; }
-.how-footer strong { color: var(--dark); }
-
-/* PRICING */
-.pricing-section { background: #0a0a0a; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; align-items: start; }
-.price-card { background: #111; border: 1.5px solid #1e1e1e; border-radius: 20px; padding: 2rem; }
-.price-card.featured { border-color: #a3ff00; box-shadow: 0 8px 40px rgba(0,0,0,0.12); position: relative; }
-.featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #a3ff00; color: #000; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.3rem 1rem; border-radius: 100px; white-space: nowrap; text-transform: uppercase; }
-.price-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #555; margin-bottom: 0.5rem; }
-.price-amount { font-size: 2.8rem; font-weight: 900; letter-spacing: -2px; color: #f0f0f0; line-height: 1; margin-bottom: 0.25rem; }
-.price-amount span { font-size: 1rem; font-weight: 600; letter-spacing: 0; color: var(--muted); }
-.price-note { font-size: 0.8rem; color: #888; margin-bottom: 1.5rem; line-height: 1.5; }
-.price-divider { border: none; border-top: 1px solid #1e1e1e; margin: 1.5rem 0; }
-.price-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-.price-features li { display: flex; gap: 0.6rem; font-size: 0.85rem; color: #888; align-items: flex-start; line-height: 1.5; }
-.price-features li::before { content: '✓'; color: #22c55e; font-weight: 800; font-size: 0.8rem; flex-shrink: 0; margin-top: 1px; }
-.price-max { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #1e1e1e; text-align: center; }
-.price-max-num { font-size: 2rem; font-weight: 900; color: #a3ff00; letter-spacing: -1px; }
-.price-max-label { font-size: 0.78rem; color: var(--muted); }
-.pricing-note { text-align: center; margin-top: 2rem; font-size: 0.85rem; color: #888; line-height: 1.7; }
-.pricing-note strong { color: #f0f0f0; }
-
-/* REVIEWS */
-.reviews-section { background: #000; }
-.reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-.review-card { background: #0a0a0a; border: 1px solid #1e1e1e; border-radius: 16px; padding: 1.75rem; }
-.review-stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 0.85rem; }
-.review-text { font-size: 0.88rem; color: #888; line-height: 1.75; font-style: italic; margin-bottom: 1.25rem; }
-.review-author { display: flex; align-items: center; gap: 0.75rem; }
-.review-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--dark); color: white; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.review-name { font-size: 0.85rem; font-weight: 700; color: #f0f0f0; }
-.review-location { font-size: 0.75rem; color: #9ca3af; }
-.review-badge { font-size: 0.68rem; color: #3b82f6; font-weight: 600; }
-
-/* ABOUT */
-.about-section { background: #0a0a0a; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-.about-text .section-title { margin-bottom: 1.25rem; }
-.about-text p { font-size: 0.92rem; color: #888; line-height: 1.8; margin-bottom: 1rem; }
-.about-perks { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.85rem; }
-.perk { display: flex; gap: 0.75rem; align-items: flex-start; }
-.perk-icon { width: 32px; height: 32px; background: rgba(163,255,0,0.08); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
-.perk-text { font-size: 0.85rem; color: #888; line-height: 1.6; }
-.perk-text strong { color: #f0f0f0; display: block; font-size: 0.88rem; margin-bottom: 0.1rem; }
-.about-visual { background: var(--dark); border-radius: 24px; padding: 3rem 2rem; color: white; }
-.about-stat { margin-bottom: 2rem; }
-.about-stat-num { font-size: 3rem; font-weight: 900; letter-spacing: -2px; color: var(--accent); line-height: 1; }
-.about-stat-label { font-size: 0.85rem; color: #6b7280; margin-top: 0.25rem; }
-.about-divider { border: none; border-top: 1px solid #1f2937; margin: 1.5rem 0; }
-.about-quote { font-size: 0.88rem; color: #9ca3af; line-height: 1.75; font-style: italic; }
-
-/* CONTACT FORM */
-.contact-section { background: #000; }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
-.contact-left .section-title { margin-bottom: 1rem; }
-.contact-left > p { font-size: 0.92rem; color: #888; line-height: 1.75; margin-bottom: 2rem; }
-.contact-method { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; }
-.method-btn { flex: 1; padding: 0.75rem; border: 1.5px solid #1e1e1e; border-radius: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s; background: white; color: var(--muted); }
-.method-btn.active { border-color: #a3ff00; color: #a3ff00; background: rgba(163,255,0,0.05); }
-.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
-.form-group label { font-size: 0.75rem; font-weight: 600; color: #f0f0f0; letter-spacing: 0.02em; }
-.form-group input, .form-group select, .form-group textarea {
-  padding: 0.85rem 1rem; border: 1.5px solid #1e1e1e; border-radius: 10px;
-  font-size: 0.9rem; font-family: 'Inter', sans-serif; color: var(--dark);
-  background: #111; color: #f0f0f0; transition: border-color 0.2s; outline: none; width: 100%;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #a3ff00; }
-.form-group textarea { min-height: 100px; resize: vertical; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.form-submit { width: 100%; background: #a3ff00; color: #000; padding: 1rem; border-radius: 10px; font-size: 0.95rem; font-weight: 700; border: none; cursor: pointer; transition: background 0.2s; font-family: 'Inter', sans-serif; }
-.form-submit:hover { background: #b8ff26; }
-.form-note { font-size: 0.75rem; color: #9ca3af; margin-top: 0.75rem; line-height: 1.5; text-align: center; }
-.contact-trust { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
-.trust-line { display: flex; gap: 0.75rem; align-items: center; font-size: 0.85rem; color: #888; }
-.trust-line span:first-child { font-size: 1.1rem; }
+.how-section{position:relative;z-index:5;max-width:900px;margin:0 auto;padding:0 24px 80px;text-align:center}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:50px}
+@media(max-width:700px){.steps{grid-template-columns:repeat(2,1fr)}}
+.step{border-radius:18px;padding:26px 20px;border:1px solid var(--border);
+  background:var(--card);text-align:left;transition:border-color .2s}
+.step:hover{border-color:rgba(163,255,0,.2)}
+.step-n{width:36px;height:36px;border-radius:9px;background:rgba(163,255,0,.1);
+  border:1px solid rgba(163,255,0,.18);color:var(--lime);font-size:13px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.step-t{font-size:14px;font-weight:700;margin-bottom:6px}
+.step-d{font-size:12px;color:rgba(255,255,255,.4);line-height:1.6}
 
 /* FAQ */
-.faq-section { background: #0a0a0a; border-top: 1px solid #1e1e1e; }
-.faq-list { max-width: 720px; margin-top: 3rem; }
-.faq-item { border-bottom: 1px solid #1e1e1e; }
-.faq-q { padding: 1.25rem 0; font-size: 0.95rem; font-weight: 600; color: #f0f0f0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-.faq-icon { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #1e1e1e; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--muted); flex-shrink: 0; transition: all 0.2s; }
-.faq-item.open .faq-icon { background: #a3ff00; border-color: #a3ff00; color: #000; color: white; transform: rotate(45deg); }
-.faq-a { display: none; padding-bottom: 1.25rem; font-size: 0.88rem; color: #888; line-height: 1.75; }
-.faq-item.open .faq-a { display: block; }
+.faq-section{position:relative;z-index:5;max-width:720px;margin:0 auto;padding:0 24px 80px}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 0;cursor:pointer;
+  font-size:16px;font-weight:600;gap:16px;transition:color .15s;user-select:none}
+.faq-q:hover{color:var(--lime)}
+.faq-arrow{font-size:18px;color:rgba(255,255,255,.3);transition:transform .25s,color .15s;flex-shrink:0}
+.faq-item.open .faq-arrow{transform:rotate(45deg);color:var(--lime)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;
+  font-size:14px;color:rgba(255,255,255,.45);line-height:1.7}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:18px}
 
-/* FOOTER CTA */
-.footer-cta { background: var(--dark); padding: 5rem 2rem; text-align: center; }
-.footer-cta h2 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: white; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 1rem; max-width: 700px; margin-left: auto; margin-right: auto; }
-.footer-cta h2 em { color: var(--accent); font-style: normal; }
-.footer-cta p { color: #6b7280; font-size: 0.95rem; margin-bottom: 2.5rem; }
-.footer-cta-note { font-size: 0.8rem; color: #4b5563; margin-top: 1.25rem; }
+/* BOTTOM CTA */
+.cta-section{position:relative;z-index:5;text-align:center;padding:0 24px 100px}
+.cta-box{max-width:700px;margin:0 auto;padding:70px 40px;border-radius:28px;
+  background:rgba(163,255,0,.04);border:1px solid rgba(163,255,0,.12);position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);
+  width:600px;height:400px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(163,255,0,.1),transparent 70%);pointer-events:none}
+.cta-box h2{font-size:clamp(28px,5vw,52px);font-weight:900;letter-spacing:-1.5px;margin-bottom:14px;line-height:1.05}
+.cta-box p{font-size:16px;color:rgba(255,255,255,.4);margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta-btn-main{background:var(--lime);color:#000;padding:16px 40px;border-radius:13px;
+  font-size:16px;font-weight:800;border:none;cursor:pointer;text-decoration:none;transition:all .18s}
+.cta-btn-main:hover{background:#bcff33;transform:scale(1.03)}
+.cta-btn-sec{background:rgba(255,255,255,.07);color:#fff;padding:16px 30px;border-radius:13px;
+  font-size:15px;font-weight:600;border:1px solid var(--border);cursor:pointer;text-decoration:none;transition:all .18s}
+.cta-btn-sec:hover{background:rgba(255,255,255,.12)}
+.cta-note{font-size:12px;color:rgba(255,255,255,.25);margin-top:18px}
 
 /* FOOTER */
-footer { background: var(--dark); border-top: 1px solid #1f2937; padding: 3rem 2rem 2rem; }
-.footer-inner { max-width: 1100px; margin: 0 auto; }
-.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-.footer-brand p { color: #555; font-size: 0.82rem; line-height: 1.75; margin-top: 0.75rem; max-width: 260px; }
-.footer-col h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #555; margin-bottom: 1.25rem; }
-.footer-col a { display: block; color: #555; text-decoration: none; font-size: 0.85rem; margin-bottom: 0.6rem; transition: color 0.2s; }
-.footer-col a:hover { color: white; }
-.footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1f2937; padding-top: 2rem; flex-wrap: wrap; gap: 1rem; }
-.footer-bottom p { color: #444; font-size: 0.78rem; }
-.footer-bottom a { color: #444; font-size: 0.78rem; text-decoration: none; }
-.footer-bottom a:hover { color: #a3ff00; }
+footer{position:relative;z-index:5;border-top:1px solid var(--border);padding:40px 40px 50px;
+  display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between}
+.foot-logo{font-size:16px;font-weight:900;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.foot-logo em{font-style:normal;color:var(--lime)}
+.foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;
+  color:rgba(255,255,255,.3);margin-bottom:12px}
+.foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:8px;transition:color .15s}
+.foot-col a:hover{color:#fff}
+.foot-bottom{position:relative;z-index:5;border-top:1px solid var(--border);
+  padding:18px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-copy{font-size:12px;color:rgba(255,255,255,.2)}
+.status{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.3)}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:pulseGreen 2s infinite}
+@keyframes pulseGreen{0%,100%{opacity:1}50%{opacity:.4}}
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  nav { padding: 0 1.25rem; }
-  .nav-links { display: none; }
-  .nav-text-btn { display: none; }
-  .hamburger { display: flex; }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
-  .about-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .footer-top { grid-template-columns: 1fr 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-}
-@media (max-width: 600px) {
-  section { padding: 3.5rem 1.25rem; }
-  .hero { padding: 7rem 1.25rem 3.5rem; }
-  .trust-badges { gap: 1.5rem; }
-  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-}
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.75);
+  backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.mbox{background:#111118;border:1px solid rgba(255,255,255,.1);border-radius:24px;
+  padding:40px;max-width:520px;width:100%;position:relative;text-align:center}
+.mclose{position:absolute;top:14px;right:18px;font-size:22px;cursor:pointer;
+  color:rgba(255,255,255,.3);transition:color .15s;background:none;border:none}
+.mclose:hover{color:#fff}
+.mspinner{width:54px;height:54px;border:3px solid rgba(163,255,0,.12);border-top-color:var(--lime);
+  border-radius:50%;animation:spin .75s linear infinite;margin:0 auto 22px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mtitle{font-size:21px;font-weight:800;margin-bottom:6px}
+.mstatus{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:26px}
+.msteps{display:flex;flex-direction:column;gap:10px;text-align:left}
+.mstep{display:flex;align-items:center;gap:11px;font-size:14px;color:rgba(255,255,255,.35)}
+.mstep.done{color:#fff} .mstep.active{color:var(--lime)}
+.mic{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid var(--border)}
+.mstep.done .mic{background:rgba(163,255,0,.1);border-color:rgba(163,255,0,.25);color:var(--lime)}
+.mstep.active .mic{background:rgba(163,255,0,.15);border-color:var(--lime);color:var(--lime);animation:pulseGreen 1s infinite}
+.mout{display:none;margin-top:28px}
+.mout.show{display:block}
+.mout-card{background:rgba(163,255,0,.05);border:1px solid rgba(163,255,0,.18);
+  border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px;text-align:left;margin-bottom:16px}
+.mout-icon{font-size:38px;flex-shrink:0}
+.mout-name{font-size:16px;font-weight:700;margin-bottom:3px}
+.mout-desc{font-size:13px;color:rgba(255,255,255,.35)}
+.mout-btns{display:flex;gap:10px;justify-content:center}
+.mbtn{padding:12px 26px;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;border:none;transition:all .18s}
+.mbtn.g{background:var(--lime);color:#000} .mbtn.g:hover{background:#bcff33}
+.mbtn.d{background:rgba(255,255,255,.07);color:#fff;border:1px solid var(--border)} .mbtn.d:hover{background:rgba(255,255,255,.12)}
 
-.nav-pay-btn {
-  background: transparent;
-  color: var(--lime);
-  border: 1.5px solid var(--lime);
-  padding: .5rem 1.1rem;
-  border-radius: 8px;
-  font-size: .82rem;
-  font-weight: 700;
-  text-decoration: none;
-  margin-right: .5rem;
-  transition: background .2s, color .2s;
-  white-space: nowrap;
-}
-.nav-pay-btn:hover { background: var(--lime); color: #000; }
+@media(max-width:640px){nav{padding:14px 16px}.hero{padding:70px 16px 36px}h1{letter-spacing:-1.5px}footer{padding:30px 20px}}
 </style>
 </head>
 <body>
 
+<div class="bg-grad"></div>
+
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">
-    <div class="nav-logo-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-    </div>
-    <span class="nav-logo-text">SiteUp <span>Agency</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#how">How It Works</a></li>
-  </ul>
-  <div class="nav-right">
-    <a class="nav-text-btn" href="sms:7573345771">
-      <span>💬</span> Text Us
-    </a>
-    <a class="nav-pay-btn" href="pay.html">💳 Pay Deposit</a><a class="nav-cta" href="#contact">Get Your Free Preview →</a>
+  <div class="logo">Site<em>Up</em></div>
+  <div class="nav-btns">
+    <a href="#" class="nb ghost">Login</a>
+    <a href="https://siteupagency.com/pay.html" class="nb solid">Sign up free</a>
   </div>
-  <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#work" onclick="toggleMobile()">Work</a>
-  <a href="#pricing" onclick="toggleMobile()">Pricing</a>
-  <a href="#reviews" onclick="toggleMobile()">Reviews</a>
-  <a href="#how" onclick="toggleMobile()">How It Works</a>
-  <a href="sms:7573345771" style="color:#22c55e;font-weight:700;">💬 Text Us</a>
-  <a href="#contact" style="background:var(--dark);color:white;padding:0.75rem 1.25rem;border-radius:8px;text-align:center;font-weight:700;" onclick="toggleMobile()">Get Your Free Preview →</a>
-</div>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-tag">Now taking new clients — spots limited</div>
-  <h1>
-    We Build Websites For
-    <span class="rotating-wrap"><span class="rotating" id="rotatingText">General Contractors</span></span>
-  </h1>
-  <p class="hero-sub">You pay nothing until you love it.</p>
-  <p class="hero-desc">
-    We build a real working preview of your site — <em>before you pay a single dollar.</em>
-    If you love it, pay <strong>$69 to kick off the full build.</strong>
-    If not — walk away, no invoice, no hard feelings.
-  </p>
-  <div class="hero-btns">
-    <a href="#contact" class="btn-dark">Get Your Free Preview →</a>
-    <a href="#work" class="btn-ghost">See Our Work ↓</a>
-  </div>
-  <div class="hero-review">
-    <div class="stars">★★★★★</div>
-    <p>"SiteUp built my site faster than I expected and it looks more professional than I could have imagined. Clients mention it all the time."</p>
-    <div class="reviewer">— Marcus T. · Virginia Beach · Roofing Contractor</div>
-  </div>
-  <div class="trust-badges">
-    <div class="trust-item"><span>🇺🇸</span> US-Based Team</div>
-    <div class="trust-item"><span>🎁</span> Free Preview — No Payment Required</div>
-    <div class="trust-item"><span>🌎</span> Serving Businesses Nationwide</div>
-    <div class="trust-item"><span>✓</span> Cancel Anytime After Launch</div>
-  </div>
-</div>
+<section class="hero">
+  <h1>The ultimate creation<br>machine.</h1>
+  <p class="hero-sub">Videos, music, images, websites, code — <span>anything</span> — from a single prompt.</p>
 
-<!-- WORK -->
-<section class="work-section" id="work">
-  <div class="container">
-    <div class="section-label">Our Work</div>
-    <div class="section-title">Websites Built for Real Businesses</div>
-    <p class="section-sub">Every site is built from scratch for the specific business, trade, and market — not a template.</p>
-    <div class="work-grid">
-      <div class="work-card" onclick="window.open('peakridge-roofing.html','_blank')" style="cursor:pointer">
-        <div class="work-card-img" style="background:linear-gradient(135deg,#3d0000,#1a0000);overflow:hidden;position:relative">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem">
-            <div style="font-size:2.5rem">🏠</div>
-            <div style="background:rgba(192,57,43,.8);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:.3rem .85rem;border-radius:100px;text-transform:uppercase">Live Site ↗</div>
-          </div>
-          <div class="work-card-tag">Roofing</div>
-        </div>
-        <div class="work-card-body">
-          <div class="work-card-name">Peak Ridge Roofing</div>
-          <div class="work-card-location">Virginia Beach, Virginia</div>
-          <div class="work-card-quote">"New leads started coming through the site within the first week. Exactly what we needed."</div>
-        </div>
-      </div>
-      <div class="work-card" onclick="window.open('greenedge-lawn.html','_blank')" style="cursor:pointer">
-        <div class="work-card-img" style="background:linear-gradient(135deg,#0a2a0a,#1a4d1a);overflow:hidden;position:relative">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem">
-            <div style="font-size:2.5rem">🌿</div>
-            <div style="background:rgba(45,122,45,.8);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:.3rem .85rem;border-radius:100px;text-transform:uppercase">Live Site ↗</div>
-          </div>
-          <div class="work-card-tag">Landscaping</div>
-        </div>
-        <div class="work-card-body">
-          <div class="work-card-name">Green Edge Lawn Care</div>
-          <div class="work-card-location">Norfolk, Virginia</div>
-          <div class="work-card-quote">"Ranking on Google for lawn care searches now. Quote requests come in every week."</div>
-        </div>
-      </div>
-      <div class="work-card" onclick="window.open('twokoats-painting.html','_blank')" style="cursor:pointer">
-        <div class="work-card-img" style="background:linear-gradient(135deg,#0a1f36,#1a3a5c);overflow:hidden;position:relative">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem">
-            <div style="font-size:2.5rem">🎨</div>
-            <div style="background:rgba(26,58,92,.9);border:1px solid rgba(232,160,32,.5);color:#e8a020;font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:.3rem .85rem;border-radius:100px;text-transform:uppercase">Live Site ↗</div>
-          </div>
-          <div class="work-card-tag">Painting</div>
-        </div>
-        <div class="work-card-body">
-          <div class="work-card-name">Two Koats Painting</div>
-          <div class="work-card-location">Chesapeake, Virginia</div>
-          <div class="work-card-quote">"Professional, well-built, exactly what we were looking for. Quick adjustments whenever needed."</div>
-        </div>
-      </div>
-      <div class="work-card" onclick="window.open('coolair-hvac.html','_blank')" style="cursor:pointer">
-        <div class="work-card-img" style="background:linear-gradient(135deg,#0a0f1e,#0a2040);overflow:hidden;position:relative">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem">
-            <div style="font-size:2.5rem">❄️</div>
-            <div style="background:rgba(0,87,184,.8);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:.3rem .85rem;border-radius:100px;text-transform:uppercase">Live Site ↗</div>
-          </div>
-          <div class="work-card-tag">HVAC</div>
-        </div>
-        <div class="work-card-body">
-          <div class="work-card-name">CoolAir HVAC Services</div>
-          <div class="work-card-location">Portsmouth, Virginia</div>
-          <div class="work-card-quote">"Custom site built for credibility and lead generation — more calls since launch."</div>
-        </div>
-      </div>
+  <div class="pbox">
+    <textarea id="mainPrompt" rows="2" placeholder="Give SiteUp a task to work on..."></textarea>
+    <div class="pbox-bar">
+      <button class="pbox-plus">+</button>
+      <button class="pbox-send" onclick="go()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+        </svg>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- PAIN POINTS -->
-<section class="pain-section">
-  <div class="container">
-    <div class="section-label">Built for Business Owners Too Busy to Deal With a Website</div>
-    <div class="section-title" style="color:white;max-width:620px;">Our service is for businesses that want a professional site — without the headache.</div>
-    <div class="pain-list">
-      <div class="pain-item"><div class="pain-check"></div><p>You've been meaning to fix your website for over a year — and it still hasn't happened.</p></div>
-      <div class="pain-item"><div class="pain-check"></div><p>You're losing jobs to competitors who look more professional online.</p></div>
-      <div class="pain-item"><div class="pain-check"></div><p>You'd rather send a text than log into any kind of dashboard or portal.</p></div>
-      <div class="pain-item"><div class="pain-check"></div><p>You don't have time to learn Wix, Squarespace, or hire a full agency.</p></div>
+<!-- SCROLLING TAGS -->
+<div class="strip">
+  <div class="strip-inner" id="stripInner">
+    <span class="stag" onclick="p('Write a Word doc')">📄 Word docs</span>
+    <span class="stag" onclick="p('Make a music track')">🎵 Music tracks</span>
+    <span class="stag" onclick="p('Create a video')">🎬 Videos</span>
+    <span class="stag" onclick="p('Generate an AI image')">🖼️ AI images</span>
+    <span class="stag" onclick="p('Build a spreadsheet')">📊 Spreadsheets</span>
+    <span class="stag" onclick="p('Write code & scripts')">💻 Code & scripts</span>
+    <span class="stag" onclick="p('Record voice narration')">🎙️ Voice narration</span>
+    <span class="stag" onclick="p('Create a PDF report')">📋 PDF reports</span>
+    <span class="stag" onclick="p('Design a logo')">✏️ Logos & graphics</span>
+    <span class="stag" onclick="p('Write a research report')">🔬 Research reports</span>
+    <span class="stag" onclick="p('Build a pitch deck')">📈 Pitch decks</span>
+    <span class="stag" onclick="p('Do math & analysis')">🧮 Math & analysis</span>
+    <!-- duplicate for loop -->
+    <span class="stag">📄 Word docs</span>
+    <span class="stag">🎵 Music tracks</span>
+    <span class="stag">🎬 Videos</span>
+    <span class="stag">🖼️ AI images</span>
+    <span class="stag">📊 Spreadsheets</span>
+    <span class="stag">💻 Code & scripts</span>
+    <span class="stag">🎙️ Voice narration</span>
+    <span class="stag">📋 PDF reports</span>
+    <span class="stag">✏️ Logos & graphics</span>
+    <span class="stag">🔬 Research reports</span>
+    <span class="stag">📈 Pitch decks</span>
+    <span class="stag">🧮 Math & analysis</span>
+  </div>
+</div>
+
+<!-- COMMUNITY GALLERY -->
+<section class="section">
+  <div class="sec-head">
+    <div>
+      <div class="sec-title">From the community</div>
+      <div class="sec-big">What creators are making right now</div>
     </div>
-    <div class="pain-cta">
-      <a href="#contact" class="btn-accent">Get Your Free Preview →</a>
-      <span class="pain-note">No payment required to see your site.</span>
+    <a href="#" class="see-more">See all →</a>
+  </div>
+  <div class="gallery">
+    <div class="gcard"><div class="gcard-img bg-v1"><div class="emoji">🎬</div></div><div class="gcard-foot"><div class="gcard-name">Cinematic short film</div><span class="gcard-type t-video">VIDEO</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v2" style="min-height:180px"><div class="emoji">🎵</div></div><div class="gcard-foot"><div class="gcard-name">Lo-fi hip hop track</div><span class="gcard-type t-music">MUSIC</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v3"><div class="emoji">🖼️</div></div><div class="gcard-foot"><div class="gcard-name">AI portrait artwork</div><span class="gcard-type t-image">IMAGE</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v4" style="min-height:200px"><div class="emoji">💻</div></div><div class="gcard-foot"><div class="gcard-name">Python automation script</div><span class="gcard-type t-code">CODE</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v5"><div class="emoji">📊</div></div><div class="gcard-foot"><div class="gcard-name">Business pitch deck</div><span class="gcard-type t-pres">SLIDES</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v6" style="min-height:160px"><div class="emoji">📄</div></div><div class="gcard-foot"><div class="gcard-name">Market research report</div><span class="gcard-type t-doc">DOCUMENT</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v7"><div class="emoji">🎙️</div></div><div class="gcard-foot"><div class="gcard-name">Podcast intro narration</div><span class="gcard-type t-music">AUDIO</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v8" style="min-height:190px"><div class="emoji">✏️</div></div><div class="gcard-foot"><div class="gcard-name">Brand logo design</div><span class="gcard-type t-image">GRAPHIC</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v9"><div class="emoji">🎬</div></div><div class="gcard-foot"><div class="gcard-name">Product promo video</div><span class="gcard-type t-video">VIDEO</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v10" style="min-height:175px"><div class="emoji">📈</div></div><div class="gcard-foot"><div class="gcard-name">Investor pitch deck</div><span class="gcard-type t-pres">SLIDES</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v11"><div class="emoji">🧮</div></div><div class="gcard-foot"><div class="gcard-name">Financial model spreadsheet</div><span class="gcard-type t-doc">EXCEL</span></div></div>
+    <div class="gcard"><div class="gcard-img bg-v12" style="min-height:185px"><div class="emoji">🎵</div></div><div class="gcard-foot"><div class="gcard-name">Epic film score</div><span class="gcard-type t-music">MUSIC</span></div></div>
+  </div>
+</section>
+
+<!-- WHAT IT DOES -->
+<section class="what-section">
+  <div class="what-label">What SiteUp actually does</div>
+  <h2 class="what-title">AI agents create real content.<br>In minutes.</h2>
+  <p class="what-sub">Not text responses. Actual files you can download, edit, and ship.</p>
+  <div class="what-grid">
+    <div class="wcard wc1">
+      <span class="wcard-icon">📄</span>
+      <div class="wcard-name">Documents</div>
+      <div class="wcard-desc">Word & PDF essays, reports, proposals. PowerPoint decks. Excel spreadsheets with formulas, charts, citations.</div>
+      <div class="wcard-tags"><span class="wtag">Word</span><span class="wtag">PDF</span><span class="wtag">PowerPoint</span><span class="wtag">Excel</span></div>
+    </div>
+    <div class="wcard wc2">
+      <span class="wcard-icon">🎵</span>
+      <div class="wcard-name">Music & Audio</div>
+      <div class="wcard-desc">Original music tracks in any genre. AI voice narration. Sound effects. Production-ready MP3 and WAV files.</div>
+      <div class="wcard-tags"><span class="wtag">Music</span><span class="wtag">Voice</span><span class="wtag">SFX</span><span class="wtag">MP3/WAV</span></div>
+    </div>
+    <div class="wcard wc3">
+      <span class="wcard-icon">🖼️</span>
+      <div class="wcard-name">Images & Graphics</div>
+      <div class="wcard-desc">AI-generated custom illustrations. Social media graphics. Logos and brand assets. Any resolution, any style.</div>
+      <div class="wcard-tags"><span class="wtag">AI Images</span><span class="wtag">Logos</span><span class="wtag">PNG/JPG</span><span class="wtag">Social</span></div>
+    </div>
+    <div class="wcard wc4">
+      <span class="wcard-icon">🎬</span>
+      <div class="wcard-name">Video Content</div>
+      <div class="wcard-desc">Marketing videos, explainers, animations. Combined video + audio + text. MP4 ready to publish anywhere.</div>
+      <div class="wcard-tags"><span class="wtag">Promo</span><span class="wtag">Shorts</span><span class="wtag">Animation</span><span class="wtag">MP4</span></div>
+    </div>
+    <div class="wcard wc5">
+      <span class="wcard-icon">🔬</span>
+      <div class="wcard-name">Research & Data</div>
+      <div class="wcard-desc">Real-time web search. Market research, trends analysis, citations. Fact-checked and properly sourced reports.</div>
+      <div class="wcard-tags"><span class="wtag">Web Search</span><span class="wtag">Analysis</span><span class="wtag">Citations</span><span class="wtag">Reports</span></div>
+    </div>
+    <div class="wcard wc6">
+      <span class="wcard-icon">💻</span>
+      <div class="wcard-name">Code & Automation</div>
+      <div class="wcard-desc">Python scripts, JavaScript, shell commands. Data analysis, automation, web functions. Math and calculations.</div>
+      <div class="wcard-tags"><span class="wtag">Python</span><span class="wtag">JavaScript</span><span class="wtag">Scripts</span><span class="wtag">Math</span></div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="how-section" id="how">
-  <div class="container">
-    <div class="section-label">How It Works</div>
-    <div class="section-title">Simple process. No pressure. No surprises.</div>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div class="step-title">Tell Us About Your Business</div>
-        <div class="step-desc">Fill out the short form with your name, phone number, and business info. We confirm by text — no phone call required.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div class="step-title">We Build Your Free Preview</div>
-        <div class="step-desc">We build a real working prototype of your site with your business name, trade, and service area. No charge, no obligation.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <div class="step-title">You Review and Approve</div>
-        <div class="step-desc">Tell us what you love and what to adjust. Nothing moves forward until you say yes to the layout and design.</div>
-      </div>
-      <div class="step-card highlight">
-        <div class="step-num">4</div>
-        <div class="step-title">Pay the $69 Kickoff Fee</div>
-        <div class="step-desc">Only after you approve the preview. Send your logo, photos, and copy — and we start the real build immediately.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">5</div>
-        <div class="step-title">First Look in 3 Business Days</div>
-        <div class="step-desc">We deliver your first real build within 3 business days. We refine until you're 100% satisfied — then we launch.</div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">∞</div>
-        <div class="step-title">Text Us When You Need Changes</div>
-        <div class="step-desc">Once it's live — just text us. No tickets, no dashboards, no portals. Changes made same day.</div>
-      </div>
-    </div>
-    <div class="how-footer" style="margin-top:2.5rem;">
-      <p>Once it's live — you text us when something needs changing. <strong>No tickets. No dashboards. Just text.</strong></p>
-    </div>
-    <div style="text-align:center;margin-top:2rem;">
-      <a href="#contact" class="btn-dark">Get Your Free Preview →</a>
-      <p style="font-size:0.8rem;color:var(--muted);margin-top:0.75rem;">We'll text you to confirm next steps.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing-section" id="pricing">
-  <div class="container">
-    <div class="section-label">Pricing</div>
-    <div class="section-title">What You Pay, and When</div>
-    <p class="section-sub">You see your site before you spend a dollar.</p>
-    <div class="pricing-grid">
-      <div class="price-card">
-        <div class="price-label">Step 1</div>
-        <div class="price-amount">$0 <span>/ free preview</span></div>
-        <div class="price-note">We build a real working prototype. You review it — no charge, no obligation.</div>
-        <hr class="price-divider">
-        <ul class="price-features">
-          <li>Real working preview of your site</li>
-          <li>Your business name & trade</li>
-          <li>Your service area</li>
-          <li>No payment required</li>
-        </ul>
-      </div>
-      <div class="price-card featured">
-        <div class="featured-badge">Most Popular</div>
-        <div class="price-label">Step 2 — After You Approve</div>
-        <div class="price-amount">$69 <span>/ kickoff</span></div>
-        <div class="price-note">Paid only after you've seen the preview and decided to move forward.</div>
-        <hr class="price-divider">
-        <ul class="price-features">
-          <li>Full custom website build</li>
-          <li>Mobile-optimized design</li>
-          <li>SEO foundation built in</li>
-          <li>Your domain connected</li>
-          <li>Live in 3 business days</li>
-        </ul>
-      </div>
-      <div class="price-card">
-        <div class="price-label">Step 3 — At Launch</div>
-        <div class="price-amount">$400–$900 <span>/ balance</span></div>
-        <div class="price-note">Due only when you approve the final site. Never pay for something you haven't signed off on.</div>
-        <hr class="price-divider">
-        <ul class="price-features">
-          <li>Basic: $500 total (1-page)</li>
-          <li>Starter: $1,000 total (5-page)</li>
-          <li>Pro: $1,500 (SEO + domain)</li>
-          <li>Elite: $2,500 (full service)</li>
-          <li>You own everything at launch</li>
-        </ul>
-        <div class="price-max">
-          <div class="price-max-num">100%</div>
-          <div class="price-max-label">yours at handoff</div>
-        </div>
-      </div>
-    </div>
-    <p class="pricing-note">
-      <strong>Don't love the preview? Walk away. You've paid nothing.</strong><br>
-      The $69 kickoff fee is charged only after you approve the preview. You approve the final site before we charge the balance.
-    </p>
-  </div>
-</section>
-
-<!-- REVIEWS -->
-<section class="reviews-section" id="reviews">
-  <div class="container">
-    <div class="section-label">Client Reviews</div>
-    <div class="section-title">What Clients Say After They See Their Free Preview</div>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"I was nervous because I'd never had a website built before. But the team listened to exactly what I wanted and designed my site better than I could have imagined. From design to finished — it looks perfect."</p>
-        <div class="review-author">
-          <div class="review-avatar">ST</div>
-          <div>
-            <div class="review-name">Shantell T.</div>
-            <div class="review-location">Virginia · Service Business</div>
-            <div class="review-badge">✓ Verified Client</div>
-          </div>
-        </div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"SiteUp took great care to understand what we needed before starting. Our finished product captured our brand perfectly. They make the whole process seamless and pain-free."</p>
-        <div class="review-author">
-          <div class="review-avatar">MT</div>
-          <div>
-            <div class="review-name">Marcus T.</div>
-            <div class="review-location">Virginia Beach · Roofing</div>
-            <div class="review-badge">✓ Verified Client</div>
-          </div>
-        </div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"They completely transformed the look and functionality of our online presence. New leads are coming in through the site now. Very happy with the communication and results."</p>
-        <div class="review-author">
-          <div class="review-avatar">JR</div>
-          <div>
-            <div class="review-name">J&amp;R Contracting</div>
-            <div class="review-location">Chesapeake, Virginia</div>
-            <div class="review-badge">✓ Verified Client</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about-section">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text">
-        <div class="section-label">Who We Are</div>
-        <div class="section-title">A Team Built Around Your Business</div>
-        <p>SiteUp Agency is a web design company built for contractors, tradespeople, and local service businesses across the country. We build fast, we build clean, and we stay with you after launch.</p>
-        <p>When you work with us, you deal with the people who actually built your site. No outsourcing. One point of contact — and you can literally just text us.</p>
-        <div class="about-perks">
-          <div class="perk"><div class="perk-icon">📱</div><div class="perk-text"><strong>Text us for changes</strong>No tickets, no dashboards. Just text and it's done same day.</div></div>
-          <div class="perk"><div class="perk-icon">🔒</div><div class="perk-text"><strong>You own everything</strong>Full ownership of your domain, files, and code. No lock-in.</div></div>
-          <div class="perk"><div class="perk-icon">⚡</div><div class="perk-text"><strong>3-day turnaround</strong>First look at your real build within 3 business days of kickoff.</div></div>
-        </div>
-      </div>
-      <div class="about-visual">
-        <div class="about-stat">
-          <div class="about-stat-num">3 days</div>
-          <div class="about-stat-label">Average delivery time after kickoff</div>
-        </div>
-        <hr class="about-divider">
-        <div class="about-stat">
-          <div class="about-stat-num">$0</div>
-          <div class="about-stat-label">Cost to see your free preview</div>
-        </div>
-        <hr class="about-divider">
-        <div class="about-stat">
-          <div class="about-stat-num">100%</div>
-          <div class="about-stat-label">Yours at handoff — domain, files, everything</div>
-        </div>
-        <hr class="about-divider">
-        <div class="about-quote">"Think of us as the person you text when something needs fixing. No tickets. No vendors. No holding music."</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT FORM -->
-<section class="contact-section" id="contact">
-  <div class="container">
-    <div class="contact-grid">
-      <div class="contact-left">
-        <div class="section-label">Get Started</div>
-        <div class="section-title">See Your Website Before You Pay a Dollar.</div>
-        <p>We build your free preview first. You only pay $69 to kick off the full build after you approve it.</p>
-        <div class="contact-trust">
-          <div class="trust-line"><span>🎁</span><span>Free preview — no payment required</span></div>
-          <div class="trust-line"><span>📱</span><span>We confirm by text — no phone call required</span></div>
-          <div class="trust-line"><span>🚪</span><span>Don't love it? Walk away. No invoice, no hard feelings.</span></div>
-          <div class="trust-line"><span>🔑</span><span>You own everything at launch — domain, files, code</span></div>
-        </div>
-      </div>
-      <div>
-        <form id="contactForm" onsubmit="submitForm(event)">
-          <div class="form-row">
-            <div class="form-group"><label>First Name</label><input type="text" id="firstName" placeholder="John" required></div>
-            <div class="form-group"><label>Last Name</label><input type="text" id="lastName" placeholder="Doe"></div>
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="tel" id="phone" placeholder="+1 (555) 000-0000" required>
-          </div>
-          <div class="form-group">
-            <label>Business Name</label>
-            <input type="text" id="bizName" placeholder="Your Business Name" required>
-          </div>
-          <div class="form-group">
-            <label>What are you looking to do?</label>
-            <select id="goal">
-              <option value="">Select one...</option>
-              <option>Get more customers</option>
-              <option>Show my services</option>
-              <option>Replace my old site</option>
-              <option>Build from scratch</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Preferred Contact Method</label>
-            <select id="contactMethod">
-              <option>Text</option>
-              <option>Call</option>
-              <option>Email</option>
-            </select>
-          </div>
-          <p style="font-size:0.75rem;color:#9ca3af;margin-bottom:1rem;line-height:1.5;">I agree to be contacted by SiteUp Agency via phone/text regarding my request.</p>
-          <button type="submit" class="form-submit">Get Your Free Preview →</button>
-          <p class="form-note">No payment required. We'll reach out within 24 hours.</p>
-        </form>
-        <div id="formSuccess" style="display:none;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:2rem;text-align:center;">
-          <div style="font-size:2rem;margin-bottom:0.75rem;">✅</div>
-          <h3 style="font-weight:700;color:#166534;margin-bottom:0.5rem;">You're on the list!</h3>
-          <p style="font-size:0.88rem;color:#166534;">We'll text you within 24 hours to confirm next steps and start your free preview.</p>
-        </div>
-      </div>
-    </div>
+<section class="how-section">
+  <div class="what-label">How it works</div>
+  <h2 class="what-title">From prompt to production<br>in four steps.</h2>
+  <p class="what-sub">AI agents handle research, design, creation, and refinement — fully autonomous.</p>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><div class="step-t">Understand your request</div><div class="step-d">SiteUp analyzes content type, format, style, depth, and specific requirements.</div></div>
+    <div class="step"><div class="step-n">02</div><div class="step-t">Gather intelligence</div><div class="step-d">Searches the web, extracts data, analyzes sources, and builds context for your content.</div></div>
+    <div class="step"><div class="step-n">03</div><div class="step-t">Create your content</div><div class="step-d">Content is generated with proper formatting, embedded media, and professional polish.</div></div>
+    <div class="step"><div class="step-n">04</div><div class="step-t">Refine & perfect</div><div class="step-d">Want changes? Just say so. Add sections, change tone, regenerate — all conversationally.</div></div>
   </div>
 </section>
 
 <!-- FAQ -->
 <section class="faq-section">
-  <div class="container">
-    <div class="section-label">FAQ</div>
-    <div class="section-title">Everything you need to know about how we work.</div>
-    <div class="faq-list">
-      <div class="faq-item"><div class="faq-q">What exactly is the free preview? <span class="faq-icon">+</span></div><div class="faq-a">We build a real, fully functional prototype of your website — with your business name, services, and area. It's not a mockup image or a Figma file — it's a live, clickable website. We show you a video walkthrough and send you the link. You pay nothing until you decide you want to move forward with the full build.</div></div>
-      <div class="faq-item"><div class="faq-q">What is the $69 kickoff fee for? <span class="faq-icon">+</span></div><div class="faq-a">The $69 kickoff fee is paid only after you approve the preview. It kicks off the full build — where we take your real logo, photos, copy, and content and build the final version of your site. Nothing starts until you've said yes.</div></div>
-      <div class="faq-item"><div class="faq-q">Do I own my website? Can I cancel anytime? <span class="faq-icon">+</span></div><div class="faq-a">Yes — 100%. Once you pay the final balance at launch, we hand you everything: your domain login, hosting access, and all the files. It's completely yours. No lock-in, no monthly obligation unless you want ongoing management.</div></div>
-      <div class="faq-item"><div class="faq-q">How do revisions work? <span class="faq-icon">+</span></div><div class="faq-a">Unlimited revisions until you're satisfied — before you pay the final balance. After launch, just text us any changes and they're done same day. No tickets, no portals.</div></div>
-      <div class="faq-item"><div class="faq-q">Do I have to get on a call? <span class="faq-icon">+</span></div><div class="faq-a">Nope. The entire process can happen over text. We prefer it that way — fast, no scheduling, no hold music. You fill out the form, we text you, and we get to work.</div></div>
-      <div class="faq-item"><div class="faq-q">How is this different from building it myself on Wix or Squarespace? <span class="faq-icon">+</span></div><div class="faq-a">On Wix or Squarespace, you're on your own. You spend hours figuring it out, it still looks like a template, and you still have to manage it forever. We build it for you, make it look professional, and you text us when something needs changing. Your time is worth more than a DIY website project.</div></div>
-      <div class="faq-item"><div class="faq-q">What do you need from me before you start? <span class="faq-icon">+</span></div><div class="faq-a">For the free preview — nothing. Just fill out the form. For the full build after you approve, we'll need your logo (if you have one), any photos of your work, your list of services, and any copy/text you want on the site. We can also write the copy for you if needed.</div></div>
-    </div>
+  <div style="text-align:center;margin-bottom:40px">
+    <div class="what-label">FAQ</div>
+    <h2 class="what-title">Common questions.</h2>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">What types of content can SiteUp actually create?<span class="faq-arrow">+</span></div>
+    <div class="faq-a">SiteUp generates documents (Word, PDF, PowerPoint, Excel), media (music, videos, images, voice), code (Python, JavaScript), research reports with web data, and much more. If you can describe it, SiteUp can create it.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">How is this different from ChatGPT or Claude?<span class="faq-arrow">+</span></div>
+    <div class="faq-a">ChatGPT and Claude give you text. SiteUp gives you actual files — downloadable, ready to use. A PowerPoint you can open, an MP3 you can play, a video you can post. Real output, not just words.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Can it do research and use real data from the web?<span class="faq-arrow">+</span></div>
+    <div class="faq-a">Yes. SiteUp agents search the web in real time, extract data from live sources, and incorporate accurate, cited information into your content — not just training data from a cutoff date.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">What about images, music, and videos?<span class="faq-arrow">+</span></div>
+    <div class="faq-a">SiteUp uses state-of-the-art AI models for each media type — image generation for visuals, music synthesis for audio, and video generation for motion content. All output is download-ready.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">How long does it take to create content?<span class="faq-arrow">+</span></div>
+    <div class="faq-a">Most content takes under 60 seconds. Complex tasks like full research reports or multi-scene videos may take 2–3 minutes. You'll see a live progress indicator the whole time.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Who owns the content SiteUp creates?<span class="faq-arrow">+</span></div>
+    <div class="faq-a">You do. 100%. Everything SiteUp generates belongs to you — no licensing fees, no royalty claims, no restrictions on how you use it commercially.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Is it really free?<span class="faq-arrow">+</span></div>
+    <div class="faq-a">Yes — sign up and start creating immediately. No credit card required. You get a generous free tier to create documents, images, and more before any upgrade is ever needed.</div>
   </div>
 </section>
 
-<!-- FOOTER CTA -->
-<div class="footer-cta">
-  <h2>See Your Website Before<br>You Pay a <em>Dollar.</em></h2>
-  <p>We build your free preview first. You only pay $69 after you approve it.</p>
-  <a href="#contact" class="btn-accent" style="font-size:1rem;padding:1rem 2.5rem;">Get Your Free Preview →</a>
-  <p class="footer-cta-note">No contracts. No long-term commitment. You decide after seeing the work.</p>
-</div>
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-box">
+    <h2>Stop spending hours on content.<br>Make it in minutes.</h2>
+    <p>Documents, media, code — generated, downloadable, yours. Start free, no credit card required.</p>
+    <div class="cta-btns">
+      <a href="https://siteupagency.com/pay.html" class="cta-btn-main">Start creating free</a>
+      <a href="#mainPrompt" class="cta-btn-sec" onclick="document.getElementById('mainPrompt').focus()">Sign in</a>
+    </div>
+    <div class="cta-note">All your content is encrypted, and you own everything SiteUp creates.</div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:0.5rem;">
-          <div style="width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <span style="color:white;font-weight:800;font-size:0.95rem;">SiteUp Agency</span>
-        </div>
-        <p>Professional websites for contractors and local businesses. We handle the build, hosting, and maintenance so you can focus on your work.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#work">Our Work</a>
-        <a href="#how">How It Works</a>
-        <a href="mailto:kinsleybazemore@gmail.com">Contact Us</a>
-      </div>
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <a href="#pricing">Pricing</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#contact">Free Preview</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="sms:7573345771">💬 Text Us</a>
-        <a href="mailto:kinsleybazemore@gmail.com">📧 Email Us</a>
-        <a href="https://instagram.com/kinsleypt1">📸 Instagram</a>
-      </div>
+  <div>
+    <div class="foot-logo">Site<em>Up</em></div>
+    <div style="font-size:13px;color:rgba(255,255,255,.3);margin-top:8px;max-width:220px;line-height:1.6">
+      The ultimate creation machine. Documents, media, code — generated, downloadable, yours.
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 SiteUp Agency. All rights reserved. · Virginia Beach, VA · Serving Businesses Nationwide</p>
-      <a href="mailto:kinsleybazemore@gmail.com">kinsleybazemore@gmail.com</a>
-    </div>
+    <div style="font-size:13px;color:rgba(255,255,255,.25);margin-top:10px">support@siteupagency.com</div>
+  </div>
+  <div class="foot-col">
+    <h4>Product</h4>
+    <a href="#">Pricing</a>
+    <a href="#">FAQs</a>
+    <a href="#">What we create</a>
+    <a href="#">How it works</a>
+  </div>
+  <div class="foot-col">
+    <h4>Company</h4>
+    <a href="#">About</a>
+    <a href="mailto:kinsleybazemore@gmail.com">Contact</a>
+    <a href="#">Earn Program</a>
+  </div>
+  <div class="foot-col">
+    <h4>Legal</h4>
+    <a href="#">Terms of Service</a>
+    <a href="#">Privacy Policy</a>
   </div>
 </footer>
-
-<script>
-// ROTATING TEXT
-const niches = ['General Contractors','Roofers','Landscapers','Painters','HVAC Companies','Plumbers','Pressure Washers','Electricians','Local Businesses'];
-let idx = 0;
-const el = document.getElementById('rotatingText');
-setInterval(() => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(8px)';
-  setTimeout(() => {
-    idx = (idx + 1) % niches.length;
-    el.textContent = niches[idx];
-    el.style.opacity = '1';
-    el.style.transform = 'translateY(0)';
-  }, 350);
-}, 2800);
-
-// MOBILE MENU
-function toggleMobile() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-// FAQ
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    const item = q.parentElement;
-    document.querySelectorAll('.faq-item').forEach(i => { if (i !== item) i.classList.remove('open'); });
-    item.classList.toggle('open');
-  });
-});
-
-// FORM SUBMIT
-function submitForm(e) {
-  e.preventDefault();
-  const name = document.getElementById('firstName').value;
-  const phone = document.getElementById('phone').value;
-  const biz = document.getElementById('bizName').value;
-  const goal = document.getElementById('goal').value;
-  const method = document.getElementById('contactMethod').value;
-
-  // Send to Kinsley via email
-  const subject = encodeURIComponent('New SiteUp Lead: ' + biz);
-  const body = encodeURIComponent('New lead from siteupagency.com:\n\nName: ' + name + '\nPhone: ' + phone + '\nBusiness: ' + biz + '\nGoal: ' + goal + '\nPreferred contact: ' + method);
-  window.open('mailto:kinsleybazemore@gmail.com?subject=' + subject + '&body=' + body);
-
-  document.getElementById('contactForm').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
-}
-
-// SMOOTH NAV
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-  });
-});
-</script>
-
-<!-- CHAT WIDGET -->
-<style>
-#chat-bubble {
-  position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 9999;
-  width: 58px; height: 58px; border-radius: 50%;
-  background: #a3ff00; color: #000;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem; cursor: pointer;
-  box-shadow: 0 4px 24px rgba(163,255,0,0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-#chat-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 30px rgba(163,255,0,0.55); }
-#chat-bubble .bubble-badge {
-  position: absolute; top: -4px; right: -4px;
-  width: 18px; height: 18px; border-radius: 50%;
-  background: #ff4444; border: 2px solid #000;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .6rem; font-weight: 800; color: white;
-}
-#chat-window {
-  position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 9998;
-  width: 360px; max-width: calc(100vw - 2rem);
-  background: #0d0d0d; border: 1px solid #1e1e1e;
-  border-radius: 20px; overflow: hidden;
-  box-shadow: 0 16px 60px rgba(0,0,0,0.6);
-  display: none; flex-direction: column;
-  font-family: 'Inter', sans-serif;
-  animation: chatSlideUp 0.25s ease;
-}
-@keyframes chatSlideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-#chat-window.open { display: flex; }
-.chat-header {
-  background: #111; padding: 1rem 1.25rem;
-  display: flex; align-items: center; gap: .75rem;
-  border-bottom: 1px solid #1e1e1e;
-}
-.chat-avatar {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: #a3ff00; display: flex; align-items: center;
-  justify-content: center; font-size: 1rem; flex-shrink: 0;
-}
-.chat-header-text .chat-name { font-size: .88rem; font-weight: 700; color: #f0f0f0; }
-.chat-header-text .chat-status { font-size: .72rem; color: #22c55e; display: flex; align-items: center; gap: .3rem; }
-.chat-header-text .chat-status::before { content:'●'; font-size: .5rem; }
-.chat-close { margin-left: auto; background: none; border: none; color: #555; font-size: 1.2rem; cursor: pointer; padding: 0 .25rem; }
-.chat-close:hover { color: #f0f0f0; }
-.chat-messages {
-  flex: 1; overflow-y: auto; padding: 1.25rem;
-  display: flex; flex-direction: column; gap: .85rem;
-  max-height: 320px; min-height: 200px;
-}
-.chat-messages::-webkit-scrollbar { width: 3px; }
-.chat-messages::-webkit-scrollbar-thumb { background: #1e1e1e; }
-.msg { display: flex; flex-direction: column; max-width: 85%; }
-.msg.bot { align-self: flex-start; }
-.msg.user { align-self: flex-end; }
-.msg-bubble {
-  padding: .65rem 1rem; border-radius: 14px;
-  font-size: .83rem; line-height: 1.6;
-}
-.msg.bot .msg-bubble { background: #1a1a1a; color: #d0d0d0; border-bottom-left-radius: 4px; }
-.msg.user .msg-bubble { background: #a3ff00; color: #000; font-weight: 600; border-bottom-right-radius: 4px; }
-.msg-time { font-size: .65rem; color: #444; margin-top: .25rem; padding: 0 .25rem; }
-.msg.user .msg-time { text-align: right; }
-.typing-indicator { display: flex; gap: 4px; align-items: center; padding: .65rem 1rem; background: #1a1a1a; border-radius: 14px; border-bottom-left-radius: 4px; width: fit-content; }
-.typing-indicator span { width: 6px; height: 6px; border-radius: 50%; background: #555; animation: typingDot 1.2s infinite; }
-.typing-indicator span:nth-child(2) { animation-delay: .2s; }
-.typing-indicator span:nth-child(3) { animation-delay: .4s; }
-@keyframes typingDot { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
-.chat-input-area {
-  padding: .85rem 1rem; border-top: 1px solid #1a1a1a;
-  display: flex; gap: .6rem; align-items: flex-end;
-}
-.chat-input-area textarea {
-  flex: 1; background: #1a1a1a; border: 1px solid #2a2a2a;
-  border-radius: 12px; padding: .6rem .9rem;
-  font-size: .83rem; color: #f0f0f0; font-family: 'Inter', sans-serif;
-  resize: none; outline: none; max-height: 100px; line-height: 1.5;
-  transition: border-color .2s;
-}
-.chat-input-area textarea:focus { border-color: #a3ff00; }
-.chat-input-area textarea::placeholder { color: #444; }
-.chat-send {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: #a3ff00; border: none; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .9rem; flex-shrink: 0; transition: background .2s;
-}
-.chat-send:hover { background: #b8ff26; }
-.chat-powered { text-align: center; padding: .4rem; font-size: .62rem; color: #2a2a2a; }
-</style>
-
-<div id="chat-bubble" onclick="toggleChat()">
-  💬
-  <div class="bubble-badge">1</div>
+<div class="foot-bottom">
+  <div class="foot-copy">© 2026 SiteUp Agency. All rights reserved.</div>
+  <div class="status"><span class="status-dot"></span>All systems operational</div>
 </div>
 
-<div id="chat-window">
-  <div class="chat-header">
-    <div class="chat-avatar">⚡</div>
-    <div class="chat-header-text">
-      <div class="chat-name">SiteUp Agency</div>
-      <div class="chat-status">Online now</div>
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="mbox">
+    <button class="mclose" onclick="closeModal()">✕</button>
+    <div class="mspinner" id="mspinner"></div>
+    <div class="mtitle" id="mtitle">Creating your content...</div>
+    <div class="mstatus" id="mstatus">Analyzing your request...</div>
+    <div class="msteps" id="msteps"></div>
+    <div class="mout" id="mout">
+      <div class="mout-card">
+        <div class="mout-icon" id="micon">✨</div>
+        <div><div class="mout-name" id="mname">Content ready!</div><div class="mout-desc" id="mdesc">Your creation is complete</div></div>
+      </div>
+      <div class="mout-btns">
+        <a href="https://siteupagency.com/pay.html" class="mbtn g">🚀 Get Started Free</a>
+        <a href="sms:7573345771" class="mbtn d">💬 Talk to us</a>
+      </div>
     </div>
-    <button class="chat-close" onclick="toggleChat()">✕</button>
   </div>
-  <div class="chat-messages" id="chatMessages">
-    <div class="msg bot">
-      <div class="msg-bubble">Hey! 👋 I'm here to help. Got questions about pricing, what's included, or want to see examples? Ask me anything.</div>
-      <div class="msg-time">Just now</div>
-    </div>
-  </div>
-  <div class="chat-input-area">
-    <textarea id="chatInput" placeholder="Ask something..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-    <button class="chat-send" onclick="sendMessage()">➤</button>
-  </div>
-  <div class="chat-powered">Powered by SiteUp AI</div>
 </div>
 
 <script>
-let chatOpen = false;
-let chatHistory = [];
+// Fill prompt
+function p(t){ document.getElementById('mainPrompt').value=t; document.getElementById('mainPrompt').focus(); }
 
-function getResponse(msg) {
-  const m = msg.toLowerCase();
-
-  // OWNER / WHO
-  if (m.match(/who.*own|who.*run|who.*behind|who.*built|who.*creat|who.*found|who.*start|owner|founder|your name|your team|who are you|who made/))
-    return "SiteUp Agency was founded by Kinsley Bazemore. 👋 Kinsley started the agency to help contractors and local businesses get professional websites without the headache — fast, affordable, and with zero tech stress on your end.";
-
-  // WHEN FOUNDED / HOW LONG
-  if (m.match(/when.*start|when.*found|when.*creat|when.*made|how long.*around|how long.*open|how long.*business|how old|year.*start|start.*year/))
-    return "SiteUp Agency launched in 2026. We're new, hungry, and we out-work everyone. 💪 Being newer means we care more about every single client — your project isn't just a number to us.";
-
-  // LOCATION
-  if (m.match(/where.*located|where.*based|your location|what city|what state|address|local|virginia|remote/))
-    return "We're 100% remote and serve clients nationwide — so it doesn't matter where you're located. 🌎 We work with businesses across the US entirely online. No need to meet in person.";
-
-  // WHAT DO YOU DO
-  if (m.match(/what do you do|what.*offer|what.*service|what.*sell|what.*provide|tell me about|explain|describe/))
-    return "We build professional websites for contractors and local businesses. 🏗️\n\nHere's the deal:\n• We build a free preview of your site first — no payment required\n• You approve it, then pay $69 to kick off the full build\n• Site is live in 3 business days\n• You own everything at launch\n\nServices include custom design, SEO, mobile optimization, domain setup, and ongoing updates.";
-
-  // PRICING
-  if (m.match(/price|cost|how much|pricing|package|\$|afford|cheap|expens|rates|charge/))
-    return "Here's exactly what it costs:\n\n💰 Free Preview — $0 (you see your site before paying anything)\n⚡ Kickoff Fee — $69 (paid only after you approve the preview)\n🚀 Full Balance — due at launch:\n   • Basic: $500 total (1-page)\n   • Starter: $1,000 (5-page)\n   • Pro: $1,500 (SEO + domain)\n   • Elite: $2,500 (full service)\n\nDon't love the preview? Walk away — you've paid nothing.";
-
-  // FREE PREVIEW
-  if (m.match(/preview|free.*site|see.*site|before.*pay|sample|demo|example/))
-    return "The free preview is exactly what it sounds like — we build a real, working version of your website before you pay a single dollar. 🎁\n\nIt has your business name, your services, your area. You review it, tell us what to tweak, and only pay $69 to kick off the full build after you say yes. If you don't like it — no charge, no hard feelings.";
-
-  // HOW LONG / TIMELINE
-  if (m.match(/how long|timeline|turnaround|days|fast|quick|when.*ready|deliver|rush/))
-    return "⚡ First look at your real site: 3 business days after kickoff.\n\nHere's the full timeline:\n1. Fill out the form → we confirm by text\n2. We build your free preview\n3. You approve it\n4. Pay $69 kickoff fee\n5. Send us your logo & photos\n6. Live site in 3 business days\n\nRush builds available if you need it faster — just mention it!";
-
-  // OWNERSHIP
-  if (m.match(/own|mine|keep|domain|files|lock|contract|stuck|cancel/))
-    return "Yes — everything is 100% yours at launch. 🔑\n\nWe hand you:\n• Your domain login\n• Hosting access\n• All source files and code\n\nNo lock-in, no monthly contract, no holding anything hostage. Once you pay the final balance — it's yours forever.";
-
-  // CHANGES / UPDATES
-  if (m.match(/change|update|edit|fix|revision|after.*launch|ongoing|support|maintain/))
-    return "After your site launches, just text us. 📱 No tickets, no dashboards, no portals.\n\nNeed to update your hours? Add a new service? Swap a photo? Send a text and it's done same day.\n\nWe also offer ongoing maintenance plans if you want us to handle everything long-term.";
-
-  // PAYMENT METHOD
-  if (m.match(/pay.*how|cashapp|venmo|card|credit|payment method|how.*pay/))
-    return "We accept:\n💳 CashApp — $kinsleybazemore8\n💳 Venmo — @Mrbazemore\n\nThe $69 kickoff deposit is all you pay upfront. The remaining balance is due when your site is complete and you've approved it. Simple as that.";
-
-  // REFUND
-  if (m.match(/refund|money back|guarant|risk|cancel/))
-    return "Our model eliminates the risk entirely. 🛡️\n\nYou see your free preview before paying anything. Don't like it? Walk away — no charge.\n\nAfter the $69 kickoff, we work until you're 100% satisfied before collecting the final balance. You never pay for something you haven't approved.";
-
-  // SEO
-  if (m.match(/seo|google|rank|search|traffic|found online/))
-    return "Yes, SEO is baked in! 🔍\n\nEvery site we build includes:\n• SEO-optimized page titles & descriptions\n• Fast load speeds (Google loves this)\n• Mobile-first design\n• Schema markup\n• Google-indexable sitemap\n\nOur Pro and Elite packages include a full SEO foundation with keyword targeting for your area and trade.";
-
-  // MOBILE
-  if (m.match(/mobile|phone|tablet|responsive|iphone|android/))
-    return "Every single site we build is fully mobile-optimized. 📱\n\nOver 70% of people searching for contractors are on their phones. Your site will look sharp and load fast on every device — phone, tablet, and desktop.";
-
-  // CONTACT
-  if (m.match(/contact|reach|email|call|phone|talk|speak|get in touch/))
-    return "Best ways to reach us:\n\n📧 Email: kinsleybazemore@gmail.com\n📝 Form: scroll to the bottom of this page\n\nWe typically respond within a few hours. For the fastest response, fill out the form below — we'll text you back! 💬";
-
-  // EXAMPLES / PORTFOLIO
-  if (m.match(/example|portfolio|work|past.*project|seen.*site|show me|sample/))
-    return "Check out our portfolio section above — you can click into fully built sample sites for:\n\n🏠 Peak Ridge Roofing\n🌿 Green Edge Lawn Care\n🎨 Two Koats Painting\n❄️ CoolAir HVAC\n\nEach one is a real, full website we built as a demo. Click any card to see the live site! 👆";
-
-  // TRUST / LEGIT
-  if (m.match(/legit|real|trust|scam|fake|verified|review|proof/))
-    return "Totally fair to ask! 💯\n\nHere's why we're legit:\n• Free preview model — you see the site before paying anything\n• You own all files at launch — no lock-in\n• Real portfolio sites you can click through right now\n• We only collect payment after you approve your site\n\nStill unsure? Fill out the form — zero risk to get your free preview started.";
-
-  // NICHE / INDUSTRIES
-  if (m.match(/niche|industry|type.*business|kind.*business|who.*for|who.*work with|contractor|plumb|roof|hvac|landscap|paint|electric/))
-    return "We specialize in contractors and local service businesses:\n\n🔨 Roofers\n🌿 Landscapers & Lawn Care\n🎨 Painters\n❄️ HVAC Companies\n🔧 Plumbers\n⚡ Electricians\n🚿 Pressure Washers\n🏗️ General Contractors\n\n...and really any local business that needs more customers online. If you serve a local area, we can build something that gets you found.";
-
-  // HELLO / GREETINGS
-  if (m.match(/^(hi|hey|hello|sup|yo|what'?s up|howdy|hiya|good morning|good afternoon|good evening).{0,10}$/))
-    return "Hey! 👋 Welcome to SiteUp Agency. I can answer pretty much anything — pricing, how it works, who we are, turnaround time, you name it. What do you want to know?";
-
-  // THANKS
-  if (m.match(/thank|thanks|appreciate|helpful|great|awesome|perfect|love it/))
-    return "Of course! 😊 That's what I'm here for. Ready to get your free preview started? Just fill out the quick form at the bottom — takes about 60 seconds. No payment needed!";
-
-  // DEFAULT
-  const defaults = [
-    "Good question! I can answer pretty much anything about SiteUp Agency — pricing, timeline, who we are, how the free preview works, SEO, you name it. What do you want to know? 🙌",
-    "Happy to help! Try asking me about pricing, how the free preview works, who founded the agency, turnaround time — anything really. 💬",
-    "I might need a bit more context on that one! But feel free to ask about our packages, process, who we are, or how to get started. 🚀"
-  ];
-  return defaults[Math.floor(Math.random() * defaults.length)];
+// FAQ toggle
+function toggleFaq(el){
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+  if(!isOpen) el.classList.add('open');
 }
 
-function toggleChat() {
-  chatOpen = !chatOpen;
-  const win = document.getElementById('chat-window');
-  const badge = document.querySelector('.bubble-badge');
-  if (chatOpen) { win.classList.add('open'); badge.style.display='none'; document.getElementById('chatInput').focus(); }
-  else { win.classList.remove('open'); }
+// Type detection for modal
+const types = {
+  video:  {icon:'🎬',name:'Video',steps:['Parsing your script...','Generating visuals...','Syncing audio & motion...','Rendering final video...','Encoding MP4 output...']},
+  music:  {icon:'🎵',name:'Music Track',steps:['Analyzing genre & mood...','Composing melody...','Layering instruments...','Mixing & mastering...','Exporting audio file...']},
+  image:  {icon:'🖼️',name:'AI Image',steps:['Understanding visual prompt...','Generating composition...','Refining details...','Upscaling resolution...','Preparing download...']},
+  code:   {icon:'💻',name:'Code',steps:['Parsing requirements...','Writing core logic...','Adding error handling...','Testing & debugging...','Packaging output...']},
+  doc:    {icon:'📄',name:'Document',steps:['Researching topic...','Structuring outline...','Writing content...','Formatting & styling...','Generating PDF/Word...']},
+  slides: {icon:'📊',name:'Presentation',steps:['Building slide structure...','Writing copy...','Designing layouts...','Adding charts & visuals...','Exporting PowerPoint...']},
+  music2: {icon:'🎙️',name:'Voice Narration',steps:['Processing script...','Selecting voice model...','Generating narration...','Cleaning audio...','Exporting MP3...']},
+  default:{icon:'✨',name:'Content',steps:['Understanding request...','Gathering resources...','Creating content...','Polishing output...','Finalizing file...']}
+};
+
+function detectType(v){
+  v=v.toLowerCase();
+  if(v.includes('video')||v.includes('film')||v.includes('short')||v.includes('reel')) return 'video';
+  if(v.includes('music')||v.includes('song')||v.includes('track')||v.includes('beat')) return 'music';
+  if(v.includes('image')||v.includes('photo')||v.includes('logo')||v.includes('design')||v.includes('illustrat')) return 'image';
+  if(v.includes('code')||v.includes('script')||v.includes('python')||v.includes('javascript')||v.includes('function')) return 'code';
+  if(v.includes('slide')||v.includes('deck')||v.includes('presentation')||v.includes('powerpoint')) return 'slides';
+  if(v.includes('voice')||v.includes('narrat')||v.includes('podcast')) return 'music2';
+  if(v.includes('doc')||v.includes('report')||v.includes('essay')||v.includes('pdf')||v.includes('word')||v.includes('research')) return 'doc';
+  return 'default';
 }
 
-function addMessage(text, type) {
-  const msgs = document.getElementById('chatMessages');
-  const now = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-  const div = document.createElement('div');
-  div.className = 'msg ' + type;
-  div.innerHTML = '<div class="msg-bubble">' + text.replace(/\n/g,'<br>') + '</div><div class="msg-time">' + now + '</div>';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
+function go(){
+  const val = document.getElementById('mainPrompt').value.trim();
+  if(!val){ document.getElementById('mainPrompt').focus(); return; }
+  const t = types[detectType(val)];
+  
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('mout').classList.remove('show');
+  document.getElementById('mspinner').style.display='block';
+  document.getElementById('mtitle').textContent='Creating your '+t.name.toLowerCase()+'...';
+  document.getElementById('mstatus').textContent=t.steps[0];
+  document.getElementById('micon').textContent=t.icon;
+  document.getElementById('mname').textContent=t.name+' is ready!';
+  document.getElementById('mdesc').textContent='Sign up free to download your creation.';
+
+  const stepsEl=document.getElementById('msteps');
+  stepsEl.innerHTML='';
+  t.steps.forEach((s,i)=>{
+    const d=document.createElement('div');
+    d.className='mstep'+(i===0?' active':'');
+    d.id='ms'+i;
+    d.innerHTML=`<div class="mic">${i===0?'→':' '}</div>${s}`;
+    stepsEl.appendChild(d);
+  });
+
+  let cur=0;
+  const iv=setInterval(()=>{
+    const el=document.getElementById('ms'+cur);
+    el.className='mstep done'; el.querySelector('.mic').textContent='✓';
+    cur++;
+    if(cur<t.steps.length){
+      const nx=document.getElementById('ms'+cur);
+      nx.className='mstep active'; nx.querySelector('.mic').textContent='→';
+      document.getElementById('mstatus').textContent=t.steps[cur];
+    } else {
+      clearInterval(iv);
+      document.getElementById('mspinner').style.display='none';
+      document.getElementById('mtitle').textContent='✅ '+t.name+' ready!';
+      document.getElementById('mstatus').textContent='Your creation is complete. Sign up to download.';
+      document.getElementById('mout').classList.add('show');
+    }
+  },900);
 }
 
-function showTyping() {
-  const msgs = document.getElementById('chatMessages');
-  const div = document.createElement('div');
-  div.className = 'msg bot'; div.id = 'typingMsg';
-  div.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
+document.getElementById('mainPrompt').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();go();}
+});
 
-function removeTyping() {
-  const t = document.getElementById('typingMsg');
-  if (t) t.remove();
-}
-
-function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = ''; input.style.height = 'auto';
-  addMessage(text, 'user');
-  showTyping();
-  setTimeout(() => {
-    removeTyping();
-    addMessage(getResponse(text), 'bot');
-  }, 900 + Math.random() * 600);
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-}
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
-}
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
 </script>
-<!-- END CHAT WIDGET -->
-
 </body>
 </html>
-
-
-
-
-
-
