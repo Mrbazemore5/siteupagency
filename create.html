@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiteUp Create — AI Videos, Logos & Websites for Contractors</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --lime: #a3ff00;
+  --dark: #080808;
+  --card: rgba(255,255,255,.04);
+  --border: rgba(255,255,255,.08);
+}
+
+html, body {
+  min-height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: var(--dark);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ── GRID BG like invideo ── */
+.grid-bg {
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.glow-top {
+  position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 500px;
+  background: radial-gradient(ellipse, rgba(120,40,255,.35) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.glow-left {
+  position: fixed; bottom: 10%; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(163,255,0,.12) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── FLOATING USER CURSORS ── */
+.cursor {
+  position: fixed; z-index: 2; pointer-events: none;
+  display: flex; align-items: center; gap: 6px;
+  animation: floatCursor linear infinite;
+}
+.cursor-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.cursor-label {
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; color: #fff;
+  white-space: nowrap;
+}
+.c1 { top: 12%; left: 8%; animation-duration: 18s; animation-delay: 0s; }
+.c2 { top: 15%; right: 9%; animation-duration: 22s; animation-delay: -5s; }
+.c3 { bottom: 32%; left: 6%; animation-duration: 20s; animation-delay: -8s; }
+.c4 { bottom: 28%; right: 7%; animation-duration: 25s; animation-delay: -12s; }
+@keyframes floatCursor {
+  0%,100% { transform: translate(0,0); }
+  25% { transform: translate(8px,-10px); }
+  50% { transform: translate(-6px,8px); }
+  75% { transform: translate(10px,4px); }
+}
+
+/* ── NAV ── */
+nav {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+.nav-logo { font-size: 20px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; }
+.nav-logo span { color: var(--lime); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { text-decoration: none; color: rgba(255,255,255,.55); font-size: 14px; font-weight: 500; transition: color .15s; }
+.nav-links a:hover { color: #fff; }
+.nav-right { display: flex; gap: 10px; align-items: center; }
+.btn-ghost {
+  padding: 8px 18px; border-radius: 9px; font-size: 13px; font-weight: 600;
+  background: transparent; color: rgba(255,255,255,.7); border: 1px solid var(--border);
+  cursor: pointer; text-decoration: none; transition: all .15s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.07); color: #fff; }
+.btn-primary {
+  padding: 9px 20px; border-radius: 9px; font-size: 13px; font-weight: 700;
+  background: #fff; color: #000; border: none; cursor: pointer; text-decoration: none;
+  transition: all .15s;
+}
+.btn-primary:hover { background: var(--lime); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 90px 20px 50px;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(163,255,0,.1); border: 1px solid rgba(163,255,0,.2);
+  border-radius: 999px; padding: 5px 14px;
+  font-size: 12px; font-weight: 700; color: var(--lime);
+  margin-bottom: 30px; letter-spacing: .5px;
+}
+.pulse { width:6px; height:6px; border-radius:50%; background:var(--lime); animation: pulseAnim 1.6s infinite; }
+@keyframes pulseAnim { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(1.6)} }
+
+h1 {
+  font-size: clamp(44px, 8.5vw, 96px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -3px;
+  max-width: 900px;
+  margin-bottom: 24px;
+}
+h1 .accent {
+  background: linear-gradient(135deg, var(--lime) 0%, #00ffcc 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: clamp(15px, 2vw, 19px);
+  color: rgba(255,255,255,.45);
+  max-width: 580px; line-height: 1.7; margin-bottom: 50px;
+}
+.hero-sub b { color: rgba(255,255,255,.85); font-weight: 600; }
+
+/* ── PROMPT BOX ── */
+.prompt-container {
+  width: 100%; max-width: 720px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+  backdrop-filter: blur(16px);
+  margin-bottom: 20px;
+}
+.prompt-container:focus-within {
+  border-color: rgba(163,255,0,.4);
+  box-shadow: 0 0 0 3px rgba(163,255,0,.07);
+}
+.prompt-top { padding: 18px 20px 6px; }
+textarea#prompt {
+  width: 100%; background: transparent; border: none; outline: none;
+  color: #fff; font-size: 17px; font-family: 'Inter', sans-serif;
+  resize: none; line-height: 1.5; min-height: 56px;
+}
+textarea#prompt::placeholder { color: rgba(255,255,255,.25); }
+.prompt-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px 14px;
+}
+.prompt-tools { display: flex; gap: 8px; }
+.tool-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 12px; border-radius: 8px;
+  background: rgba(255,255,255,.06); border: 1px solid var(--border);
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,.6);
+  cursor: pointer; transition: all .15s;
+}
+.tool-chip:hover { background: rgba(163,255,0,.1); border-color: rgba(163,255,0,.25); color: var(--lime); }
+.tool-chip.active { background: rgba(163,255,0,.12); border-color: rgba(163,255,0,.3); color: var(--lime); }
+.generate-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 10px 22px; border-radius: 11px;
+  background: var(--lime); color: #000;
+  font-size: 14px; font-weight: 800; border: none; cursor: pointer;
+  transition: all .18s;
+}
+.generate-btn:hover { background: #bcff33; transform: scale(1.04); }
+.generate-btn .spark { font-size: 16px; }
+
+/* ── CAPABILITY STRIP ── */
+.strip-wrap {
+  width: 100%; overflow: hidden; position: relative; z-index: 5;
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  margin: 8px 0 70px;
+}
+.strip-track {
+  display: flex; gap: 10px; width: max-content;
+  animation: stripScroll 30s linear infinite;
+}
+.strip-track:hover { animation-play-state: paused; }
+@keyframes stripScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.strip-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 18px; border-radius: 999px;
+  background: rgba(255,255,255,.05); border: 1px solid var(--border);
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,.65);
+  white-space: nowrap; cursor: pointer; transition: all .15s;
+}
+.strip-chip:hover { background: rgba(163,255,0,.1); border-color: rgba(163,255,0,.25); color: #fff; }
+
+/* ── VIDEO GALLERY GRID ── */
+.gallery-section {
+  position: relative; z-index: 5;
+  max-width: 1200px; margin: 0 auto; padding: 0 24px 90px;
+}
+.gallery-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 22px;
+}
+.gallery-title { font-size: 22px; font-weight: 800; }
+.gallery-sub { font-size: 13px; color: rgba(255,255,255,.35); margin-top: 4px; }
+.see-all { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.4); text-decoration: none; transition: color .15s; }
+.see-all:hover { color: var(--lime); }
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+@media(max-width:900px){ .video-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:500px){ .video-grid { grid-template-columns: 1fr; } }
+
+.vid-card {
+  border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer; transition: transform .22s, border-color .22s, box-shadow .22s;
+  position: relative;
+}
+.vid-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  border-color: rgba(163,255,0,.25);
+  box-shadow: 0 16px 40px rgba(0,0,0,.4);
+}
+.vid-thumb {
+  width: 100%; aspect-ratio: 9/16;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+/* Animated video mockup backgrounds */
+.vid-thumb .bg { position:absolute;inset:0; background-size:cover; background-position:center; }
+.vid-thumb .overlay { position:absolute;inset:0; background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8) 100%); }
+.vid-thumb .play-btn {
+  position:absolute; width:44px; height:44px; border-radius:50%;
+  background:rgba(255,255,255,.15); border:2px solid rgba(255,255,255,.3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; backdrop-filter:blur(4px);
+  transition: all .2s;
+  z-index:2;
+}
+.vid-card:hover .play-btn { background:var(--lime); border-color:var(--lime); color:#000; transform:scale(1.1); }
+.vid-duration {
+  position:absolute; bottom:8px; right:8px; z-index:3;
+  background:rgba(0,0,0,.6); backdrop-filter:blur(4px);
+  padding:2px 7px; border-radius:5px; font-size:11px; font-weight:600; color:#fff;
+}
+.vid-type-badge {
+  position:absolute; top:8px; left:8px; z-index:3;
+  padding:3px 9px; border-radius:6px; font-size:10px; font-weight:700;
+}
+.badge-video { background:rgba(163,255,0,.2); color:var(--lime); border:1px solid rgba(163,255,0,.3); }
+.badge-logo  { background:rgba(255,149,0,.2); color:#ff9500; border:1px solid rgba(255,149,0,.3); }
+.badge-flyer { background:rgba(100,149,255,.2); color:#6495ff; border:1px solid rgba(100,149,255,.3); }
+.badge-site  { background:rgba(255,80,200,.2); color:#ff50c8; border:1px solid rgba(255,80,200,.3); }
+
+.vid-meta { padding: 11px 13px; }
+.vid-biz { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+.vid-desc { font-size: 11px; color: rgba(255,255,255,.35); }
+
+/* animated gradients for thumb backgrounds */
+.grad-roofing { background: linear-gradient(135deg, #1a0a00 0%, #3d1500 40%, #1a0800 100%); }
+.grad-lawn    { background: linear-gradient(135deg, #001a05 0%, #003d0e 40%, #001505 100%); }
+.grad-hvac    { background: linear-gradient(135deg, #000d1a 0%, #001a3d 40%, #000d20 100%); }
+.grad-paint   { background: linear-gradient(135deg, #150020 0%, #30005a 40%, #100018 100%); }
+.grad-elec    { background: linear-gradient(135deg, #0a0a00 0%, #1a1a00 40%, #0f0f00 100%); }
+.grad-plumb   { background: linear-gradient(135deg, #00101a 0%, #002030 40%, #000c14 100%); }
+.grad-wash    { background: linear-gradient(135deg, #00001a 0%, #000040 40%, #000015 100%); }
+.grad-hand    { background: linear-gradient(135deg, #100000 0%, #280000 40%, #0c0000 100%); }
+
+/* shimmer animation on thumbs */
+.vid-thumb::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.04) 50%, transparent 60%);
+  animation: shimmer 3s infinite;
+}
+@keyframes shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
+
+/* icons inside thumbs */
+.thumb-icon {
+  font-size: 52px; position:relative; z-index:1;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,.6));
+  animation: floatIcon 4s ease-in-out infinite;
+}
+@keyframes floatIcon { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* ── WHAT WE BUILD ── */
+.features-section {
+  position: relative; z-index: 5;
+  max-width: 1100px; margin: 0 auto; padding: 0 24px 90px;
+}
+.feat-label { font-size:12px; font-weight:700; color:var(--lime); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; text-align:center; }
+.feat-title { font-size: clamp(28px,5vw,52px); font-weight:900; letter-spacing:-1.5px; text-align:center; margin-bottom:14px; line-height:1.05; }
+.feat-sub   { font-size:16px; color:rgba(255,255,255,.4); text-align:center; margin-bottom:54px; }
+
+.feat-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 16px;
+}
+@media(max-width:600px){ .feat-grid { grid-template-columns:1fr; } }
+
+.feat-card {
+  border-radius: 22px; padding: 30px 26px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: border-color .2s, transform .2s;
+  overflow: hidden; position: relative;
+}
+.feat-card:hover { border-color: rgba(163,255,0,.2); transform: translateY(-3px); }
+.feat-card::before {
+  content:''; position:absolute; top:-60px; right:-60px;
+  width:180px; height:180px; border-radius:50%;
+  opacity: .06; pointer-events:none;
+}
+.fc-video::before  { background: var(--lime); }
+.fc-logo::before   { background: #ff9500; }
+.fc-flyer::before  { background: #6495ff; }
+.fc-website::before { background: #ff50c8; }
+
+.feat-icon { font-size:36px; margin-bottom:16px; display:block; }
+.feat-name { font-size:20px; font-weight:800; margin-bottom:8px; }
+.feat-desc { font-size:14px; color:rgba(255,255,255,.45); line-height:1.65; margin-bottom:18px; }
+.feat-examples {
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.feat-ex {
+  padding:4px 11px; border-radius:6px; font-size:11px; font-weight:600;
+  background:rgba(255,255,255,.06); border:1px solid var(--border); color:rgba(255,255,255,.5);
+}
+
+/* ── PRICING ── */
+.pricing-section {
+  position: relative; z-index: 5;
+  max-width: 960px; margin: 0 auto; padding: 0 24px 90px;
+  text-align: center;
+}
+.price-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 50px;
+}
+@media(max-width:700px){ .price-grid { grid-template-columns:1fr; } }
+.price-card {
+  border-radius: 22px; padding: 32px 24px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  text-align: left; transition: border-color .2s;
+  position: relative;
+}
+.price-card.featured {
+  border-color: rgba(163,255,0,.35);
+  background: rgba(163,255,0,.04);
+}
+.price-badge {
+  position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+  background:var(--lime); color:#000; padding:4px 16px; border-radius:999px;
+  font-size:11px; font-weight:800;
+}
+.price-name { font-size:14px; font-weight:700; color:rgba(255,255,255,.5); margin-bottom:12px; text-transform:uppercase; letter-spacing:.8px; }
+.price-amount { font-size:44px; font-weight:900; letter-spacing:-2px; margin-bottom:4px; }
+.price-amount sup { font-size:22px; vertical-align:top; margin-top:10px; display:inline-block; font-weight:700; }
+.price-per { font-size:13px; color:rgba(255,255,255,.35); margin-bottom:22px; }
+.price-features { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:26px; }
+.price-features li { font-size:13px; color:rgba(255,255,255,.6); display:flex; align-items:center; gap:8px; }
+.price-features li::before { content:'✓'; color:var(--lime); font-weight:900; font-size:12px; }
+.price-cta {
+  display:block; text-align:center; padding:12px;
+  border-radius:12px; font-size:14px; font-weight:700;
+  text-decoration:none; transition:all .18s; cursor:pointer; border:none; width:100%;
+}
+.price-card:not(.featured) .price-cta { background:rgba(255,255,255,.08); color:#fff; }
+.price-card:not(.featured) .price-cta:hover { background:rgba(255,255,255,.14); }
+.price-card.featured .price-cta { background:var(--lime); color:#000; }
+.price-card.featured .price-cta:hover { background:#bcff33; }
+
+/* ── CTA BOTTOM ── */
+.cta-bottom {
+  position:relative; z-index:5;
+  text-align:center; padding:0 24px 120px;
+}
+.cta-inner {
+  max-width:680px; margin:0 auto;
+  border-radius:28px; padding:64px 40px;
+  background: rgba(163,255,0,.05);
+  border: 1px solid rgba(163,255,0,.15);
+  position:relative; overflow:hidden;
+}
+.cta-inner::before {
+  content:''; position:absolute; top:-100px; left:50%; transform:translateX(-50%);
+  width:500px; height:300px; border-radius:50%;
+  background: radial-gradient(ellipse, rgba(163,255,0,.12), transparent 70%);
+  pointer-events:none;
+}
+.cta-inner h2 { font-size:clamp(28px,5vw,48px); font-weight:900; letter-spacing:-1.5px; margin-bottom:14px; line-height:1.1; }
+.cta-inner p { font-size:16px; color:rgba(255,255,255,.45); margin-bottom:34px; }
+.cta-main-btn {
+  display:inline-block; background:var(--lime); color:#000;
+  font-size:16px; font-weight:800; padding:16px 44px;
+  border-radius:14px; text-decoration:none; border:none; cursor:pointer;
+  transition:all .2s;
+}
+.cta-main-btn:hover { background:#bcff33; transform:scale(1.04); }
+
+/* ── MODAL ── */
+.modal {
+  display:none; position:fixed; inset:0; z-index:900;
+  background:rgba(0,0,0,.75); backdrop-filter:blur(10px);
+  align-items:center; justify-content:center; padding:20px;
+}
+.modal.show { display:flex; }
+.modal-box {
+  background:#111; border:1px solid rgba(255,255,255,.1);
+  border-radius:26px; padding:40px; max-width:520px; width:100%;
+  position:relative; text-align:center;
+}
+.modal-close { position:absolute;top:16px;right:20px; font-size:22px; cursor:pointer; color:rgba(255,255,255,.3); transition:color .15s; }
+.modal-close:hover { color:#fff; }
+.modal-spinner {
+  width:56px;height:56px; border-radius:50%;
+  border:3px solid rgba(163,255,0,.15); border-top-color:var(--lime);
+  animation:spin .75s linear infinite; margin:0 auto 24px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal-title { font-size:22px;font-weight:800;margin-bottom:8px; }
+.modal-status { font-size:14px;color:rgba(255,255,255,.4);margin-bottom:28px; }
+.modal-steps { display:flex;flex-direction:column;gap:11px; text-align:left; }
+.mstep { display:flex;align-items:center;gap:12px; font-size:14px;color:rgba(255,255,255,.4); }
+.mstep.done  { color:#fff; }
+.mstep.active { color:var(--lime); }
+.mstep .ic {
+  width:26px;height:26px;border-radius:8px; flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.05); border:1px solid var(--border);
+  font-size:12px;
+}
+.mstep.done .ic  { background:rgba(163,255,0,.12);border-color:rgba(163,255,0,.3);color:var(--lime); }
+.mstep.active .ic { background:rgba(163,255,0,.15);border-color:var(--lime);color:var(--lime);animation:pulseAnim 1s infinite; }
+.modal-output { display:none;margin-top:28px; }
+.modal-output.show { display:block; }
+.output-preview {
+  background:rgba(163,255,0,.06); border:1px solid rgba(163,255,0,.2);
+  border-radius:16px; padding:22px; margin-bottom:18px;
+  display:flex; align-items:center; gap:16px; text-align:left;
+}
+.output-icon { font-size:40px; flex-shrink:0; }
+.output-name { font-size:16px;font-weight:700;margin-bottom:4px; }
+.output-desc { font-size:13px;color:rgba(255,255,255,.4); }
+.output-actions { display:flex;gap:10px;justify-content:center; }
+.out-btn {
+  padding:12px 24px;border-radius:11px;font-size:14px;font-weight:700;
+  cursor:pointer; text-decoration:none; border:none; transition:all .18s;
+}
+.out-btn.green { background:var(--lime);color:#000; }
+.out-btn.green:hover { background:#bcff33; }
+.out-btn.dark { background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--border); }
+.out-btn.dark:hover { background:rgba(255,255,255,.14); }
+
+@media(max-width:600px){
+  nav { padding:14px 16px; }
+  .nav-links { display:none; }
+  h1 { letter-spacing:-1.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- BG -->
+<div class="grid-bg"></div>
+<div class="glow-top"></div>
+<div class="glow-left"></div>
+
+<!-- FLOATING CURSORS -->
+<div class="cursor c1">
+  <div class="cursor-dot" style="background:#a3ff00"></div>
+  <div class="cursor-label" style="background:#1a3300;border:1px solid rgba(163,255,0,.3)">Marcus</div>
+</div>
+<div class="cursor c2">
+  <div class="cursor-dot" style="background:#ff9500"></div>
+  <div class="cursor-label" style="background:#331a00;border:1px solid rgba(255,149,0,.3)">James</div>
+</div>
+<div class="cursor c3">
+  <div class="cursor-dot" style="background:#6495ff"></div>
+  <div class="cursor-label" style="background:#001033;border:1px solid rgba(100,149,255,.3)">Dana</div>
+</div>
+<div class="cursor c4">
+  <div class="cursor-dot" style="background:#ff50c8"></div>
+  <div class="cursor-label" style="background:#33002a;border:1px solid rgba(255,80,200,.3)">Tyler</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Site<span>Up</span></div>
+  <div class="nav-links">
+    <a href="#">Videos</a>
+    <a href="#">Logos</a>
+    <a href="#">Websites</a>
+    <a href="#">Pricing</a>
+  </div>
+  <div class="nav-right">
+    <a href="https://siteupagency.com" class="btn-ghost">Login</a>
+    <a href="https://siteupagency.com/pay.html" class="btn-primary">Start Free →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="pulse"></span>
+    AI-powered creation for contractors
+  </div>
+
+  <h1>The AI creation<br>platform for <span class="accent">your business.</span></h1>
+
+  <p class="hero-sub">
+    Promo videos, logos, flyers, and websites — <b>built by AI in seconds.</b>
+    Just describe your business and we handle everything.
+  </p>
+
+  <!-- PROMPT BOX -->
+  <div class="prompt-container">
+    <div class="prompt-top">
+      <textarea id="prompt" rows="2" placeholder="Describe what you want... e.g. &quot;30-second promo video for my roofing company&quot;"></textarea>
+    </div>
+    <div class="prompt-bottom">
+      <div class="prompt-tools">
+        <div class="tool-chip active" onclick="selectType(this,'video')" data-type="video">🎬 Video</div>
+        <div class="tool-chip" onclick="selectType(this,'logo')" data-type="logo">✏️ Logo</div>
+        <div class="tool-chip" onclick="selectType(this,'flyer')" data-type="flyer">📄 Flyer</div>
+        <div class="tool-chip" onclick="selectType(this,'website')" data-type="website">🌐 Website</div>
+      </div>
+      <button class="generate-btn" onclick="handleGenerate()">
+        <span class="spark">✦</span> Generate
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SCROLLING STRIP -->
+<div class="strip-wrap">
+  <div class="strip-track">
+    <span class="strip-chip" onclick="fill('30-sec promo video for my roofing company')">🎬 Roofing promo video</span>
+    <span class="strip-chip" onclick="fill('logo for my lawn care business')">✏️ Lawn care logo</span>
+    <span class="strip-chip" onclick="fill('Facebook ad for my HVAC company')">📱 HVAC Facebook ad</span>
+    <span class="strip-chip" onclick="fill('flyer for my painting business')">📄 Painting flyer</span>
+    <span class="strip-chip" onclick="fill('website for my electrical company')">🌐 Electrician website</span>
+    <span class="strip-chip" onclick="fill('Instagram reel for my pressure washing business')">📸 Pressure washing reel</span>
+    <span class="strip-chip" onclick="fill('business card design for my plumbing company')">💼 Plumber business card</span>
+    <span class="strip-chip" onclick="fill('brand kit for my general contracting business')">🎨 Contractor brand kit</span>
+    <span class="strip-chip" onclick="fill('Google Ads banner for my fencing company')">📢 Fencing Google ad</span>
+    <span class="strip-chip" onclick="fill('before & after video for my concrete company')">🏗️ Concrete before/after</span>
+    <!-- duplicate -->
+    <span class="strip-chip">🎬 Roofing promo video</span>
+    <span class="strip-chip">✏️ Lawn care logo</span>
+    <span class="strip-chip">📱 HVAC Facebook ad</span>
+    <span class="strip-chip">📄 Painting flyer</span>
+    <span class="strip-chip">🌐 Electrician website</span>
+    <span class="strip-chip">📸 Pressure washing reel</span>
+    <span class="strip-chip">💼 Plumber business card</span>
+    <span class="strip-chip">🎨 Contractor brand kit</span>
+    <span class="strip-chip">📢 Fencing Google ad</span>
+    <span class="strip-chip">🏗️ Concrete before/after</span>
+  </div>
+</div>
+
+<!-- VIDEO GALLERY -->
+<section class="gallery-section">
+  <div class="gallery-header">
+    <div>
+      <div class="gallery-title">Recent creations</div>
+      <div class="gallery-sub">Made by contractors just like you</div>
+    </div>
+    <a href="#" class="see-all">See all →</a>
+  </div>
+  <div class="video-grid">
+
+    <div class="vid-card">
+      <div class="vid-thumb grad-roofing">
+        <div class="overlay"></div>
+        <div class="thumb-icon">🏠</div>
+        <div class="play-btn">▶</div>
+        <div class="vid-duration">0:30</div>
+        <div class="vid-type-badge badge-video">VIDEO</div>
+      </div>
+      <div class="vid-meta">
+        <div class="vid-biz">Peak Ridge Roofing</div>
+        <div class="vid-desc">Summer storm damage promo</div>
+      </div>
+    </div>
+
+    <div class="vid-card">
+      <div class="vid-thumb grad-lawn">
+        <div class="overlay"></div>
+        <div class="thumb-icon">🌿</div>
+        <div class="play-btn">▶</div>
+        <div class="vid-duration">0:15</div>
+        <div class="vid-type-badge badge-logo">LOGO</div>
+      </div>
+      <div class="vid-meta">
+        <div class="vid-biz">Green Edge Lawn Care</div>
+        <div class="vid-desc">Brand logo animation</div>
+      </div>
+    </div>
+
+    <div class="vid-card">
+      <div class="vid-thumb grad-hvac">
+        <div class="overlay"></div>
+        <div class="thumb-icon">❄️</div>
+        <div class="play-btn">▶</div>
+        <div class="vid-duration">0:45</div>
+        <div class="vid-type-badge badge-video">VIDEO</div>
+      </div>
+      <div class="vid-meta">
+        <div class="vid-biz">CoolAir HVAC</div>
+        <div class="vid-desc">AC tune-up special ad</div>
+      </div>
+    </div>
+
+    <div class="vid-card">
+      <div class="vid-thumb grad-paint">
+        <div class="overlay"></div>
+        <div class="thumb-icon">🎨</div>
+        <div class="play-btn">▶</div>
+        <div class="vid-duration">0:20</div>
+        <div class="vid-type-badge badge-flyer">FLYER</div>
+      </div>
+      <div class="vid-meta">
+        <div class="vid-biz">Two Koats Painting</div>
+        <div class="vid-desc">Spring special promo flyer</div>
+      </div>
+    </div>
+
+    <div class="vid-card">
+      <div class="vid-thumb grad-elec">
+        <div class="overlay"></div>
+        <div class="thumb-icon">⚡</div>
+        <div class="play-btn">▶</div>
+        <div class="vid-duration">0:30</div>
+        <div class="vid-type-badge badge-site">WEBSITE</div>
+      </div>
+      <div class="vid-meta">
+        <div class="vid-biz">Real Estate Electric</div>
+        <div class="vid-desc">Full business website</div>
+      </div>
+    </div>
+
+    <div class="vid-card">
+      <div class="vid-thumb grad-plumb">
+        <div class="overlay"></div>
+        <div class="thumb-icon">🔧</div>
+        <div class="play-btn">▶</div>
+        <div class="vid-duration">0:60</div>
+        <div class="vid-type-badge badge-video">VIDEO</div>
+      </div>
+      <div class="vid-meta">
+        <div class="vid-biz">Clear Day Plumbing</div>
+        <div class="vid-desc">Emergency service ad</div>
+      </div>
+    </div>
+
+    <div class="vid-card">
+      <div class="vid-thumb grad-wash">
+        <div class="overlay"></div>
+        <div class="thumb-icon">💧</div>
+        <div class="play-btn">▶</div>
+        <div class="vid-duration">0:15</div>
+        <div class="vid-type-badge badge-logo">LOGO</div>
+      </div>
+      <div class="vid-meta">
+        <div class="vid-biz">Neptune Clean</div>
+        <div class="vid-desc">Logo + brand identity</div>
+      </div>
+    </div>
+
+    <div class="vid-card">
+      <div class="vid-thumb grad-hand">
+        <div class="overlay"></div>
+        <div class="thumb-icon">🔨</div>
+        <div class="play-btn">▶</div>
+        <div class="vid-duration">0:30</div>
+        <div class="vid-type-badge badge-flyer">FLYER</div>
+      </div>
+      <div class="vid-meta">
+        <div class="vid-biz">Sandbridge Handyman</div>
+        <div class="vid-desc">Neighborhood door hanger</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section class="features-section">
+  <div class="feat-label">What we create</div>
+  <h2 class="feat-title">Everything your business needs<br>to <span style="color:var(--lime)">get found & get paid</span></h2>
+  <p class="feat-sub">One platform. All your marketing content. Done by AI.</p>
+
+  <div class="feat-grid">
+    <div class="feat-card fc-video">
+      <span class="feat-icon">🎬</span>
+      <div class="feat-name">Promo Videos</div>
+      <div class="feat-desc">30–60 second videos with your branding, services, and a call-to-action. Ready to post on Instagram, TikTok, Facebook, and YouTube.</div>
+      <div class="feat-examples">
+        <span class="feat-ex">Instagram Reels</span>
+        <span class="feat-ex">TikTok ads</span>
+        <span class="feat-ex">YouTube shorts</span>
+        <span class="feat-ex">Facebook ads</span>
+      </div>
+    </div>
+
+    <div class="feat-card fc-logo">
+      <span class="feat-icon">✏️</span>
+      <div class="feat-name">Logos & Branding</div>
+      <div class="feat-desc">Professional logo designs, color palettes, and brand kits. Everything you need to look legit and build trust with new customers.</div>
+      <div class="feat-examples">
+        <span class="feat-ex">Logo design</span>
+        <span class="feat-ex">Brand kit</span>
+        <span class="feat-ex">Business cards</span>
+        <span class="feat-ex">Truck wraps</span>
+      </div>
+    </div>
+
+    <div class="feat-card fc-flyer">
+      <span class="feat-icon">📄</span>
+      <div class="feat-name">Flyers & Print</div>
+      <div class="feat-desc">Door hangers, postcards, and flyers tailored to your trade. Print-ready files delivered instantly. Drop them in any neighborhood and watch calls come in.</div>
+      <div class="feat-examples">
+        <span class="feat-ex">Door hangers</span>
+        <span class="feat-ex">Postcards</span>
+        <span class="feat-ex">Yard signs</span>
+        <span class="feat-ex">Invoice templates</span>
+      </div>
+    </div>
+
+    <div class="feat-card fc-website">
+      <span class="feat-icon">🌐</span>
+      <div class="feat-name">Full Websites</div>
+      <div class="feat-desc">A complete, SEO-ready website live on your own domain. Built in minutes. Includes contact forms, click-to-call, and Google indexing.</div>
+      <div class="feat-examples">
+        <span class="feat-ex">Custom domain</span>
+        <span class="feat-ex">SEO optimized</span>
+        <span class="feat-ex">Mobile-ready</span>
+        <span class="feat-ex">Google indexed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="feat-label">Pricing</div>
+  <h2 class="feat-title">Simple, honest pricing</h2>
+  <p class="feat-sub">No subscriptions. Pay per creation.</p>
+
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-name">Starter</div>
+      <div class="price-amount"><sup>$</sup>69</div>
+      <div class="price-per">one-time kickoff</div>
+      <ul class="price-features">
+        <li>1 custom website</li>
+        <li>Your own domain</li>
+        <li>Mobile optimized</li>
+        <li>SEO setup</li>
+        <li>30 days of updates</li>
+      </ul>
+      <a href="https://siteupagency.com/pay.html" class="price-cta">Get Started</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-name">Growth</div>
+      <div class="price-amount"><sup>$</sup>299</div>
+      <div class="price-per">one-time</div>
+      <ul class="price-features">
+        <li>Website + 3 promo videos</li>
+        <li>Logo & brand kit</li>
+        <li>2 flyer designs</li>
+        <li>Social media assets</li>
+        <li>60 days of updates</li>
+        <li>Priority delivery</li>
+      </ul>
+      <a href="https://siteupagency.com/pay.html" class="price-cta">Get Started</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-name">Full Stack</div>
+      <div class="price-amount"><sup>$</sup>599</div>
+      <div class="price-per">one-time</div>
+      <ul class="price-features">
+        <li>Everything in Growth</li>
+        <li>10 promo videos/month</li>
+        <li>Google Ads creatives</li>
+        <li>Ongoing content drops</li>
+        <li>Dedicated manager</li>
+        <li>Unlimited revisions</li>
+      </ul>
+      <a href="https://siteupagency.com/pay.html" class="price-cta">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-bottom">
+  <div class="cta-inner">
+    <h2>Start creating in<br><span style="color:var(--lime)">60 seconds.</span></h2>
+    <p>Describe your business above and watch AI build everything you need to get more customers this week.</p>
+    <a href="#prompt" class="cta-main-btn" onclick="document.getElementById('prompt').focus()">✦ Try it now — it's free</a>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <span class="modal-close" onclick="closeModal()">✕</span>
+    <div class="modal-spinner" id="spinner"></div>
+    <div class="modal-title" id="modalTitle">Creating your content...</div>
+    <div class="modal-status" id="modalStatus">Analyzing your request...</div>
+    <div class="modal-steps" id="modalSteps"></div>
+    <div class="modal-output" id="modalOutput">
+      <div class="output-preview">
+        <div class="output-icon" id="outIcon">🎬</div>
+        <div>
+          <div class="output-name" id="outName">Your content is ready!</div>
+          <div class="output-desc" id="outDesc">Click below to get started for $69</div>
+        </div>
+      </div>
+      <div class="output-actions">
+        <a href="https://siteupagency.com/pay.html" class="out-btn green">🚀 Claim for $69</a>
+        <a href="sms:7573345771" class="out-btn dark">💬 Text Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedType = 'video';
+
+function selectType(el, type) {
+  document.querySelectorAll('.tool-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  selectedType = type;
+}
+
+function fill(text) {
+  document.getElementById('prompt').value = text;
+  document.getElementById('prompt').focus();
+}
+
+const typeConfig = {
+  video:   { icon:'🎬', steps:['Analyzing your business...','Scripting your video...','Selecting footage & music...','Adding your branding...','Rendering final video...'], name:'Promo Video', desc:'30-second promo ready to post on social media' },
+  logo:    { icon:'✏️', steps:['Understanding your brand...','Exploring design concepts...','Generating logo variations...','Refining color palette...','Finalizing brand kit...'], name:'Logo & Brand Kit', desc:'Professional logo with colors, fonts & usage guide' },
+  flyer:   { icon:'📄', steps:['Reading your offer...','Designing layout...','Placing your content...','Applying your brand colors...','Exporting print-ready file...'], name:'Print Flyer', desc:'Print-ready flyer — door hangers, postcards, or signs' },
+  website: { icon:'🌐', steps:['Analyzing your services...','Generating copy & design...','Building pages & structure...','Setting up SEO tags...','Deploying live preview...'], name:'Custom Website', desc:'Full website live on your domain this week' },
+};
+
+function handleGenerate() {
+  const val = document.getElementById('prompt').value.trim();
+  if (!val) { document.getElementById('prompt').focus(); return; }
+
+  const cfg = typeConfig[selectedType];
+  document.getElementById('modal').classList.add('show');
+  document.getElementById('modalOutput').classList.remove('show');
+  document.getElementById('spinner').style.display = 'block';
+  document.getElementById('modalTitle').textContent = 'Creating your ' + cfg.name.toLowerCase() + '...';
+  document.getElementById('modalStatus').textContent = cfg.steps[0];
+  document.getElementById('outIcon').textContent = cfg.icon;
+  document.getElementById('outName').textContent = cfg.name + ' is ready!';
+  document.getElementById('outDesc').textContent = cfg.desc;
+
+  // Build step els
+  const stepsEl = document.getElementById('modalSteps');
+  stepsEl.innerHTML = '';
+  cfg.steps.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'mstep' + (i === 0 ? ' active' : '');
+    div.id = 'ms' + i;
+    div.innerHTML = `<div class="ic">${i===0?'→':' '}</div>${s}`;
+    stepsEl.appendChild(div);
+  });
+
+  let cur = 0;
+  const iv = setInterval(() => {
+    document.getElementById('ms'+cur).className = 'mstep done';
+    document.getElementById('ms'+cur).querySelector('.ic').textContent = '✓';
+    cur++;
+    if (cur < cfg.steps.length) {
+      document.getElementById('ms'+cur).className = 'mstep active';
+      document.getElementById('ms'+cur).querySelector('.ic').textContent = '→';
+      document.getElementById('modalStatus').textContent = cfg.steps[cur];
+    } else {
+      clearInterval(iv);
+      document.getElementById('spinner').style.display = 'none';
+      document.getElementById('modalTitle').textContent = '✅ ' + cfg.name + ' ready!';
+      document.getElementById('modalStatus').textContent = 'Your creation is complete. Claim it below.';
+      document.getElementById('modalOutput').classList.add('show');
+    }
+  }, 950);
+}
+
+document.getElementById('prompt').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleGenerate(); }
+});
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+</script>
+</body>
+</html>
