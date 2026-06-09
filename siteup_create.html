@@ -222,8 +222,8 @@ const typeConfig = {
 };
 
 const typeSteps = {
-  image:        ['Reading your prompt...','Warming up FLUX AI...','Generating with FLUX Schnell...','Finalizing 4 images...'],
-  logo:         ['Reading brand brief...','Warming up FLUX AI...','Generating logo concepts...','Finalizing 4 concepts...'],
+  image:        ['Sending to Gemini AI...','Generating your images...','Rendering 4 variations...','Almost ready...'],
+  logo:         ['Sending to Gemini AI...','Designing logo concepts...','Rendering variations...','Almost ready...'],
   video_script: ['Understanding your business...','Writing hook and opening...','Scripting all scenes...','Adding CTA and captions...'],
   post:         ['Analyzing your audience...','Writing the hook...','Crafting body and CTA...','Adding hashtags...'],
   email:        ['Reading your goal...','Writing subject line...','Drafting body copy...','Polishing CTA and P.S....'],
@@ -295,46 +295,26 @@ async function generate() {
   let stepIdx = 0;
   const stepTimer = setInterval(() => {
     if (stepIdx < steps.length - 1) { stepIdx++; updateStep(stepIdx, steps); }
-  }, 2000);
+  }, 3500);
 
   try {
-    // ── IMAGE & LOGO — Pollinations AI (100% free, no login, no API key) ──────
-    if (currentType === 'image' || currentType === 'logo') {
-      clearInterval(stepTimer);
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: currentType, prompt })
+    });
 
-      const imagePrompt = currentType === 'logo'
-        ? `professional logo design: ${prompt}, clean vector style, white background, minimal, bold`
-        : prompt;
+    clearInterval(stepTimer);
+    if (!res.ok) throw new Error('Server error ' + res.status);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Generation failed. Please try again.');
 
-      // Build 4 unique Pollinations URLs with different seeds
-      const seeds = [
-        Math.floor(Math.random() * 9000) + 1000,
-        Math.floor(Math.random() * 9000) + 1000,
-        Math.floor(Math.random() * 9000) + 1000,
-        Math.floor(Math.random() * 9000) + 1000
-      ];
-      const encoded = encodeURIComponent(imagePrompt);
-      const urls = seeds.map(s =>
-        `https://image.pollinations.ai/prompt/${encoded}?model=flux&width=1024&height=1024&seed=${s}&nologo=true&enhance=true`
-      );
+    steps.forEach((_,i) => markStepDone(i));
+    await delay(300);
 
-      steps.forEach((_,i) => markStepDone(i));
-      await delay(200);
-      showImageResult(prompt, urls, 'flux');
-
-    // ── ALL TEXT TYPES — backend (OpenRouter) ─────────────────────────────────
+    if (data.type === 'images') {
+      showImageResult(prompt, data.urls, data.source);
     } else {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: currentType, prompt })
-      });
-      clearInterval(stepTimer);
-      if (!res.ok) throw new Error(`Server error ${res.status}`);
-      const data = await res.json();
-      if (!data.success) throw new Error(data.error || 'Generation failed. Please try again.');
-      steps.forEach((_,i) => markStepDone(i));
-      await delay(400);
       showTextResult(prompt, data.text);
     }
 
@@ -392,9 +372,11 @@ function markStepDone(i) {
 
 // ── SHOW IMAGE RESULT ─────────────────────────────────────────────
 function showImageResult(prompt, urls, source) {
+  // Store URLs globally for download (handles base64 data URLs)
+  urls.forEach((url, i) => { _imgStore[i] = url; });
   currentResult = { type:'image', prompt, urls };
   const wrap = document.getElementById('outputWrap');
-  const sourceLabel = source === 'flux' ? '✨ FLUX AI' : 'AI Generated';
+  const sourceLabel = source === 'gemini' ? '✨ Gemini AI' : source === 'flux' ? '✨ FLUX AI' : 'AI Generated';
 
   wrap.innerHTML = `
     <div class="res-header">
@@ -403,15 +385,15 @@ function showImageResult(prompt, urls, source) {
     </div>
     <div class="img-grid" id="imgGrid">
       ${urls.map((url,i) => `
-        <div class="img-slot" id="slot${i}">
-          <div class="img-loading"><div class="mini-spin"></div><span>Loading...</span></div>
+        <div class="img-slot" id="slot${i}" data-url="${i}">
+          <div class="img-loading"><div class="mini-spin"></div><span>Generating...</span></div>
           <img src="${url}" alt="AI image ${i+1}"
             onload="imgLoaded(${i})"
-            onerror="imgFailed(${i},'${url}')"
+            onerror="imgFailed(${i})"
             style="display:none"
           >
           <div class="img-overlay">
-            <button class="dl-btn" onclick="dlImg('${url}',${i})">⬇ Save</button>
+            <button class="dl-btn" onclick="dlImgByIndex(${i})">⬇ Save</button>
           </div>
         </div>`).join('')}
     </div>
@@ -436,10 +418,22 @@ function imgFailed(i, url) {
   if (loading) loading.innerHTML = '<span style="color:rgba(255,100,100,.6);font-size:11px">⚠️ Load failed — tap Regenerate</span>';
 }
 
-function dlImg(url, i) {
+// Store image data URLs globally for download
+const _imgStore = {};
+
+function dlImgByIndex(idx) {
+  const url = _imgStore[idx];
+  if (!url) return;
   const a = document.createElement('a');
-  a.href = url; a.download = `siteup-image-${i+1}.jpg`; a.target='_blank'; a.click();
-  toast('⬇️ Saving image...');
+  a.href = url;
+  a.download = 'siteup-ai-image-' + (idx+1) + '.png';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function dlImg(url, idx) {
+  dlImgByIndex(idx);
 }
 
 function dlAll() {
