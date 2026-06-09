@@ -4,422 +4,794 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SiteUp — The Ultimate Creation Machine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--lime:#a3ff00;--bg:#0c0c14;--card:rgba(255,255,255,.04);--border:rgba(255,255,255,.08)}
+:root{--bg:#0f0d1a;--bg2:#13111f;--border:rgba(255,255,255,.08);--text:rgba(255,255,255,.55)}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden;min-height:100vh}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
 
-/* BG */
-.bg-grad{position:fixed;inset:0;z-index:0;
-  background:radial-gradient(ellipse 90% 55% at 50% -5%,rgba(100,30,200,.6) 0%,transparent 65%),
-             radial-gradient(ellipse 55% 45% at 85% 55%,rgba(50,10,140,.4) 0%,transparent 60%),
-             radial-gradient(ellipse 50% 40% at 10% 75%,rgba(80,20,160,.3) 0%,transparent 60%),
-             #0c0c14;
-  pointer-events:none}
+/* ── HERO BG ── */
+.hero-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% -10%, rgba(90,30,180,.7) 0%, rgba(60,10,130,.4) 40%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 30%, rgba(140,20,80,.25) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 15% 70%, rgba(30,10,90,.35) 0%, transparent 60%),
+    #0f0d1a;
+}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;
-  backdrop-filter:blur(18px);background:rgba(12,12,20,.7);border-bottom:1px solid var(--border)}
-.logo{font-size:18px;font-weight:900;letter-spacing:6px;text-transform:uppercase;color:#fff}
-.logo em{font-style:normal;color:var(--lime)}
-.nav-btns{display:flex;gap:10px}
-.nb{padding:9px 20px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;border:none;transition:all .15s}
-.nb.ghost{background:rgba(255,255,255,.07);color:#ccc;border:1px solid var(--border)}
-.nb.ghost:hover{background:rgba(255,255,255,.12);color:#fff}
-.nb.solid{background:#fff;color:#000}
-.nb.solid:hover{background:var(--lime)}
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:200;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding:16px 32px;gap:10px;
+  backdrop-filter:blur(20px);
+  background:rgba(15,13,26,.5);
+}
+.nav-btn{
+  display:flex;align-items:center;gap:7px;
+  padding:9px 20px;border-radius:10px;
+  font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;border:none;
+  transition:all .15s;
+}
+.nav-btn.ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border:1px solid var(--border)}
+.nav-btn.ghost:hover{background:rgba(255,255,255,.13);color:#fff}
+.nav-btn.white{background:#fff;color:#000}
+.nav-btn.white:hover{background:#f0f0f0}
+.nav-icon{font-size:15px}
 
-/* HERO */
-.hero{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;padding:100px 20px 44px}
-h1{font-size:clamp(46px,9vw,100px);font-weight:900;letter-spacing:-3px;line-height:1.0;max-width:860px;margin-bottom:22px}
-.hero-sub{font-size:clamp(16px,2.2vw,20px);color:rgba(255,255,255,.5);max-width:580px;line-height:1.7;margin-bottom:50px}
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:5;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:90px 20px 40px;
+}
+.site-logo{
+  font-size:28px;font-weight:900;letter-spacing:8px;text-transform:uppercase;
+  color:#fff;margin-bottom:36px;opacity:.9;
+}
+h1{
+  font-size:clamp(42px,8.5vw,90px);
+  font-weight:700;letter-spacing:-2px;line-height:1.06;
+  max-width:800px;margin-bottom:20px;
+}
+.hero-sub{
+  font-size:clamp(15px,2vw,19px);color:var(--text);
+  max-width:540px;line-height:1.7;margin-bottom:44px;
+}
 .hero-sub span{color:rgba(255,255,255,.9)}
 
-/* PROMPT */
-.pbox{width:100%;max-width:700px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);
-  border-radius:18px;overflow:hidden;backdrop-filter:blur(14px);transition:border-color .2s,box-shadow .2s;margin-bottom:18px}
-.pbox:focus-within{border-color:rgba(163,255,0,.4);box-shadow:0 0 0 4px rgba(163,255,0,.06)}
-.pbox textarea{width:100%;background:transparent;border:none;outline:none;color:#fff;
-  font-size:17px;font-family:'Inter',sans-serif;resize:none;padding:20px 20px 8px;min-height:64px;line-height:1.5}
-.pbox textarea::placeholder{color:rgba(255,255,255,.28)}
-.pbox-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 14px}
-.pbox-plus{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid var(--border);
-  color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
-.pbox-plus:hover{background:rgba(255,255,255,.15)}
-.pbox-send{width:38px;height:38px;border-radius:11px;background:var(--lime);border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:all .18s}
-.pbox-send:hover{background:#bcff33;transform:scale(1.07)}
-.pbox-send svg{width:15px;height:15px}
+/* ── PROMPT BOX ── */
+.prompt-wrap{width:100%;max-width:680px;margin-bottom:16px}
+.pbox{
+  width:100%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  overflow:hidden;
+  backdrop-filter:blur(14px);
+  transition:border-color .2s,box-shadow .2s;
+}
+.pbox:focus-within{
+  border-color:rgba(255,255,255,.3);
+  box-shadow:0 0 0 4px rgba(255,255,255,.04);
+}
+.pbox-input{
+  width:100%;background:transparent;border:none;outline:none;
+  color:#fff;font-size:16px;font-family:'Inter',sans-serif;
+  resize:none;padding:18px 20px 6px;min-height:58px;line-height:1.5;
+}
+.pbox-input::placeholder{color:rgba(255,255,255,.3)}
+.pbox-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 12px 14px;
+}
+.pbox-plus{
+  width:32px;height:32px;border-radius:8px;
+  background:transparent;border:none;
+  color:rgba(255,255,255,.5);font-size:22px;font-weight:300;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+}
+.pbox-plus:hover{color:#fff}
+.pbox-send{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .18s;
+}
+.pbox-send:hover{background:rgba(255,255,255,.28)}
+.pbox-send svg{width:14px;height:14px}
 
-/* TAGS STRIP */
-.strip{width:100%;overflow:hidden;position:relative;z-index:5;
-  mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);
-  -webkit-mask-image:linear-gradient(to right,transparent,black 10%,black 90%,transparent);
-  margin:4px 0 60px}
-.strip-inner{display:flex;gap:10px;width:max-content;animation:scrollL 35s linear infinite}
-.strip-inner:hover{animation-play-state:paused}
-@keyframes scrollL{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.stag{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:999px;
-  background:rgba(255,255,255,.06);border:1px solid var(--border);
-  font-size:13px;font-weight:500;color:rgba(255,255,255,.65);white-space:nowrap;cursor:pointer;transition:all .15s}
-.stag:hover{background:rgba(163,255,0,.1);border-color:rgba(163,255,0,.25);color:#fff}
+/* ── SCROLLING CHIPS ── */
+.chips-wrap{
+  width:100%;overflow:hidden;position:relative;z-index:5;
+  mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);
+  -webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);
+  margin:14px 0 50px;
+}
+.chips-track{display:flex;gap:10px;width:max-content;animation:chipScroll 38s linear infinite}
+.chips-track:hover{animation-play-state:paused}
+@keyframes chipScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 18px;border-radius:999px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.6);
+  white-space:nowrap;cursor:pointer;transition:all .15s;
+}
+.chip:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff}
+.chip-icon{font-size:14px}
 
-/* COMMUNITY GRID - like supercool's output gallery */
+/* ── STUDIO BUTTONS ── */
+.studio-row{
+  position:relative;z-index:5;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+  max-width:820px;margin:0 auto 70px;padding:0 20px;
+}
+.studio-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:10px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  font-size:14px;font-weight:600;color:rgba(255,255,255,.7);
+  cursor:pointer;text-decoration:none;transition:all .18s;
+}
+.studio-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff;transform:translateY(-1px)}
+.studio-btn .si{font-size:16px}
+
+/* ── VIRAL SHORTS SECTION ── */
 .section{position:relative;z-index:5;max-width:1200px;margin:0 auto;padding:0 24px 80px}
-.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
-.sec-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:1px}
-.sec-big{font-size:22px;font-weight:800;margin-top:4px}
-.see-more{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
-.see-more:hover{color:var(--lime)}
+.sec-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px}
+.sec-title{font-size:clamp(26px,4vw,48px);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:10px}
+.sec-sub{font-size:15px;color:var(--text);margin-bottom:36px;max-width:600px;line-height:1.6}
 
-.gallery{columns:4;gap:12px}
-@media(max-width:900px){.gallery{columns:2}}
-@media(max-width:500px){.gallery{columns:1}}
-.gcard{break-inside:avoid;margin-bottom:12px;border-radius:14px;overflow:hidden;border:1px solid var(--border);
-  background:var(--card);cursor:pointer;transition:transform .2s,border-color .2s;position:relative}
-.gcard:hover{transform:translateY(-4px);border-color:rgba(163,255,0,.2)}
-.gcard-img{width:100%;display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden}
-.gcard-img .emoji{font-size:clamp(32px,5vw,56px);padding:28px 0;
-  animation:float 5s ease-in-out infinite;position:relative;z-index:1}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.gcard-img::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.03) 50%,transparent 65%);
-  animation:shimmer 3.5s infinite}
-@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
-.gcard-foot{padding:11px 14px;border-top:1px solid var(--border)}
-.gcard-name{font-size:13px;font-weight:700;margin-bottom:3px}
-.gcard-type{font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px;display:inline-block}
-.t-video{background:rgba(163,255,0,.12);color:var(--lime);border:1px solid rgba(163,255,0,.2)}
-.t-image{background:rgba(100,149,255,.12);color:#6495ff;border:1px solid rgba(100,149,255,.2)}
-.t-music{background:rgba(255,80,200,.12);color:#ff50c8;border:1px solid rgba(255,80,200,.2)}
-.t-code {background:rgba(255,149,0,.12);color:#ff9500;border:1px solid rgba(255,149,0,.2)}
-.t-doc  {background:rgba(0,229,255,.12);color:#00e5ff;border:1px solid rgba(0,229,255,.2)}
-.t-pres {background:rgba(255,100,100,.12);color:#ff6464;border:1px solid rgba(255,100,100,.2)}
+.shorts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.shorts-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.shorts-grid{grid-template-columns:1fr 1fr;gap:10px}}
 
-/* gradient bg per card */
-.bg-v1{background:linear-gradient(135deg,#0e0020,#1a0040)}
-.bg-v2{background:linear-gradient(135deg,#001a08,#003315)}
-.bg-v3{background:linear-gradient(135deg,#1a0010,#380020)}
-.bg-v4{background:linear-gradient(135deg,#001020,#002040)}
-.bg-v5{background:linear-gradient(135deg,#1a0e00,#382000)}
-.bg-v6{background:linear-gradient(135deg,#0a0a0a,#1a1a1a)}
-.bg-v7{background:linear-gradient(135deg,#001510,#003020)}
-.bg-v8{background:linear(135deg,#150015,#2a002a)}
-.bg-v8{background:linear-gradient(135deg,#150015,#2a002a)}
-.bg-v9{background:linear-gradient(135deg,#00100a,#001f14)}
-.bg-v10{background:linear-gradient(135deg,#0f0005,#200010)}
-.bg-v11{background:linear-gradient(135deg,#050f1a,#0a1a30)}
-.bg-v12{background:linear-gradient(135deg,#1a1000,#302000)}
+.short-card{
+  border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);cursor:pointer;
+  transition:transform .2s,border-color .2s;position:relative;
+}
+.short-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.18)}
+.short-card .popular-badge{
+  position:absolute;top:10px;left:10px;z-index:3;
+  background:rgba(255,255,255,.15);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.2);
+  padding:3px 9px;border-radius:6px;font-size:10px;font-weight:700;color:#fff;
+}
+.short-thumb{
+  width:100%;aspect-ratio:9/16;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  font-size:clamp(36px,5vw,60px);
+}
+.short-thumb::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.75) 100%);
+}
+.short-meta{padding:12px 14px}
+.short-name{font-size:13px;font-weight:700;margin-bottom:3px}
+.short-desc{font-size:11px;color:var(--text);line-height:1.5}
 
-/* WHAT IT DOES */
-.what-section{position:relative;z-index:5;max-width:1100px;margin:0 auto;padding:0 24px 80px;text-align:center}
-.what-label{font-size:12px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
-.what-title{font-size:clamp(28px,5vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1.05;margin-bottom:14px}
-.what-sub{font-size:16px;color:rgba(255,255,255,.4);margin-bottom:54px;max-width:600px;margin-left:auto;margin-right:auto}
+/* thumb backgrounds */
+.g-cinematic{background:linear-gradient(160deg,#0d0820,#1a1035,#0d0820)}
+.g-narrated {background:linear-gradient(160deg,#081520,#102535,#081a20)}
+.g-brainrot {background:linear-gradient(160deg,#1a0808,#300d0d,#1a0808)}
+.g-fruit    {background:linear-gradient(160deg,#1a1000,#2e1e00,#1a1000)}
+.g-anime    {background:linear-gradient(160deg,#0a0818,#14102e,#0a0818)}
+.g-roblox   {background:linear-gradient(160deg,#081a10,#0f2e18,#081a10)}
+.g-lego     {background:linear-gradient(160deg,#1a1200,#2e2000,#1a1200)}
+.g-adlib    {background:linear-gradient(160deg,#1a0015,#300028,#1a0015)}
 
+/* ── ORIGINALS ── */
+.originals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.originals-grid{grid-template-columns:1fr}}
+.orig-card{
+  border-radius:16px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+  cursor:pointer;transition:transform .2s,border-color .2s;
+}
+.orig-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
+.orig-thumb{
+  width:100%;aspect-ratio:16/9;
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;position:relative;overflow:hidden;
+}
+.orig-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8) 100%)}
+.orig-badge{
+  position:absolute;top:10px;left:10px;z-index:3;
+  padding:3px 10px;border-radius:6px;font-size:10px;font-weight:800;
+}
+.badge-free{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.badge-series{background:rgba(163,100,255,.25);color:#c87aff;border:1px solid rgba(163,100,255,.3)}
+.orig-body{padding:16px}
+.orig-title{font-size:15px;font-weight:800;margin-bottom:6px}
+.orig-desc{font-size:12px;color:var(--text);line-height:1.6}
+.g-rider   {background:linear-gradient(135deg,#0a0014,#180028)}
+.g-apoc    {background:linear-gradient(135deg,#100800,#201000)}
+.g-film    {background:linear-gradient(135deg,#001018,#001a28)}
+.g-influencer{background:linear-gradient(135deg,#14001a,#280030)}
+.g-book    {background:linear-gradient(135deg,#001a0a,#002e12)}
+.g-publish {background:linear-gradient(135deg,#1a0a00,#2e1400)}
+
+/* ── COMMUNITY MASONRY ── */
+.masonry{columns:5;gap:10px}
+@media(max-width:1000px){.masonry{columns:3}}
+@media(max-width:600px){.masonry{columns:2}}
+.m-card{
+  break-inside:avoid;margin-bottom:10px;
+  border-radius:12px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);
+  cursor:pointer;transition:transform .2s,border-color .2s;position:relative;
+}
+.m-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.18)}
+.m-img{
+  width:100%;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.m-emoji{font-size:clamp(28px,3vw,44px);padding:24px 0;position:relative;z-index:1;
+  animation:mfloat 5s ease-in-out infinite}
+@keyframes mfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.m-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.025) 50%,transparent 65%);
+  animation:mshimmer 4s infinite}
+@keyframes mshimmer{0%{transform:translateX(-150%)}100%{transform:translateX(250%)}}
+.m-foot{padding:8px 12px 10px;border-top:1px solid rgba(255,255,255,.05)}
+.m-user{font-size:12px;font-weight:700}
+.m-likes{font-size:11px;color:var(--text);margin-top:1px}
+
+/* community card bg variants */
+.cb1{background:linear-gradient(145deg,#0d0020,#1a0035)}
+.cb2{background:linear-gradient(145deg,#001a08,#003315)}
+.cb3{background:linear-gradient(145deg,#1a0010,#300020)}
+.cb4{background:linear-gradient(145deg,#000d1a,#001535)}
+.cb5{background:linear-gradient(145deg,#1a0e00,#2e1a00)}
+.cb6{background:linear-gradient(145deg,#060606,#111)}
+.cb7{background:linear-gradient(145deg,#001510,#002520)}
+.cb8{background:linear-gradient(145deg,#150015,#280028)}
+.cb9{background:linear-gradient(145deg,#001008,#001a10)}
+.cb10{background:linear-gradient(145deg,#100005,#200010)}
+.cb11{background:linear-gradient(145deg,#050f1a,#0a1830)}
+.cb12{background:linear-gradient(145deg,#1a1000,#2e1e00)}
+.cb13{background:linear-gradient(145deg,#0a0010,#150020)}
+.cb14{background:linear-gradient(145deg,#001505,#002a0a)}
+.cb15{background:linear-gradient(145deg,#180005,#2e000a)}
+
+/* ── WHAT IT DOES ── */
 .what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media(max-width:700px){.what-grid{grid-template-columns:1fr}}
-.wcard{border-radius:20px;padding:28px 24px;border:1px solid var(--border);
-  background:var(--card);text-align:left;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
-.wcard:hover{border-color:rgba(163,255,0,.2);transform:translateY(-3px)}
-.wcard::before{content:'';position:absolute;top:-60px;right:-60px;width:160px;height:160px;
-  border-radius:50%;opacity:.07;pointer-events:none}
-.wc1::before{background:var(--lime)} .wc2::before{background:#6495ff} .wc3::before{background:#ff50c8}
-.wc4::before{background:#ff9500}    .wc5::before{background:#00e5ff} .wc6::before{background:#ff6464}
-.wcard-icon{font-size:34px;margin-bottom:16px;display:block}
-.wcard-name{font-size:18px;font-weight:800;margin-bottom:8px}
-.wcard-desc{font-size:14px;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:16px}
-.wcard-tags{display:flex;flex-wrap:wrap;gap:6px}
-.wtag{padding:3px 10px;border-radius:5px;font-size:11px;font-weight:600;
-  background:rgba(255,255,255,.06);border:1px solid var(--border);color:rgba(255,255,255,.45)}
+.w-card{
+  border-radius:18px;padding:26px 22px;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);
+  transition:border-color .2s,transform .2s;
+}
+.w-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px)}
+.w-icon{font-size:30px;margin-bottom:14px;display:block}
+.w-title{font-size:17px;font-weight:700;margin-bottom:8px}
+.w-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.w-list li{font-size:13px;color:var(--text);padding-left:14px;position:relative;line-height:1.5}
+.w-list li::before{content:'·';position:absolute;left:0;color:rgba(255,255,255,.3)}
+.w-badge{
+  margin-top:14px;padding:5px 12px;border-radius:7px;
+  font-size:11px;font-weight:600;display:inline-block;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.45);
+}
 
-/* HOW IT WORKS */
-.how-section{position:relative;z-index:5;max-width:900px;margin:0 auto;padding:0 24px 80px;text-align:center}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:50px}
-@media(max-width:700px){.steps{grid-template-columns:repeat(2,1fr)}}
-.step{border-radius:18px;padding:26px 20px;border:1px solid var(--border);
-  background:var(--card);text-align:left;transition:border-color .2s}
-.step:hover{border-color:rgba(163,255,0,.2)}
-.step-n{width:36px;height:36px;border-radius:9px;background:rgba(163,255,0,.1);
-  border:1px solid rgba(163,255,0,.18);color:var(--lime);font-size:13px;font-weight:900;
-  display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-.step-t{font-size:14px;font-weight:700;margin-bottom:6px}
-.step-d{font-size:12px;color:rgba(255,255,255,.4);line-height:1.6}
+/* ── USE CASE TABS ── */
+.tabs-bar{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.tab{
+  padding:8px 18px;border-radius:8px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  background:transparent;border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.45);transition:all .15s;
+}
+.tab.active{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff}
+.tab:hover{background:rgba(255,255,255,.08);color:#fff}
+.use-panel{display:none}
+.use-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:650px){.use-panel.active{grid-template-columns:1fr}}
+.use-left{border-radius:18px;padding:28px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.use-left h3{font-size:20px;font-weight:800;margin-bottom:10px}
+.use-left p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:22px}
+.prompt-example{
+  background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:14px 16px;
+  font-size:13px;color:rgba(255,255,255,.6);font-style:italic;line-height:1.5;
+  margin-bottom:20px;
+}
+.prompt-example strong{color:rgba(255,255,255,.35);font-style:normal;font-size:11px;font-weight:700;letter-spacing:1px;display:block;margin-bottom:6px;text-transform:uppercase}
+.blueprint{border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);margin-bottom:10px}
+.blueprint h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.blueprint p{font-size:13px;color:var(--text);line-height:1.5}
+.use-right{border-radius:18px;padding:28px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);display:flex;flex-direction:column;gap:10px}
+.use-chips{display:flex;flex-direction:column;gap:8px}
+.use-chip-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);cursor:pointer;transition:all .15s}
+.use-chip-row:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+.ucr-icon{font-size:18px;flex-shrink:0}
+.ucr-text{font-size:13px;font-weight:600}
+.ucr-sub{font-size:11px;color:var(--text);margin-top:1px}
 
-/* FAQ */
-.faq-section{position:relative;z-index:5;max-width:720px;margin:0 auto;padding:0 24px 80px}
-.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
-.faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 0;cursor:pointer;
-  font-size:16px;font-weight:600;gap:16px;transition:color .15s;user-select:none}
-.faq-q:hover{color:var(--lime)}
-.faq-arrow{font-size:18px;color:rgba(255,255,255,.3);transition:transform .25s,color .15s;flex-shrink:0}
-.faq-item.open .faq-arrow{transform:rotate(45deg);color:var(--lime)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s;
-  font-size:14px;color:rgba(255,255,255,.45);line-height:1.7}
-.faq-item.open .faq-a{max-height:300px;padding-bottom:18px}
+/* ── HOW IT WORKS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:48px}
+@media(max-width:700px){.steps-grid{grid-template-columns:repeat(2,1fr)}}
+.step{
+  border-radius:16px;padding:24px 18px;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);
+}
+.step-num{
+  font-size:12px;font-weight:700;color:rgba(255,255,255,.25);
+  letter-spacing:1px;margin-bottom:12px;
+}
+.step-title{font-size:15px;font-weight:700;margin-bottom:7px}
+.step-desc{font-size:13px;color:var(--text);line-height:1.6}
 
-/* BOTTOM CTA */
+/* ── FAQ ── */
+.faq-list{display:flex;flex-direction:column}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.07)}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 0;cursor:pointer;font-size:15px;font-weight:600;gap:16px;
+  user-select:none;transition:color .15s;
+}
+.faq-q:hover{color:rgba(255,255,255,.8)}
+.faq-num{font-size:13px;font-weight:700;color:rgba(255,255,255,.25);margin-right:4px;flex-shrink:0}
+.faq-arrow{font-size:20px;color:rgba(255,255,255,.25);transition:transform .25s,color .15s;flex-shrink:0}
+.faq-item.open .faq-arrow{transform:rotate(45deg);color:rgba(255,255,255,.6)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s}
+.faq-a-inner{font-size:14px;color:var(--text);line-height:1.75;padding-bottom:18px}
+.faq-item.open .faq-a{max-height:400px}
+
+/* ── CTA BOTTOM ── */
 .cta-section{position:relative;z-index:5;text-align:center;padding:0 24px 100px}
-.cta-box{max-width:700px;margin:0 auto;padding:70px 40px;border-radius:28px;
-  background:rgba(163,255,0,.04);border:1px solid rgba(163,255,0,.12);position:relative;overflow:hidden}
-.cta-box::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);
-  width:600px;height:400px;border-radius:50%;
-  background:radial-gradient(ellipse,rgba(163,255,0,.1),transparent 70%);pointer-events:none}
-.cta-box h2{font-size:clamp(28px,5vw,52px);font-weight:900;letter-spacing:-1.5px;margin-bottom:14px;line-height:1.05}
-.cta-box p{font-size:16px;color:rgba(255,255,255,.4);margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto}
-.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.cta-btn-main{background:var(--lime);color:#000;padding:16px 40px;border-radius:13px;
-  font-size:16px;font-weight:800;border:none;cursor:pointer;text-decoration:none;transition:all .18s}
-.cta-btn-main:hover{background:#bcff33;transform:scale(1.03)}
-.cta-btn-sec{background:rgba(255,255,255,.07);color:#fff;padding:16px 30px;border-radius:13px;
-  font-size:15px;font-weight:600;border:1px solid var(--border);cursor:pointer;text-decoration:none;transition:all .18s}
-.cta-btn-sec:hover{background:rgba(255,255,255,.12)}
-.cta-note{font-size:12px;color:rgba(255,255,255,.25);margin-top:18px}
+.cta-box{
+  max-width:680px;margin:0 auto;
+  padding:72px 40px;border-radius:24px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  position:relative;overflow:hidden;
+}
+.cta-box::before{
+  content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);
+  width:700px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(90,30,180,.35),transparent 70%);
+  pointer-events:none;
+}
+.cta-eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.3);margin-bottom:14px}
+.cta-box h2{font-size:clamp(28px,5vw,50px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px}
+.cta-box p{font-size:16px;color:var(--text);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.cta-main{
+  background:#fff;color:#000;
+  padding:14px 36px;border-radius:11px;
+  font-size:15px;font-weight:700;
+  border:none;cursor:pointer;text-decoration:none;transition:all .18s;
+}
+.cta-main:hover{background:#e8e8e8;transform:scale(1.02)}
+.cta-sec{
+  background:transparent;color:rgba(255,255,255,.6);
+  padding:14px 28px;border-radius:11px;
+  font-size:15px;font-weight:600;
+  border:1px solid rgba(255,255,255,.12);cursor:pointer;text-decoration:none;transition:all .18s;
+}
+.cta-sec:hover{background:rgba(255,255,255,.07);color:#fff}
+.cta-note{font-size:12px;color:rgba(255,255,255,.2)}
 
-/* FOOTER */
-footer{position:relative;z-index:5;border-top:1px solid var(--border);padding:40px 40px 50px;
-  display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between}
-.foot-logo{font-size:16px;font-weight:900;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.foot-logo em{font-style:normal;color:var(--lime)}
-.foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;
-  color:rgba(255,255,255,.3);margin-bottom:12px}
-.foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:8px;transition:color .15s}
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:5;
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:48px 48px 40px;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;
+}
+@media(max-width:700px){footer{grid-template-columns:1fr 1fr;padding:32px 20px 30px}}
+.foot-brand{font-size:15px;font-weight:900;letter-spacing:6px;text-transform:uppercase;color:#fff;margin-bottom:10px;opacity:.7}
+.foot-tagline{font-size:13px;color:rgba(255,255,255,.3);line-height:1.6;max-width:220px;margin-bottom:10px}
+.foot-email{font-size:13px;color:rgba(255,255,255,.25)}
+.foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.25);margin-bottom:14px}
+.foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:10px;transition:color .15s}
 .foot-col a:hover{color:#fff}
-.foot-bottom{position:relative;z-index:5;border-top:1px solid var(--border);
-  padding:18px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-bar{
+  position:relative;z-index:5;
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:16px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
 .foot-copy{font-size:12px;color:rgba(255,255,255,.2)}
-.status{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.3)}
-.status-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:pulseGreen 2s infinite}
-@keyframes pulseGreen{0%,100%{opacity:1}50%{opacity:.4}}
+.sys-status{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.3)}
+.sys-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:sysPulse 2s infinite}
+@keyframes sysPulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* MODAL */
-.modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.75);
-  backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}
+/* ── MODAL ── */
+.modal{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(12px);
+  align-items:center;justify-content:center;padding:20px;
+}
 .modal.open{display:flex}
-.mbox{background:#111118;border:1px solid rgba(255,255,255,.1);border-radius:24px;
-  padding:40px;max-width:520px;width:100%;position:relative;text-align:center}
-.mclose{position:absolute;top:14px;right:18px;font-size:22px;cursor:pointer;
-  color:rgba(255,255,255,.3);transition:color .15s;background:none;border:none}
+.mbox{
+  background:#0f0d1a;border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;padding:38px;max-width:500px;width:100%;
+  position:relative;text-align:center;
+}
+.mclose{position:absolute;top:14px;right:16px;font-size:22px;cursor:pointer;
+  color:rgba(255,255,255,.3);background:none;border:none;transition:color .15s}
 .mclose:hover{color:#fff}
-.mspinner{width:54px;height:54px;border:3px solid rgba(163,255,0,.12);border-top-color:var(--lime);
-  border-radius:50%;animation:spin .75s linear infinite;margin:0 auto 22px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.mtitle{font-size:21px;font-weight:800;margin-bottom:6px}
-.mstatus{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:26px}
-.msteps{display:flex;flex-direction:column;gap:10px;text-align:left}
-.mstep{display:flex;align-items:center;gap:11px;font-size:14px;color:rgba(255,255,255,.35)}
-.mstep.done{color:#fff} .mstep.active{color:var(--lime)}
-.mic{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;
-  font-size:11px;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid var(--border)}
-.mstep.done .mic{background:rgba(163,255,0,.1);border-color:rgba(163,255,0,.25);color:var(--lime)}
-.mstep.active .mic{background:rgba(163,255,0,.15);border-color:var(--lime);color:var(--lime);animation:pulseGreen 1s infinite}
+.mspinner{
+  width:52px;height:52px;border:2px solid rgba(255,255,255,.08);
+  border-top-color:rgba(255,255,255,.7);
+  border-radius:50%;animation:mspin .75s linear infinite;margin:0 auto 22px;
+}
+@keyframes mspin{to{transform:rotate(360deg)}}
+.mtitle{font-size:20px;font-weight:700;margin-bottom:6px}
+.mstatus{font-size:14px;color:var(--text);margin-bottom:26px}
+.msteps{display:flex;flex-direction:column;gap:9px;text-align:left}
+.mst{display:flex;align-items:center;gap:11px;font-size:14px;color:rgba(255,255,255,.3)}
+.mst.done{color:rgba(255,255,255,.8)} .mst.active{color:#fff}
+.mst-ic{
+  width:22px;height:22px;border-radius:6px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+}
+.mst.done .mst-ic{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff}
+.mst.active .mst-ic{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff}
 .mout{display:none;margin-top:28px}
 .mout.show{display:block}
-.mout-card{background:rgba(163,255,0,.05);border:1px solid rgba(163,255,0,.18);
-  border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px;text-align:left;margin-bottom:16px}
-.mout-icon{font-size:38px;flex-shrink:0}
-.mout-name{font-size:16px;font-weight:700;margin-bottom:3px}
-.mout-desc{font-size:13px;color:rgba(255,255,255,.35)}
+.mout-row{
+  display:flex;align-items:center;gap:14px;text-align:left;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:18px;margin-bottom:16px;
+}
+.mout-icon{font-size:34px;flex-shrink:0}
+.mout-name{font-size:15px;font-weight:700;margin-bottom:3px}
+.mout-desc{font-size:13px;color:var(--text)}
 .mout-btns{display:flex;gap:10px;justify-content:center}
-.mbtn{padding:12px 26px;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;border:none;transition:all .18s}
-.mbtn.g{background:var(--lime);color:#000} .mbtn.g:hover{background:#bcff33}
-.mbtn.d{background:rgba(255,255,255,.07);color:#fff;border:1px solid var(--border)} .mbtn.d:hover{background:rgba(255,255,255,.12)}
+.mb{padding:11px 24px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;border:none;transition:all .18s}
+.mb.w{background:#fff;color:#000} .mb.w:hover{background:#e8e8e8}
+.mb.g{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.1)} .mb.g:hover{background:rgba(255,255,255,.14)}
 
-@media(max-width:640px){nav{padding:14px 16px}.hero{padding:70px 16px 36px}h1{letter-spacing:-1.5px}footer{padding:30px 20px}}
+@media(max-width:640px){
+  nav{padding:12px 16px}
+  .hero{padding:60px 16px 30px}
+  h1{letter-spacing:-1px}
+  .section{padding:0 16px 60px}
+  .foot-bar{padding:14px 16px}
+}
 </style>
 </head>
 <body>
 
-<div class="bg-grad"></div>
+<div class="hero-bg"></div>
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Site<em>Up</em></div>
-  <div class="nav-btns">
-    <a href="#" class="nb ghost">Login</a>
-    <a href="https://siteupagency.com/pay.html" class="nb solid">Sign up free</a>
-  </div>
+  <a href="#" class="nav-btn ghost"><span class="nav-icon">→</span> Login</a>
+  <a href="https://siteupagency.com/pay.html" class="nav-btn white"><span class="nav-icon">👤</span> Sign up</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="site-logo">SITEUP</div>
   <h1>The ultimate creation<br>machine.</h1>
-  <p class="hero-sub">Videos, music, images, websites, code — <span>anything</span> — from a single prompt.</p>
+  <p class="hero-sub">Movies, music, books, images, presentations, code — <span>anything</span> — from a single prompt.</p>
 
-  <div class="pbox">
-    <textarea id="mainPrompt" rows="2" placeholder="Give SiteUp a task to work on..."></textarea>
-    <div class="pbox-bar">
-      <button class="pbox-plus">+</button>
-      <button class="pbox-send" onclick="go()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
-        </svg>
-      </button>
+  <div class="prompt-wrap">
+    <div class="pbox">
+      <textarea class="pbox-input" id="mainPrompt" rows="2" placeholder="Give SiteUp a task to work on..."></textarea>
+      <div class="pbox-bar">
+        <button class="pbox-plus">+</button>
+        <button class="pbox-send" onclick="go()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SCROLLING TAGS -->
-<div class="strip">
-  <div class="strip-inner" id="stripInner">
-    <span class="stag" onclick="p('Write a Word doc')">📄 Word docs</span>
-    <span class="stag" onclick="p('Make a music track')">🎵 Music tracks</span>
-    <span class="stag" onclick="p('Create a video')">🎬 Videos</span>
-    <span class="stag" onclick="p('Generate an AI image')">🖼️ AI images</span>
-    <span class="stag" onclick="p('Build a spreadsheet')">📊 Spreadsheets</span>
-    <span class="stag" onclick="p('Write code & scripts')">💻 Code & scripts</span>
-    <span class="stag" onclick="p('Record voice narration')">🎙️ Voice narration</span>
-    <span class="stag" onclick="p('Create a PDF report')">📋 PDF reports</span>
-    <span class="stag" onclick="p('Design a logo')">✏️ Logos & graphics</span>
-    <span class="stag" onclick="p('Write a research report')">🔬 Research reports</span>
-    <span class="stag" onclick="p('Build a pitch deck')">📈 Pitch decks</span>
-    <span class="stag" onclick="p('Do math & analysis')">🧮 Math & analysis</span>
-    <!-- duplicate for loop -->
-    <span class="stag">📄 Word docs</span>
-    <span class="stag">🎵 Music tracks</span>
-    <span class="stag">🎬 Videos</span>
-    <span class="stag">🖼️ AI images</span>
-    <span class="stag">📊 Spreadsheets</span>
-    <span class="stag">💻 Code & scripts</span>
-    <span class="stag">🎙️ Voice narration</span>
-    <span class="stag">📋 PDF reports</span>
-    <span class="stag">✏️ Logos & graphics</span>
-    <span class="stag">🔬 Research reports</span>
-    <span class="stag">📈 Pitch decks</span>
-    <span class="stag">🧮 Math & analysis</span>
+<!-- SCROLLING CHIPS -->
+<div class="chips-wrap">
+  <div class="chips-track">
+    <span class="chip" onclick="fp('Write a Word document')"><span class="chip-icon">📄</span> Word docs</span>
+    <span class="chip" onclick="fp('Create a music track')"><span class="chip-icon">🎵</span> Music tracks</span>
+    <span class="chip" onclick="fp('Create a video')"><span class="chip-icon">🎬</span> Videos</span>
+    <span class="chip" onclick="fp('Generate an AI image')"><span class="chip-icon">🖼️</span> AI images</span>
+    <span class="chip" onclick="fp('Build a spreadsheet')"><span class="chip-icon">📊</span> Spreadsheets</span>
+    <span class="chip" onclick="fp('Write code and scripts')"><span class="chip-icon">💻</span> Code & scripts</span>
+    <span class="chip" onclick="fp('Create voice narration')"><span class="chip-icon">🎙️</span> Voice narration</span>
+    <span class="chip" onclick="fp('Create a PDF report')"><span class="chip-icon">📋</span> PDF reports</span>
+    <span class="chip" onclick="fp('Design a logo')"><span class="chip-icon">✏️</span> Logos & graphics</span>
+    <span class="chip" onclick="fp('Write a research report')"><span class="chip-icon">🔬</span> Research reports</span>
+    <span class="chip" onclick="fp('Build a pitch deck')"><span class="chip-icon">📈</span> Pitch decks</span>
+    <span class="chip" onclick="fp('Do math and analysis')"><span class="chip-icon">🧮</span> Math & analysis</span>
+    <!-- dup -->
+    <span class="chip"><span class="chip-icon">📄</span> Word docs</span>
+    <span class="chip"><span class="chip-icon">🎵</span> Music tracks</span>
+    <span class="chip"><span class="chip-icon">🎬</span> Videos</span>
+    <span class="chip"><span class="chip-icon">🖼️</span> AI images</span>
+    <span class="chip"><span class="chip-icon">📊</span> Spreadsheets</span>
+    <span class="chip"><span class="chip-icon">💻</span> Code & scripts</span>
+    <span class="chip"><span class="chip-icon">🎙️</span> Voice narration</span>
+    <span class="chip"><span class="chip-icon">📋</span> PDF reports</span>
+    <span class="chip"><span class="chip-icon">✏️</span> Logos & graphics</span>
+    <span class="chip"><span class="chip-icon">🔬</span> Research reports</span>
+    <span class="chip"><span class="chip-icon">📈</span> Pitch decks</span>
+    <span class="chip"><span class="chip-icon">🧮</span> Math & analysis</span>
   </div>
 </div>
 
-<!-- COMMUNITY GALLERY -->
+<!-- STUDIO BUTTONS -->
+<div class="studio-row">
+  <a href="#" class="studio-btn"><span class="si">🎨</span> Creator Studio <span style="font-size:11px;color:var(--text)">Create images and videos</span></a>
+  <a href="#" class="studio-btn"><span class="si">📺</span> SiteUp Watch <span style="font-size:11px;color:var(--text)">Stream originals</span></a>
+  <a href="#" class="studio-btn"><span class="si">📱</span> Marketing Studio <span style="font-size:11px;color:var(--text)">UGC videos with a click</span></a>
+  <a href="#" class="studio-btn"><span class="si">💻</span> Coder</a>
+</div>
+
+<!-- VIRAL SHORTS -->
 <section class="section">
-  <div class="sec-head">
-    <div>
-      <div class="sec-title">From the community</div>
-      <div class="sec-big">What creators are making right now</div>
-    </div>
-    <a href="#" class="see-more">See all →</a>
+  <div class="sec-eyebrow">Viral Shorts</div>
+  <div class="sec-title">Pick a format. Make a short.</div>
+  <div class="sec-sub">Cinematic story, narrated tale, surreal brainrot, anime, and more — each template carries its own visual style, voice, and pacing.</div>
+  <div class="shorts-grid">
+    <div class="short-card"><div class="popular-badge">POPULAR</div><div class="short-thumb g-cinematic">🎬</div><div class="short-meta"><div class="short-name">Cinematic Story</div><div class="short-desc">Photoreal cinematic shorts with dramatic lighting and a strong narrative arc.</div></div></div>
+    <div class="short-card"><div class="short-thumb g-narrated">📖</div><div class="short-meta"><div class="short-name">Narrated Tale</div><div class="short-desc">Voice-led storytelling with stylised, illustrative visuals.</div></div></div>
+    <div class="short-card"><div class="short-thumb g-brainrot">🍕</div><div class="short-meta"><div class="short-name">Italian Brainrot</div><div class="short-desc">Surreal Italian-meme mascots narrated like Planet Earth on espresso.</div></div></div>
+    <div class="short-card"><div class="short-thumb g-fruit">🍎</div><div class="short-meta"><div class="short-name">Fruit Drama</div><div class="short-desc">Anthropomorphised fruit drama. The chaotic-internet meme format.</div></div></div>
+    <div class="short-card"><div class="short-thumb g-anime">⚔️</div><div class="short-meta"><div class="short-name">Viral Anime</div><div class="short-desc">Make your own anime episode — shonen, romance, isekai drama.</div></div></div>
+    <div class="short-card"><div class="short-thumb g-roblox">🎮</div><div class="short-meta"><div class="short-name">Roblox Rage</div><div class="short-desc">Blocky avatar ranting at camera. Built for Gen Z brainrot.</div></div></div>
+    <div class="short-card"><div class="short-thumb g-lego">🧱</div><div class="short-meta"><div class="short-name">Lego</div><div class="short-desc">Minifigure drama — soap-opera beats and rants in brick form.</div></div></div>
+    <div class="short-card"><div class="short-thumb g-adlib">🎤</div><div class="short-meta"><div class="short-name">Viral Adlib</div><div class="short-desc">Locked 5-scene celebrity press conferences with unhinged announcements.</div></div></div>
   </div>
-  <div class="gallery">
-    <div class="gcard"><div class="gcard-img bg-v1"><div class="emoji">🎬</div></div><div class="gcard-foot"><div class="gcard-name">Cinematic short film</div><span class="gcard-type t-video">VIDEO</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v2" style="min-height:180px"><div class="emoji">🎵</div></div><div class="gcard-foot"><div class="gcard-name">Lo-fi hip hop track</div><span class="gcard-type t-music">MUSIC</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v3"><div class="emoji">🖼️</div></div><div class="gcard-foot"><div class="gcard-name">AI portrait artwork</div><span class="gcard-type t-image">IMAGE</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v4" style="min-height:200px"><div class="emoji">💻</div></div><div class="gcard-foot"><div class="gcard-name">Python automation script</div><span class="gcard-type t-code">CODE</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v5"><div class="emoji">📊</div></div><div class="gcard-foot"><div class="gcard-name">Business pitch deck</div><span class="gcard-type t-pres">SLIDES</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v6" style="min-height:160px"><div class="emoji">📄</div></div><div class="gcard-foot"><div class="gcard-name">Market research report</div><span class="gcard-type t-doc">DOCUMENT</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v7"><div class="emoji">🎙️</div></div><div class="gcard-foot"><div class="gcard-name">Podcast intro narration</div><span class="gcard-type t-music">AUDIO</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v8" style="min-height:190px"><div class="emoji">✏️</div></div><div class="gcard-foot"><div class="gcard-name">Brand logo design</div><span class="gcard-type t-image">GRAPHIC</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v9"><div class="emoji">🎬</div></div><div class="gcard-foot"><div class="gcard-name">Product promo video</div><span class="gcard-type t-video">VIDEO</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v10" style="min-height:175px"><div class="emoji">📈</div></div><div class="gcard-foot"><div class="gcard-name">Investor pitch deck</div><span class="gcard-type t-pres">SLIDES</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v11"><div class="emoji">🧮</div></div><div class="gcard-foot"><div class="gcard-name">Financial model spreadsheet</div><span class="gcard-type t-doc">EXCEL</span></div></div>
-    <div class="gcard"><div class="gcard-img bg-v12" style="min-height:185px"><div class="emoji">🎵</div></div><div class="gcard-foot"><div class="gcard-name">Epic film score</div><span class="gcard-type t-music">MUSIC</span></div></div>
+</section>
+
+<!-- ORIGINALS -->
+<section class="section">
+  <div class="sec-eyebrow">Originals</div>
+  <div class="sec-title">Now streaming</div>
+  <div class="sec-sub">Series, shorts, and exclusive drops from the SiteUp universe.</div>
+  <div class="originals-grid">
+    <div class="orig-card"><div class="orig-thumb g-rider"><div class="orig-badge badge-free">FREE</div>🏇</div><div class="orig-body"><div class="orig-title">THE RIDER — Episode 1</div><div class="orig-desc">Rook, a charming bounty hunter, takes on a contract to track the most dangerous fugitive in the kingdom. A warning from an old stable master sets him on a path he can't come back from.</div></div></div>
+    <div class="orig-card"><div class="orig-thumb g-apoc"><div class="orig-badge badge-series">SERIES TEASER</div>🔥</div><div class="orig-body"><div class="orig-title">APOCALYPSE PLAINS</div><div class="orig-desc">Out in the forgotten stretches of East Texas, something has changed. A gritty survival series that drops you into the collapse of the world through the eyes of ordinary people.</div></div></div>
+    <div class="orig-card"><div class="orig-thumb g-film"><div class="orig-badge badge-series">COURSE</div>🎬</div><div class="orig-body"><div class="orig-title">HOW TO MAKE A FILM</div><div class="orig-desc">Learn how to concept, script, create, edit, and distribute a film or series. From story foundation to distribution.</div></div></div>
+    <div class="orig-card"><div class="orig-thumb g-influencer"><div class="orig-badge badge-series">COURSE</div>🤖</div><div class="orig-body"><div class="orig-title">CREATE AN AI INFLUENCER</div><div class="orig-desc">Learn how to concept, design, animate, and monetize a fully AI-generated influencer — from first prompt to viral post.</div></div></div>
+    <div class="orig-card"><div class="orig-thumb g-book"><div class="orig-badge badge-series">COURSE</div>📚</div><div class="orig-body"><div class="orig-title">HOW TO WRITE A BESTSELLER</div><div class="orig-desc">Learn how to plan, write, edit, publish, and market a bestselling book. From getting started to launch day.</div></div></div>
+    <div class="orig-card"><div class="orig-thumb g-publish"><div class="orig-badge badge-series">GUIDE</div>📖</div><div class="orig-body"><div class="orig-title">HOW TO SELF-PUBLISH</div><div class="orig-desc">A clear, step-by-step guide to navigating the publishing process and getting your manuscript ready for the marketplace.</div></div></div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="section">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px">
+    <div>
+      <div class="sec-eyebrow">Community</div>
+      <div class="sec-title" style="font-size:clamp(22px,3.5vw,38px)">From the Community</div>
+      <div class="sec-sub" style="margin-bottom:0">What creators are making with SiteUp right now.</div>
+    </div>
+  </div>
+  <div class="masonry">
+    <div class="m-card"><div class="m-img cb1" style="min-height:140px"><div class="m-emoji">🎬</div></div><div class="m-foot"><div class="m-user">SiteUp Official</div><div class="m-likes">♥ 199</div></div></div>
+    <div class="m-card"><div class="m-img cb2" style="min-height:180px"><div class="m-emoji">🎵</div></div><div class="m-foot"><div class="m-user">latonyamccullough37</div><div class="m-likes">♥ 157</div></div></div>
+    <div class="m-card"><div class="m-img cb3" style="min-height:120px"><div class="m-emoji">🎤</div></div><div class="m-foot"><div class="m-user">Slam Verse</div><div class="m-likes">♥ 81</div></div></div>
+    <div class="m-card"><div class="m-img cb4" style="min-height:200px"><div class="m-emoji">🖼️</div></div><div class="m-foot"><div class="m-user">Crookedeye</div><div class="m-likes">♥ 269</div></div></div>
+    <div class="m-card"><div class="m-img cb5" style="min-height:160px"><div class="m-emoji">🤖</div></div><div class="m-foot"><div class="m-user">Biohacking Talks</div><div class="m-likes">♥ 154</div></div></div>
+    <div class="m-card"><div class="m-img cb6" style="min-height:130px"><div class="m-emoji">💻</div></div><div class="m-foot"><div class="m-user">Jonathan P</div><div class="m-likes">♥ 74</div></div></div>
+    <div class="m-card"><div class="m-img cb7" style="min-height:190px"><div class="m-emoji">🎶</div></div><div class="m-foot"><div class="m-user">eonrobby</div><div class="m-likes">♥ 179</div></div></div>
+    <div class="m-card"><div class="m-img cb8" style="min-height:150px"><div class="m-emoji">💃</div></div><div class="m-foot"><div class="m-user">Ashley Ross</div><div class="m-likes">♥ 62</div></div></div>
+    <div class="m-card"><div class="m-img cb9" style="min-height:175px"><div class="m-emoji">🧪</div></div><div class="m-foot"><div class="m-user">Dream Dress Muse</div><div class="m-likes">♥ 67</div></div></div>
+    <div class="m-card"><div class="m-img cb10" style="min-height:140px"><div class="m-emoji">🐉</div></div><div class="m-foot"><div class="m-user">Dragon Creed</div><div class="m-likes">♥ 184</div></div></div>
+    <div class="m-card"><div class="m-img cb11" style="min-height:165px"><div class="m-emoji">🌌</div></div><div class="m-foot"><div class="m-user">Sky Wonders</div><div class="m-likes">♥ 93</div></div></div>
+    <div class="m-card"><div class="m-img cb12" style="min-height:185px"><div class="m-emoji">🍕</div></div><div class="m-foot"><div class="m-user">foodtalk</div><div class="m-likes">♥ 84</div></div></div>
+    <div class="m-card"><div class="m-img cb13" style="min-height:145px"><div class="m-emoji">📊</div></div><div class="m-foot"><div class="m-user">Geoffrey Barnes</div><div class="m-likes">♥ 136</div></div></div>
+    <div class="m-card"><div class="m-img cb14" style="min-height:170px"><div class="m-emoji">🌿</div></div><div class="m-foot"><div class="m-user">CreativePulse</div><div class="m-likes">♥ 47</div></div></div>
+    <div class="m-card"><div class="m-img cb15" style="min-height:155px"><div class="m-emoji">🎭</div></div><div class="m-foot"><div class="m-user">Neon Shadows</div><div class="m-likes">♥ 48</div></div></div>
   </div>
 </section>
 
 <!-- WHAT IT DOES -->
-<section class="what-section">
-  <div class="what-label">What SiteUp actually does</div>
-  <h2 class="what-title">AI agents create real content.<br>In minutes.</h2>
-  <p class="what-sub">Not text responses. Actual files you can download, edit, and ship.</p>
+<section class="section">
+  <div style="text-align:center;margin-bottom:48px">
+    <div class="sec-eyebrow">What SiteUp actually does</div>
+    <div class="sec-title">AI agents create real content. In minutes.</div>
+    <p style="font-size:16px;color:var(--text);max-width:500px;margin:10px auto 0;line-height:1.6">Not text responses. Actual files you can download, edit, and ship.</p>
+  </div>
   <div class="what-grid">
-    <div class="wcard wc1">
-      <span class="wcard-icon">📄</span>
-      <div class="wcard-name">Documents</div>
-      <div class="wcard-desc">Word & PDF essays, reports, proposals. PowerPoint decks. Excel spreadsheets with formulas, charts, citations.</div>
-      <div class="wcard-tags"><span class="wtag">Word</span><span class="wtag">PDF</span><span class="wtag">PowerPoint</span><span class="wtag">Excel</span></div>
+    <div class="w-card">
+      <span class="w-icon">📄</span>
+      <div class="w-title">Documents</div>
+      <ul class="w-list">
+        <li>Word & PDF: essays, reports, proposals</li>
+        <li>PowerPoint: presentations, pitch decks</li>
+        <li>Excel: spreadsheets with formulas</li>
+        <li>Citations, charts, tables, formatting</li>
+      </ul>
+      <div class="w-badge">AI agents generate formatted files with proper structure</div>
     </div>
-    <div class="wcard wc2">
-      <span class="wcard-icon">🎵</span>
-      <div class="wcard-name">Music & Audio</div>
-      <div class="wcard-desc">Original music tracks in any genre. AI voice narration. Sound effects. Production-ready MP3 and WAV files.</div>
-      <div class="wcard-tags"><span class="wtag">Music</span><span class="wtag">Voice</span><span class="wtag">SFX</span><span class="wtag">MP3/WAV</span></div>
+    <div class="w-card">
+      <span class="w-icon">🎵</span>
+      <div class="w-title">Music & Audio</div>
+      <ul class="w-list">
+        <li>Music tracks: any genre, any length</li>
+        <li>Voice narration: AI voice generation</li>
+        <li>Sound effects: audio editing</li>
+        <li>MP3, WAV, production-ready files</li>
+      </ul>
+      <div class="w-badge">AI generates original music with synthesis models</div>
     </div>
-    <div class="wcard wc3">
-      <span class="wcard-icon">🖼️</span>
-      <div class="wcard-name">Images & Graphics</div>
-      <div class="wcard-desc">AI-generated custom illustrations. Social media graphics. Logos and brand assets. Any resolution, any style.</div>
-      <div class="wcard-tags"><span class="wtag">AI Images</span><span class="wtag">Logos</span><span class="wtag">PNG/JPG</span><span class="wtag">Social</span></div>
+    <div class="w-card">
+      <span class="w-icon">🖼️</span>
+      <div class="w-title">Images & Graphics</div>
+      <ul class="w-list">
+        <li>AI images: custom illustrations</li>
+        <li>Graphics: social media assets</li>
+        <li>Web search: find relevant images</li>
+        <li>PNG, JPG, any resolution</li>
+      </ul>
+      <div class="w-badge">AI image generation from text descriptions</div>
     </div>
-    <div class="wcard wc4">
-      <span class="wcard-icon">🎬</span>
-      <div class="wcard-name">Video Content</div>
-      <div class="wcard-desc">Marketing videos, explainers, animations. Combined video + audio + text. MP4 ready to publish anywhere.</div>
-      <div class="wcard-tags"><span class="wtag">Promo</span><span class="wtag">Shorts</span><span class="wtag">Animation</span><span class="wtag">MP4</span></div>
+    <div class="w-card">
+      <span class="w-icon">🎬</span>
+      <div class="w-title">Video Content</div>
+      <ul class="w-list">
+        <li>Video clips: marketing, explainers</li>
+        <li>Animations: motion graphics</li>
+        <li>Combined: video + audio + text</li>
+        <li>MP4, ready to publish</li>
+      </ul>
+      <div class="w-badge">AI video generation with multi-modal synthesis</div>
     </div>
-    <div class="wcard wc5">
-      <span class="wcard-icon">🔬</span>
-      <div class="wcard-name">Research & Data</div>
-      <div class="wcard-desc">Real-time web search. Market research, trends analysis, citations. Fact-checked and properly sourced reports.</div>
-      <div class="wcard-tags"><span class="wtag">Web Search</span><span class="wtag">Analysis</span><span class="wtag">Citations</span><span class="wtag">Reports</span></div>
+    <div class="w-card">
+      <span class="w-icon">🔬</span>
+      <div class="w-title">Research & Data</div>
+      <ul class="w-list">
+        <li>Web search: real-time data gathering</li>
+        <li>Analysis: market research, trends</li>
+        <li>Citations: properly sourced</li>
+        <li>Fact-checked, current information</li>
+      </ul>
+      <div class="w-badge">AI agents search, analyze, and synthesize data</div>
     </div>
-    <div class="wcard wc6">
-      <span class="wcard-icon">💻</span>
-      <div class="wcard-name">Code & Automation</div>
-      <div class="wcard-desc">Python scripts, JavaScript, shell commands. Data analysis, automation, web functions. Math and calculations.</div>
-      <div class="wcard-tags"><span class="wtag">Python</span><span class="wtag">JavaScript</span><span class="wtag">Scripts</span><span class="wtag">Math</span></div>
+    <div class="w-card">
+      <span class="w-icon">💻</span>
+      <div class="w-title">Code & Automation</div>
+      <ul class="w-list">
+        <li>Python scripts: data analysis, automation</li>
+        <li>JavaScript: web functionality</li>
+        <li>Shell commands: task automation</li>
+        <li>Math calculations, data processing</li>
+      </ul>
+      <div class="w-badge">AI code generation with execution environment</div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASE SPOTLIGHT -->
+<section class="section">
+  <div style="margin-bottom:28px">
+    <div class="sec-eyebrow">Use Case Spotlight</div>
+    <div class="sec-title">Built for the way you create.</div>
+  </div>
+  <div class="tabs-bar">
+    <button class="tab active" onclick="switchTab(this,'docs')">Documents & Reports</button>
+    <button class="tab" onclick="switchTab(this,'media')">Media & Creative</button>
+    <button class="tab" onclick="switchTab(this,'code')">Code & Data</button>
+  </div>
+
+  <div class="use-panel active" id="panel-docs">
+    <div class="use-left">
+      <h3>From research papers to pitch decks — formatted, cited, ready to present.</h3>
+      <p>Generate Word docs, PDFs, PowerPoints, and Excel spreadsheets with charts, images, citations, and professional formatting in minutes.</p>
+      <div class="prompt-example">
+        <strong>Example Prompt</strong>
+        "Create a 20-slide investor pitch deck with market analysis, financial projections, team bios, and competitive landscape"
+      </div>
+      <div class="blueprint"><h4>Academic research papers</h4><p>Full APA/MLA-formatted papers with web-sourced citations, literature review, methodology, and bibliography.</p></div>
+      <div class="blueprint"><h4>Business documents</h4><p>Proposals, reports, financial models with working formulas, charts, and executive summaries.</p></div>
+    </div>
+    <div class="use-right">
+      <div class="use-chips">
+        <div class="use-chip-row" onclick="fp('Write a research report on AI trends')"><div class="ucr-icon">📄</div><div><div class="ucr-text">Research Report</div><div class="ucr-sub">Web-sourced, cited, formatted</div></div></div>
+        <div class="use-chip-row" onclick="fp('Create a 15-slide pitch deck')"><div class="ucr-icon">📊</div><div><div class="ucr-text">Pitch Deck</div><div class="ucr-sub">PowerPoint with charts & design</div></div></div>
+        <div class="use-chip-row" onclick="fp('Build a financial model spreadsheet')"><div class="ucr-icon">💹</div><div><div class="ucr-text">Financial Model</div><div class="ucr-sub">Excel with formulas & projections</div></div></div>
+        <div class="use-chip-row" onclick="fp('Write a business proposal')"><div class="ucr-icon">✍️</div><div><div class="ucr-text">Business Proposal</div><div class="ucr-sub">PDF-ready, professional format</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="use-panel" id="panel-media">
+    <div class="use-left">
+      <h3>Videos, music, images — generated and ready to ship.</h3>
+      <p>Create marketing videos, original music tracks, custom illustrations, and brand graphics in seconds. All files are downloadable and production-ready.</p>
+      <div class="prompt-example">
+        <strong>Example Prompt</strong>
+        "Create a 30-second cinematic promo video with epic music and a voiceover about our new product launch"
+      </div>
+      <div class="blueprint"><h4>Video production</h4><p>Script, visuals, voiceover, and music — all generated and combined into a single MP4.</p></div>
+      <div class="blueprint"><h4>Brand identity</h4><p>Logo, color palette, social media templates — a complete brand kit from one prompt.</p></div>
+    </div>
+    <div class="use-right">
+      <div class="use-chips">
+        <div class="use-chip-row" onclick="fp('Create a promo video for my business')"><div class="ucr-icon">🎬</div><div><div class="ucr-text">Promo Video</div><div class="ucr-sub">MP4 with music & voiceover</div></div></div>
+        <div class="use-chip-row" onclick="fp('Compose an original music track')"><div class="ucr-icon">🎵</div><div><div class="ucr-text">Music Track</div><div class="ucr-sub">Any genre, production-ready MP3</div></div></div>
+        <div class="use-chip-row" onclick="fp('Generate a logo and brand kit')"><div class="ucr-icon">✏️</div><div><div class="ucr-text">Brand Kit</div><div class="ucr-sub">Logo, colors, fonts, assets</div></div></div>
+        <div class="use-chip-row" onclick="fp('Create social media graphics pack')"><div class="ucr-icon">🖼️</div><div><div class="ucr-text">Social Pack</div><div class="ucr-sub">Instagram, TikTok, YouTube</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="use-panel" id="panel-code">
+    <div class="use-left">
+      <h3>Automate anything with AI-written code that actually runs.</h3>
+      <p>Generate Python scripts, JavaScript functions, data analysis tools, and automation workflows. Code is tested, documented, and ready to deploy.</p>
+      <div class="prompt-example">
+        <strong>Example Prompt</strong>
+        "Write a Python script that scrapes product prices from Amazon and exports them to an Excel spreadsheet daily"
+      </div>
+      <div class="blueprint"><h4>Data automation</h4><p>Scraping, processing, and reporting pipelines built in Python with full documentation.</p></div>
+      <div class="blueprint"><h4>Web tools</h4><p>JavaScript utilities, browser extensions, and full-stack web apps with working code.</p></div>
+    </div>
+    <div class="use-right">
+      <div class="use-chips">
+        <div class="use-chip-row" onclick="fp('Write a Python data analysis script')"><div class="ucr-icon">🐍</div><div><div class="ucr-text">Python Script</div><div class="ucr-sub">Tested, documented, ready to run</div></div></div>
+        <div class="use-chip-row" onclick="fp('Build a web scraper')"><div class="ucr-icon">🕷️</div><div><div class="ucr-text">Web Scraper</div><div class="ucr-sub">Automated data collection</div></div></div>
+        <div class="use-chip-row" onclick="fp('Create a data analysis dashboard')"><div class="ucr-icon">📈</div><div><div class="ucr-text">Data Dashboard</div><div class="ucr-sub">Charts, insights, export-ready</div></div></div>
+        <div class="use-chip-row" onclick="fp('Automate my spreadsheet workflows')"><div class="ucr-icon">⚙️</div><div><div class="ucr-text">Automation</div><div class="ucr-sub">Shell scripts & workflows</div></div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="how-section">
-  <div class="what-label">How it works</div>
-  <h2 class="what-title">From prompt to production<br>in four steps.</h2>
-  <p class="what-sub">AI agents handle research, design, creation, and refinement — fully autonomous.</p>
-  <div class="steps">
-    <div class="step"><div class="step-n">01</div><div class="step-t">Understand your request</div><div class="step-d">SiteUp analyzes content type, format, style, depth, and specific requirements.</div></div>
-    <div class="step"><div class="step-n">02</div><div class="step-t">Gather intelligence</div><div class="step-d">Searches the web, extracts data, analyzes sources, and builds context for your content.</div></div>
-    <div class="step"><div class="step-n">03</div><div class="step-t">Create your content</div><div class="step-d">Content is generated with proper formatting, embedded media, and professional polish.</div></div>
-    <div class="step"><div class="step-n">04</div><div class="step-t">Refine & perfect</div><div class="step-d">Want changes? Just say so. Add sections, change tone, regenerate — all conversationally.</div></div>
+<section class="section" style="text-align:center">
+  <div class="sec-eyebrow">How it works</div>
+  <div class="sec-title">From prompt to production in four steps.</div>
+  <p style="font-size:16px;color:var(--text);max-width:520px;margin:10px auto 0;line-height:1.6">AI agents handle research, design, creation, and refinement. Every step is autonomous and intelligent.</p>
+  <div class="steps-grid">
+    <div class="step"><div class="step-num">STEP 1</div><div class="step-title">Understand your request</div><div class="step-desc">SiteUp analyzes what you need — content type, format, style, depth, and any specific requirements.</div></div>
+    <div class="step"><div class="step-num">STEP 2</div><div class="step-title">Gather intelligence</div><div class="step-desc">SiteUp searches the web, extracts data, analyzes sources, and builds context for your content.</div></div>
+    <div class="step"><div class="step-num">STEP 3</div><div class="step-title">Create your content</div><div class="step-desc">Content is generated with proper formatting, embedded media, accurate data, and professional polish.</div></div>
+    <div class="step"><div class="step-num">STEP 4</div><div class="step-title">Refine & perfect</div><div class="step-desc">Want changes? Just say so. Add sections, change tone, update data, regenerate — all conversationally.</div></div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq-section">
+<section class="section" style="max-width:760px">
   <div style="text-align:center;margin-bottom:40px">
-    <div class="what-label">FAQ</div>
-    <h2 class="what-title">Common questions.</h2>
+    <div class="sec-eyebrow">FAQ</div>
+    <div class="sec-title">Common questions.</div>
+    <p style="font-size:14px;color:var(--text);margin-top:8px">Still curious? Email <a href="mailto:support@siteupagency.com" style="color:rgba(255,255,255,.5)">support@siteupagency.com</a> and we'll get right back to you.</p>
   </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">What types of content can SiteUp actually create?<span class="faq-arrow">+</span></div>
-    <div class="faq-a">SiteUp generates documents (Word, PDF, PowerPoint, Excel), media (music, videos, images, voice), code (Python, JavaScript), research reports with web data, and much more. If you can describe it, SiteUp can create it.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">How is this different from ChatGPT or Claude?<span class="faq-arrow">+</span></div>
-    <div class="faq-a">ChatGPT and Claude give you text. SiteUp gives you actual files — downloadable, ready to use. A PowerPoint you can open, an MP3 you can play, a video you can post. Real output, not just words.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Can it do research and use real data from the web?<span class="faq-arrow">+</span></div>
-    <div class="faq-a">Yes. SiteUp agents search the web in real time, extract data from live sources, and incorporate accurate, cited information into your content — not just training data from a cutoff date.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">What about images, music, and videos?<span class="faq-arrow">+</span></div>
-    <div class="faq-a">SiteUp uses state-of-the-art AI models for each media type — image generation for visuals, music synthesis for audio, and video generation for motion content. All output is download-ready.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">How long does it take to create content?<span class="faq-arrow">+</span></div>
-    <div class="faq-a">Most content takes under 60 seconds. Complex tasks like full research reports or multi-scene videos may take 2–3 minutes. You'll see a live progress indicator the whole time.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Who owns the content SiteUp creates?<span class="faq-arrow">+</span></div>
-    <div class="faq-a">You do. 100%. Everything SiteUp generates belongs to you — no licensing fees, no royalty claims, no restrictions on how you use it commercially.</div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-q">Is it really free?<span class="faq-arrow">+</span></div>
-    <div class="faq-a">Yes — sign up and start creating immediately. No credit card required. You get a generous free tier to create documents, images, and more before any upgrade is ever needed.</div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">01</span> What types of content can SiteUp actually create?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">SiteUp generates documents (Word, PDF, PowerPoint, Excel), media (music, videos, images, voice), code (Python, JavaScript), research reports with web data, mathematical analyses, spreadsheets with formulas, and much more. If you can describe it, SiteUp can create it.</div></div></div>
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">02</span> How is this different from ChatGPT or Claude?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">ChatGPT and Claude give you text. SiteUp gives you actual files — a PowerPoint you can open, an MP3 you can play, a video you can post. We use specialized AI agents for each content type, not a single chat model trying to do everything.</div></div></div>
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">03</span> Can it do research and use real data from the web?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Yes. SiteUp agents search the web in real time, extract data from live sources, and incorporate accurate, cited information into your content — not just training data from a cutoff date.</div></div></div>
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">04</span> What about images, music, and videos?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">SiteUp uses state-of-the-art AI models for each media type — image generation for visuals, music synthesis for audio, and video generation for motion content. All output is download-ready in standard formats.</div></div></div>
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">05</span> Is the content professionally formatted and usable?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Yes. Documents open in Word or Google Docs with proper headings, tables, and citations. Spreadsheets have working formulas. Presentations have designed slides. Videos are properly encoded MP4 files.</div></div></div>
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">06</span> Can I make changes after SiteUp creates something?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Absolutely. Just describe what you want changed — "make it shorter," "add a section on competitors," "use a darker color scheme." SiteUp will regenerate or refine exactly what you ask.</div></div></div>
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">07</span> How long does it take to create content?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">Most content takes under 60 seconds. Complex research reports or multi-scene videos may take 2–3 minutes. You'll see a live progress indicator throughout.</div></div></div>
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">08</span> Who owns the content SiteUp creates?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">You do. 100%. Everything SiteUp generates belongs to you — no licensing fees, no royalty claims, no restrictions on commercial use.</div></div></div>
+    <div class="faq-item" onclick="faq(this)"><div class="faq-q"><span><span class="faq-num">09</span> What AI models do you use?</span><span class="faq-arrow">+</span></div><div class="faq-a"><div class="faq-a-inner">We use a mix of frontier models for each task — leading LLMs for text and reasoning, dedicated models for image generation, synthesis engines for music, and video generation models for motion content. Always the best tool for each job.</div></div></div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section">
   <div class="cta-box">
+    <div class="cta-eyebrow">Ready?</div>
     <h2>Stop spending hours on content.<br>Make it in minutes.</h2>
     <p>Documents, media, code — generated, downloadable, yours. Start free, no credit card required.</p>
     <div class="cta-btns">
-      <a href="https://siteupagency.com/pay.html" class="cta-btn-main">Start creating free</a>
-      <a href="#mainPrompt" class="cta-btn-sec" onclick="document.getElementById('mainPrompt').focus()">Sign in</a>
+      <a href="https://siteupagency.com/pay.html" class="cta-main">Start creating free</a>
+      <a href="#mainPrompt" class="cta-sec" onclick="document.getElementById('mainPrompt').focus()">Sign in</a>
     </div>
     <div class="cta-note">All your content is encrypted, and you own everything SiteUp creates.</div>
   </div>
@@ -428,18 +800,16 @@ footer{position:relative;z-index:5;border-top:1px solid var(--border);padding:40
 <!-- FOOTER -->
 <footer>
   <div>
-    <div class="foot-logo">Site<em>Up</em></div>
-    <div style="font-size:13px;color:rgba(255,255,255,.3);margin-top:8px;max-width:220px;line-height:1.6">
-      The ultimate creation machine. Documents, media, code — generated, downloadable, yours.
-    </div>
-    <div style="font-size:13px;color:rgba(255,255,255,.25);margin-top:10px">support@siteupagency.com</div>
+    <div class="foot-brand">SITEUP</div>
+    <div class="foot-tagline">The ultimate creation machine. Documents, media, code — generated, downloadable, yours.</div>
+    <div class="foot-email">support@siteupagency.com</div>
   </div>
   <div class="foot-col">
     <h4>Product</h4>
     <a href="#">Pricing</a>
     <a href="#">FAQs</a>
-    <a href="#">What we create</a>
-    <a href="#">How it works</a>
+    <a href="#">Credit Usage</a>
+    <a href="#">Download</a>
   </div>
   <div class="foot-col">
     <h4>Company</h4>
@@ -453,9 +823,9 @@ footer{position:relative;z-index:5;border-top:1px solid var(--border);padding:40
     <a href="#">Privacy Policy</a>
   </div>
 </footer>
-<div class="foot-bottom">
-  <div class="foot-copy">© 2026 SiteUp Agency. All rights reserved.</div>
-  <div class="status"><span class="status-dot"></span>All systems operational</div>
+<div class="foot-bar">
+  <div class="foot-copy">© 2026 SiteUp. All rights reserved.</div>
+  <div class="sys-status"><span class="sys-dot"></span> All systems operational</div>
 </div>
 
 <!-- MODAL -->
@@ -467,13 +837,13 @@ footer{position:relative;z-index:5;border-top:1px solid var(--border);padding:40
     <div class="mstatus" id="mstatus">Analyzing your request...</div>
     <div class="msteps" id="msteps"></div>
     <div class="mout" id="mout">
-      <div class="mout-card">
+      <div class="mout-row">
         <div class="mout-icon" id="micon">✨</div>
-        <div><div class="mout-name" id="mname">Content ready!</div><div class="mout-desc" id="mdesc">Your creation is complete</div></div>
+        <div><div class="mout-name" id="mname">Content ready!</div><div class="mout-desc" id="mdesc">Sign up free to download</div></div>
       </div>
       <div class="mout-btns">
-        <a href="https://siteupagency.com/pay.html" class="mbtn g">🚀 Get Started Free</a>
-        <a href="sms:7573345771" class="mbtn d">💬 Talk to us</a>
+        <a href="https://siteupagency.com/pay.html" class="mb w">Start creating free</a>
+        <a href="#mainPrompt" class="mb g" onclick="closeModal()">Sign in</a>
       </div>
     </div>
   </div>
@@ -481,77 +851,82 @@ footer{position:relative;z-index:5;border-top:1px solid var(--border);padding:40
 
 <script>
 // Fill prompt
-function p(t){ document.getElementById('mainPrompt').value=t; document.getElementById('mainPrompt').focus(); }
+function fp(t){document.getElementById('mainPrompt').value=t;document.getElementById('mainPrompt').focus();}
 
-// FAQ toggle
-function toggleFaq(el){
-  const isOpen = el.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
-  if(!isOpen) el.classList.add('open');
+// Tabs
+function switchTab(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.use-panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
 }
 
-// Type detection for modal
-const types = {
-  video:  {icon:'🎬',name:'Video',steps:['Parsing your script...','Generating visuals...','Syncing audio & motion...','Rendering final video...','Encoding MP4 output...']},
-  music:  {icon:'🎵',name:'Music Track',steps:['Analyzing genre & mood...','Composing melody...','Layering instruments...','Mixing & mastering...','Exporting audio file...']},
-  image:  {icon:'🖼️',name:'AI Image',steps:['Understanding visual prompt...','Generating composition...','Refining details...','Upscaling resolution...','Preparing download...']},
-  code:   {icon:'💻',name:'Code',steps:['Parsing requirements...','Writing core logic...','Adding error handling...','Testing & debugging...','Packaging output...']},
-  doc:    {icon:'📄',name:'Document',steps:['Researching topic...','Structuring outline...','Writing content...','Formatting & styling...','Generating PDF/Word...']},
-  slides: {icon:'📊',name:'Presentation',steps:['Building slide structure...','Writing copy...','Designing layouts...','Adding charts & visuals...','Exporting PowerPoint...']},
-  music2: {icon:'🎙️',name:'Voice Narration',steps:['Processing script...','Selecting voice model...','Generating narration...','Cleaning audio...','Exporting MP3...']},
+// FAQ
+function faq(el){
+  const open=el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+  if(!open)el.classList.add('open');
+}
+
+// Modal content types
+const T={
+  video: {icon:'🎬',name:'Video',steps:['Parsing your script...','Generating visuals...','Composing audio...','Rendering final video...','Encoding MP4 output...']},
+  music: {icon:'🎵',name:'Music Track',steps:['Analyzing genre & mood...','Composing melody...','Layering instruments...','Mixing & mastering...','Exporting audio file...']},
+  image: {icon:'🖼️',name:'AI Image',steps:['Understanding visual prompt...','Generating composition...','Refining details...','Upscaling resolution...','Preparing download...']},
+  code:  {icon:'💻',name:'Code',steps:['Parsing requirements...','Writing core logic...','Adding error handling...','Testing execution...','Packaging output...']},
+  doc:   {icon:'📄',name:'Document',steps:['Researching topic...','Structuring outline...','Writing content...','Formatting & styling...','Generating file...']},
+  slides:{icon:'📊',name:'Presentation',steps:['Building slide structure...','Writing copy...','Designing layouts...','Adding visuals...','Exporting PowerPoint...']},
+  voice: {icon:'🎙️',name:'Voice Narration',steps:['Processing script...','Selecting voice model...','Generating narration...','Cleaning audio...','Exporting MP3...']},
   default:{icon:'✨',name:'Content',steps:['Understanding request...','Gathering resources...','Creating content...','Polishing output...','Finalizing file...']}
 };
 
-function detectType(v){
+function detect(v){
   v=v.toLowerCase();
-  if(v.includes('video')||v.includes('film')||v.includes('short')||v.includes('reel')) return 'video';
-  if(v.includes('music')||v.includes('song')||v.includes('track')||v.includes('beat')) return 'music';
-  if(v.includes('image')||v.includes('photo')||v.includes('logo')||v.includes('design')||v.includes('illustrat')) return 'image';
-  if(v.includes('code')||v.includes('script')||v.includes('python')||v.includes('javascript')||v.includes('function')) return 'code';
-  if(v.includes('slide')||v.includes('deck')||v.includes('presentation')||v.includes('powerpoint')) return 'slides';
-  if(v.includes('voice')||v.includes('narrat')||v.includes('podcast')) return 'music2';
-  if(v.includes('doc')||v.includes('report')||v.includes('essay')||v.includes('pdf')||v.includes('word')||v.includes('research')) return 'doc';
+  if(/video|film|short|reel|movie/.test(v)) return 'video';
+  if(/music|song|track|beat|compose/.test(v)) return 'music';
+  if(/image|photo|logo|design|illustrat|graphic/.test(v)) return 'image';
+  if(/code|script|python|javascript|function|automat/.test(v)) return 'code';
+  if(/slide|deck|presentation|powerpoint/.test(v)) return 'slides';
+  if(/voice|narrat|podcast|audio/.test(v)) return 'voice';
+  if(/doc|report|essay|pdf|word|research|proposal|book/.test(v)) return 'doc';
   return 'default';
 }
 
 function go(){
-  const val = document.getElementById('mainPrompt').value.trim();
-  if(!val){ document.getElementById('mainPrompt').focus(); return; }
-  const t = types[detectType(val)];
-  
+  const val=document.getElementById('mainPrompt').value.trim();
+  if(!val){document.getElementById('mainPrompt').focus();return;}
+  const t=T[detect(val)];
   document.getElementById('modal').classList.add('open');
   document.getElementById('mout').classList.remove('show');
   document.getElementById('mspinner').style.display='block';
   document.getElementById('mtitle').textContent='Creating your '+t.name.toLowerCase()+'...';
   document.getElementById('mstatus').textContent=t.steps[0];
   document.getElementById('micon').textContent=t.icon;
-  document.getElementById('mname').textContent=t.name+' is ready!';
+  document.getElementById('mname').textContent=t.name+' ready!';
   document.getElementById('mdesc').textContent='Sign up free to download your creation.';
-
-  const stepsEl=document.getElementById('msteps');
-  stepsEl.innerHTML='';
+  const el=document.getElementById('msteps');
+  el.innerHTML='';
   t.steps.forEach((s,i)=>{
     const d=document.createElement('div');
-    d.className='mstep'+(i===0?' active':'');
-    d.id='ms'+i;
-    d.innerHTML=`<div class="mic">${i===0?'→':' '}</div>${s}`;
-    stepsEl.appendChild(d);
+    d.className='mst'+(i===0?' active':'');
+    d.id='st'+i;
+    d.innerHTML=`<div class="mst-ic">${i===0?'→':' '}</div>${s}`;
+    el.appendChild(d);
   });
-
-  let cur=0;
+  let c=0;
   const iv=setInterval(()=>{
-    const el=document.getElementById('ms'+cur);
-    el.className='mstep done'; el.querySelector('.mic').textContent='✓';
-    cur++;
-    if(cur<t.steps.length){
-      const nx=document.getElementById('ms'+cur);
-      nx.className='mstep active'; nx.querySelector('.mic').textContent='→';
-      document.getElementById('mstatus').textContent=t.steps[cur];
-    } else {
+    const cur=document.getElementById('st'+c);
+    cur.className='mst done';cur.querySelector('.mst-ic').textContent='✓';
+    c++;
+    if(c<t.steps.length){
+      const nx=document.getElementById('st'+c);
+      nx.className='mst active';nx.querySelector('.mst-ic').textContent='→';
+      document.getElementById('mstatus').textContent=t.steps[c];
+    }else{
       clearInterval(iv);
       document.getElementById('mspinner').style.display='none';
       document.getElementById('mtitle').textContent='✅ '+t.name+' ready!';
-      document.getElementById('mstatus').textContent='Your creation is complete. Sign up to download.';
+      document.getElementById('mstatus').textContent='Your creation is complete.';
       document.getElementById('mout').classList.add('show');
     }
   },900);
@@ -561,7 +936,7 @@ document.getElementById('mainPrompt').addEventListener('keydown',e=>{
   if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();go();}
 });
 
-function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+function closeModal(){document.getElementById('modal').classList.remove('open');}
 </script>
 </body>
 </html>
