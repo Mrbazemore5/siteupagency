@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiteUp — AI Creation Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--lime:#a3ff00;--dark:#080808;--card:rgba(255,255,255,.05);--border:rgba(255,255,255,.09)}
+html,body{min-height:100%;font-family:'Inter',sans-serif;background:var(--dark);color:#fff;overflow-x:hidden}
+
+/* BG */
+.grid-bg{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.glow-top{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(120,40,255,.3) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(8,8,8,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:18px;font-weight:900;letter-spacing:-.5px}
+.nav-logo span{color:var(--lime)}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;font-weight:500;padding:6px 12px;border-radius:6px;transition:.2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav-links a.active{color:#fff}
+
+/* HERO */
+.hero{position:relative;z-index:1;text-align:center;padding:80px 20px 48px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(163,255,0,.1);border:1px solid rgba(163,255,0,.25);color:var(--lime);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:999px;margin-bottom:24px}
+.hero h1{font-size:clamp(36px,6vw,68px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:16px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--lime),#00e5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:rgba(255,255,255,.55);font-size:clamp(15px,2vw,18px);max-width:560px;margin:0 auto 40px}
+
+/* TYPE TABS */
+.type-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.type-tab{background:var(--card);border:1px solid var(--border);color:rgba(255,255,255,.6);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;user-select:none}
+.type-tab:hover{border-color:rgba(255,255,255,.2);color:#fff}
+.type-tab.active{background:var(--lime);color:#000;border-color:var(--lime)}
+
+/* PROMPT BOX */
+.prompt-box{max-width:720px;margin:0 auto;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;transition:.2s}
+.prompt-box:focus-within{border-color:rgba(163,255,0,.4);box-shadow:0 0 0 3px rgba(163,255,0,.08)}
+textarea#prompt{width:100%;background:transparent;border:none;outline:none;color:#fff;font-size:16px;font-family:'Inter',sans-serif;padding:20px 20px 8px;resize:none;min-height:90px;line-height:1.5}
+textarea#prompt::placeholder{color:rgba(255,255,255,.25)}
+.prompt-footer{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06)}
+.char-count{font-size:12px;color:rgba(255,255,255,.25)}
+.gen-btn{background:var(--lime);color:#000;border:none;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.15s}
+.gen-btn:hover{background:#bcff33;transform:scale(1.03)}
+.gen-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* CHIPS */
+.chip-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:720px;margin:16px auto 0}
+.chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.65);padding:6px 14px;border-radius:999px;font-size:12px;cursor:pointer;transition:.2s}
+.chip:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.18)}
+
+/* OUTPUT AREA */
+.output-area{max-width:900px;margin:48px auto;padding:0 20px;position:relative;z-index:1}
+.output-area.hidden{display:none}
+
+/* PROGRESS */
+.progress-card{background:rgba(255,255,255,.04);border:1px solid rgba(163,255,0,.2);border-radius:16px;padding:32px;text-align:center}
+.prog-spinner{width:48px;height:48px;border:3px solid rgba(163,255,0,.15);border-top-color:var(--lime);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.prog-title{font-size:20px;font-weight:700;margin-bottom:8px}
+.prog-status{color:rgba(255,255,255,.5);font-size:14px;margin-bottom:24px}
+.prog-steps{list-style:none;display:flex;flex-direction:column;gap:10px;text-align:left;max-width:380px;margin:0 auto}
+.prog-step{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.4)}
+.prog-step.done{color:var(--lime)}
+.prog-step.active{color:#fff;font-weight:600}
+.step-dot{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.prog-step.done .step-dot{background:rgba(163,255,0,.15);color:var(--lime)}
+.prog-step.active .step-dot{background:rgba(163,255,0,.25);color:var(--lime);box-shadow:0 0 10px rgba(163,255,0,.3)}
+
+/* RESULT CARDS */
+.result-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.result-title{font-size:22px;font-weight:800}
+.result-badge{background:rgba(163,255,0,.1);border:1px solid rgba(163,255,0,.25);color:var(--lime);font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+.result-grid{display:grid;gap:16px}
+
+/* TEXT RESULT */
+.res-text-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.res-text-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.res-text-head span{font-size:13px;font-weight:600;color:rgba(255,255,255,.7)}
+.res-text-body{padding:18px;font-size:14px;line-height:1.7;color:rgba(255,255,255,.85);white-space:pre-wrap;max-height:320px;overflow-y:auto}
+.res-text-body::-webkit-scrollbar{width:4px}
+.res-text-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+
+/* IMAGE RESULT */
+.res-img-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.res-img-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.res-img-head span{font-size:13px;font-weight:600;color:rgba(255,255,255,.7)}
+.res-img-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;padding:16px}
+.res-img-wrap img{width:100%;border-radius:8px;display:block;border:1px solid var(--border)}
+.res-img-loading{width:100%;aspect-ratio:1;background:rgba(255,255,255,.04);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.2);font-size:13px;border:1px dashed rgba(255,255,255,.08)}
+
+/* ACTION BTNS */
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn-download{background:var(--lime);color:#000;border:none;padding:11px 22px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:6px;text-decoration:none;transition:.15s}
+.btn-download:hover{background:#bcff33}
+.btn-copy{background:rgba(255,255,255,.07);border:1px solid var(--border);color:#fff;padding:11px 22px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
+.btn-copy:hover{background:rgba(255,255,255,.12)}
+.btn-regen{background:transparent;border:1px solid rgba(163,255,0,.3);color:var(--lime);padding:11px 22px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
+.btn-regen:hover{background:rgba(163,255,0,.07)}
+
+/* ERROR */
+.err-card{background:rgba(255,80,80,.06);border:1px solid rgba(255,80,80,.2);border-radius:14px;padding:20px;color:rgba(255,120,120,.9);font-size:14px}
+
+/* EXAMPLES SECTION */
+.examples{position:relative;z-index:1;max-width:900px;margin:60px auto;padding:0 20px}
+.examples h2{font-size:24px;font-weight:800;margin-bottom:20px;text-align:center}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.ex-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:.2s}
+.ex-card:hover{border-color:rgba(163,255,0,.3);background:rgba(163,255,0,.03)}
+.ex-icon{font-size:28px;margin-bottom:10px}
+.ex-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.ex-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(20,20,20,.95);border:1px solid rgba(163,255,0,.3);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="glow-top"></div>
+
+<nav>
+  <div class="nav-logo">SITE<span>UP</span></div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="siteup_create.html" class="active">Create</a>
+    <a href="login.html">Login</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">⚡ Real AI Generation</div>
+  <h1>Create <em>anything</em><br>with AI — instantly.</h1>
+  <p class="hero-sub">Type what you need. Get real AI-generated scripts, images, logos, and content in seconds.</p>
+
+  <!-- TYPE TABS -->
+  <div class="type-tabs">
+    <div class="type-tab active" onclick="setType('image',this)" data-type="image">🖼️ AI Image</div>
+    <div class="type-tab" onclick="setType('video_script',this)" data-type="video_script">🎬 Video Script</div>
+    <div class="type-tab" onclick="setType('logo',this)" data-type="logo">✏️ Logo Concept</div>
+    <div class="type-tab" onclick="setType('post',this)" data-type="post">📱 Social Post</div>
+    <div class="type-tab" onclick="setType('email',this)" data-type="email">📧 Email Copy</div>
+    <div class="type-tab" onclick="setType('website',this)" data-type="website">🌐 Website Copy</div>
+    <div class="type-tab" onclick="setType('flyer',this)" data-type="flyer">📄 Flyer Text</div>
+  </div>
+
+  <!-- PROMPT BOX -->
+  <div class="prompt-box">
+    <textarea id="prompt" rows="3" placeholder="Describe what you want to create..."></textarea>
+    <div class="prompt-footer">
+      <span class="char-count" id="charCount">0 / 500</span>
+      <button class="gen-btn" id="genBtn" onclick="generate()">
+        <span>⚡</span> Generate
+      </button>
+    </div>
+  </div>
+
+  <!-- QUICK CHIPS -->
+  <div class="chip-row" id="chipRow"></div>
+</div>
+
+<!-- OUTPUT -->
+<div class="output-area hidden" id="outputArea"></div>
+
+<!-- EXAMPLES -->
+<div class="examples">
+  <h2>What can you create?</h2>
+  <div class="ex-grid">
+    <div class="ex-card" onclick="quickFill('image','Professional logo for Atlantic Roofing Company, bold red and white, modern')">
+      <div class="ex-icon">🖼️</div>
+      <div class="ex-title">AI Logo Image</div>
+      <div class="ex-desc">Generate a visual logo concept for any business in seconds</div>
+    </div>
+    <div class="ex-card" onclick="quickFill('video_script','30 second promo video script for a roofing company in Virginia Beach')">
+      <div class="ex-icon">🎬</div>
+      <div class="ex-title">Video Script</div>
+      <div class="ex-desc">Full promo script with scenes, voiceover, and captions ready to film</div>
+    </div>
+    <div class="ex-card" onclick="quickFill('post','Instagram post for a plumbing company offering a summer special deal')">
+      <div class="ex-icon">📱</div>
+      <div class="ex-title">Social Media Post</div>
+      <div class="ex-desc">Captions, hashtags, and hooks that get engagement</div>
+    </div>
+    <div class="ex-card" onclick="quickFill('email','Cold email outreach for a landscaping business targeting homeowners')">
+      <div class="ex-icon">📧</div>
+      <div class="ex-title">Email Campaign</div>
+      <div class="ex-desc">High-converting email copy for any service business</div>
+    </div>
+    <div class="ex-card" onclick="quickFill('website','Homepage copy for an HVAC company in Virginia Beach, professional and trustworthy')">
+      <div class="ex-icon">🌐</div>
+      <div class="ex-title">Website Copy</div>
+      <div class="ex-desc">Full page copy — hero, services, about, and CTA sections</div>
+    </div>
+    <div class="ex-card" onclick="quickFill('flyer','Door hanger flyer text for a pressure washing business, offering 20% off first clean')">
+      <div class="ex-icon">📄</div>
+      <div class="ex-title">Print Flyer</div>
+      <div class="ex-desc">Ready-to-print flyer copy for door hangers, postcards, and signs</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────
+const OPENROUTER_KEY = 'sk-or-v1-placeholder'; // Will use free Pollinations for text too
+const POLLINATIONS_TEXT = 'https://text.pollinations.ai/';
+const POLLINATIONS_IMAGE = 'https://image.pollinations.ai/prompt/';
+
+let currentType = 'image';
+let currentResult = null;
+
+const typeConfig = {
+  image: {
+    label: 'AI Image',
+    placeholder: 'Describe the image — e.g. "Professional logo for Atlantic Roofing, bold red and white, modern minimal"',
+    chips: ['Roofing company logo', 'Plumbing van wrap design', 'HVAC business card', 'Landscaping flyer background', 'Electric company logo'],
+    steps: ['Reading your description...', 'Building visual prompt...', 'Generating image with AI...', 'Rendering variations...'],
+  },
+  video_script: {
+    label: 'Video Script',
+    placeholder: 'Describe your video — e.g. "30-second promo for my roofing company, upbeat, targets homeowners"',
+    chips: ['30-sec roofing promo', 'HVAC summer special', 'Plumbing emergency ad', 'Landscaping spring deal', 'Painting before/after'],
+    steps: ['Understanding your business...', 'Writing hook and opening...', 'Scripting scenes...', 'Adding CTA and captions...'],
+  },
+  logo: {
+    label: 'Logo Concept',
+    placeholder: 'Describe your logo — e.g. "Bold logo for Atlantic Roofing, blue and white, shield icon"',
+    chips: ['Bold roofing logo', 'Clean plumbing logo', 'Modern HVAC logo', 'Green landscaping logo', 'Electric company logo'],
+    steps: ['Analyzing brand identity...', 'Designing concept...', 'Generating logo image...', 'Rendering result...'],
+  },
+  post: {
+    label: 'Social Post',
+    placeholder: 'Describe your post — e.g. "Instagram post for summer HVAC special, fun and engaging"',
+    chips: ['HVAC summer deal post', 'Roofing before/after', 'New business announcement', '5-star review repost', 'Holiday promo post'],
+    steps: ['Analyzing your audience...', 'Writing the hook...', 'Adding hashtags...', 'Finalizing caption...'],
+  },
+  email: {
+    label: 'Email Copy',
+    placeholder: 'Describe your email — e.g. "Cold outreach to homeowners for a free roof inspection offer"',
+    chips: ['Free inspection offer', 'Follow-up email', 'Seasonal promo', 'New customer welcome', 'Re-engagement email'],
+    steps: ['Reading your goal...', 'Writing subject line...', 'Drafting body copy...', 'Adding CTA...'],
+  },
+  website: {
+    label: 'Website Copy',
+    placeholder: 'Describe your website — e.g. "Homepage for an HVAC company in Virginia Beach, trustworthy and professional"',
+    chips: ['HVAC homepage', 'Roofing services page', 'Plumbing about page', 'Landscaping homepage', 'Painter services page'],
+    steps: ['Understanding your brand...', 'Writing hero section...', 'Crafting services copy...', 'Adding trust signals...'],
+  },
+  flyer: {
+    label: 'Flyer Text',
+    placeholder: 'Describe your flyer — e.g. "Door hanger for pressure washing, 20% off first clean, Virginia Beach"',
+    chips: ['Pressure wash special', 'Roof inspection offer', 'HVAC tune-up deal', 'Lawn care seasonal', 'Painting estimate CTA'],
+    steps: ['Reading your offer...', 'Writing headline...', 'Crafting bullet points...', 'Adding call-to-action...'],
+  },
+};
+
+// ─── INIT ────────────────────────────────────────────────
+function setType(type, el) {
+  currentType = type;
+  document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const cfg = typeConfig[type];
+  document.getElementById('prompt').placeholder = cfg.placeholder;
+  renderChips(type);
+  document.getElementById('prompt').focus();
+}
+
+function renderChips(type) {
+  const row = document.getElementById('chipRow');
+  const cfg = typeConfig[type];
+  row.innerHTML = cfg.chips.map(c => `<div class="chip" onclick="fillPrompt('${c}')">${c}</div>`).join('');
+}
+
+function fillPrompt(text) {
+  document.getElementById('prompt').value = text;
+  document.getElementById('charCount').textContent = text.length + ' / 500';
+  document.getElementById('prompt').focus();
+}
+
+function quickFill(type, text) {
+  document.querySelectorAll('.type-tab').forEach(t => {
+    if (t.dataset.type === type) { setType(type, t); t.classList.add('active'); }
+    else t.classList.remove('active');
+  });
+  currentType = type;
+  document.getElementById('prompt').value = text;
+  document.getElementById('charCount').textContent = text.length + ' / 500';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(() => generate(), 300);
+}
+
+document.getElementById('prompt').addEventListener('input', function() {
+  document.getElementById('charCount').textContent = this.value.length + ' / 500';
+});
+document.getElementById('prompt').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); generate(); }
+});
+
+// ─── PROGRESS UI ────────────────────────────────────────
+function showProgress(steps) {
+  const area = document.getElementById('outputArea');
+  area.classList.remove('hidden');
+  area.innerHTML = `
+    <div class="progress-card">
+      <div class="prog-spinner"></div>
+      <div class="prog-title" id="progTitle">Generating your content...</div>
+      <div class="prog-status" id="progStatus">${steps[0]}</div>
+      <ul class="prog-steps" id="progSteps">
+        ${steps.map((s,i) => `
+          <li class="prog-step ${i===0?'active':''}" id="ps${i}">
+            <div class="step-dot">${i===0?'→':i+1}</div>
+            <span>${s}</span>
+          </li>`).join('')}
+      </ul>
+    </div>`;
+  area.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function updateProgress(i, steps) {
+  for (let j = 0; j < i; j++) {
+    const el = document.getElementById('ps'+j);
+    if (el) { el.className = 'prog-step done'; el.querySelector('.step-dot').textContent = '✓'; }
+  }
+  const cur = document.getElementById('ps'+i);
+  if (cur) { cur.className = 'prog-step active'; cur.querySelector('.step-dot').textContent = '→'; }
+  const status = document.getElementById('progStatus');
+  if (status) status.textContent = steps[i] || 'Almost done...';
+}
+
+// ─── GENERATE ───────────────────────────────────────────
+async function generate() {
+  const prompt = document.getElementById('prompt').value.trim();
+  if (!prompt) { document.getElementById('prompt').focus(); return; }
+
+  const cfg = typeConfig[currentType];
+  const btn = document.getElementById('genBtn');
+  btn.disabled = true;
+
+  showProgress(cfg.steps);
+
+  try {
+    if (currentType === 'image' || currentType === 'logo') {
+      await generateImage(prompt, cfg.steps);
+    } else {
+      await generateText(prompt, currentType, cfg.steps);
+    }
+  } catch (err) {
+    showError(err.message || 'Something went wrong. Please try again.');
+  }
+
+  btn.disabled = false;
+}
+
+// ─── IMAGE GENERATION (Pollinations - free, no key) ────
+async function generateImage(prompt, steps) {
+  updateProgress(1, steps);
+  await delay(600);
+  updateProgress(2, steps);
+
+  // Generate 4 variations with slightly different seeds
+  const encodedPrompt = encodeURIComponent(prompt + ', high quality, professional, 4k');
+  const seeds = [Math.floor(Math.random()*9999), Math.floor(Math.random()*9999), Math.floor(Math.random()*9999), Math.floor(Math.random()*9999)];
+  const urls = seeds.map(s => `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&seed=${s}&nologo=true`);
+
+  updateProgress(3, steps);
+  await delay(400);
+
+  showImageResult(prompt, urls);
+}
+
+// ─── TEXT GENERATION (Pollinations text - free) ────────
+async function generateText(prompt, type, steps) {
+  updateProgress(1, steps);
+
+  const systemPrompts = {
+    video_script: `You are a professional video scriptwriter. Create compelling 30-60 second video scripts for small businesses. Format with: HOOK (first 3 seconds), SCENE 1, SCENE 2, SCENE 3, CTA. Include [VISUALS] and [VOICEOVER] for each scene. Keep it energetic and conversion-focused.`,
+    post: `You are a social media expert for local service businesses. Write engaging Instagram/Facebook posts with: a strong hook line, 2-3 body sentences, relevant emojis, 8-10 targeted hashtags. Make it feel authentic and local.`,
+    email: `You are an email copywriter. Write a high-converting email with: Subject Line, Preview Text, Greeting, Body (3 short paragraphs), CTA button text, P.S. line. Keep it personal, professional, and scannable.`,
+    website: `You are a web copywriter for service businesses. Write compelling website copy including: Hero Headline, Hero Subheadline, 3 Service Sections (title + 2 sentences each), About Us paragraph, Social Proof section, and CTA section. Professional tone, conversion-focused.`,
+    flyer: `You are a print marketing copywriter. Write flyer copy including: Bold Headline, Offer/Deal line, 3 bullet point benefits, Contact/CTA info placeholder, Urgency line. Short, punchy, and scannable for door hangers or postcards.`,
+  };
+
+  const system = systemPrompts[type] || systemPrompts.post;
+  const fullPrompt = `${system}\n\nCreate content for: "${prompt}"\n\nProvide the complete, ready-to-use content:`;
+
+  updateProgress(2, steps);
+
+  // Use Pollinations text API (completely free)
+  const apiUrl = `https://text.pollinations.ai/${encodeURIComponent(fullPrompt)}?model=openai&seed=${Math.floor(Math.random()*9999)}`;
+
+  const response = await fetch(apiUrl);
+  if (!response.ok) throw new Error('Generation failed. Please try again.');
+
+  const text = await response.text();
+
+  updateProgress(3, steps);
+  await delay(400);
+
+  showTextResult(prompt, type, text.trim());
+}
+
+// ─── SHOW RESULTS ────────────────────────────────────────
+function showImageResult(prompt, urls) {
+  currentResult = { type: 'image', prompt, urls };
+  const area = document.getElementById('outputArea');
+
+  const imgCards = urls.map((url, i) => `
+    <div style="position:relative">
+      <div class="res-img-loading" id="imgLoad${i}">Loading...</div>
+      <img src="${url}" alt="AI Generated ${i+1}" style="display:none;width:100%;border-radius:8px;border:1px solid var(--border)" 
+           id="img${i}"
+           onload="document.getElementById('imgLoad${i}').style.display='none';this.style.display='block'"
+           onerror="document.getElementById('imgLoad${i}').textContent='⚠️ Retry'"
+      >
+    </div>`).join('');
+
+  area.innerHTML = `
+    <div class="result-header">
+      <div class="result-title">🖼️ Your AI Images</div>
+      <div class="result-badge">✅ Generated</div>
+    </div>
+    <div class="res-img-card">
+      <div class="res-img-head">
+        <span>4 variations • "${prompt.slice(0,50)}${prompt.length>50?'...':''}"</span>
+        <span style="color:rgba(255,255,255,.3);font-size:12px">Click any image to download</span>
+      </div>
+      <div class="res-img-wrap" id="imgGrid">${imgCards}</div>
+    </div>
+    <div class="action-row">
+      <button class="btn-download" onclick="downloadAllImages()">⬇️ Download All</button>
+      <button class="btn-regen" onclick="generate()">↺ Regenerate</button>
+      <button class="btn-copy" onclick="copyPrompt()">Copy Prompt</button>
+    </div>`;
+
+  // Make images clickable to download
+  urls.forEach((url, i) => {
+    setTimeout(() => {
+      const img = document.getElementById('img'+i);
+      if (img) {
+        img.style.cursor = 'pointer';
+        img.onclick = () => downloadImage(url, `siteup-image-${i+1}.jpg`);
+      }
+    }, 500);
+  });
+}
+
+function showTextResult(prompt, type, text) {
+  currentResult = { type, prompt, text };
+  const cfg = typeConfig[type];
+  const area = document.getElementById('outputArea');
+
+  area.innerHTML = `
+    <div class="result-header">
+      <div class="result-title">${cfg.label} Ready</div>
+      <div class="result-badge">✅ Generated</div>
+    </div>
+    <div class="res-text-card">
+      <div class="res-text-head">
+        <span>Based on: "${prompt.slice(0,60)}${prompt.length>60?'...':''}"</span>
+        <span style="color:rgba(255,255,255,.3);font-size:11px">${text.split(' ').length} words</span>
+      </div>
+      <div class="res-text-body" id="textOutput">${escapeHtml(text)}</div>
+    </div>
+    <div class="action-row">
+      <button class="btn-download" onclick="downloadText()">⬇️ Download .txt</button>
+      <button class="btn-copy" onclick="copyText()">📋 Copy Text</button>
+      <button class="btn-regen" onclick="generate()">↺ Regenerate</button>
+    </div>`;
+}
+
+function showError(msg) {
+  const area = document.getElementById('outputArea');
+  area.innerHTML = `<div class="err-card">⚠️ ${msg}</div>`;
+}
+
+// ─── ACTIONS ─────────────────────────────────────────────
+function copyText() {
+  if (!currentResult?.text) return;
+  navigator.clipboard.writeText(currentResult.text).then(() => toast('✅ Copied to clipboard!'));
+}
+
+function copyPrompt() {
+  if (!currentResult?.prompt) return;
+  navigator.clipboard.writeText(currentResult.prompt).then(() => toast('✅ Prompt copied!'));
+}
+
+function downloadText() {
+  if (!currentResult?.text) return;
+  const blob = new Blob([currentResult.text], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `siteup-${currentResult.type}-${Date.now()}.txt`;
+  a.click();
+  toast('⬇️ Downloaded!');
+}
+
+function downloadImage(url, filename) {
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.target = '_blank';
+  a.click();
+  toast('⬇️ Downloading image...');
+}
+
+function downloadAllImages() {
+  if (!currentResult?.urls) return;
+  currentResult.urls.forEach((url, i) => {
+    setTimeout(() => downloadImage(url, `siteup-image-${i+1}.jpg`), i * 500);
+  });
+  toast('⬇️ Downloading 4 images...');
+}
+
+// ─── UTILS ───────────────────────────────────────────────
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ─── INIT ────────────────────────────────────────────────
+renderChips('image');
+</script>
+</body>
+</html>
