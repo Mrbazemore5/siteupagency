@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+  <!-- v3-gemini-20260609 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SiteUp — AI Video & Image Generator</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -372,12 +373,14 @@ function markStepDone(i) {
 
 // ── SHOW IMAGE RESULT ─────────────────────────────────────────────
 function showImageResult(prompt, urls, source) {
-  // Store URLs globally for download (handles base64 data URLs)
+  // Store URLs globally for download
   urls.forEach((url, i) => { _imgStore[i] = url; });
+
   currentResult = { type:'image', prompt, urls };
   const wrap = document.getElementById('outputWrap');
-  const sourceLabel = source === 'gemini' ? '✨ Gemini AI' : source === 'flux' ? '✨ FLUX AI' : 'AI Generated';
+  const sourceLabel = source === 'gemini' ? '✨ Gemini AI' : '✨ AI Generated';
 
+  // Build grid HTML without embedding base64 in template (too large)
   wrap.innerHTML = `
     <div class="res-header">
       <div class="res-title">🖼️ Your Images</div>
@@ -385,12 +388,10 @@ function showImageResult(prompt, urls, source) {
     </div>
     <div class="img-grid" id="imgGrid">
       ${urls.map((url,i) => `
-        <div class="img-slot" id="slot${i}" data-url="${i}">
-          <div class="img-loading"><div class="mini-spin"></div><span>Generating...</span></div>
-          <img src="${url}" alt="AI image ${i+1}"
-            onload="imgLoaded(${i})"
-            onerror="imgFailed(${i})"
-            style="display:none"
+        <div class="img-slot" id="slot${i}">
+          <div class="img-loading" id="load${i}"><div class="mini-spin"></div><span>Generating...</span></div>
+          <img id="img${i}" alt="AI image ${i+1}"
+            style="display:none;width:100%;height:100%;object-fit:cover;border-radius:12px;"
           >
           <div class="img-overlay">
             <button class="dl-btn" onclick="dlImgByIndex(${i})">⬇ Save</button>
@@ -398,10 +399,25 @@ function showImageResult(prompt, urls, source) {
         </div>`).join('')}
     </div>
     <div class="action-row">
-      <button class="btn-dl" onclick="dlAll()">⬇️ Download All</button>
-      <button class="btn-copy" onclick="copyPromptText()">Copy Prompt</button>
-      <button class="btn-regen" onclick="generate()">↺ Regenerate</button>
-    </div>`;
+      <button class="act-btn secondary" onclick="generate()">🔄 Regenerate</button>
+      <button class="act-btn primary" onclick="dlImgByIndex(0)">⬇ Download First</button>
+    </div>
+  `;
+
+  // Set image sources AFTER DOM is built (avoids base64-in-template issues)
+  urls.forEach((url, i) => {
+    const img = document.getElementById('img' + i);
+    const loader = document.getElementById('load' + i);
+    if (!img) return;
+    img.onload = () => {
+      if (loader) loader.style.display = 'none';
+      img.style.display = 'block';
+    };
+    img.onerror = () => {
+      if (loader) loader.innerHTML = '<span style="color:#f87171;font-size:12px;">⚠️ Failed</span>';
+    };
+    img.src = url;
+  });
 }
 
 function imgLoaded(i) {
